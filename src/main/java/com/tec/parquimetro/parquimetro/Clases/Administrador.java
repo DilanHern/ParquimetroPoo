@@ -1,13 +1,22 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.tec.parquimetro.parquimetro.Clases;
+import java.io.Serializable;
+import java.time.LocalDate;
 
-/**
- *
- * @author carol_flgngfy
- */
-public class Administrador {
+
+public class Administrador extends Persona implements Serializable{
+    
+    
+    //Constructor
+    public Administrador(String nombre, String apellidos, int telefono, String direccionFisica, LocalDate fechaIngreso, String identificacion, String pin ){
+    
+        super(nombre, apellidos,  telefono, direccionFisica, fechaIngreso, identificacion, pin);
+    
+    }
+    
+    public boolean actualizarAdministrador(Administrador administrador){
+    
+        return true;
+    
+    }
     
 }
