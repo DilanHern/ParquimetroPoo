@@ -8,6 +8,7 @@ package com.tec.parquimetro.parquimetro.Clases;
  *
  * @author carol_flgngfy
  */
-public class Administrador {
+public class Administrador extends Persona{
+    //NO SUBIR, BORRAR
     
 }

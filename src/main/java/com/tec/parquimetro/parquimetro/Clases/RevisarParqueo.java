@@ -6,8 +6,17 @@ package com.tec.parquimetro.parquimetro.Clases;
 
 /**
  *
- * @author carol_flgngfy
+ * @author Dilan
  */
-public class Usuario extends Persona{
+public class RevisarParqueo {
+    //Parqueo parqueo;
     
+    //constructor
+    //public RevisarParqueo(Parqueo parqueo){
+    //    this.parqueo = parqueo;
+    //}
+    
+    public void revisarPlaca(int placa, int numEspacio){
+        //logica
+    }
 }

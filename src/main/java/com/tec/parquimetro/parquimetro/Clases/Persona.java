@@ -4,10 +4,21 @@
  */
 package com.tec.parquimetro.parquimetro.Clases;
 
+import java.io.Serializable;
+
 /**
  *
  * @author carol_flgngfy
  */
-public class Persona {
-    
+//NO SUBIR, BORRAR
+public class Persona implements Serializable{
+    private static final long serialVersionUID = 1L;
+
+    public String getIdentificacion(){
+        return "1234";
+    }
+    public String getPin(){
+        return "1234";
+    }
+   
 }

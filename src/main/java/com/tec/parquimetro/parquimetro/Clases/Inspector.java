@@ -8,6 +8,6 @@ package com.tec.parquimetro.parquimetro.Clases;
  *
  * @author carol_flgngfy
  */
-public class Inspector {
+public class Inspector extends Persona{
     
 }
