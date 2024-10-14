@@ -6,6 +6,8 @@ import java.time.LocalDate;
 public class Administrador extends Persona implements Serializable{
     
     
+    public Administrador(){
+    }
     //Constructor
     public Administrador(String nombre, String apellidos, int telefono, String direccionFisica, LocalDate fechaIngreso, String identificacion, String pin ){
     

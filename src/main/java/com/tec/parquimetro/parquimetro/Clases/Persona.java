@@ -15,7 +15,7 @@ import java.util.List;
 
 public class Persona implements Serializable{
     
-    
+    private static final long serialVersionUID = 1L;
     //atributos
     private String apellidos;
     private String nombre;
@@ -27,7 +27,10 @@ public class Persona implements Serializable{
     //private Correo correo;
     //private Tarjeta tarjeta;
 
-    public Persona(){}
+    public Persona(){
+    
+        telefono = -1;
+    }
     
     //Constructor
     public Persona(String nombre, String apellidos, int telefono, String direccionFisica, LocalDate fechaIngreso, String identificacion, String pin){
@@ -184,18 +187,34 @@ public class Persona implements Serializable{
     }
     
 
-   public boolean actualizarDatos(Persona persona){
+   public void actualizarDatos(Persona persona){
        
-       //respuesta
+       //validacion actualizar datos de una persona
        
        if(persona.getApellidos() != null){
        
            this.setApellidos(persona.getApellidos());
-           
-           
        }
+       if(persona.getNombre() != null){
        
-       return false;
+           this.setNombre(persona.getNombre());
+       }
+       if(persona.getIdentificacion() != null){
+       
+           this.setIdentificacion(persona.getIdentificacion());
+       }
+       if(persona.getDireccionFisica()!= null){
+       
+           this.setDireccionFisica(persona.getDireccionFisica());
+       }
+       if(persona.getTelefono()!= -1){
+       
+           this.setTelefono(persona.getTelefono());
+       }
+       if(persona.getFechaIngreso()!= null){
+       
+           this.setFechaIngreso(persona.getFechaIngreso());
+       }
    
    }
     

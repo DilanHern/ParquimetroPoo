@@ -10,9 +10,13 @@ public class Usuario extends Persona implements Serializable{
     private int tiempoAcumulado;
    // private Tarjeta tarjeta; 
     
-    
+  
+    public Usuario(){
+        super();
+        this.tiempoAcumulado = -1;
+    }
     //Constructor
-        public Usuario(String nombre, String apellidos, int telefono, String direccionFisica, LocalDate fechaIngreso, String identificacion, String pin, int tiempoAcumulado){
+   public Usuario(String nombre, String apellidos, int telefono, String direccionFisica, LocalDate fechaIngreso, String identificacion, String pin, int tiempoAcumulado){
     
         super(nombre, apellidos,  telefono, direccionFisica, fechaIngreso, identificacion, pin);
         this.tiempoAcumulado = tiempoAcumulado;
@@ -20,15 +24,31 @@ public class Usuario extends Persona implements Serializable{
     
     
     //getters and setters
-    void setTiempoAcumulado(int tiempo){
+    public void setTiempoAcumulado(int tiempo){
     
         this.tiempoAcumulado = tiempo;
     }
     
-    int getTiempoAcumulado(){
+    public int getTiempoAcumulado(){
     
         return this.tiempoAcumulado;
     
     }
+    
+    public int actualizarTiempoAcumulado(int tiempoExtra){
+    
+       return  this.tiempoAcumulado += tiempoExtra;
+    }
+    
+    public void actualizarUsuario(Usuario persona){
+       
+        super.actualizarDatos(persona);
+        
+        if(persona.getTiempoAcumulado()!=-1){
+        
+            this.setTiempoAcumulado(persona.getTiempoAcumulado());
+        }
+
+   }
     
 }

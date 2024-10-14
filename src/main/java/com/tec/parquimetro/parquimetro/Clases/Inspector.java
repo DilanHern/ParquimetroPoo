@@ -1,13 +1,44 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package com.tec.parquimetro.parquimetro.Clases;
 
-/**
- *
- * @author carol_flgngfy
- */
-public class Inspector {
+import java.io.Serializable;
+import java.time.LocalDate;
+
+public class Inspector  extends Persona implements Serializable{
+    
+    private String terminalInspeccion;
+    
+    
+    
+    //getters and setters
+
+    public String getTerminalInspeccion() {
+        return terminalInspeccion;
+    }
+
+    public void setTerminalInspeccion(String terminal) {
+        this.terminalInspeccion = terminal;
+    }
+    
+    
+    //Constructor
+    public Inspector(){}
+    
+    public Inspector(String nombre, String apellidos, int telefono, String direccionFisica, LocalDate fechaIngreso, String identificacion, String pin, String terminalInspeccion ){
+    
+        super(nombre, apellidos,  telefono, direccionFisica, fechaIngreso, identificacion, pin);
+        this.terminalInspeccion = terminalInspeccion;
+    }
+    
+    public void actualizarInspector(Inspector persona){
+       
+        super.actualizarDatos(persona);
+        
+        if(persona.getTerminalInspeccion()!=null){
+        
+            this.setTerminalInspeccion(persona.getTerminalInspeccion());
+        }
+
+   }
     
 }
