@@ -1,4 +1,3 @@
-
 package com.tec.parquimetro.parquimetro.GUI;
 
 import java.awt.BasicStroke;
