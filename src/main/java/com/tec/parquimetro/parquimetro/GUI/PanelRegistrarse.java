@@ -15,6 +15,7 @@ import com.tec.parquimetro.parquimetro.Clases.Tarjeta;
 import com.tec.parquimetro.parquimetro.Clases.Usuario;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.time.LocalDate;
 
 /**
  *
@@ -25,8 +26,13 @@ public class PanelRegistrarse extends javax.swing.JPanel {
     /**
      * Creates new form PanelRegistrarse
      */
-    public PanelRegistrarse() {
+    public PanelRegistrarse(LoginJFrame loginFrame) {
+        this.loginJFrame = loginFrame;
         initComponents();
+    }
+    
+    public LoginJFrame getLoginJFrame(){
+        return loginJFrame;
     }
     
     //*********************************************************
@@ -79,15 +85,20 @@ public class PanelRegistrarse extends javax.swing.JPanel {
         
     }
  
- public boolean validacionIdentificacion(String identificacion) {
+ public boolean validacionIdentificacion(String identificacion, ArrayList<Persona> listaBuscar) {
         
         if(identificacion.length()>= 2 && identificacion.length() <= 25){
-            return true;
+            for (Persona persona : listaBuscar){
+                if (persona.getIdentificacion().equals(identificacion)){ //si la identificacion es igual, retorna false
+                    JOptionPane.showMessageDialog(null, "Ya existe un usuario con esa identificacion!");
+                    return false;
+                }
+            }
+            return true; //la identificacion es unica
         }
         else{
-            
+            JOptionPane.showMessageDialog(null, "La identificacion debe tener entre 2 a 25 caracteres!");
             return false;
-        
         }
     }
  
@@ -140,56 +151,65 @@ public class PanelRegistrarse extends javax.swing.JPanel {
         return true;
     }
     
-    private boolean validarTarjeta(String numTar, String codigo, String mesVencimiento, String anoVencimiento){
+    private ArrayList<Persona> validarTarjeta(String numTar, String codigo, String mesVencimiento, String anoVencimiento){
         try {
-            Long numTarInt = Long.valueOf(numTar);
-            Integer codigoInt = Integer.parseInt(codigo);
-            Integer mesVencimientoInt = Integer.parseInt(mesVencimiento);
-            Integer anoVencimientoInt = Integer.parseInt(anoVencimiento);
+            long numTarInt = Long.parseLong(numTar);
+            int codigoInt = Integer.parseInt(codigo);
+            int mesVencimientoInt = Integer.parseInt(mesVencimiento);
+            int anoVencimientoInt = Integer.parseInt(anoVencimiento);
             //en caso de cumplir todos los requisitos
             if (numTar.length() == 16 && codigo.length() == 3 && (mesVencimientoInt > 0 && mesVencimientoInt < 13) && anoVencimiento.length() == 4 ) {
                 //validar que la tarjeta es unica
                 Tarjeta tarjetaNueva = new Tarjeta(numTarInt,mesVencimientoInt, anoVencimientoInt, codigoInt);
-                Login login1 = new Login();
                 //cargamos la lista de cuentas
                 try {
-                    login1.setListaUsuarios(cargarUsuarios("listaUsuarios.dat"));  //le asignamos al login la lista de usuarios cargada
+                    ArrayList<Persona> buscarTarjeta = cargarUsuarios("listaUsuarios.txt");  //le asignamos al login la lista de usuarios cargada
+                    System.out.println("NO dio error buscando la tarjeta");
                     //verificamos que no exista el numero de tarjeta para ningun usuario
                     boolean existe = false;
-                    for (Persona persona : login1.getListaUsuarios()){
+                    for (Persona persona : buscarTarjeta){
                         if (persona instanceof Usuario){
+                            Usuario usuario = (Usuario) persona; // Hacer el cast a Usuario
                             //comprobar numero de la tarjeta
-                            /*if (persona.getNumeroTarjeta() == tarjetaNueva.getNumeroTarjeta()){
-                                JOptionPane.showMessageDialog(null, "Ya existe un usuario con esta tarjeta de crédito", "ERROR", JOptionPane.INFORMATION_MESSAGE);
-                                existe = true;
-                                return false; 
-                            }*/
-                            return true;//borrar y descomentar
+                            if (usuario.getTarjeta() == null){
+                                //nada
+                            }
+                            
+                            else {
+                                
+                                if (usuario.getTarjeta().getNumeroTarjeta() == tarjetaNueva.getNumeroTarjeta()) {
+                                    JOptionPane.showMessageDialog(null, "Ya existe un usuario con esta tarjeta de crédito", "ERROR", JOptionPane.INFORMATION_MESSAGE);
+                                    existe = true;
+                                    return null; 
+                                }
+                            }
+                            return buscarTarjeta;//borrar y descomentar
                         }
                     }
                     //si no existe una persona con esta tarjeta:
                     if(!existe){
-                        return true;
+                        return buscarTarjeta;
                     }
                     else{
-                        return false;
+                        return null;
                     }
                 }
                 catch (IOException e){
-                    JOptionPane.showMessageDialog(null, "No se pudo cargar la lista de cuentas", "ERROR", JOptionPane.INFORMATION_MESSAGE);
-                    return false;
+                    System.out.println("dio error buscando la tarjeta");
+                    return null;
                 }
                 catch (ClassNotFoundException e1){
                     JOptionPane.showMessageDialog(null, "No se pudo cargar la lista de cuentas, error con las clases", "ERROR", JOptionPane.INFORMATION_MESSAGE);
-                    return false;   
+                    return null;   
                 }
             }
             else
-                return false;
-        }
+                JOptionPane.showMessageDialog(null, "El numero de tarjeta debe tener 16 digitos, el código 3 dígitos, el mes debe de ser entre 1 y 12 y el año debe de tener 4 digitos!");
+                return null;
+            }
         
         catch (NumberFormatException e){
-            return false;
+            return null;
         }
         //return false;
     }
@@ -202,38 +222,41 @@ public class PanelRegistrarse extends javax.swing.JPanel {
         if(validarNombre(txtNombre1.getText())){
                 if(validarApellidos(txtApellidos.getText())){
                     if(validacionDireccionFisica(taDireccionFisica.getText())){
-                        if(validacionIdentificacion(txtIdentificacion.getText())){
                             if(validarConversion(txtTelefono.getText())){
                                 if(validarTelefono(txtTelefono.getText())){
                                     if(validarCorreo(txtPt1Mail.getText(), txtPt2Mail.getText())){
-                                        if ( validarTarjeta(txtNumTar.getText(), txtCodigo.getText(), txtMes.getText(), txtAno.getText() )){
-                                            if (validarPin(new String(txtPin.getPassword())) ){
-                                                //crear cuenta
-                                                Usuario usuarioAgregar = new Usuario(); //agregar parametros de usuario
-                                                Login login1 = new Login();
-                                                try {
-                                                    login1.setListaUsuarios(cargarUsuarios("listaUsuarios.dat")); //le asignamos la lista de usuarios
-                                                    login1.getListaUsuarios().add(usuarioAgregar);
-                                                    guardarUsuarios("listaUsuarios.dat", login1.getListaUsuarios()); //guarda al usuario en la lista de cuentas
-                                                    JOptionPane.showMessageDialog(null, "Su cuenta fue creada exitosamente!");
+                                        ArrayList<Persona> listaRevisar = validarTarjeta(txtNumTar.getText(), txtCodigo.getText(), txtMes.getText(), txtAno.getText()); //si retorna la lista, quiere decir que no hay usuarios con esta tarjeta, si retorna null ya hay usuarios
+                                        if ( listaRevisar != null){
+                                            if ( validacionIdentificacion(txtIdentificacion.getText(), listaRevisar)) {
+                                                if (validarPin(new String(txtPin.getPassword())) ){
+                                                    //crear cuenta
+                                                    Tarjeta tarjetaAgregar = new Tarjeta(Long.parseLong(txtNumTar.getText()), Integer.parseInt(txtMes.getText()), Integer.parseInt(txtAno.getText()), Integer.parseInt(txtCodigo.getText()) );
+                                                    Usuario usuarioAgregar = new Usuario(txtNombre1.getText(), txtApellidos.getText(), Integer.parseInt(txtTelefono.getText()), taDireccionFisica.getText(), LocalDate.now(), txtIdentificacion.getText(), new String(txtPin.getPassword()), 0, tarjetaAgregar); //agregar parametros de usuario
+                                                    //cargar y guardar la listaUsuarios
+                                                    listaRevisar.add(usuarioAgregar);
+                                                    try {
+                                                        Login.guardarUsuarios("listaUsuarios.txt", listaRevisar);
+                                                        JOptionPane.showMessageDialog(null, "Su cuenta fue creada exitosamente!");
+                                                        getLoginJFrame().getBotonCancelarDeRegistrarse(); //cerramos esta ventana de registrarse
+                                                        
+                                                    }
+                                                    catch (IOException e){
+                                                        JOptionPane.showMessageDialog(null, "Hubo un error guardando su cuenta en el sistema!" + e.getMessage());
+                                                        e.printStackTrace(); // Imprime la traza de la excepción en la consola);
+                                                    }
+                                                }
 
-                                                }
-                                                catch (IOException e){
-                                                    JOptionPane.showMessageDialog(null, "Hubo un error cargando la lista de usuarios!");
-                                                }
-                                                catch (ClassNotFoundException e){
-                                                    JOptionPane.showMessageDialog(null, "Hubo un error cargando las clases!");
+                                                else {
+                                                   JOptionPane.showMessageDialog(null, "El pin debe de contener 4 dígitos!");
                                                 }
                                             }
-                                            
-                                           else {
-                                               JOptionPane.showMessageDialog(null, "El pin debe de contener 4 dígitos!");
-                                           }
-                                           
-                                       }
+                                            else{
+                                                //nada
+                                            }
+                                        }
                                        
                                        else{
-                                           JOptionPane.showMessageDialog(null, "El numero de tarjeta debe tener 16 digitos, el código 3 dígitos, el mes debe de ser entre 1 y 12 y el año debe de tener 4 digitos!");
+                                           JOptionPane.showMessageDialog(null, "Hubo un error cargando las tarjetas!");
                                        }
                                     }
                                     else{
@@ -247,10 +270,6 @@ public class PanelRegistrarse extends javax.swing.JPanel {
                             else{
                                 JOptionPane.showMessageDialog(null, "El telefono posee caracteres alfabeticos o no lo haz ingresado!");
                             }
-                        }
-                        else{
-                            JOptionPane.showMessageDialog(null, "La identificacion debe tener entre 2 a 25 caracteres!");
-                        }
                     }
                     else{
                     JOptionPane.showMessageDialog(null, "La direccion fisica debe tener entre 5 a 60 caracteres!");

@@ -4,7 +4,7 @@ import java.time.LocalDate;
 
 
 public class Administrador extends Persona implements Serializable{
-    
+    private static final long serialVersionUID = 3L;
     
     public Administrador(){
     }

@@ -7,8 +7,9 @@ import java.time.LocalDate;
 public class Usuario extends Persona implements Serializable{
     
     //atributos
+    private static final long serialVersionUID = 2L;
     private int tiempoAcumulado;
-   // private Tarjeta tarjeta; 
+    private Tarjeta tarjeta; 
     
   
     public Usuario(){
@@ -16,14 +17,19 @@ public class Usuario extends Persona implements Serializable{
         this.tiempoAcumulado = -1;
     }
     //Constructor
-   public Usuario(String nombre, String apellidos, int telefono, String direccionFisica, LocalDate fechaIngreso, String identificacion, String pin, int tiempoAcumulado){
+   public Usuario(String nombre, String apellidos, int telefono, String direccionFisica, LocalDate fechaIngreso, String identificacion, String pin, int tiempoAcumulado, Tarjeta tarjeta){
     
         super(nombre, apellidos,  telefono, direccionFisica, fechaIngreso, identificacion, pin);
         this.tiempoAcumulado = tiempoAcumulado;
+        this.tarjeta = tarjeta;
     }
     
     
     //getters and setters
+    public Tarjeta getTarjeta(){
+        return tarjeta;
+    }
+    
     public void setTiempoAcumulado(int tiempo){
     
         this.tiempoAcumulado = tiempo;

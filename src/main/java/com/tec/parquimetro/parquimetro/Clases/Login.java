@@ -12,6 +12,7 @@ import java.io.FileOutputStream;
 //cargar archivos
 import java.io.ObjectInputStream;
 import java.io.FileInputStream;
+import java.time.LocalDate;
 import javax.swing.JOptionPane;
 
 /**
@@ -20,6 +21,7 @@ import javax.swing.JOptionPane;
  */
 public class Login {
     private ArrayList<Persona> listaUsuarios;
+    
     //constructor
     public Login() {
      listaUsuarios = new ArrayList<>(); 
@@ -37,14 +39,16 @@ public class Login {
     
     //funcion existeParametros.txt: esta funcion comprueba si existe el archivo Parametros.txt
     public boolean existeParametros(){
-        File file = new File("Parametros.dat");
+        File file = new File("Parametros.txt");
         return file.exists();
     }
     
     //funcion verificarIdentificacion: esta funcion se encarga de verificar si la identificacion ingresada existe:
     public Persona verificarIdentificacion(String identificacion){
         for (Persona persona: listaUsuarios){
-            if (persona.getIdentificacion().equals(identificacion)){
+            if (persona.getIdentificacion() == null){ //no hacer nada
+            }
+            else if (persona.getIdentificacion().equals(identificacion)){
                 return persona;
             }
         }
@@ -69,8 +73,15 @@ public class Login {
     }
     //BORRARRR
     public void crear(){
-        Administrador adminOficial = new Administrador();
+        Administrador adminOficial = new Administrador("Admin prueba", "apellido", 123456, "vive en su casa", LocalDate.now(), "1234", "1234");
+
         listaUsuarios.add(adminOficial);
+        try{
+            guardarUsuarios("listaUsuarios.txt", listaUsuarios);
+        }
+        catch (IOException e){
+            System.out.println("malmamlal");
+        }
         
     }
     

@@ -5,7 +5,7 @@ import java.io.Serializable;
 import java.time.LocalDate;
 
 public class Inspector  extends Persona implements Serializable{
-    
+    private static final long serialVersionUID = 4L;
     private String terminalInspeccion;
     
     

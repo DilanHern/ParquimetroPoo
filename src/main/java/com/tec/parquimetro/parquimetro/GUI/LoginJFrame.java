@@ -27,6 +27,10 @@ public class LoginJFrame extends javax.swing.JFrame {
      * Creates new form LoginJFrame
      */
     
+    //getter de botonCancelarDeRegistrarse
+    public void getBotonCancelarDeRegistrarse(){
+        botonCancelarDeRegistrarseActionPerformed(null);
+    }
     //getter de panelVentana
     public javax.swing.JPanel getPanelVentana(){
         return panelVentana;
@@ -112,9 +116,11 @@ public class LoginJFrame extends javax.swing.JFrame {
         if (validarIdentPin()) { //si la informacion ingresada cumple las validaciones:
             //creamos un objeto LoginJFrame
             Login login1 = new Login();
+            //login1.crear();
             //cargamos la lista de cuentas
             try {
-                login1.setListaUsuarios(cargarUsuarios("listaUsuarios.dat")); 
+                
+                login1.setListaUsuarios(cargarUsuarios("listaUsuarios.txt")); 
                 //comprobar que el usuario con la identificacion
                 Persona usuarioAIngresar = login1.verificarIdentificacion(campoIdentificacion.getText()); //CAMBIAR A LO QUE EL USUARIO INGRESE
                 if (usuarioAIngresar == null){
@@ -125,13 +131,15 @@ public class LoginJFrame extends javax.swing.JFrame {
                         //verificar que tipo de cuenta es
                         if (usuarioAIngresar instanceof Administrador){
                             //abrir app del Administrador
+                            System.out.println("SE ABRIO LA APP DE ADMIN");
                         }
                         else if (usuarioAIngresar instanceof Inspector){
-                            //abrir app del Inspector
+                            System.out.println("SE ABRIO LA APP DE INSpector");
                         }
                         else if (usuarioAIngresar instanceof Usuario){
                             if (new File("Parametros.txt").exists()){ //comprobar si los parametros ya fueron configurados por el administrador
                                 //abrir app del Usuario
+                                System.out.println("SE ABRIO LA APP DE USUARIO");
                             }
                             else {
                                 JOptionPane.showMessageDialog(null, "El parquímetro no ha sido configurado por un administrador, ponerse en contacto con alguno", "ERROR", JOptionPane.ERROR_MESSAGE);
@@ -194,7 +202,7 @@ public class LoginJFrame extends javax.swing.JFrame {
         labelErrorPin = new javax.swing.JLabel();
         labelCrearCuenta = new javax.swing.JLabel();
         botonRegistrarse = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        botonCancelarDeRegistrarse = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -294,11 +302,11 @@ public class LoginJFrame extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setText("Cancelar");
-        jButton1.setVisible(false);
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        botonCancelarDeRegistrarse.setText("Cancelar");
+        botonCancelarDeRegistrarse.setVisible(false);
+        botonCancelarDeRegistrarse.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                botonCancelarDeRegistrarseActionPerformed(evt);
             }
         });
 
@@ -318,7 +326,7 @@ public class LoginJFrame extends javax.swing.JFrame {
                         .addComponent(botonRegistrarse)))
                 .addGap(195, 195, 195))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelVentanaLayout.createSequentialGroup()
-                .addComponent(jButton1)
+                .addComponent(botonCancelarDeRegistrarse)
                 .addGap(32, 32, 32))
         );
         panelVentanaLayout.setVerticalGroup(
@@ -333,7 +341,7 @@ public class LoginJFrame extends javax.swing.JFrame {
                         .addComponent(labelCrearCuenta))
                     .addComponent(botonRegistrarse))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
-                .addComponent(jButton1)
+                .addComponent(botonCancelarDeRegistrarse)
                 .addGap(41, 41, 41))
         );
 
@@ -373,12 +381,12 @@ public class LoginJFrame extends javax.swing.JFrame {
 
     private void botonRegistrarseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonRegistrarseActionPerformed
         
-        panelRegistrarse = new PanelRegistrarse();
+        panelRegistrarse = new PanelRegistrarse(this);
         panelRegistrarse.setBounds(0, 0, 1080, 720);
         panelLogin.setVisible(false);
         labelCrearCuenta.setVisible(false);
         botonRegistrarse.setVisible(false);
-        jButton1.setVisible(true);
+        botonCancelarDeRegistrarse.setVisible(true);
         panelVentana.add(panelRegistrarse);
         panelVentana.revalidate();
         panelVentana.repaint();
@@ -402,16 +410,15 @@ public class LoginJFrame extends javax.swing.JFrame {
  
     }//GEN-LAST:event_campoPinFocusGained
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        //panelLogin.setBounds(0, 0, 1080, 720);
+    private void botonCancelarDeRegistrarseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCancelarDeRegistrarseActionPerformed
         panelRegistrarse.setVisible(false);
         labelCrearCuenta.setVisible(true);
         botonRegistrarse.setVisible(true);
         panelLogin.setVisible(true);
-        jButton1.setVisible(false);
+        botonCancelarDeRegistrarse.setVisible(false);
         panelVentana.revalidate();
         panelVentana.repaint();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_botonCancelarDeRegistrarseActionPerformed
 
     /**
      * @param args the command line arguments
@@ -450,6 +457,7 @@ public class LoginJFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton botonCancelarDeRegistrarse;
     private javax.swing.JButton botonIniciar;
     private javax.swing.JButton botonOlvidePin;
     private javax.swing.JButton botonRegistrarse;
@@ -463,7 +471,6 @@ public class LoginJFrame extends javax.swing.JFrame {
     private javax.swing.Box.Filler filler6;
     private javax.swing.Box.Filler filler7;
     private javax.swing.Box.Filler filler8;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel labelBienvenido;

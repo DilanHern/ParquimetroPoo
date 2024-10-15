@@ -25,7 +25,6 @@ public class Persona implements Serializable{
     private String identificacion;
     private String direccionFisica;
     //private Correo correo;
-    //private Tarjeta tarjeta;
 
     public Persona(){
     
@@ -49,6 +48,8 @@ public class Persona implements Serializable{
     
     
     // getters and setters
+    
+    
     public String getApellidos() {
         return apellidos;
     }

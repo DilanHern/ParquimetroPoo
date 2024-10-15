@@ -3,12 +3,14 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package com.tec.parquimetro.parquimetro.Clases;
+import java.io.Serializable;
 import java.time.LocalDate;
 /**
  *
  * @author Dilan
  */
-public class Tarjeta {
+public class Tarjeta implements Serializable{
+    private static final long serialVersionUID = 5L;
     private long numeroTarjeta;
     private int mesVencimiento;
     private int anoVencimiento;

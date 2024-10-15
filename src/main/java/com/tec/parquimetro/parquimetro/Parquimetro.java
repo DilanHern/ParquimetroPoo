@@ -13,7 +13,7 @@ import java.util.List;
 
 public class Parquimetro {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) {/*
         
             Parqueo parqueo = new Parqueo(LocalTime.parse("08:30"), LocalTime.parse("10:30"), 300, 30, 200);
             parqueo.agregarEspacios(100, 110);
@@ -57,7 +57,7 @@ public class Parquimetro {
              if(ob instanceof Inspector)
                  System.out.println("Inspector");
              
-         }
+         }*/
          
     }
 }
