@@ -3,12 +3,13 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package com.tec.parquimetro.parquimetro.Clases;
+import java.io.Serializable;
 import java.time.LocalDateTime;
 /**
  *
  * @author Dilan
  */
-public class TicketParqueo {
+public class TicketParqueo implements Serializable{
     private int tiempoParqueo;
     private LocalDateTime horaSistema;
     private boolean estado;

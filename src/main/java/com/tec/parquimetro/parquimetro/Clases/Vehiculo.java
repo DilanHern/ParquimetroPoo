@@ -97,7 +97,6 @@ public class Vehiculo implements Serializable {
     public void establecerTicketVigente(TicketParqueo  ticket){
     
         ticketVigente = ticket;
-        agregarTicket(ticket);
     
     }
 }
