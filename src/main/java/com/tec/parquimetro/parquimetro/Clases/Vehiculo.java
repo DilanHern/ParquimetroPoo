@@ -5,6 +5,8 @@
 package com.tec.parquimetro.parquimetro.Clases;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Vehiculo implements Serializable {
     private String placa;
@@ -12,6 +14,8 @@ public class Vehiculo implements Serializable {
     private String modelo;
     private Usuario usuario;
     private Espacio espacio;
+    private TicketParqueo ticketVigente;
+    private List<TicketParqueo> ticketsUtilizados;
     
     
     
@@ -22,6 +26,7 @@ public class Vehiculo implements Serializable {
         this.marca = marca;
         this.modelo = modelo;
         this.usuario = usuario;
+        ticketsUtilizados = new ArrayList<TicketParqueo>();
     }
     
     public Vehiculo(String placa, Usuario usuario){
@@ -80,5 +85,19 @@ public class Vehiculo implements Serializable {
         this.espacio = espacio;
     }
     
+    public List<TicketParqueo>  getTickets(){
+        return ticketsUtilizados;
+    }
     
+    public void agregarTicket(TicketParqueo  ticket){
+    
+        ticketsUtilizados.add(ticket);
+    }
+    
+    public void establecerTicketVigente(TicketParqueo  ticket){
+    
+        ticketVigente = ticket;
+        agregarTicket(ticket);
+    
+    }
 }
