@@ -1962,6 +1962,8 @@ public class MenuUsuario extends javax.swing.JFrame {
             vehiculo.setEspacio(espacio);
             espacio.agregarVehiculo(vehiculo);
             
+            vehiculo.establecerTicketVigente(ticket);
+            
             parqueo.cargarArchivo();
             
             JOptionPane.showMessageDialog(null, "Espacio registrado exitosamente!");
