@@ -12,13 +12,24 @@ public class TicketParqueo {
     private int tiempoParqueo;
     private LocalDateTime horaSistema;
     private boolean estado;
-    
+    private Usuario usuario;
+    private Vehiculo vehiculo;
+    private int total;
+    private Espacio espacio;
     //constructor
-    public TicketParqueo(int tiempoParqueo, LocalDateTime horaSistema, boolean estado){
+    
+    public TicketParqueo(){}
+    
+    public TicketParqueo(int tiempoParqueo, LocalDateTime horaSistema, boolean estado, Vehiculo vehiculo, Usuario usuario, int total){
         this.tiempoParqueo = tiempoParqueo;
         this.horaSistema = horaSistema;
         this.estado = estado;
+        this.vehiculo = vehiculo;
+        this.usuario = usuario;
+        this.total = total;
     }
+    
+    
     
     public void desaparcar(){
         //logica
@@ -27,4 +38,75 @@ public class TicketParqueo {
     public void extenderTiempo(int tiempoExtra, boolean estado){
         //logica
     }
+
+
+    public int getTiempoParqueo() {
+        return tiempoParqueo;
+    }
+
+
+    public void setTiempoParqueo(int tiempoParqueo) {
+        this.tiempoParqueo = tiempoParqueo;
+    }
+
+
+    public LocalDateTime getHoraSistema() {
+        return horaSistema;
+    }
+
+
+    public void setHoraSistema(LocalDateTime horaSistema) {
+        this.horaSistema = horaSistema;
+    }
+
+
+    public boolean isEstado() {
+        return estado;
+    }
+
+  
+    public void setEstado(boolean estado) {
+        this.estado = estado;
+    }
+
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+    
+    public Espacio getEspacio() {
+        return espacio;
+    }
+
+
+    public void setEspacio(Espacio espacio) {
+        this.espacio = espacio;
+    }
+
+
+    public Vehiculo getVehiculo() {
+        return vehiculo;
+    }
+
+
+    public void setVehiculo(Vehiculo vehiculo) {
+        this.vehiculo = vehiculo;
+    }
+
+
+    public int getTotal() {
+        return total;
+    }
+
+
+    public void setTotal(int total) {
+        this.total = total;
+    }
+    
+    
 }

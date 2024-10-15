@@ -6,6 +6,7 @@ import com.tec.parquimetro.parquimetro.Clases.Espacio;
 import com.tec.parquimetro.parquimetro.Clases.Inspector;
 import com.tec.parquimetro.parquimetro.Clases.Parqueo;
 import com.tec.parquimetro.parquimetro.Clases.Persona;
+import com.tec.parquimetro.parquimetro.Clases.Usuario;
 import java.awt.Color;
 import java.text.SimpleDateFormat;
 import java.time.Instant;
@@ -40,12 +41,20 @@ public class MenuAdministrador extends javax.swing.JFrame {
      */
     DefaultTableModel tableFormato = new DefaultTableModel();//formato para tabla espacios en la pestana de configuracion
     DefaultTableModel mdlEspaciosGeneral = new DefaultTableModel();//formato para tabal espacios en reporte general de espacios
-    public MenuAdministrador() {
+    public static Administrador administrador = new Administrador();
+    
+    
+    public MenuAdministrador(Administrador padministrador) {
         
+
        
         SwingUtilities.updateComponentTreeUI(this);
         initComponents();
         
+        
+         administrador = padministrador;
+        labelBienvenido.setText(administrador.getNombre() + " " + administrador.getApellidos());
+        lblId.setText(administrador.getIdentificacion());
         SpinnerNumberModel sTiempo = new SpinnerNumberModel();
         sTiempo.setMinimum(0);
         sTiempo.setStepSize(30);
@@ -126,7 +135,7 @@ public class MenuAdministrador extends javax.swing.JFrame {
         rondedBordes5 = new com.tec.parquimetro.parquimetro.GUI.RondedBordes();
         btnReportes = new com.tec.parquimetro.parquimetro.GUI.RondedBordes();
         labelBienvenido = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        lblId = new javax.swing.JLabel();
         pbTabl = new javax.swing.JTabbedPane();
         panelConfiguracion = new com.tec.parquimetro.parquimetro.GUI.Componentes.PanelRedondo();
         jLabel3 = new javax.swing.JLabel();
@@ -354,8 +363,8 @@ public class MenuAdministrador extends javax.swing.JFrame {
         labelBienvenido.setForeground(new java.awt.Color(255, 255, 255));
         labelBienvenido.setText("Camila Araya Conejo");
 
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("305610469");
+        lblId.setForeground(new java.awt.Color(255, 255, 255));
+        lblId.setText("305610469");
 
         javax.swing.GroupLayout panelRedondo1Layout = new javax.swing.GroupLayout(panelRedondo1);
         panelRedondo1.setLayout(panelRedondo1Layout);
@@ -368,7 +377,7 @@ public class MenuAdministrador extends javax.swing.JFrame {
                         .addComponent(labelBienvenido, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(panelRedondo1Layout.createSequentialGroup()
                         .addGap(57, 57, 57)
-                        .addComponent(jLabel2))
+                        .addComponent(lblId))
                     .addGroup(panelRedondo1Layout.createSequentialGroup()
                         .addGap(17, 17, 17)
                         .addComponent(jLabel1)))
@@ -391,7 +400,7 @@ public class MenuAdministrador extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(labelBienvenido, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel2)
+                .addComponent(lblId)
                 .addGap(33, 33, 33)
                 .addComponent(btnPerfil, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(33, 33, 33)
@@ -2164,7 +2173,7 @@ public class MenuAdministrador extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MenuAdministrador().setVisible(true);
+                new MenuAdministrador(administrador).setVisible(true);
             }
         });
     }
@@ -2190,7 +2199,6 @@ public class MenuAdministrador extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -2228,6 +2236,7 @@ public class MenuAdministrador extends javax.swing.JFrame {
     private javax.swing.JLabel lblHora3;
     private javax.swing.JLabel lblHora4;
     private javax.swing.JLabel lblHora5;
+    private javax.swing.JLabel lblId;
     private javax.swing.JLabel lblIdentificacion;
     private javax.swing.JLabel lblIdentificacion1;
     private javax.swing.JLabel lblMinutos;
