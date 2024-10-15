@@ -3,6 +3,8 @@ package com.tec.parquimetro.parquimetro.Clases;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Usuario extends Persona implements Serializable{
     
@@ -10,7 +12,7 @@ public class Usuario extends Persona implements Serializable{
     private static final long serialVersionUID = 2L;
     private int tiempoAcumulado;
     private Tarjeta tarjeta; 
-    
+    private List<Vehiculo> vehiculos; //Almacena el vehiculo que esta parqueado, de esta desocupado sera NULL
   
     public Usuario(){
         super();
@@ -22,6 +24,7 @@ public class Usuario extends Persona implements Serializable{
         super(nombre, apellidos,  telefono, direccionFisica, fechaIngreso, identificacion, pin);
         this.tiempoAcumulado = tiempoAcumulado;
         this.tarjeta = tarjeta;
+        vehiculos = new ArrayList<Vehiculo>();
     }
     
     
@@ -41,6 +44,10 @@ public class Usuario extends Persona implements Serializable{
     
     }
     
+        public List<Vehiculo> getVehiculos(){
+        return vehiculos;
+    }
+    
     public int actualizarTiempoAcumulado(int tiempoExtra){
     
        return  this.tiempoAcumulado += tiempoExtra;
@@ -56,5 +63,23 @@ public class Usuario extends Persona implements Serializable{
         }
 
    }
+    
+   public Vehiculo buscarVehiculo(String placa){
+    
+        for(Vehiculo obj : vehiculos){
+            if(obj.getPlaca().equals(placa)){
+                return obj;
+            }
+        }
+        return null;
+        
+    }
+    
+    public void agregarVehiculo(Vehiculo vehiculo){
+        if(buscarVehiculo(vehiculo.getPlaca())== null){
+            vehiculo.setUsuario(this);
+            vehiculos.add(vehiculo);
+        }
+    }
     
 }

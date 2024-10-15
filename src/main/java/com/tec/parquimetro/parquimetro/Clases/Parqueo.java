@@ -276,6 +276,24 @@ public class Parqueo implements Serializable {
         return espaciosOcupados;
     
     }
+   
+   public void liberarEspacio(int numero){
+   
+   
+       Espacio espacio = buscarEspacio(numero);
+       espacio.setEstado(true);
+       cargarArchivo();
+   
+   }
+   
+     public void ocuparEspacio(int numero){
+   
+   
+       Espacio espacio = buscarEspacio(numero);
+       espacio.setEstado(false);
+       cargarArchivo();
+   
+   }
     
     public boolean agregarEspacios(int rangoInicio, int rangoFinal){
     

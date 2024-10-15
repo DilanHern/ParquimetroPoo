@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package com.tec.parquimetro.parquimetro.GUI;
+import com.tec.parquimetro.parquimetro.Clases.Administrador;
 import com.tec.parquimetro.parquimetro.Clases.Inspector;
 import com.tec.parquimetro.parquimetro.Clases.Persona;
 import java.awt.Color;
@@ -32,10 +33,14 @@ public class MenuInspector extends javax.swing.JFrame {
     /**
      * Creates new form MenuInspector
      */
-    public MenuInspector() {
+    public  static Inspector inspector = new Inspector();
+    public MenuInspector(Inspector pinspector) {
         initComponents();
         
-                pbTabl.setSelectedIndex(2);
+        inspector = pinspector;
+        labelBienvenido.setText(inspector.getNombre() + " " + inspector.getApellidos());
+        lblId.setText(inspector.getIdentificacion());
+         pbTabl.setSelectedIndex(2);
         
          pbTabl.setUI(new javax.swing.plaf.basic.BasicTabbedPaneUI() {
             @Override
@@ -69,7 +74,7 @@ public class MenuInspector extends javax.swing.JFrame {
         rondedBordes5 = new com.tec.parquimetro.parquimetro.GUI.RondedBordes();
         btnReportes = new com.tec.parquimetro.parquimetro.GUI.RondedBordes();
         labelBienvenido = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        lblId = new javax.swing.JLabel();
         pbTabl = new javax.swing.JTabbedPane();
         pnParquear = new com.tec.parquimetro.parquimetro.GUI.Componentes.PanelRedondo();
         lblPerfil1 = new javax.swing.JLabel();
@@ -197,8 +202,8 @@ public class MenuInspector extends javax.swing.JFrame {
         labelBienvenido.setForeground(new java.awt.Color(255, 255, 255));
         labelBienvenido.setText("Camila Araya Conejo");
 
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("305610469");
+        lblId.setForeground(new java.awt.Color(255, 255, 255));
+        lblId.setText("305610469");
 
         javax.swing.GroupLayout panelRedondo1Layout = new javax.swing.GroupLayout(panelRedondo1);
         panelRedondo1.setLayout(panelRedondo1Layout);
@@ -211,7 +216,7 @@ public class MenuInspector extends javax.swing.JFrame {
                         .addComponent(labelBienvenido, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(panelRedondo1Layout.createSequentialGroup()
                         .addGap(57, 57, 57)
-                        .addComponent(jLabel2))
+                        .addComponent(lblId))
                     .addGroup(panelRedondo1Layout.createSequentialGroup()
                         .addGap(17, 17, 17)
                         .addComponent(jLabel1)))
@@ -234,7 +239,7 @@ public class MenuInspector extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(labelBienvenido, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel2)
+                .addComponent(lblId)
                 .addGap(33, 33, 33)
                 .addComponent(btnPerfil, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(33, 33, 33)
@@ -851,7 +856,7 @@ public class MenuInspector extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MenuInspector().setVisible(true);
+                new MenuInspector(inspector).setVisible(true);
             }
         });
     }
@@ -863,7 +868,6 @@ public class MenuInspector extends javax.swing.JFrame {
     private com.tec.parquimetro.parquimetro.GUI.RondedBordes btnReportes;
     private com.tec.parquimetro.parquimetro.GUI.RondedBordes btnRestablecerContra;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
@@ -872,6 +876,7 @@ public class MenuInspector extends javax.swing.JFrame {
     private javax.swing.JLabel lblApellidos1;
     private javax.swing.JLabel lblApellidos2;
     private javax.swing.JLabel lblApellidos3;
+    private javax.swing.JLabel lblId;
     private javax.swing.JLabel lblIdentificacion;
     private javax.swing.JLabel lblNombre1;
     private javax.swing.JLabel lblPerfil1;
