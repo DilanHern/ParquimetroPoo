@@ -17,6 +17,8 @@ public class TicketParqueo implements Serializable{
     private Vehiculo vehiculo;
     private int total;
     private Espacio espacio;
+    private byte tipoTicket; //1->Ticket nuevo 2-> Ticket con tiempo extra
+    
     //constructor
     
     public TicketParqueo(){}
@@ -28,6 +30,7 @@ public class TicketParqueo implements Serializable{
         this.vehiculo = vehiculo;
         this.usuario = usuario;
         this.total = total;
+        this.tipoTicket = 1;
     }
     
     
@@ -108,6 +111,18 @@ public class TicketParqueo implements Serializable{
     public void setTotal(int total) {
         this.total = total;
     }
+
+
+    public byte getTipoTicket() {
+        return tipoTicket;
+    }
+
+
+    public void setTipoTicket(byte tipoTicket) {
+        this.tipoTicket = tipoTicket;
+    }
     
+    
+
     
 }

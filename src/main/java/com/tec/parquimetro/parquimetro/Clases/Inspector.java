@@ -24,9 +24,9 @@ public class Inspector  extends Persona implements Serializable{
     //Constructor
     public Inspector(){}
     
-    public Inspector(String nombre, String apellidos, int telefono, String direccionFisica, LocalDate fechaIngreso, String identificacion, String pin, String terminalInspeccion ){
+    public Inspector(String nombre, String apellidos, int telefono, String direccionFisica, LocalDate fechaIngreso, String identificacion, String pin, String terminalInspeccion, Correo correo ){
     
-        super(nombre, apellidos,  telefono, direccionFisica, fechaIngreso, identificacion, pin);
+        super(nombre, apellidos,  telefono, direccionFisica, fechaIngreso, identificacion, pin, correo);
         this.terminalInspeccion = terminalInspeccion;
     }
     

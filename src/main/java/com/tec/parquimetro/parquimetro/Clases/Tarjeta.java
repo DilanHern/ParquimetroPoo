@@ -3,12 +3,13 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package com.tec.parquimetro.parquimetro.Clases;
+import java.io.Serializable;
 import java.time.LocalDate;
 /**
  *
  * @author Dilan
  */
-public class Tarjeta {
+public class Tarjeta implements Serializable{
     private long numeroTarjeta;
     private int mesVencimiento;
     private int anoVencimiento;
@@ -32,7 +33,9 @@ public class Tarjeta {
     public int getAnoVencimiento(){
         return anoVencimiento;
     }
-    
+    public int getMesVencimiento(){
+        return mesVencimiento;
+    }
     //setters
     public void setTarjeta(long numeroTarjeta, int mesVencimiento, int anoVencimiento, int codigoValidacion){
         this.numeroTarjeta = numeroTarjeta;
