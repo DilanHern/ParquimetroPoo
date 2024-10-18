@@ -16,11 +16,11 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Parquimetro {
+public class Parquimetro {/*
 
     public static void main(String[] args) throws ClassNotFoundException {
         
-          Parqueo parqueo = new Parqueo(LocalTime.parse("08:30"), LocalTime.parse("10:30"), 1000, 30, 200);
+       /*   Parqueo parqueo = new Parqueo(LocalTime.parse("08:30"), LocalTime.parse("10:30"), 1000, 30, 200);
             parqueo.agregarEspacios(100, 110);
             List<Espacio> espacios = parqueo.getEspacios();
             espacios.getFirst().setEstado(false);
@@ -62,12 +62,12 @@ public class Parquimetro {
          
          personas = new ArrayList<Persona>();
          
-         Persona.lecturaArchivo(personas);
+         Persona.lecturaArchivo(personas);*/
         
 
          
-        /*ArrayList<Persona> personas = new ArrayList<Persona>();
-        Usuario usuario = new Usuario();*/
+        ArrayList<Persona> personas = new ArrayList<Persona>();
+        Usuario usuario = new Usuario();
        Login login = new Login();
        /*try{
             Login.guardarUsuarios("listaUsuarios.dat", personas);
@@ -77,7 +77,7 @@ public class Parquimetro {
         }*/
         
         try{
-            personas = Login.cargarUsuarios("listaUsuarios.txt");
+           personas = Login.cargarUsuarios("listaUsuarios.dat");
             System.out.println("hola si");
         }
         catch (IOException e){
@@ -101,5 +101,5 @@ public class Parquimetro {
          
         // MenuAdministrador menuIns = new MenuAdministrador((Administrador)admin);
        //  menuIns.setVisible(true);
-    }
+    }*/
 }
