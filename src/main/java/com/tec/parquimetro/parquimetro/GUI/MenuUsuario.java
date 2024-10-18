@@ -6,6 +6,7 @@ package com.tec.parquimetro.parquimetro.GUI;
 
 import com.tec.parquimetro.parquimetro.Clases.Correo;
 import com.tec.parquimetro.parquimetro.Clases.Espacio;
+import com.tec.parquimetro.parquimetro.Clases.Login;
 import com.tec.parquimetro.parquimetro.Clases.Parqueo;
 import com.tec.parquimetro.parquimetro.Clases.Tarjeta;
 import com.tec.parquimetro.parquimetro.Clases.TicketParqueo;
@@ -15,6 +16,7 @@ import com.tec.parquimetro.parquimetro.GUI.Componentes.RenderTable;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.time.LocalDate;
@@ -1196,16 +1198,19 @@ public class MenuUsuario extends javax.swing.JFrame {
                 .addGap(147, 147, 147)
                 .addGroup(pnPerfil1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnPerfil1Layout.createSequentialGroup()
-                        .addGroup(pnPerfil1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(pnPerfil1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(lblNombre3)
                             .addComponent(txtNumeroTarjeta, javax.swing.GroupLayout.PREFERRED_SIZE, 608, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnPerfil1Layout.createSequentialGroup()
                                 .addGroup(pnPerfil1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblNombre4)
-                                    .addComponent(spnAnioTarjeta, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(24, 24, 24)
-                                .addComponent(spnMesTarjeta, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(112, 112, 112)
+                                    .addGroup(pnPerfil1Layout.createSequentialGroup()
+                                        .addComponent(spnAnioTarjeta, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(spnMesTarjeta, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(112, 112, 112))
+                                    .addGroup(pnPerfil1Layout.createSequentialGroup()
+                                        .addComponent(lblNombre4)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                                 .addGroup(pnPerfil1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(lblNombre6)
                                     .addComponent(txtCodigoTarjeta, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE))))
@@ -1853,6 +1858,14 @@ public class MenuUsuario extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void actualizarInformacion(Usuario usuario, String identificacion){
+    
+        Login login = new Login();
+        System.out.println("holaaaaaaaaaaaa");
+         login.actualizarPersona(usuario,identificacion);
+        
+    }
+    
     private void btnPerfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPerfilActionPerformed
         // TODO add your handling code here:
         pbTabl.setSelectedIndex(6);
@@ -1891,8 +1904,6 @@ public class MenuUsuario extends javax.swing.JFrame {
             tpParquearEspacio.setSelectedIndex(2);
             txtEspacioConsultado.setEnabled(true);
             btnConsultarEspacio.setVisible(true);
-            Parqueo parqueo = new Parqueo();
-            parqueo.lecturaArchivo();
         }else{
             
             JOptionPane.showMessageDialog(null, "Debe registar un metodo de pago antes de utilizar un espacio");
@@ -1912,6 +1923,9 @@ public class MenuUsuario extends javax.swing.JFrame {
     private void btnCerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarSesionActionPerformed
        
         LoginJFrame login = new LoginJFrame();
+        
+        actualizarInformacion(usuario, usuario.getIdentificacion());
+        
         usuario=null;
         this.setVisible(false);
         login.setVisible(true);
@@ -2205,6 +2219,7 @@ public class MenuUsuario extends javax.swing.JFrame {
         String direccionFisica;
         String parte1Correo;
         String parte2Correo;
+        String identificacionGeneral;
         LocalDate fechaIngreso;
         int telefono;
         
@@ -2233,9 +2248,11 @@ public class MenuUsuario extends javax.swing.JFrame {
                                        Correo correo = new Correo(parte1Correo, parte2Correo);
                                        fechaIngreso = LocalDate.now();
                                        System.out.println(fechaIngreso);
-                                       
+                                       identificacionGeneral = usuario.getIdentificacion();
                                         Usuario usuarioActualizado = new Usuario(nombre, apellidos,telefono, direccionFisica, fechaIngreso, identificacion,"",0, correo);
                                         usuario.actualizarDatos(usuarioActualizado);
+                                        
+                                        actualizarInformacion(usuario, identificacionGeneral);
                                        
                                          JOptionPane.showMessageDialog(null, "Datos actualizados existosamente!");
                                    }
@@ -2378,6 +2395,8 @@ public class MenuUsuario extends javax.swing.JFrame {
                              Tarjeta tarjeta = new Tarjeta(numeroTarjeta,anio,mes,codigoValidacion);
                              
                              usuario.setTarjeta(tarjeta);
+                             
+                             actualizarInformacion(usuario, usuario.getIdentificacion());
                         
                              JOptionPane.showMessageDialog(null, "Tarjeta actualizada exitosamente");
                         }
@@ -2602,6 +2621,7 @@ public class MenuUsuario extends javax.swing.JFrame {
                  lblEspacioDisponible.setText("Espacio: " + txtEspacioConsultado.getText());
                  btnConsultarEspacio.setVisible(false);
                  actualizarDatosTicket();
+                 actualizarInformacion(usuario, usuario.getIdentificacion());
               }
             else{
                 JOptionPane.showMessageDialog(null, "No se liberará!");
@@ -2640,6 +2660,8 @@ public class MenuUsuario extends javax.swing.JFrame {
             txtEspacioConsultado.enable(true);
             btnConsultarEspacio.setVisible(true);
             tpParquearEspacio.setSelectedIndex(2);
+            
+            actualizarInformacion(usuario, usuario.getIdentificacion());
             
         }else{
         
@@ -2726,6 +2748,7 @@ public class MenuUsuario extends javax.swing.JFrame {
                 
                 
                 inicializarTBMisParqueos();
+                actualizarInformacion(usuario, usuario.getIdentificacion());
               }
             else{
                 JOptionPane.showMessageDialog(null, "No se agregara tiempo extra!");
@@ -2769,6 +2792,7 @@ public class MenuUsuario extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(null, "Vehiculo desaparcado!");
                 
                 inicializarTBMisParqueos();
+                actualizarInformacion(usuario, usuario.getIdentificacion());
               }
             else{
                 JOptionPane.showMessageDialog(null, "No se libera el espacio!");
@@ -2838,6 +2862,7 @@ public class MenuUsuario extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Tiempo actualizado!");
             inicializarTBMisParqueos();
             pnlAgregarTiempo.setVisible(false);
+            actualizarInformacion(usuario, usuario.getIdentificacion());
             
         }
     }//GEN-LAST:event_btnConfirmarTiempoExtraActionPerformed
@@ -2884,6 +2909,7 @@ public class MenuUsuario extends javax.swing.JFrame {
                             tpPanelModificaciones.setVisible(false);
                             inicializarTablaVehiculos();
                             btnAgregarVehiculo.setVisible(true);
+                            actualizarInformacion(usuario, usuario.getIdentificacion());
                     }
                     else
                         JOptionPane.showMessageDialog(null, "Al ingresar un modelo debe tener menos de 15 caracteres");
@@ -2941,6 +2967,7 @@ public class MenuUsuario extends javax.swing.JFrame {
                         tpPanelModificaciones.setVisible(false);
                         inicializarTablaVehiculos();
                         btnAgregarVehiculo.setVisible(true);
+                        actualizarInformacion(usuario, usuario.getIdentificacion());
                 }
                 else
                     JOptionPane.showMessageDialog(null, "Al ingresar un modelo debe tener menos de 15 caracteres");
@@ -2968,6 +2995,7 @@ public class MenuUsuario extends javax.swing.JFrame {
                     usuario.removerVehiculo(placa);
                     JOptionPane.showMessageDialog(null, "Vehiculo eliminado exitosamente!");
                     inicializarTablaVehiculos();
+                    actualizarInformacion(usuario, usuario.getIdentificacion());
                 }
                 else{
                     JOptionPane.showMessageDialog(null, "El vehiculo se encuentra parqueado en un espacio!");
