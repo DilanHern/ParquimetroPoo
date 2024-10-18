@@ -109,6 +109,7 @@ public class Vehiculo implements Serializable {
     
      public  void  generarTicketTiempoExtra(int tiempoExtra, int total){
     
+         //al ser un ticket generado desde otro ticket se genera un ticker con un tiempo extra generado
     
         TicketParqueo ticketNuevo = new TicketParqueo();
         ticketNuevo.setEspacio(ticketVigente.getEspacio());
@@ -117,12 +118,14 @@ public class Vehiculo implements Serializable {
         ticketNuevo.setVehiculo(ticketVigente.getVehiculo());
         ticketNuevo.setUsuario(ticketVigente.getUsuario());
         ticketNuevo.setTotal(ticketVigente.getTotal() + total);
+        ticketNuevo.setTipoTicket((short)2);
         ticketNuevo.setEstado(true);
         
         ticketVigente.setEstado(false);
         
         agregarTicket(ticketVigente);
         
+        //define el nuevo ticker vigente
         ticketVigente=ticketNuevo;
         
         

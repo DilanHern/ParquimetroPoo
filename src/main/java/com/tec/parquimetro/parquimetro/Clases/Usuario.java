@@ -65,7 +65,6 @@ public class Usuario extends Persona implements Serializable{
     public void actualizarUsuario(Usuario persona){
        
         super.actualizarDatos(persona);
-        
         if(persona.getTiempoAcumulado()!=-1){
         
             this.setTiempoAcumulado(persona.getTiempoAcumulado());
@@ -85,12 +84,14 @@ public class Usuario extends Persona implements Serializable{
     }
     
     public void agregarVehiculo(Vehiculo vehiculo){
+        //valida que el vehiculo no este registrado
         if(buscarVehiculo(vehiculo.getPlaca())== null){
             vehiculo.setUsuario(this);
             vehiculos.add(vehiculo);
         }
     }
     
+    //remueve el vehiculo en relacion a la placa recibida
     public void removerVehiculo(String placa){
     
        Vehiculo objEncontrado = null;
