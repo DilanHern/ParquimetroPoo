@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-/*
+
 package com.tec.parquimetro.parquimetro.GUI;
 import com.tec.parquimetro.parquimetro.Clases.Administrador;
 import com.tec.parquimetro.parquimetro.Clases.Espacio;
@@ -1001,4 +1001,4 @@ public class MenuInspector extends javax.swing.JFrame {
     private javax.swing.JTextField txtTelefono;
     private javax.swing.JTextField txtTerminal;
     // End of variables declaration//GEN-END:variables
-}*/
+}
