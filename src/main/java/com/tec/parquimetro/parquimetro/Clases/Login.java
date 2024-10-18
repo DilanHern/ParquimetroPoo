@@ -14,7 +14,6 @@ import java.io.ObjectInputStream;
 import java.io.FileInputStream;
 import java.time.LocalDate;
 import javax.swing.JOptionPane;
-
 /**
  *
  * @author carol_flgngfy
@@ -71,19 +70,6 @@ public class Login {
         //inicia sesion automaticamente despues de registrarse
         //
     }
-    //BORRARRR
-    public void crear(){
-        Administrador adminOficial = new Administrador("Admin prueba", "apellido", 123456, "vive en su casa", LocalDate.now(), "1234", "1234");
-
-        listaUsuarios.add(adminOficial);
-        try{
-            guardarUsuarios("listaUsuarios.txt", listaUsuarios);
-        }
-        catch (IOException e){
-            System.out.println("malmamlal");
-        }
-        
-    }
     
     //funcion iniciarSesion(): permite al usuario/admins/inspectores ingresar a la app
     public void iniciarSesion(){
@@ -138,12 +124,13 @@ public class Login {
     //recibe una persona y su identificacion(puede ser la antigua) y la actualice en los usuarios
     public void actualizarPersona(Persona usuario, String identificacion){
         
-         try{
-             try {
+        try{
+            try {
                  //carga la lista de los usuarios para ser buscado entre los usuarios
                  this.setListaUsuarios(cargarUsuarios("listaUsuarios.dat"));
-             } catch (ClassNotFoundException ex) {
-                 Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+             } 
+            catch (ClassNotFoundException ex) {
+                System.out.println("No se encontró el archivo");
              }
         }
         catch (IOException e){

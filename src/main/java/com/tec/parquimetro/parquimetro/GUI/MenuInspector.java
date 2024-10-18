@@ -2,10 +2,14 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
+
 package com.tec.parquimetro.parquimetro.GUI;
 import com.tec.parquimetro.parquimetro.Clases.Administrador;
+import com.tec.parquimetro.parquimetro.Clases.Espacio;
 import com.tec.parquimetro.parquimetro.Clases.Inspector;
+import com.tec.parquimetro.parquimetro.Clases.Parqueo;
 import com.tec.parquimetro.parquimetro.Clases.Persona;
+import com.tec.parquimetro.parquimetro.Clases.Vehiculo;
 import java.awt.Color;
 import java.text.SimpleDateFormat;
 import java.time.Instant;
@@ -13,6 +17,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -58,17 +63,39 @@ public class MenuInspector extends javax.swing.JFrame {
          pbTabl.setBorder(BorderFactory.createEmptyBorder());
     }
 
-    //FUNCION PARA VERIFICAR SI EL NUMERO DE PARQUEO INGRESADO EXISTE
-    public static void verificarNumParqueo(int numParqueo){
-        
-    }
-    //FUNCION PARA VERIFICAR SI LA PLACA ESTÁ EN EL PARQUEO
-    public static void verificarPlacaParqueo(int placa, int numParqueo){
-        //1.cargar parqueos en una lista
+    //FUNCION PARA VERIFICAR SI LA PLACA ESTÁ EN EL PARQUEO, retorna true si la placa está en el parqueo, false si no lo está
+    public static boolean verificarPlacaParqueo(int placa, int numParqueo, Parqueo parqueo){
+        ArrayList<Espacio> listaEspacios = parqueo.getEspacios();
         //2. verificar en esta lista si el parqueo ingresado existe, si no retorna FALSE, si si, continua
-        //revisar si el espacio está ocupado y si la placa corresponde al parqueo
-        
-    }
+        Espacio espacioVerificar = null;
+        for (Espacio cadaEspacio : listaEspacios){
+            if (cadaEspacio.getNumero() == numParqueo){
+                espacioVerificar = cadaEspacio;
+                break;
+            }
+        }
+        if (espacioVerificar == null){ //no existe ese espacio
+            JOptionPane.showMessageDialog(null, "NO existe un espacio con ese número de parqueo", "ERROR", JOptionPane.INFORMATION_MESSAGE);
+            return true;
+        }
+        else{ //si existe ese espacio, revisar si el espacio está ocupado y si la placa corresponde al parqueo
+            if (espacioVerificar.getEstado()){ //si el estado es true, está disponible
+                JOptionPane.showMessageDialog(null, "El espacio está disponible, no hay ningun auto registrado a este espacio", "MULTA", JOptionPane.INFORMATION_MESSAGE);
+                return true;
+            } 
+            else{ //el espacio está ocupado
+                for (Vehiculo vehiculo : espacioVerificar.getVehiculos()){
+                    if (!vehiculo.getPlaca().equals(placa)){ //si la placa es diferente al del vehiculo estacionado, hace una multa
+                        JOptionPane.showMessageDialog(null, "El vehiculo pago no corresponde con la placa ingresada", "MULTA", JOptionPane.INFORMATION_MESSAGE);
+                        return true;
+                    }
+                }
+                JOptionPane.showMessageDialog(null, "La placa del vehiculo en el espacio corresponde al pago", "TODO EN ORDEN", JOptionPane.INFORMATION_MESSAGE);
+                return false;
+            }
+        }
+    }    
+}
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -89,7 +116,7 @@ public class MenuInspector extends javax.swing.JFrame {
         lblId = new javax.swing.JLabel();
         pbTabl = new javax.swing.JTabbedPane();
         pnParquear = new com.tec.parquimetro.parquimetro.GUI.Componentes.PanelRedondo();
-        lblPerfil1 = new javax.swing.JLabel();
+        lbRevisarParqueos = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         txtPlaca = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
@@ -278,9 +305,9 @@ public class MenuInspector extends javax.swing.JFrame {
         pnParquear.setRoundTopLeft(15);
         pnParquear.setRoundTopRight(15);
 
-        lblPerfil1.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        lblPerfil1.setForeground(new java.awt.Color(255, 255, 255));
-        lblPerfil1.setText("Revisar parqueos");
+        lbRevisarParqueos.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        lbRevisarParqueos.setForeground(new java.awt.Color(255, 255, 255));
+        lbRevisarParqueos.setText("Revisar parqueos");
 
         jLabel2.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLabel2.setText("Ingrese el número de placa:");
@@ -318,7 +345,7 @@ public class MenuInspector extends javax.swing.JFrame {
                             .addComponent(txtNumParqueo, javax.swing.GroupLayout.DEFAULT_SIZE, 186, Short.MAX_VALUE)))
                     .addGroup(pnParquearLayout.createSequentialGroup()
                         .addGap(302, 302, 302)
-                        .addComponent(lblPerfil1))
+                        .addComponent(lbRevisarParqueos))
                     .addGroup(pnParquearLayout.createSequentialGroup()
                         .addGap(348, 348, 348)
                         .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -328,7 +355,7 @@ public class MenuInspector extends javax.swing.JFrame {
             pnParquearLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnParquearLayout.createSequentialGroup()
                 .addGap(88, 88, 88)
-                .addComponent(lblPerfil1)
+                .addComponent(lbRevisarParqueos)
                 .addGap(97, 97, 97)
                 .addGroup(pnParquearLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
@@ -943,6 +970,7 @@ public class MenuInspector extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel labelBienvenido;
+    private javax.swing.JLabel lbRevisarParqueos;
     private javax.swing.JLabel lblApellidos;
     private javax.swing.JLabel lblApellidos1;
     private javax.swing.JLabel lblApellidos2;
@@ -950,7 +978,6 @@ public class MenuInspector extends javax.swing.JFrame {
     private javax.swing.JLabel lblId;
     private javax.swing.JLabel lblIdentificacion;
     private javax.swing.JLabel lblNombre1;
-    private javax.swing.JLabel lblPerfil1;
     private javax.swing.JLabel lblPerfil3;
     private javax.swing.JLabel lblPerfil5;
     private javax.swing.JLabel lblPerfil6;

@@ -325,7 +325,7 @@
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace min="-2" pref="302" max="-2" attributes="0"/>
-                                  <Component id="lblPerfil1" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lbRevisarParqueos" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace min="-2" pref="348" max="-2" attributes="0"/>
@@ -340,7 +340,7 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="88" max="-2" attributes="0"/>
-                          <Component id="lblPerfil1" min="-2" max="-2" attributes="0"/>
+                          <Component id="lbRevisarParqueos" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="97" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -359,7 +359,7 @@
                 </DimensionLayout>
               </Layout>
               <SubComponents>
-                <Component class="javax.swing.JLabel" name="lblPerfil1">
+                <Component class="javax.swing.JLabel" name="lbRevisarParqueos">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Dialog" size="18" style="1"/>

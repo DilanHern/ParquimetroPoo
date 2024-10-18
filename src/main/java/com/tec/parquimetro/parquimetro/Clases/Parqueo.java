@@ -145,7 +145,7 @@ public class Parqueo implements Serializable {
         this.costoMulta = costoMulta;
     }
     
-   public List<Espacio> getEspacios(){
+   public ArrayList<Espacio> getEspacios(){
     
         return this.espacios;
     }
