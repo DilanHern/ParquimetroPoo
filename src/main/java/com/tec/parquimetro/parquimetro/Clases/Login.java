@@ -126,10 +126,12 @@ public class Login {
         }
     }
     
+    //recibe una persona y su identificacion(puede ser la antigua) y la actualice en los usuarios
     public void actualizarPersona(Persona usuario, String identificacion){
         
          try{
              try {
+                 //carga la lista de los usuarios para ser buscado entre los usuarios
                  this.setListaUsuarios(cargarUsuarios("listaUsuarios.dat"));
              } catch (ClassNotFoundException ex) {
                  Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
@@ -139,12 +141,13 @@ public class Login {
             System.out.println("malmamlal");
         }
         
+         //busca dentro de la lista el usuario
         for(Persona obj : listaUsuarios){
-        
-            
+            //busca el usuario que coincide con la identificacion
             if(obj.getIdentificacion().equals(usuario.getIdentificacion())){
-                System.out.println("holaaaa");
+                //remueve el usuario de la lista
                 listaUsuarios.remove(obj);
+                //agrega el nuevo usuario
                 listaUsuarios.add(usuario);
                 break;
             }

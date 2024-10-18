@@ -71,6 +71,7 @@ public class MenuUsuario extends javax.swing.JFrame {
         
 
         
+        //Inicializa los elementos de tipo tab panel, elimina los tabs visibles al usuario
          pbTabl.setUI(new javax.swing.plaf.basic.BasicTabbedPaneUI() {
             @Override
             protected int calculateTabAreaHeight(int tabPlacement, int runCount, int maxTabHeight) {
@@ -94,13 +95,16 @@ public class MenuUsuario extends javax.swing.JFrame {
             }
          });
          tpParquearEspacio.setBorder(BorderFactory.createEmptyBorder());
-              
+         //Finaliza la modificacion de los tab
+         
+         //Actualia el usuario global para poder acceder a el desde otros metodos
         usuario = pusuario;
+        //Actualiza los datos del nombre e identificacion del usuario dentro del menu del usuario
         labelBienvenido.setText(pusuario.getNombre() + " " + pusuario.getApellidos());
         lblId.setText(pusuario.getIdentificacion());
          
         
-        pbTabl.setSelectedIndex(3);
+        pbTabl.setSelectedIndex(3); //muestra el tab 3 (inicio)
     }
 
     /**
@@ -116,7 +120,7 @@ public class MenuUsuario extends javax.swing.JFrame {
         jMenuItem1 = new javax.swing.JMenuItem();
         jPanel1 = new javax.swing.JPanel();
         panelRedondo1 = new com.tec.parquimetro.parquimetro.GUI.Componentes.PanelRedondo();
-        jLabel1 = new javax.swing.JLabel();
+        lblTiuloPrincipal = new javax.swing.JLabel();
         btnPerfil = new com.tec.parquimetro.parquimetro.GUI.RondedBordes();
         btnParquear = new com.tec.parquimetro.parquimetro.GUI.RondedBordes();
         BtnVehiculos = new com.tec.parquimetro.parquimetro.GUI.RondedBordes();
@@ -264,13 +268,13 @@ public class MenuUsuario extends javax.swing.JFrame {
         panelRedondo1.setRoundTopLeft(30);
         panelRedondo1.setRoundTopRight(30);
 
-        jLabel1.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel1.setFont(new java.awt.Font("Leelawadee", 1, 24)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Parquimetro");
-        jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
+        lblTiuloPrincipal.setBackground(new java.awt.Color(255, 255, 255));
+        lblTiuloPrincipal.setFont(new java.awt.Font("Leelawadee", 1, 24)); // NOI18N
+        lblTiuloPrincipal.setForeground(new java.awt.Color(255, 255, 255));
+        lblTiuloPrincipal.setText("Parquimetro");
+        lblTiuloPrincipal.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel1MouseClicked(evt);
+                lblTiuloPrincipalMouseClicked(evt);
             }
         });
 
@@ -411,7 +415,7 @@ public class MenuUsuario extends javax.swing.JFrame {
                         .addComponent(lblId))
                     .addGroup(panelRedondo1Layout.createSequentialGroup()
                         .addGap(17, 17, 17)
-                        .addComponent(jLabel1)))
+                        .addComponent(lblTiuloPrincipal)))
                 .addContainerGap(20, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRedondo1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -429,7 +433,7 @@ public class MenuUsuario extends javax.swing.JFrame {
             panelRedondo1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelRedondo1Layout.createSequentialGroup()
                 .addGap(50, 50, 50)
-                .addComponent(jLabel1)
+                .addComponent(lblTiuloPrincipal)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(labelBienvenido, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -1860,15 +1864,17 @@ public class MenuUsuario extends javax.swing.JFrame {
 
     private void actualizarInformacion(Usuario usuario, String identificacion){
     
+        //Utilizado para actualizar los usuarios al modificar su informacion
         Login login = new Login();
-        System.out.println("holaaaaaaaaaaaa");
          login.actualizarPersona(usuario,identificacion);
         
     }
     
     private void btnPerfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPerfilActionPerformed
-        // TODO add your handling code here:
-        pbTabl.setSelectedIndex(6);
+
+        pbTabl.setSelectedIndex(6); //lleva a la pestana de actualizar informacion del perfil'
+        
+        //coloca la informacion cactual del usuario dentro de los campos de texto
         txtNombre1.setText(usuario.getNombre());
         txtApellidos.setText(usuario.getApellidos());
         txtTelefono.setText(String.valueOf(usuario.getTelefono()));
@@ -1880,6 +1886,7 @@ public class MenuUsuario extends javax.swing.JFrame {
 
     private void btnParquearMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnParquearMouseEntered
 
+        //modifica el color del boton al posicionar el mouse sobre el boton
         btnParquear.setColor1(Color.orange);
         btnParquear.setColor2(Color.orange);
         btnParquear.setColor3(Color.orange);
@@ -1887,21 +1894,20 @@ public class MenuUsuario extends javax.swing.JFrame {
     }//GEN-LAST:event_btnParquearMouseEntered
 
     private void btnParquearMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnParquearMouseExited
+
+         //modifica el color del boton al posicionar el mouse sobre el botonbtnParquear.setColor1(Color.white);
         btnParquear.setColor1(Color.white);
-        btnParquear.setColor2(Color.white);
+         btnParquear.setColor2(Color.white);
         btnParquear.setColor3(Color.white);
         btnParquear.setForeground(new Color(0,0,51));
     }//GEN-LAST:event_btnParquearMouseExited
 
-    
-
-    
     private void btnParquearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnParquearActionPerformed
 
-        
+        //valida que el usuario haya registrado un metodo de pago para poder reservar un espacio
         if(usuario.getTarjeta() != null){
-            pbTabl.setSelectedIndex(5);
-            tpParquearEspacio.setSelectedIndex(2);
+            pbTabl.setSelectedIndex(5); //muestra la pestana 5 correspondiente al reservar un espacio
+            tpParquearEspacio.setSelectedIndex(2);//cambia la pestana del tab panel interno a la pestana inicial
             txtEspacioConsultado.setEnabled(true);
             btnConsultarEspacio.setVisible(true);
         }else{
@@ -1909,35 +1915,28 @@ public class MenuUsuario extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Debe registar un metodo de pago antes de utilizar un espacio");
             
         }
-        
-       // cargarTablaEspaciosParquear(parqueo.listarEspaciosVacios());
-        
-      //  TableRowSorter<TableModel> sorter = new TableRowSorter<TableModel>(mdlEspacios);
-      //  tblEspaciosParquear.setRowSorter(sorter);
-        //sorter.setSortKeys(Arrays.asList(new RowSorter.SortKey(0, SortOrder.ASCENDING)));
-        
-        
-
     }//GEN-LAST:event_btnParquearActionPerformed
 
     private void btnCerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarSesionActionPerformed
        
         LoginJFrame login = new LoginJFrame();
         
-        actualizarInformacion(usuario, usuario.getIdentificacion());
+        actualizarInformacion(usuario, usuario.getIdentificacion()); //actualiza la informacion que fue generada por el usuario
         
-        usuario=null;
+        usuario=null; //elimina la informacion que apuntaba el usuario
         this.setVisible(false);
         login.setVisible(true);
         
     }//GEN-LAST:event_btnCerrarSesionActionPerformed
 
     private void btnReportesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReportesActionPerformed
-       pbTabl.setSelectedIndex(1);
+       pbTabl.setSelectedIndex(1); //muestra la pestana del tab en la que se puede generar reportes
     }//GEN-LAST:event_btnReportesActionPerformed
 
     private void inicializarTabPanelVehiculos(){
     
+        //inicializa el tab que muestra las acciones que manipula los vehiculos
+        //oculta las pestana del panel
         tpPanelModificaciones.setUI(new javax.swing.plaf.basic.BasicTabbedPaneUI() {
             @Override
             protected int calculateTabAreaHeight(int tabPlacement, int runCount, int maxTabHeight) {
@@ -1950,17 +1949,15 @@ public class MenuUsuario extends javax.swing.JFrame {
     
     private void inicializarTablaVehiculos(){
         
-        String placa, modeloAuto,  marca,  estado;
+        String placa, modeloAuto,  marca,  estado; 
         int espacio;
         
-        tblVehiculo.setDefaultRenderer(Object.class, new RenderTable());
+        tblVehiculo.setDefaultRenderer(Object.class, new RenderTable()); //genera un modelo de tabla qe permite modificar los espacios de la misma
         
         DefaultTableModel modelo = new DefaultTableModel();
         
-        String identificadores [] = {"Placa","Estado", "Espacio", "Modelo", "Serie", "Actualizar", "Eliminar"};
-        modelo.setColumnIdentifiers(identificadores);
-        
-
+        String identificadores [] = {"Placa","Estado", "Espacio", "Modelo", "Serie", "Actualizar", "Eliminar"}; //se define el nombre de las columnas
+        modelo.setColumnIdentifiers(identificadores);//se agrega los identificadores de las columnas al modelo
         
 
         //ESTILIZANDO BOTONES
@@ -1986,14 +1983,16 @@ public class MenuUsuario extends javax.swing.JFrame {
         eliminar.setSize(10,30);
         //---------------------------------
         
-        modelo.getDataVector().removeAllElements();
+        modelo.getDataVector().removeAllElements(); //elimina los datos que tiene la tabla
         
-        for(Vehiculo obj : usuario.getVehiculos()){
+        for(Vehiculo obj : usuario.getVehiculos()){ //recorre los vehiculos que posee los usuarios
         
+            //almacena la informacion del vehiculo en las variables
             placa= obj.getPlaca();
             marca=obj.getMarca();
             modeloAuto= obj.getModelo();
            
+            //valida que el vehiculo este parqueado, de se asi define el espacio en el que se encuentra el vehiculo
             if(obj.getTicketVigente()!=null){
             
                 estado = "Parqueado";
@@ -2001,21 +2000,20 @@ public class MenuUsuario extends javax.swing.JFrame {
                 modelo.addRow(new Object[]{placa, estado, espacio, modeloAuto, marca,actualizar, eliminar});
             }
             else{
-            
+                //al no estar parqueado el numero de espacio no se muestra
                  estado = "Desaparcado"; 
                  modelo.addRow(new Object[]{placa, estado, "-", modeloAuto, marca,actualizar, eliminar});
             }
         }
         
-        
-        tblVehiculo.setModel(modelo);
-        tblVehiculo.setRowHeight(40);
+        tblVehiculo.setModel(modelo); //se establece el modelo a la tabla, con los datos y nombres de las columnas cargadas
+        tblVehiculo.setRowHeight(40); //Estable la altura de las filas
         
         
     }
     
     private void BtnVehiculosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnVehiculosActionPerformed
-        pbTabl.setSelectedIndex(0);
+        pbTabl.setSelectedIndex(0); //muestra la pestana del panel principal, permite manipular a los vehiculo
         tpPanelModificaciones.setVisible(false);
         inicializarTabPanelVehiculos();
         inicializarTablaVehiculos();
@@ -2023,16 +2021,17 @@ public class MenuUsuario extends javax.swing.JFrame {
     }//GEN-LAST:event_BtnVehiculosActionPerformed
 
     private void BtnParqueos1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnParqueos1ActionPerformed
-       pbTabl.setSelectedIndex(2);
+       pbTabl.setSelectedIndex(2); //muestra la pestana del panel principal la cual permite mostrar los parqueos activos que posee el usuario
        pnlAgregarTiempo.setVisible(false);
        inicializarTBMisParqueos();
     }//GEN-LAST:event_BtnParqueos1ActionPerformed
 
-    private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
-        pbTabl.setSelectedIndex(4);
-    }//GEN-LAST:event_jLabel1MouseClicked
+    private void lblTiuloPrincipalMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblTiuloPrincipalMouseClicked
+        pbTabl.setSelectedIndex(4); //Representa el titulo principal que muestra la pestana principal de la aplicacion
+    }//GEN-LAST:event_lblTiuloPrincipalMouseClicked
 
     private void btnPerfilMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPerfilMouseExited
+        //cambia el color cuando el mouse se posiciona sobre el boton
         btnPerfil.setColor1(Color.white);
         btnPerfil.setColor2(Color.white);
         btnPerfil.setColor3(Color.white);
@@ -2040,6 +2039,7 @@ public class MenuUsuario extends javax.swing.JFrame {
     }//GEN-LAST:event_btnPerfilMouseExited
 
     private void BtnParqueos1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnParqueos1MouseExited
+        //cambia el color cuando el mouse se posiciona sobre el boton
         BtnParqueos1.setColor1(Color.white);
         BtnParqueos1.setColor2(Color.white);
         BtnParqueos1.setColor3(Color.white);
@@ -2047,6 +2047,7 @@ public class MenuUsuario extends javax.swing.JFrame {
     }//GEN-LAST:event_BtnParqueos1MouseExited
 
     private void BtnVehiculosMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnVehiculosMouseExited
+        //cambia el color cuando el mouse se posiciona sobre el boton
         BtnVehiculos.setColor1(Color.white);
         BtnVehiculos.setColor2(Color.white);
         BtnVehiculos.setColor3(Color.white);
@@ -2054,6 +2055,7 @@ public class MenuUsuario extends javax.swing.JFrame {
     }//GEN-LAST:event_BtnVehiculosMouseExited
 
     private void btnReportesMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReportesMouseExited
+        //cambia el color cuando el mouse se posiciona sobre el boton
         btnReportes.setColor1(Color.white);
         btnReportes.setColor2(Color.white);
         btnReportes.setColor3(Color.white);
@@ -2061,6 +2063,7 @@ public class MenuUsuario extends javax.swing.JFrame {
     }//GEN-LAST:event_btnReportesMouseExited
 
     private void btnReportesMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReportesMouseEntered
+        //cambia el color cuando el mouse se posiciona sobre el boton
         btnReportes.setColor1(Color.orange);
         btnReportes.setColor2(Color.orange);
         btnReportes.setColor3(Color.orange);
@@ -2068,10 +2071,11 @@ public class MenuUsuario extends javax.swing.JFrame {
     }//GEN-LAST:event_btnReportesMouseEntered
 
     private void BtnVehiculosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnVehiculosMouseClicked
-        // TODO add your handling code here:
+      
     }//GEN-LAST:event_BtnVehiculosMouseClicked
 
     private void BtnVehiculosMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnVehiculosMouseEntered
+        //cambia el color cuando el mouse se posiciona sobre el boton
         BtnVehiculos.setColor1(Color.orange);
         BtnVehiculos.setColor2(Color.orange);
         BtnVehiculos.setColor3(Color.orange);
@@ -2079,6 +2083,7 @@ public class MenuUsuario extends javax.swing.JFrame {
     }//GEN-LAST:event_BtnVehiculosMouseEntered
 
     private void BtnParqueos1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnParqueos1MouseEntered
+       //cambia el color cuando el mouse se posiciona sobre el boton
         BtnParqueos1.setColor1(Color.orange);
         BtnParqueos1.setColor2(Color.orange);
         BtnParqueos1.setColor3(Color.orange);
@@ -2086,6 +2091,7 @@ public class MenuUsuario extends javax.swing.JFrame {
     }//GEN-LAST:event_BtnParqueos1MouseEntered
 
     private void btnPerfilMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPerfilMouseEntered
+        //cambia el color cuando el mouse se posiciona sobre el boton
         btnPerfil.setColor1(Color.orange);
         btnPerfil.setColor2(Color.orange);
         btnPerfil.setColor3(Color.orange);
@@ -2093,14 +2099,14 @@ public class MenuUsuario extends javax.swing.JFrame {
     }//GEN-LAST:event_btnPerfilMouseEntered
 
     private void txtTelefonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTelefonoActionPerformed
-        // TODO add your handling code here:
+       
     }//GEN-LAST:event_txtTelefonoActionPerformed
 
     private void txtApellidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtApellidosActionPerformed
-        // TODO add your handling code here:
+      
     }//GEN-LAST:event_txtApellidosActionPerformed
 
-    //VALIDACIONES DATOS DE PERFIL
+    //-------------------------------------VALIDACIONES DATOS DE PERFIL----------------------
     public boolean validarApellidos(String apellidos) {
         
         if(apellidos.length()>= 1 && apellidos.length()<=40){
@@ -2210,6 +2216,8 @@ public class MenuUsuario extends javax.swing.JFrame {
        }
    
    }
+   
+   //----------------FIN VALIDACION DATOS PERFIL-------------------------------------------------
     
     private void btnActualizarPerfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarPerfilActionPerformed
         
@@ -2237,7 +2245,7 @@ public class MenuUsuario extends javax.swing.JFrame {
                                
                                    if(validarCorreo(txtPt1Mail.getText(), txtPt2Mail.getText())){
                                    
-                                   
+                                       //Almacena los datos de los campos de texto en las variables para ser alamacenadas
                                        nombre = txtNombre1.getText();
                                        apellidos= txtApellidos.getText();
                                        direccionFisica = taDireccionFisica.getText();
@@ -2248,9 +2256,13 @@ public class MenuUsuario extends javax.swing.JFrame {
                                        Correo correo = new Correo(parte1Correo, parte2Correo);
                                        fechaIngreso = LocalDate.now();
                                        System.out.println(fechaIngreso);
+                                       
+                                       //Almacena la identificacion del usuario anteriormente de ser modificada
                                        identificacionGeneral = usuario.getIdentificacion();
-                                        Usuario usuarioActualizado = new Usuario(nombre, apellidos,telefono, direccionFisica, fechaIngreso, identificacion,"",0, correo);
-                                        usuario.actualizarDatos(usuarioActualizado);
+                                       Usuario usuarioActualizado = new Usuario(nombre, apellidos,telefono, direccionFisica, fechaIngreso, identificacion,"",0, correo);
+                                       
+                                       //modifica la informacion modificada en el archivo de datos
+                                       usuario.actualizarDatos(usuarioActualizado);
                                         
                                         actualizarInformacion(usuario, identificacionGeneral);
                                        
@@ -2301,11 +2313,12 @@ public class MenuUsuario extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRestablecerContraActionPerformed
 
     private void btnMetodoPagoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMetodoPagoActionPerformed
-       pbTabl.setSelectedIndex(4);
+       pbTabl.setSelectedIndex(4); //lleva la pestana del panel del tab principal al metodo de pago
        
-       Tarjeta tarjeta = usuario.getTarjeta();
-       if(tarjeta!=null){
+       Tarjeta tarjeta = usuario.getTarjeta(); //obtiene los datos de la tarjeta
+       if(tarjeta!=null){ //valida que tenga una tarjeta registarda
            
+           //coloca los datos de la tarjeta actuales en los campos de texto que le permiten actualizarlos
             txtNumeroTarjeta.setText(String.valueOf(tarjeta.getNumeroTarjeta()));
             txtCodigoTarjeta.setText(String.valueOf(tarjeta.getCodigoValidacion()));
             spnAnioTarjeta.setYear(tarjeta.getAnoVencimiento());
@@ -2316,12 +2329,12 @@ public class MenuUsuario extends javax.swing.JFrame {
     }//GEN-LAST:event_btnMetodoPagoActionPerformed
 
     private void btnVolverPerfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverPerfilActionPerformed
-        pbTabl.setSelectedIndex(6);
+        pbTabl.setSelectedIndex(6);//boton presente en metodo de pago, le permite devolverse a actualizar el perfil
     }//GEN-LAST:event_btnVolverPerfilActionPerformed
 
-    
+    //------------------------VALIDACIONES DE DATOS DE TARJETA--------------------------------
     private boolean validarConversionLong(String numero){
-    
+        //valida que el numero pueda convertirse a long
         try{
         
             Long prueba = Long.valueOf(numero);
@@ -2368,9 +2381,11 @@ public class MenuUsuario extends javax.swing.JFrame {
         else
             return false;
     }
+    //-----------------------------------------------FIN DE VALIDACIONES  DE NUMERO DE TARJETA---------------------
     
     private void btnActualizarTarjetaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarTarjetaActionPerformed
         
+       //Datos que almacenan los datos a actualizar
         long numeroTarjeta;
         int anio;
         int mes;
@@ -2387,6 +2402,7 @@ public class MenuUsuario extends javax.swing.JFrame {
                         
                         if(validarCodigo(txtCodigoTarjeta.getText())){
                             
+                            //almacena los datos que fueron ingresados en los campos de texto
                             numeroTarjeta= Long.valueOf(txtNumeroTarjeta.getText());
                             anio = (int)spnAnioTarjeta.getValue();
                             mes=(int)spnMesTarjeta.getMonth();
@@ -2394,8 +2410,10 @@ public class MenuUsuario extends javax.swing.JFrame {
                             
                              Tarjeta tarjeta = new Tarjeta(numeroTarjeta,anio,mes,codigoValidacion);
                              
+                             //actualiza la tarjeta del usuario
                              usuario.setTarjeta(tarjeta);
                              
+                             //modifica los datos del usuario en el archivo de texto
                              actualizarInformacion(usuario, usuario.getIdentificacion());
                         
                              JOptionPane.showMessageDialog(null, "Tarjeta actualizada exitosamente");
@@ -2422,34 +2440,38 @@ public class MenuUsuario extends javax.swing.JFrame {
     
      private void generarReporteGeneralEspaciosVacios(List<Espacio>  espacios){
         
+         //Inicializa la tabla de espacios vacios que puede utilizar el usuario
         int cantidadEspacios=0;
         String estado = "Vacio";
         String identificadores [] = {"Numero", "Estado"};
-        mdlEspaciosGeneral.setColumnIdentifiers(identificadores);
         
+        //genera y modifica los identificadores de las columnas en la tabla
+        mdlEspaciosGeneral.setColumnIdentifiers(identificadores);
         tblEspaciosGeneral.setModel(mdlEspaciosGeneral);
-
         mdlEspaciosGeneral.getDataVector().removeAllElements();
-            
+         
+       //recorre los espacios para validar los espacios que estan vacios
         for(Espacio obj : espacios){
             mdlEspaciosGeneral.addRow(new Object[]{obj.getNumero(), estado});
-            cantidadEspacios++;
-                
+            cantidadEspacios++; //controla la cantidad de espacios tomados en cuenta
         }
-    
+        //modifica la cantidad de espacios tomados en cuenta en el reporte
         lblCantidadEspacios.setText(String.valueOf(cantidadEspacios));
     }
     
     private void cbReportesItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbReportesItemStateChanged
 
+        //Se genera cada vez que el combo box cambia de valor
+        //valida el valor seleccionado, y genera una respuesta en relacion a lo seleccionado
         if(cbReportes.getSelectedItem() == "Parqueos Disponibles")
         {
-            tpReportes.setSelectedIndex(0);
-             Parqueo parqueo = new Parqueo();
-            parqueo.lecturaArchivo();
+            tpReportes.setSelectedIndex(0);//muestra la pestana del panel que tiene la tabla a cargar
+            Parqueo parqueo = new Parqueo();
+            parqueo.lecturaArchivo();//obtiene los datos que posee el parqueo
 
             generarReporteGeneralEspaciosVacios(parqueo.getEspacios());
         
+            //Ordena los datos de la tabla basados en la columna 0 de manera ascendente
             TableRowSorter<TableModel> sorter = new TableRowSorter<TableModel>(mdlEspaciosGeneral);
             tblEspaciosGeneral.setRowSorter(sorter);
             sorter.setSortKeys(Arrays.asList(new RowSorter.SortKey(0, SortOrder.ASCENDING)));
@@ -2457,14 +2479,16 @@ public class MenuUsuario extends javax.swing.JFrame {
     }//GEN-LAST:event_cbReportesItemStateChanged
 
     private void cbReportesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbReportesActionPerformed
-        // TODO add your handling code here:
+      
     }//GEN-LAST:event_cbReportesActionPerformed
 
     
     private void actualizarDatosTicket(){
     
-
-        if(usuario.getVehiculos().isEmpty()){
+       //actualiza la tabla de los datos al generar un ticket del espacio
+       
+       //valida si el usuario tiene vehiculos registrados
+        if(usuario.getVehiculos().isEmpty()){ 
         
             JOptionPane.showMessageDialog(null, "Debe registrar un vehiculo para reservar un espacio!");
             txtEspacioConsultado.enable(true);
@@ -2472,79 +2496,82 @@ public class MenuUsuario extends javax.swing.JFrame {
             btnConsultarEspacio.setVisible(true);
         }
         else{
-            lblTotal.setText("0");
+            
+            lblTotal.setText("0"); //tendra el total del ticket en relacion a los minutos solicitados
+            
             Parqueo parqueo = new Parqueo();
             parqueo.lecturaArchivo();
-            precioMinuto = parqueo.getPrecioHora()/2;
-            SpinnerNumberModel mdTiempo= new SpinnerNumberModel();
-            mdTiempo.setMinimum(parqueo.getTiempoMinimo());
-            mdTiempo.setMaximum(99999);
-            mdTiempo.setStepSize(30);
-            spnTiempoParqueo.setModel(mdTiempo);
-            spnTiempoParqueo.setValue(parqueo.getTiempoMinimo());
             
+            precioMinuto = parqueo.getPrecioHora()/2; //modifica el precio por minuto del usuario, definiendolo cada 30 min
+            
+            //----------------------Define las caracterisiticas del spiner que controla los minutos solicitados
+            SpinnerNumberModel mdTiempo= new SpinnerNumberModel();
+            mdTiempo.setMinimum(parqueo.getTiempoMinimo()); //define el tiempo minimo que puede solicitarse
+            mdTiempo.setMaximum(99999); //define el tiempo maximo
+            mdTiempo.setStepSize(30);// define los pasos entre el tiempo que se puede seleccionar, ej 30-60-90
+            
+            spnTiempoParqueo.setModel(mdTiempo); //definer el modelo al spinner
+            spnTiempoParqueo.setValue(parqueo.getTiempoMinimo()); //seleccuiona el valor minimo
+            
+            //valida si el usuario tiene tiempo minimo y es posible de ser utilizado
             if(usuario.getTiempoAcumulado()!=0 && usuario.getTiempoAcumulado() >= 30){
             
-
+                //muestra los elementos relacionados al tiempo acumulado
                 lblTextoTiempo1.setVisible(true);
                 lblTextoTiempo2.setVisible(true);
                 lblTiempoAcumulado.setText(String.valueOf(usuario.getTiempoAcumulado()));
                 
                 //Actualizar el tiempo acumulado con con los datos que posee el usuario
                 SpinnerNumberModel mdAcumulado= new SpinnerNumberModel();
-                mdAcumulado.setMinimum(0);
+                mdAcumulado.setMinimum(0); //define el valor minimo que se tiene como valor minimo
                 mdAcumulado.setStepSize(30);
                 spnTiempoAcumulado.setModel(mdAcumulado);
                 spnTiempoAcumulado.setValue(0);
             }
-            else{
-
-            }
         
+            //--------------VALIDACION DE LOS VEHICULOS DEL USUARIO-----------------------
+            
+            //El usuario solo tiene un vehiculo registrado
             if(usuario.getVehiculos().size() == 1){
             
-                
+                //el vehiculo ya esta parqueado, por lo que no se puede parquear en otro espacio
                 if(usuario.getVehiculos().getFirst().getEspacio()!= null){
                 
                     JOptionPane.showMessageDialog(null, "El vehiculo con placa " + usuario.getVehiculos().getFirst().getPlaca() + " se encuentra en un espacio de parqueo!");
                     txtEspacioConsultado.enable(true);
                     tpParquearEspacio.setSelectedIndex(3);
                     btnConsultarEspacio.setVisible(true);
-                }else{
                     
-                    cbPlacasVehiculo.addItem( usuario.getVehiculos().getFirst().getPlaca());
-                    cbPlacasVehiculo.setEnabled(false);
-
+                }else{
+                    cbPlacasVehiculo.addItem( usuario.getVehiculos().getFirst().getPlaca()); //anade la placa del vehiculo al combo box
+                    cbPlacasVehiculo.setEnabled(false); //al ser solo uno el combo box se inhabilita
                 }
             }
             else{
             
-                 DefaultComboBoxModel<String> comboModel = new DefaultComboBoxModel();
+                 DefaultComboBoxModel<String> comboModel = new DefaultComboBoxModel(); //al ser mas de un vehiculo valida los carga al combo box
 
-                for(Vehiculo obj : usuario.getVehiculos())
+                for(Vehiculo obj : usuario.getVehiculos()) //recorre los vehiculos del usuario
                 {
-                    if(obj.getEspacio()==null)
-                        comboModel.addElement(obj.getPlaca());
+                    if(obj.getEspacio()==null) //valida que el vehiculo se encuentre en un espacio disponible
+                        comboModel.addElement(obj.getPlaca()); //anade le vehiculo al combo box, es decir, anade la placa
                 }
 
-                cbPlacasVehiculo.setModel(comboModel);
+                cbPlacasVehiculo.setModel(comboModel); // selecciona el modelo y lo establece en el combo box
             
             }
-        
         }
-            
-        
-    
     
     }
     private void btnConsultarEspacioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarEspacioActionPerformed
         
+        //valida que se haya ingresado un numero de paso
         if(!"".equals(txtEspacioConsultado.getText())){
         
-            if(validarConversion(txtEspacioConsultado.getText())){
+            if(validarConversion(txtEspacioConsultado.getText())){ //valida que el espacio ingresado sea numerico
                 
                 Parqueo parqueo = new Parqueo();
-                parqueo.lecturaArchivo();
+                parqueo.lecturaArchivo(); //obtiene los datos del parqueo
                 
                 Espacio espacio = parqueo.buscarEspacio(Integer.valueOf(txtEspacioConsultado.getText()));
                 if(espacio!=null){
@@ -2560,12 +2587,12 @@ public class MenuUsuario extends javax.swing.JFrame {
                     }
                     else{ //el espacio esta ocupado pero puede reportar que esta libre
                         
-                        boolean encontrado=false;
+                       boolean encontrado=false;
                         
                         for(Vehiculo obj : espacio.getVehiculos()){
                         
                             System.out.println("hola");
-                            if(usuario.buscarVehiculo(obj.getPlaca())!= null){
+                            if(usuario.buscarVehiculo(obj.getPlaca())!= null){ //valdia si el espacio es uno de los vehiculos del usuario
                                 
                                 JOptionPane.showMessageDialog(null, "El espacio ingresado ya se encuentra ocupado por uno de sus vehiculos placa: " + obj.getPlaca());
                                 txtEspacioConsultado.setText("");
@@ -2575,14 +2602,10 @@ public class MenuUsuario extends javax.swing.JFrame {
                                 
                             }
                         }
-                        if(!encontrado){
-                            
-                            tpParquearEspacio.setSelectedIndex(1);
+                        if(!encontrado){ //el vehiculo parqueado es de otro usuario por lo que se puede liberar del parqueo (desaparcar)
+                            tpParquearEspacio.setSelectedIndex(1); //muestra la pestana que permite reportar el espacio y liberarlo
                             lblEspacio.setText(txtEspacioConsultado.getText());
-                            
                         }
-                        
-                        
                     }
                 }
                 else{
@@ -2604,15 +2627,18 @@ public class MenuUsuario extends javax.swing.JFrame {
     }//GEN-LAST:event_btnConsultarEspacioActionPerformed
 
     private void btnRepostarEspacioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRepostarEspacioActionPerformed
+            
+            //genera una confirmacion al usuario para liberar el espacio
             String[] options = { "Si", "No" };
             var selection = JOptionPane.showOptionDialog(null, "Esta segur@ de liberar el espacio?", "Alerta!!", 
                                                               0, 3, null, options, options[0]);
             if (selection == 0) {
 
+                //lee los datos reservados en los parametros
                 Parqueo parqueo = new Parqueo();
                 parqueo.lecturaArchivo();
                 
-                parqueo.liberarEspacio(Integer.valueOf(txtEspacioConsultado.getText()));
+                parqueo.liberarEspacio(Integer.valueOf(txtEspacioConsultado.getText())); //libera el espacio
                  
                 
                 JOptionPane.showMessageDialog(null, "El espacio ha sido liberado exitosamente, ahora podrá parquear en el!");
@@ -2621,7 +2647,9 @@ public class MenuUsuario extends javax.swing.JFrame {
                  lblEspacioDisponible.setText("Espacio: " + txtEspacioConsultado.getText());
                  btnConsultarEspacio.setVisible(false);
                  actualizarDatosTicket();
-                 actualizarInformacion(usuario, usuario.getIdentificacion());
+                 
+                 //actualiza la informacion del usuario dentro del archivo de texto
+                 actualizarInformacion(usuario, usuario.getIdentificacion()); 
               }
             else{
                 JOptionPane.showMessageDialog(null, "No se liberará!");
@@ -2630,15 +2658,20 @@ public class MenuUsuario extends javax.swing.JFrame {
 
     private void btnParquearEspacioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnParquearEspacioActionPerformed
      
-        
+        //valida que el tiempo a parquear en minutos no sea 0
         if((int)spnTiempoParqueo.getValue() !=0){
         
+            //lee los datos que son alamacenados en el archivo de parametros
             Parqueo parqueo = new Parqueo();
             parqueo.lecturaArchivo();
             
+            //obtiene el vehiculo que fue seleccionado para ser parqueado
             Vehiculo vehiculo = usuario.buscarVehiculo((String)cbPlacasVehiculo.getSelectedItem());
+            //obtiene el espacio dentro del parqueo para modificarlo
             Espacio espacio = parqueo.buscarEspacio(Integer.valueOf(txtEspacioConsultado.getText()));
             TicketParqueo ticket = new TicketParqueo();
+            
+            //GENERA UN TICKET. almacena los espacios
             ticket.setTiempoParqueo((int)spnTiempoParqueo.getValue());
             ticket.setUsuario(usuario);
             ticket.setVehiculo(vehiculo);
@@ -2647,13 +2680,16 @@ public class MenuUsuario extends javax.swing.JFrame {
             ticket.setHoraSistema(LocalDateTime.now());
             ticket.setEspacio(espacio);
             
+            //Agrega el vehiculo al espacio que fue reservado
             espacio.agregarVehiculo(vehiculo);
             espacio.setEstado(false);
+            
+            //Define el espacio en el que se encuentra el vehiculo
             vehiculo.setEspacio(espacio);
-            espacio.agregarVehiculo(vehiculo);
             
+            //define el tickete vigente del vehiculo
             vehiculo.establecerTicketVigente(ticket);
-            
+            //guarda los datos al archivo Parametros.txt
             parqueo.cargarArchivo();
             
             JOptionPane.showMessageDialog(null, "Espacio registrado exitosamente!");
@@ -2681,36 +2717,41 @@ public class MenuUsuario extends javax.swing.JFrame {
     }//GEN-LAST:event_btnConsultarOtroEspacioActionPerformed
 
     private void spnTiempoParqueoStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_spnTiempoParqueoStateChanged
-
+        //se genera cada vez que en spinner que define los minutos del parqueo cambia su valor
+        
         int tiempoAcumulado =  (int)spnTiempoAcumulado.getValue();
         int tiempoParqueo = (int) spnTiempoParqueo.getValue();
-        if(tiempoParqueo<tiempoAcumulado){
-        
+        //valida que el tiempo de parqueo no sobrepase el tiempo acumulado
+        if(tiempoParqueo<tiempoAcumulado){ 
+                JOptionPane.showMessageDialog(null, "El tiempo de parqueo es menor al tiempo acumulado que se piensa utilzar");
+                spnTiempoParqueo.setValue(tiempoParqueo + 30);
 
         }else{
+                //Actualiza el precio total 
                 int total = (tiempoParqueo-tiempoAcumulado)/30 * precioMinuto;
                 lblTotal.setText(String.valueOf(total));
-                System.out.println(total);
         }
 
     }//GEN-LAST:event_spnTiempoParqueoStateChanged
 
     private void spnTiempoAcumuladoStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_spnTiempoAcumuladoStateChanged
         
-        
+        //se genera cada vez que en spinner que define los minutos del parqueo cambia su valor
         int tiempoAcumulado =  (int)spnTiempoAcumulado.getValue();
         int tiempoParqueo = (int) spnTiempoParqueo.getValue();
         
+        //valida que el tiempo acumulado no sea mayor al tiempo de parqueo, asi como qel tiempo debe ser mayor o igual al 30
         if(tiempoAcumulado>tiempoParqueo && tiempoAcumulado>=30){
             JOptionPane.showMessageDialog(null, "El tiempo acumulado es mayor al tiempo en que se ocupara el espacio!");
-            spnTiempoAcumulado.setValue(tiempoAcumulado-30);
+            spnTiempoAcumulado.setValue(tiempoAcumulado-30); //se resta el valor que fue aumentado
         }
+        //valida que el tiempo acumulado sea el que el usuario tiene disponible
         else if(tiempoAcumulado > usuario.getTiempoAcumulado() && tiempoAcumulado>=30){
-        
             JOptionPane.showMessageDialog(null, "El tiempo ingresado es mayor al tiempo acumulado que posee disponible!");
             spnTiempoAcumulado.setValue(tiempoAcumulado-30);
         }
         else{
+                //modifica el precio total en relacion a los minutos a utilizar y los que tienen acumulados
                  int total = (tiempoParqueo-tiempoAcumulado)/30 * precioMinuto;
                  lblTotal.setText(String.valueOf(total));
                  lblTiempoAcumulado.setText(String.valueOf(usuario.getTiempoAcumulado() - tiempoAcumulado));
@@ -2722,31 +2763,37 @@ public class MenuUsuario extends javax.swing.JFrame {
     
     private void agregarTiempo(String placa){
     
+            //Confirma la extension del tiempo
             String[] options = { "Si", "No" };
             var selection = JOptionPane.showOptionDialog(null, "Esta segur@ de agregar el tiempo al vehiculo con placa "+placa+"?", "Alerta!!", 
                                                               0, 3, null, options, options[0]);
             if (selection == 0) {
-                pnlAgregarTiempo.setVisible(true);
-                Vehiculo vehiculo = usuario.buscarVehiculo(placa);
-                Parqueo parqueo = new Parqueo();
                 
+                //muestra el panel del tiempo para agregar el tiempo extra
+                pnlAgregarTiempo.setVisible(true);
+                //Obtiene el vehiculo al que se desea extender su ticket
+                Vehiculo vehiculo = usuario.buscarVehiculo(placa);
+                
+                Parqueo parqueo = new Parqueo();
                 parqueo.lecturaArchivo();
                 
                 lblEspacioExtra.setText("Espacio: " + String.valueOf(vehiculo.getEspacio().getNumero()));
                 lblVehiculoExtra.setText(placa);
                 
+                //modifica las caracteristicas del spinner que define el tiempo minimo a agregar
                 SpinnerNumberModel mdTiempo= new SpinnerNumberModel();
                 mdTiempo.setMinimum(parqueo.getTiempoMinimo());
                 mdTiempo.setValue(30);
                 mdTiempo.setStepSize(30);
                 spnTiempoExtra.setModel(mdTiempo);
                 
+                //modifica las caracteristicas del spinner que define el tiempo acumulado a utilizar
                 SpinnerNumberModel mdTiempoAcumulado= new SpinnerNumberModel();
                 mdTiempoAcumulado.setStepSize(30);
                 spnAcumuladoExtra.setModel(mdTiempoAcumulado);
                 lblTiempoTotal.setText("Tiempo extra:");
                 
-                
+                //Modifica los datos de la tabla, refresca
                 inicializarTBMisParqueos();
                 actualizarInformacion(usuario, usuario.getIdentificacion());
               }
@@ -2757,6 +2804,7 @@ public class MenuUsuario extends javax.swing.JFrame {
     
     private void desaparcar(String placa){
     
+            //Confirma que se puede desaparcar el vehiculo en el espacio
            String[] options = { "Si", "No" };
             var selection = JOptionPane.showOptionDialog(null, "Esta segur@ de desaparcar el vehiculo con placa "+placa+"?", "Alerta!!", 
                                                               0, 3, null, options, options[0]);
@@ -2768,8 +2816,9 @@ public class MenuUsuario extends javax.swing.JFrame {
                 
                 //calcula si queda tiempo extra que puede ser acumulado en el usuario
                 TicketParqueo ticket = vehiculo.getTicketVigente();
+                //obtiene el tiempo entre la hora de registro del ticket y la hora actual al sistema
                 int tiempoRestante = (int)ChronoUnit.MINUTES.between( LocalDateTime.now(),ticket.getHoraSistema().plusMinutes(ticket.getTiempoParqueo()));
-                
+                //en caso se haber tiempo sobrante se acumula el tiempo
                 if(tiempoRestante >0)
                     usuario.actualizarTiempoAcumulado(tiempoRestante);
                 
@@ -2803,17 +2852,27 @@ public class MenuUsuario extends javax.swing.JFrame {
     
     private void tblMisParqueosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblMisParqueosMouseClicked
         
+        //registra algun click realizado sobre la tabla, con el fin de saber si fue dentro de un boton
+        //obtiene la columna en la que fue presionado el boton
         columna=tblMisParqueos.getColumnModel().getColumnIndexAtX(evt.getX());
+        //obtiene la fila
         row=evt.getY() /tblMisParqueos.getRowHeight();
+        
+        //valida si la fila y la columna esta dentro de las columnas y filas que posee la tabla
         if(columna <= tblMisParqueos.getColumnCount() && columna >= 0 && row <= tblMisParqueos.getRowCount() && row>=0){
             
+            //Obtiene el objeto al que fue presionada
             Object objeto = tblMisParqueos.getValueAt(row, columna);
+            
+            //valida si el objeto es de la clase botones
             if(objeto instanceof RondedBordes){
             
+                //Genera un click sobre el boton presionado
                 ((RondedBordes)objeto).doClick();
                 
                 RondedBordes botones = (RondedBordes)objeto;
                 
+                //valida el nombre del boton al que fue presionado
                 if(botones.getName().equals("btnDesaparcar")){
                     String placa = (String)tblMisParqueos.getValueAt(row, columna-4);
                     desaparcar(placa);
@@ -2829,9 +2888,12 @@ public class MenuUsuario extends javax.swing.JFrame {
     }//GEN-LAST:event_tblMisParqueosMouseClicked
 
     private void spnAcumuladoExtraStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_spnAcumuladoExtraStateChanged
+        
+        //se genera cada vez que el spinner que controla el tiempo acumulado cambia de valor
         int tiempoAcumulado = (int)spnAcumuladoExtra.getValue();
         int tiempoExtra = (int)spnTiempoExtra.getValue();
         
+        //valida que el tiempo acumulado coincida con el que tiene el usuario
         if(tiempoAcumulado<= usuario.getTiempoAcumulado()){
         
                 lblTiempoTotal.setText("Tiempo a agregar: " + (tiempoExtra+tiempoAcumulado) +" minutos");
@@ -2845,22 +2907,23 @@ public class MenuUsuario extends javax.swing.JFrame {
 
     private void btnConfirmarTiempoExtraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarTiempoExtraActionPerformed
         
-        
         int tiempoAcumulado = (int)spnAcumuladoExtra.getValue();
         int tiempoExtra = (int)spnTiempoExtra.getValue();
         String placa = lblVehiculoExtra.getText();
         
         if(true){
         
-           
-           int total = (tiempoAcumulado + tiempoExtra) * precioMinuto;
+           //genera un nuevo ticket al ser tiempo extra
+           int total = (tiempoAcumulado + tiempoExtra) * precioMinuto; //genera el total del tiempo extra
            
            Vehiculo vehiculo = usuario.buscarVehiculo(placa);
             
-            vehiculo.generarTicketTiempoExtra(tiempoExtra, total);
+           //El vehiculo cambia a su nuevo ticket vigente
+            vehiculo.generarTicketTiempoExtra(tiempoExtra, total); 
             
             JOptionPane.showMessageDialog(null, "Tiempo actualizado!");
             inicializarTBMisParqueos();
+            //oculta el panel
             pnlAgregarTiempo.setVisible(false);
             actualizarInformacion(usuario, usuario.getIdentificacion());
             
@@ -2872,9 +2935,10 @@ public class MenuUsuario extends javax.swing.JFrame {
     }//GEN-LAST:event_btnConsultarOtroEspacio1ActionPerformed
 
     private void spnTiempoExtraStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_spnTiempoExtraStateChanged
+        //se genera cada vez que el tiempo en minutos extras cambia su valor
         int tiempoAcumulado = (int)spnAcumuladoExtra.getValue();
         int tiempoExtra = (int)spnTiempoExtra.getValue();
-        
+        //valida que el tiempo siga siendo menor o igual al que se tiene diponible
         if(tiempoAcumulado<= usuario.getTiempoAcumulado()){
         
                 lblTiempoTotal.setText("Tiempo a agregar: " + (tiempoExtra+tiempoAcumulado)  +" minutos");
@@ -2890,12 +2954,15 @@ public class MenuUsuario extends javax.swing.JFrame {
 
     private void btnConfirmarTiempoExtra1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarTiempoExtra1ActionPerformed
 
+        //AGREGA UN VEHICULO, AL BOTON BTNAGREGARVEHICULO
+        //No se ha modificado el nombre de la funcion
        String placa, modelo, marca;
         
         placa = txtPlacaAgregar.getText();
         marca = txtMarcaAgregar.getText();
         modelo = txtModeloAgregar.getText();
         
+        //valida
         if(validarPlaca(placa)){
                 if(true){
                 if(validarModeloMarca(marca)){
@@ -2903,10 +2970,12 @@ public class MenuUsuario extends javax.swing.JFrame {
                     if(validarModeloMarca(modelo)){
 
                             Vehiculo vehiculo = new Vehiculo(placa, modelo, marca, usuario);
+                            //agrega el vehiculo al usuario
                             usuario.agregarVehiculo(vehiculo);
                             JOptionPane.showMessageDialog(null, "Vehiculo agregado exitosamente");
 
                             tpPanelModificaciones.setVisible(false);
+                            //refresca la tabla de vehiculos
                             inicializarTablaVehiculos();
                             btnAgregarVehiculo.setVisible(true);
                             actualizarInformacion(usuario, usuario.getIdentificacion());
@@ -2934,6 +3003,7 @@ public class MenuUsuario extends javax.swing.JFrame {
     }//GEN-LAST:event_btnVolverVehiculos3btnVolverVehiculosActionPerformed
 
     
+    //---------------VALIDACIONES MODIFICAR VEHICULO--------------------
     private boolean validarPlaca(String placa){
     
          return (placa.length()==6);
@@ -2946,6 +3016,8 @@ public class MenuUsuario extends javax.swing.JFrame {
         else
             return true;
     }
+   
+        //---------------FIN VALIDACIONES MODIFICAR VEHICULO--------------------
     
     private void btnConfirmarActualzacionVehiculobtnConfirmarTiempoExtra1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActualzacionVehiculobtnConfirmarTiempoExtra1ActionPerformed
         String placa, modelo, marca;
@@ -2961,11 +3033,12 @@ public class MenuUsuario extends javax.swing.JFrame {
                 if(validarModeloMarca(modelo)){
                     
                         Vehiculo vehiculo = usuario.buscarVehiculo(lblPlaccaActualizar.getText());
+                        //actualiza el vehiculo con sus datos
                         vehiculo.actualizarVehiculo(placa, modelo, marca);
                         JOptionPane.showMessageDialog(null, "Vehiculo actualizado exitosamente");
                         
                         tpPanelModificaciones.setVisible(false);
-                        inicializarTablaVehiculos();
+                        inicializarTablaVehiculos(); //refresca los datos de la tabla
                         btnAgregarVehiculo.setVisible(true);
                         actualizarInformacion(usuario, usuario.getIdentificacion());
                 }
@@ -2983,15 +3056,16 @@ public class MenuUsuario extends javax.swing.JFrame {
     
     private void eliminarVehiculo(String placa){
     
-    
-                   String[] options = { "Si", "No" };
+            //genera una confirmacion de eliminar el vehiculo
+            String[] options = { "Si", "No" };
             var selection = JOptionPane.showOptionDialog(null, "Esta segur@ de eliminar el vehiculo con placa "+placa+"?", "Alerta!!", 
                                                               0, 3, null, options, options[0]);
             if (selection == 0) {
-
+                //obtiene el vehiculo que fue buscado
                 Vehiculo vehiculo = usuario.buscarVehiculo(placa);
+                //valida que el vehiculo no este parqueado y por lo tanto no tiene un ticket asocioado
                 if(vehiculo.getTicketVigente()==null){
-                
+                    //elimina el vehiculo del usuario
                     usuario.removerVehiculo(placa);
                     JOptionPane.showMessageDialog(null, "Vehiculo eliminado exitosamente!");
                     inicializarTablaVehiculos();
@@ -3023,6 +3097,7 @@ public class MenuUsuario extends javax.swing.JFrame {
     }
     
     private void tblVehiculoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblVehiculoMouseClicked
+        //genera este metodo cada vez que la tabla de los vehiculos es presionada
         
         columna=tblVehiculo.getColumnModel().getColumnIndexAtX(evt.getX());
         row=evt.getY() /tblVehiculo.getRowHeight();
@@ -3174,7 +3249,6 @@ public class MenuUsuario extends javax.swing.JFrame {
     private com.tec.parquimetro.parquimetro.GUI.RondedBordes btnVolverVehiculos3;
     private javax.swing.JComboBox<String> cbPlacasVehiculo;
     private javax.swing.JComboBox<String> cbReportes;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
@@ -3242,6 +3316,7 @@ public class MenuUsuario extends javax.swing.JFrame {
     private javax.swing.JLabel lblTextoTiempo5;
     private javax.swing.JLabel lblTiempoAcumulado;
     private javax.swing.JLabel lblTiempoTotal;
+    private javax.swing.JLabel lblTiuloPrincipal;
     private javax.swing.JLabel lblTotal;
     private javax.swing.JLabel lblTotaltITULO;
     private javax.swing.JLabel lblVehiculoExtra;
