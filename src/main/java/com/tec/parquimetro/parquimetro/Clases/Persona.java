@@ -24,7 +24,8 @@ public class Persona implements Serializable{
     private String pin;
     private String identificacion;
     private String direccionFisica;
-    //private Correo correo;
+    private Correo correo;
+
 
     public Persona(){
     
@@ -32,7 +33,7 @@ public class Persona implements Serializable{
     }
     
     //Constructor
-    public Persona(String nombre, String apellidos, int telefono, String direccionFisica, LocalDate fechaIngreso, String identificacion, String pin){
+    public Persona(String nombre, String apellidos, int telefono, String direccionFisica, LocalDate fechaIngreso, String identificacion, String pin, Correo correo){
     
     
         this.apellidos = apellidos;
@@ -42,12 +43,22 @@ public class Persona implements Serializable{
         this.pin = pin;
         this.telefono = telefono;
         this.nombre =nombre;
-        
+        this.correo = correo;
     }
     
     
     
     // getters and setters
+    
+    public Correo getCorreo() {
+        return correo;
+    }
+
+    public void setCorrero(Correo correo) {
+        
+            this.correo = correo;
+    }
+    
     
     
     public String getApellidos() {
@@ -216,6 +227,9 @@ public class Persona implements Serializable{
        
            this.setFechaIngreso(persona.getFechaIngreso());
        }
+      if(persona.getCorreo() != null){
+          this.correo = persona.getCorreo();
+      }
    
    }
     

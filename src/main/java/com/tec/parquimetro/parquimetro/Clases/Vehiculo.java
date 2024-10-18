@@ -26,6 +26,8 @@ public class Vehiculo implements Serializable {
         this.marca = marca;
         this.modelo = modelo;
         this.usuario = usuario;
+        this.ticketVigente = null;
+        this.espacio = null;
         ticketsUtilizados = new ArrayList<TicketParqueo>();
     }
     
@@ -34,6 +36,7 @@ public class Vehiculo implements Serializable {
         this.marca = "";
         this.modelo = "";
         this.usuario = usuario;
+        ticketsUtilizados = new ArrayList<TicketParqueo>();
     }
 
  
@@ -89,6 +92,10 @@ public class Vehiculo implements Serializable {
         return ticketsUtilizados;
     }
     
+    
+    public TicketParqueo  getTicketVigente(){
+        return ticketVigente;
+    }
     public void agregarTicket(TicketParqueo  ticket){
     
         ticketsUtilizados.add(ticket);
@@ -97,6 +104,35 @@ public class Vehiculo implements Serializable {
     public void establecerTicketVigente(TicketParqueo  ticket){
     
         ticketVigente = ticket;
+    
+    }
+    
+     public  void  generarTicketTiempoExtra(int tiempoExtra, int total){
+    
+    
+        TicketParqueo ticketNuevo = new TicketParqueo();
+        ticketNuevo.setEspacio(ticketVigente.getEspacio());
+        ticketNuevo.setHoraSistema(ticketVigente.getHoraSistema());
+        ticketNuevo.setTiempoParqueo(ticketVigente.getTiempoParqueo()+ tiempoExtra);
+        ticketNuevo.setVehiculo(ticketVigente.getVehiculo());
+        ticketNuevo.setUsuario(ticketVigente.getUsuario());
+        ticketNuevo.setTotal(ticketVigente.getTotal() + total);
+        ticketNuevo.setEstado(true);
+        
+        ticketVigente.setEstado(false);
+        
+        agregarTicket(ticketVigente);
+        
+        ticketVigente=ticketNuevo;
+        
+        
+    }
+     
+    public void actualizarVehiculo(String placa, String modelo, String marca){
+    
+        this.placa = placa;
+        this.modelo = modelo;
+        this.marca = marca;
     
     }
 }

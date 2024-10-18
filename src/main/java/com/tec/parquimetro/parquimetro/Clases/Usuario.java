@@ -19,9 +19,9 @@ public class Usuario extends Persona implements Serializable{
         this.tiempoAcumulado = -1;
     }
     //Constructor
-   public Usuario(String nombre, String apellidos, int telefono, String direccionFisica, LocalDate fechaIngreso, String identificacion, String pin, int tiempoAcumulado, Tarjeta tarjeta){
+   public Usuario(String nombre, String apellidos, int telefono, String direccionFisica, LocalDate fechaIngreso, String identificacion, String pin, int tiempoAcumulado, Correo correo){
     
-        super(nombre, apellidos,  telefono, direccionFisica, fechaIngreso, identificacion, pin);
+        super(nombre, apellidos,  telefono, direccionFisica, fechaIngreso, identificacion, pin, correo);
         this.tiempoAcumulado = tiempoAcumulado;
         this.tarjeta = tarjeta;
         vehiculos = new ArrayList<Vehiculo>();
@@ -29,10 +29,19 @@ public class Usuario extends Persona implements Serializable{
     
     
     //getters and setters
-    public Tarjeta getTarjeta(){
-        return tarjeta;
+   
+       public void setTarjeta(Tarjeta tarjeta){
+    
+        this.tarjeta = tarjeta;
     }
     
+    public Tarjeta getTarjeta(){
+    
+        return this.tarjeta;
+    
+    }
+    
+   
     public void setTiempoAcumulado(int tiempo){
     
         this.tiempoAcumulado = tiempo;
@@ -44,7 +53,7 @@ public class Usuario extends Persona implements Serializable{
     
     }
     
-        public List<Vehiculo> getVehiculos(){
+    public List<Vehiculo> getVehiculos(){
         return vehiculos;
     }
     
@@ -81,5 +90,23 @@ public class Usuario extends Persona implements Serializable{
             vehiculos.add(vehiculo);
         }
     }
+    
+    public void removerVehiculo(String placa){
+    
+       Vehiculo objEncontrado = null;
+       
+        for(Vehiculo obj : vehiculos){
+         
+            if(obj.getPlaca().equals(placa)){
+                objEncontrado = obj;
+                break;
+            }
+            
+        }
+        if(objEncontrado!=null)
+            vehiculos.remove(objEncontrado);
+        
+    }
+    
     
 }

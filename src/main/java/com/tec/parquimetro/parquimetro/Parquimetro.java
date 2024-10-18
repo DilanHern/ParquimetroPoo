@@ -35,10 +35,11 @@ public class Parquimetro {/*
             
             
          List<Persona> personas = new ArrayList<Persona>();
+         Correo correo = new Correo("camila", "gmail.com");
          
-         Usuario usuario = new Usuario("Camila", "Araya Conejo", 61963811, "Cartago  Guadalupe", LocalDate.of(2024, 10, 8), "305610469", "2410", 85);
-         Persona inspector = new Inspector("Teodoro", "Araya Conejo", 78456456, "Cartago  Guadalupe", LocalDate.of(2024, 10, 8), "308950456", "2410", "78");
-         Persona admin = new Administrador("Antonio", "Araya Conejo", 89667412, "Cartago  Guadalupe", LocalDate.of(2023, 10, 8), "30964089", "8952");
+         Usuario usuario = new Usuario("Camila", "Araya Conejo", 61963811, "Cartago  Guadalupe", LocalDate.of(2024, 10, 8), "305610469", "2410", 85,correo);
+         Persona inspector = new Inspector("Teodoro", "Araya Conejo", 78456456, "Cartago  Guadalupe", LocalDate.of(2024, 10, 8), "308950456", "2410", "78", correo);
+         Persona admin = new Administrador("Antonio", "Araya Conejo", 89667412, "Cartago  Guadalupe", LocalDate.of(2023, 10, 8), "30964089", "8952", correo);
          
          Vehiculo v1 = new Vehiculo("123456", (Usuario)usuario);
          Vehiculo v2 = new Vehiculo("234678", (Usuario)usuario);
@@ -47,6 +48,9 @@ public class Parquimetro {/*
         usuario.agregarVehiculo(v1);
          
          System.out.println(usuario.getVehiculos().isEmpty());
+         long numero = 1234567891234567L;
+         Tarjeta tarjeta = new Tarjeta(numero, 12,2024,123);
+         usuario.setTarjeta(tarjeta);
          
          personas.add(usuario);
          personas.add(inspector);
@@ -71,8 +75,11 @@ public class Parquimetro {/*
              
          }
          
+         
          MenuUsuario menuUser = new MenuUsuario(usuario);
          menuUser.setVisible(true);
+         
+         
          
         // MenuAdministrador menuIns = new MenuAdministrador((Administrador)admin);
        //  menuIns.setVisible(true);

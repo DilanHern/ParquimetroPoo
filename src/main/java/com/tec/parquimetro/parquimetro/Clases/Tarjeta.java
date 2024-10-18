@@ -34,7 +34,9 @@ public class Tarjeta implements Serializable{
     public int getAnoVencimiento(){
         return anoVencimiento;
     }
-    
+    public int getMesVencimiento(){
+        return mesVencimiento;
+    }
     //setters
     public void setTarjeta(long numeroTarjeta, int mesVencimiento, int anoVencimiento, int codigoValidacion){
         this.numeroTarjeta = numeroTarjeta;

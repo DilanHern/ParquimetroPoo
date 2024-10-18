@@ -72,5 +72,22 @@ public class Espacio implements Serializable{
         
     }
     
+   public void removerVehiculo(String placa){
+    
+       Vehiculo objEncontrado = null;
+       
+        for(Vehiculo obj : vehiculos){
+         
+            if(obj.getPlaca().equals(placa)){
+                objEncontrado = obj;
+                break;
+            }
+            
+        }
+        if(objEncontrado!=null)
+            vehiculos.remove(objEncontrado);
+        
+    }
+    
     
 }
