@@ -135,4 +135,37 @@ public class Login {
         }
     }
     
+    public void actualizarPersona(Persona usuario, String identificacion){
+        
+         try{
+             try {
+                 this.setListaUsuarios(cargarUsuarios("listaUsuarios.dat"));
+             } catch (ClassNotFoundException ex) {
+                 Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+             }
+        }
+        catch (IOException e){
+            System.out.println("malmamlal");
+        }
+        
+        for(Persona obj : listaUsuarios){
+        
+            
+            if(obj.getIdentificacion().equals(usuario.getIdentificacion())){
+                System.out.println("holaaaa");
+                listaUsuarios.remove(obj);
+                listaUsuarios.add(usuario);
+                break;
+            }
+        
+        }
+        try{
+            guardarUsuarios("listaUsuarios.dat", listaUsuarios);
+        }
+        catch (IOException e){
+            System.out.println("malmamlal");
+        }
+        
+    }
+    
 }
