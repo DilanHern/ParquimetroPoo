@@ -73,7 +73,7 @@ public class Login {
     }
     //BORRARRR
     public void crear(){
-        Administrador adminOficial = new Administrador("Admin prueba", "apellido", 123456, "vive en su casa", LocalDate.now(), "1234", "1234");
+        Administrador adminOficial = new Administrador("Admin prueba", "apellido", 123456, "vive en su casa", LocalDate.now(), "1234", "1234",null);
 
         listaUsuarios.add(adminOficial);
         try{
@@ -143,7 +143,7 @@ public class Login {
                  //carga la lista de los usuarios para ser buscado entre los usuarios
                  this.setListaUsuarios(cargarUsuarios("listaUsuarios.dat"));
              } catch (ClassNotFoundException ex) {
-                 Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+                 
              }
         }
         catch (IOException e){

@@ -16,7 +16,7 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Parquimetro {/*
+public class Parquimetro {
 
     public static void main(String[] args) throws ClassNotFoundException {
         
@@ -101,5 +101,5 @@ public class Parquimetro {/*
          
         // MenuAdministrador menuIns = new MenuAdministrador((Administrador)admin);
        //  menuIns.setVisible(true);
-    }*/
+    }
 }

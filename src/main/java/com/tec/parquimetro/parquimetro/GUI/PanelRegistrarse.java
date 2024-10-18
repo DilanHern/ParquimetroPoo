@@ -231,7 +231,7 @@ public class PanelRegistrarse extends javax.swing.JPanel {
                                                 if (validarPin(new String(txtPin.getPassword())) ){
                                                     //crear cuenta
                                                     Tarjeta tarjetaAgregar = new Tarjeta(Long.parseLong(txtNumTar.getText()), Integer.parseInt(txtMes.getText()), Integer.parseInt(txtAno.getText()), Integer.parseInt(txtCodigo.getText()) );
-                                                    Usuario usuarioAgregar = new Usuario(txtNombre1.getText(), txtApellidos.getText(), Integer.parseInt(txtTelefono.getText()), taDireccionFisica.getText(), LocalDate.now(), txtIdentificacion.getText(), new String(txtPin.getPassword()), 0, tarjetaAgregar); //agregar parametros de usuario
+                                                    Usuario usuarioAgregar = new Usuario(txtNombre1.getText(), txtApellidos.getText(), Integer.parseInt(txtTelefono.getText()), taDireccionFisica.getText(), LocalDate.now(), txtIdentificacion.getText(), new String(txtPin.getPassword()), 0,null); //agregar parametros de usuario
                                                     //cargar y guardar la listaUsuarios
                                                     listaRevisar.add(usuarioAgregar);
                                                     try {
