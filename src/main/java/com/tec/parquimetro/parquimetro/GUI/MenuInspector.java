@@ -37,6 +37,7 @@ public class MenuInspector extends javax.swing.JFrame {
     public MenuInspector(Inspector pinspector) {
         initComponents();
         
+        
         inspector = pinspector;
         labelBienvenido.setText(inspector.getNombre() + " " + inspector.getApellidos());
         lblId.setText(inspector.getIdentificacion());
@@ -57,6 +58,17 @@ public class MenuInspector extends javax.swing.JFrame {
          pbTabl.setBorder(BorderFactory.createEmptyBorder());
     }
 
+    //FUNCION PARA VERIFICAR SI EL NUMERO DE PARQUEO INGRESADO EXISTE
+    public static void verificarNumParqueo(int numParqueo){
+        
+    }
+    //FUNCION PARA VERIFICAR SI LA PLACA ESTÁ EN EL PARQUEO
+    public static void verificarPlacaParqueo(int placa, int numParqueo){
+        //1.cargar parqueos en una lista
+        //2. verificar en esta lista si el parqueo ingresado existe, si no retorna FALSE, si si, continua
+        //revisar si el espacio está ocupado y si la placa corresponde al parqueo
+        
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -70,7 +82,7 @@ public class MenuInspector extends javax.swing.JFrame {
         panelRedondo1 = new com.tec.parquimetro.parquimetro.GUI.Componentes.PanelRedondo();
         jLabel1 = new javax.swing.JLabel();
         btnPerfil = new com.tec.parquimetro.parquimetro.GUI.RondedBordes();
-        btnParqueos = new com.tec.parquimetro.parquimetro.GUI.RondedBordes();
+        btnRevisarParqueos = new com.tec.parquimetro.parquimetro.GUI.RondedBordes();
         rondedBordes5 = new com.tec.parquimetro.parquimetro.GUI.RondedBordes();
         btnReportes = new com.tec.parquimetro.parquimetro.GUI.RondedBordes();
         labelBienvenido = new javax.swing.JLabel();
@@ -78,6 +90,11 @@ public class MenuInspector extends javax.swing.JFrame {
         pbTabl = new javax.swing.JTabbedPane();
         pnParquear = new com.tec.parquimetro.parquimetro.GUI.Componentes.PanelRedondo();
         lblPerfil1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        txtPlaca = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        txtNumParqueo = new javax.swing.JTextField();
+        btnBuscar = new javax.swing.JButton();
         pnReportes = new com.tec.parquimetro.parquimetro.GUI.Componentes.PanelRedondo();
         lblPerfil3 = new javax.swing.JLabel();
         pnPrincipal = new com.tec.parquimetro.parquimetro.GUI.Componentes.PanelRedondo();
@@ -146,23 +163,23 @@ public class MenuInspector extends javax.swing.JFrame {
             }
         });
 
-        btnParqueos.setForeground(new java.awt.Color(0, 0, 51));
-        btnParqueos.setText("Parqueos");
-        btnParqueos.setColor1(new java.awt.Color(255, 255, 255));
-        btnParqueos.setColor2(new java.awt.Color(255, 255, 255));
-        btnParqueos.setColor3(new java.awt.Color(204, 204, 204));
-        btnParqueos.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        btnParqueos.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnRevisarParqueos.setForeground(new java.awt.Color(0, 0, 51));
+        btnRevisarParqueos.setText("Revisar parqueos");
+        btnRevisarParqueos.setColor1(new java.awt.Color(255, 255, 255));
+        btnRevisarParqueos.setColor2(new java.awt.Color(255, 255, 255));
+        btnRevisarParqueos.setColor3(new java.awt.Color(204, 204, 204));
+        btnRevisarParqueos.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        btnRevisarParqueos.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnParqueosMouseEntered(evt);
+                btnRevisarParqueosMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnParqueosMouseExited(evt);
+                btnRevisarParqueosMouseExited(evt);
             }
         });
-        btnParqueos.addActionListener(new java.awt.event.ActionListener() {
+        btnRevisarParqueos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnParqueosActionPerformed(evt);
+                btnRevisarParqueosActionPerformed(evt);
             }
         });
 
@@ -226,8 +243,8 @@ public class MenuInspector extends javax.swing.JFrame {
                 .addGroup(panelRedondo1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnReportes, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(panelRedondo1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(rondedBordes5, javax.swing.GroupLayout.DEFAULT_SIZE, 145, Short.MAX_VALUE)
-                        .addComponent(btnParqueos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(rondedBordes5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnRevisarParqueos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnPerfil, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGap(25, 25, 25))
         );
@@ -243,7 +260,7 @@ public class MenuInspector extends javax.swing.JFrame {
                 .addGap(33, 33, 33)
                 .addComponent(btnPerfil, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(33, 33, 33)
-                .addComponent(btnParqueos, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnRevisarParqueos, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(28, 28, 28)
                 .addComponent(btnReportes, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -263,23 +280,66 @@ public class MenuInspector extends javax.swing.JFrame {
 
         lblPerfil1.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         lblPerfil1.setForeground(new java.awt.Color(255, 255, 255));
-        lblPerfil1.setText("Parquear");
+        lblPerfil1.setText("Revisar parqueos");
+
+        jLabel2.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jLabel2.setText("Ingrese el número de placa:");
+
+        jLabel4.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jLabel4.setText("Ingrese el número del parqueo:");
+
+        txtNumParqueo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNumParqueoActionPerformed(evt);
+            }
+        });
+
+        btnBuscar.setText("Buscar");
+        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnParquearLayout = new javax.swing.GroupLayout(pnParquear);
         pnParquear.setLayout(pnParquearLayout);
         pnParquearLayout.setHorizontalGroup(
             pnParquearLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnParquearLayout.createSequentialGroup()
-                .addContainerGap(682, Short.MAX_VALUE)
-                .addComponent(lblPerfil1)
-                .addGap(51, 51, 51))
+            .addGroup(pnParquearLayout.createSequentialGroup()
+                .addGroup(pnParquearLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnParquearLayout.createSequentialGroup()
+                        .addGap(142, 142, 142)
+                        .addGroup(pnParquearLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel2))
+                        .addGap(30, 30, 30)
+                        .addGroup(pnParquearLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtPlaca)
+                            .addComponent(txtNumParqueo, javax.swing.GroupLayout.DEFAULT_SIZE, 186, Short.MAX_VALUE)))
+                    .addGroup(pnParquearLayout.createSequentialGroup()
+                        .addGap(302, 302, 302)
+                        .addComponent(lblPerfil1))
+                    .addGroup(pnParquearLayout.createSequentialGroup()
+                        .addGap(348, 348, 348)
+                        .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(257, Short.MAX_VALUE))
         );
         pnParquearLayout.setVerticalGroup(
             pnParquearLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnParquearLayout.createSequentialGroup()
-                .addGap(27, 27, 27)
+                .addGap(88, 88, 88)
                 .addComponent(lblPerfil1)
-                .addContainerGap(605, Short.MAX_VALUE))
+                .addGap(97, 97, 97)
+                .addGroup(pnParquearLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(txtPlaca, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(37, 37, 37)
+                .addGroup(pnParquearLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(txtNumParqueo, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(88, 88, 88)
+                .addComponent(btnBuscar)
+                .addContainerGap(232, Short.MAX_VALUE))
         );
 
         pbTabl.addTab("", pnParquear);
@@ -330,7 +390,7 @@ public class MenuInspector extends javax.swing.JFrame {
             .addGroup(pnPrincipalLayout.createSequentialGroup()
                 .addGap(328, 328, 328)
                 .addComponent(lblPerfil5)
-                .addContainerGap(349, Short.MAX_VALUE))
+                .addContainerGap(347, Short.MAX_VALUE))
         );
         pnPrincipalLayout.setVerticalGroup(
             pnPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -454,7 +514,7 @@ public class MenuInspector extends javax.swing.JFrame {
         pnPerfilLayout.setHorizontalGroup(
             pnPerfilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnPerfilLayout.createSequentialGroup()
-                .addContainerGap(110, Short.MAX_VALUE)
+                .addContainerGap(111, Short.MAX_VALUE)
                 .addGroup(pnPerfilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnPerfilLayout.createSequentialGroup()
                         .addGroup(pnPerfilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -589,24 +649,24 @@ public class MenuInspector extends javax.swing.JFrame {
         pbTabl.setSelectedIndex(3);
     }//GEN-LAST:event_btnPerfilActionPerformed
 
-    private void btnParqueosMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnParqueosMouseEntered
-        btnParqueos.setColor1(Color.orange);
-        btnParqueos.setColor2(Color.orange);
-        btnParqueos.setColor3(Color.orange);
-        btnParqueos.setForeground(Color.white);
-    }//GEN-LAST:event_btnParqueosMouseEntered
+    private void btnRevisarParqueosMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRevisarParqueosMouseEntered
+        btnRevisarParqueos.setColor1(Color.orange);
+        btnRevisarParqueos.setColor2(Color.orange);
+        btnRevisarParqueos.setColor3(Color.orange);
+        btnRevisarParqueos.setForeground(Color.white);
+    }//GEN-LAST:event_btnRevisarParqueosMouseEntered
 
-    private void btnParqueosMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnParqueosMouseExited
-        btnParqueos.setColor1(Color.white);
-        btnParqueos.setColor2(Color.white);
-        btnParqueos.setColor3(Color.white);
-        btnParqueos.setForeground(new Color(0,0,51));
-    }//GEN-LAST:event_btnParqueosMouseExited
+    private void btnRevisarParqueosMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRevisarParqueosMouseExited
+        btnRevisarParqueos.setColor1(Color.white);
+        btnRevisarParqueos.setColor2(Color.white);
+        btnRevisarParqueos.setColor3(Color.white);
+        btnRevisarParqueos.setForeground(new Color(0,0,51));
+    }//GEN-LAST:event_btnRevisarParqueosMouseExited
 
-    private void btnParqueosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnParqueosActionPerformed
+    private void btnRevisarParqueosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRevisarParqueosActionPerformed
 
         pbTabl.setSelectedIndex(0);
-    }//GEN-LAST:event_btnParqueosActionPerformed
+    }//GEN-LAST:event_btnRevisarParqueosActionPerformed
 
     private void rondedBordes5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rondedBordes5ActionPerformed
         // TODO add your handling code here:
@@ -826,6 +886,14 @@ public class MenuInspector extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtTelefonoActionPerformed
 
+    private void txtNumParqueoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNumParqueoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtNumParqueoActionPerformed
+
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnBuscarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -863,12 +931,15 @@ public class MenuInspector extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.tec.parquimetro.parquimetro.GUI.RondedBordes btnActualizarPerfil;
-    private com.tec.parquimetro.parquimetro.GUI.RondedBordes btnParqueos;
+    private javax.swing.JButton btnBuscar;
     private com.tec.parquimetro.parquimetro.GUI.RondedBordes btnPerfil;
     private com.tec.parquimetro.parquimetro.GUI.RondedBordes btnReportes;
     private com.tec.parquimetro.parquimetro.GUI.RondedBordes btnRestablecerContra;
+    private com.tec.parquimetro.parquimetro.GUI.RondedBordes btnRevisarParqueos;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel labelBienvenido;
@@ -896,6 +967,8 @@ public class MenuInspector extends javax.swing.JFrame {
     private javax.swing.JTextField txtApellidos;
     private javax.swing.JTextField txtIdentificacion;
     private javax.swing.JTextField txtNombre1;
+    private javax.swing.JTextField txtNumParqueo;
+    private javax.swing.JTextField txtPlaca;
     private javax.swing.JTextField txtPt1Mail;
     private javax.swing.JTextField txtPt2Mail;
     private javax.swing.JTextField txtTelefono;
