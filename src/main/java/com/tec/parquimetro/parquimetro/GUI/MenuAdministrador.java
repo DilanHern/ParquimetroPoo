@@ -18,6 +18,17 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.NoSuchProviderException;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.AddressException;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import javax.swing.BorderFactory;
 import javax.swing.JOptionPane;
 import javax.swing.JSpinner;
@@ -42,6 +53,16 @@ public class MenuAdministrador extends javax.swing.JFrame {
     DefaultTableModel tableFormato = new DefaultTableModel();//formato para tabla espacios en la pestana de configuracion
     DefaultTableModel mdlEspaciosGeneral = new DefaultTableModel();//formato para tabal espacios en reporte general de espacios
     public static Administrador administrador = new Administrador();
+    
+        //ATRIBUTOS PARA ENVIAR REPORTES
+    private static String emailDe = "dilanhernandez48@gmail.com";
+    private static String contraseñaDe = "yqxt avpo uilp zvja";
+    private static String emailPara;
+    
+    private Properties mProperties;
+    private Session mSession;
+    private MimeMessage mCorreo;
+    //FIN DE ATRIBUTOS DE REPORTES
     
     
     public MenuAdministrador(Administrador padministrador) {
@@ -1576,6 +1597,50 @@ public class MenuAdministrador extends javax.swing.JFrame {
         }
     }   
     
+    //FUNCION PARA CREAR EL MAIL
+     public void crearEmail(String cuerpo, String asunto, String correo){
+         //Protocolo para el envio de correos
+        mProperties.put("mail.smtp.host", "smtp.gmail.com");
+        mProperties.put("mail.smtp.ssl.trust", "smtp.gmail.com");
+        mProperties.setProperty("mail.smtp.starttls.enable", "true");
+        mProperties.setProperty("mail.smtp.port", "587");
+        mProperties.setProperty("mail.smtp.user", emailDe);
+        mProperties.setProperty("mail.smtp.ssl.protocols", "TLSv1.2");
+        mProperties.setProperty("mail.smtp.auth", "true");
+
+        mSession = Session.getDefaultInstance(mProperties);
+
+
+        try {        
+            mCorreo = new MimeMessage(mSession);
+            mCorreo.setFrom(new InternetAddress(emailDe));
+            mCorreo.setRecipient(Message.RecipientType.TO, new InternetAddress(correo)); //correo del usuario
+            mCorreo.setSubject(asunto); //Asunto
+            mCorreo.setText(cuerpo, "ISO-8859-1", "html");
+
+        } catch (AddressException ex) {
+            Logger.getLogger(MenuInspector.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (MessagingException ex) {
+            Logger.getLogger(MenuInspector.class.getName()).log(Level.SEVERE, null, ex);
+        }
+     }
+     
+     //FUNCION PARA ENVIAR LOS EMAILS
+     public void enviarEmail(){
+        try {
+            Transport mTransport = mSession.getTransport("smtp");
+            mTransport.connect(emailDe, contraseñaDe);
+            mTransport.sendMessage(mCorreo, mCorreo.getRecipients(Message.RecipientType.TO));
+            mTransport.close();
+            JOptionPane.showMessageDialog(null, "Correo enviado");
+            
+        } catch (NoSuchProviderException ex) {
+            Logger.getLogger(MenuInspector.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (MessagingException ex) {
+            Logger.getLogger(MenuInspector.class.getName()).log(Level.SEVERE, null, ex);
+        }
+     }
+    
     
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
         // TODO add your handling code here:
@@ -1907,7 +1972,10 @@ public class MenuAdministrador extends javax.swing.JFrame {
                            if(validarConversion(txtTelefono.getText())){
                            
                                if(validarTelefono(Integer.parseInt(txtTelefono.getText()))){
-                               
+                                   String cuerpo = "Nombre: " + administrador.getNombre() + "\n" + "Apellidos: " + administrador.getApellidos() + "\n" + "Direccion fisica: " + administrador.getDireccionFisica() + "\n" + 
+                                   "Identificacion: " + administrador.getIdentificacion() + "\n" + "Telefono: " + administrador.getTelefono();
+                                   crearEmail(cuerpo, "PARAMETROS ACTUALIZADOS", administrador.getCorreo().getCorreo());
+                                   enviarEmail();
                                }
                                else{
                                     JOptionPane.showMessageDialog(null, "El telefono debe tener 8 digitos!");

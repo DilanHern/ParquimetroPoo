@@ -4,18 +4,36 @@
  */
 package com.tec.parquimetro.parquimetro.GUI;
 import com.tec.parquimetro.parquimetro.Clases.Administrador;
+import com.tec.parquimetro.parquimetro.Clases.Espacio;
 import com.tec.parquimetro.parquimetro.Clases.Inspector;
+import com.tec.parquimetro.parquimetro.Clases.Login;
+import com.tec.parquimetro.parquimetro.Clases.Parqueo;
 import com.tec.parquimetro.parquimetro.Clases.Persona;
+import com.tec.parquimetro.parquimetro.Clases.Usuario;
+import com.tec.parquimetro.parquimetro.Clases.Vehiculo;
 import java.awt.Color;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.NoSuchProviderException;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.AddressException;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import javax.swing.BorderFactory;
 import javax.swing.JOptionPane;
 import javax.swing.JSpinner;
@@ -33,15 +51,27 @@ public class MenuInspector extends javax.swing.JFrame {
     /**
      * Creates new form MenuInspector
      */
+    //ATRIBUTOS PARA ENVIAR REPORTES
+    private static String emailDe = "dilanhernandez48@gmail.com";
+    private static String contraseñaDe = "yqxt avpo uilp zvja";
+    private static String emailPara;
+    
+    private Properties mProperties;
+    private Session mSession;
+    private MimeMessage mCorreo;
+    //FIN DE ATRIBUTOS DE REPORTES
     public  static Inspector inspector = new Inspector();
-    public MenuInspector(Inspector pinspector) {
+    public static Parqueo parqueo;
+    
+    public MenuInspector(Inspector pinspector, Parqueo pParqueo) {
         initComponents();
+        mProperties = new Properties();
         
-        
+        parqueo = pParqueo;
         inspector = pinspector;
         labelBienvenido.setText(inspector.getNombre() + " " + inspector.getApellidos());
         lblId.setText(inspector.getIdentificacion());
-         pbTabl.setSelectedIndex(2);
+         pbTabl.setSelectedIndex(3);
         
          pbTabl.setUI(new javax.swing.plaf.basic.BasicTabbedPaneUI() {
             @Override
@@ -58,17 +88,110 @@ public class MenuInspector extends javax.swing.JFrame {
          pbTabl.setBorder(BorderFactory.createEmptyBorder());
     }
 
-    //FUNCION PARA VERIFICAR SI EL NUMERO DE PARQUEO INGRESADO EXISTE
-    public static void verificarNumParqueo(int numParqueo){
+    //FUNCION PARA VERIFICAR SI LA PLACA ESTÁ EN EL PARQUEO, retorna true si la placa está en el parqueo, false si no lo está
+     public static boolean verificarPlacaParqueo(int placa, int numParqueo, Parqueo parqueo){
+         //2. verificar en esta lista si el parqueo ingresado existe, si no retorna FALSE, si si, continua
+         Espacio espacioVerificar = parqueo.buscarEspacio(numParqueo);
+         if (espacioVerificar == null){ //no existe ese espacio
+             JOptionPane.showMessageDialog(null, "NO existe un espacio con ese número de parqueo", "ERROR", JOptionPane.INFORMATION_MESSAGE);
+             return true;
+         }
+         else{ //si existe ese espacio, revisar si el espacio está ocupado y si la placa corresponde al parqueo
+             if (espacioVerificar.getEstado()){ //si el estado es true, está disponible
+                 JOptionPane.showMessageDialog(null, "El espacio está disponible, no hay ningun auto registrado a este espacio", "MULTA", JOptionPane.INFORMATION_MESSAGE);
+                 return false;
+             } 
+             else{ //el espacio está ocupado
+                 for (Vehiculo vehiculo : espacioVerificar.getVehiculos()){
+                     if (vehiculo.getPlaca().equals(placa)){ //si la placa es igual al del vehiculo estacionado, no hace una multa
+                         JOptionPane.showMessageDialog(null, "La placa del vehiculo en el espacio corresponde al pago", "TODO EN ORDEN", JOptionPane.INFORMATION_MESSAGE);
+                        return true;
+                     }
+                 }
+                 //caso contrario de que las placas sean diferentes
+                 JOptionPane.showMessageDialog(null, "El vehiculo pago no corresponde con la placa ingresada", "MULTA", JOptionPane.INFORMATION_MESSAGE);
+                 return false;
+             }
+         }
+     }    
+     
+     //FUNCION PARA CREAR EL MAIL
+     public void crearEmail(String cuerpo, String asunto, String correo){
+         //Protocolo para el envio de correos
+        mProperties.put("mail.smtp.host", "smtp.gmail.com");
+        mProperties.put("mail.smtp.ssl.trust", "smtp.gmail.com");
+        mProperties.setProperty("mail.smtp.starttls.enable", "true");
+        mProperties.setProperty("mail.smtp.port", "587");
+        mProperties.setProperty("mail.smtp.user", emailDe);
+        mProperties.setProperty("mail.smtp.ssl.protocols", "TLSv1.2");
+        mProperties.setProperty("mail.smtp.auth", "true");
+
+        mSession = Session.getDefaultInstance(mProperties);
+
+
+        try {        
+            mCorreo = new MimeMessage(mSession);
+            mCorreo.setFrom(new InternetAddress(emailDe));
+            mCorreo.setRecipient(Message.RecipientType.TO, new InternetAddress(correo)); //correo del usuario
+            mCorreo.setSubject(asunto); //Asunto
+            mCorreo.setText(cuerpo, "ISO-8859-1", "html");
+
+        } catch (AddressException ex) {
+            Logger.getLogger(MenuInspector.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (MessagingException ex) {
+            Logger.getLogger(MenuInspector.class.getName()).log(Level.SEVERE, null, ex);
+        }
+     }
+     
+     public void enviarEmail(){
+        try {
+            Transport mTransport = mSession.getTransport("smtp");
+            mTransport.connect(emailDe, contraseñaDe);
+            mTransport.sendMessage(mCorreo, mCorreo.getRecipients(Message.RecipientType.TO));
+            mTransport.close();
+            JOptionPane.showMessageDialog(null, "Correo enviado");
+            
+        } catch (NoSuchProviderException ex) {
+            Logger.getLogger(MenuInspector.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (MessagingException ex) {
+            Logger.getLogger(MenuInspector.class.getName()).log(Level.SEVERE, null, ex);
+        }
+     }
+     
+     //FUNCION PARA CREAR UNA MULTA
+     public void crearMulta(int placa){
         
-    }
-    //FUNCION PARA VERIFICAR SI LA PLACA ESTÁ EN EL PARQUEO
-    public static void verificarPlacaParqueo(int placa, int numParqueo){
-        //1.cargar parqueos en una lista
-        //2. verificar en esta lista si el parqueo ingresado existe, si no retorna FALSE, si si, continua
-        //revisar si el espacio está ocupado y si la placa corresponde al parqueo
-        
-    }
+        try{
+            //buscar todos los usuarios
+            for (Persona cadaPersona : Login.cargarUsuarios("listaUsuarios.txt")){
+                if (cadaPersona instanceof Usuario){
+                    Usuario usuario = (Usuario) cadaPersona; // Hacer el cast a Usuario
+                    if (usuario.getVehiculos() != null){ //si el usuario tiene vehiculos:
+                        for (Vehiculo cadaVehiculo : usuario.getVehiculos()){ //revisa cada vehiculo
+                            if (cadaVehiculo.getPlaca().equals(placa)){ //si la placa es la misma
+                                //se envia el correo
+                                emailPara = usuario.getCorreo().getCorreo();
+                                crearEmail(txtRazonMulta.getText(), "MULTA", emailPara);
+                                enviarEmail();
+                                pbTabl.setSelectedIndex(0);
+                                return; //termina
+                            }
+                        }
+                    }
+                }
+            }
+            //no encontro ningun usuario con esa 
+            
+        }
+        catch (IOException e){
+            JOptionPane.showMessageDialog(null, "No se pudo cargar la lista de usuarios, no se podrá enviar un correo", "ERROR", JOptionPane.INFORMATION_MESSAGE);
+            
+        }
+        catch (ClassNotFoundException ex){
+            JOptionPane.showMessageDialog(null, "Error en las clases. No se pudo cargar la lista de usuarios, no se podrá enviar un correo", "ERROR", JOptionPane.INFORMATION_MESSAGE);
+        }
+     }
+     
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -99,6 +222,10 @@ public class MenuInspector extends javax.swing.JFrame {
         lblPerfil3 = new javax.swing.JLabel();
         pnPrincipal = new com.tec.parquimetro.parquimetro.GUI.Componentes.PanelRedondo();
         lblPerfil5 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        txtRazonMulta = new javax.swing.JTextArea();
+        btnEnviarMulta = new javax.swing.JButton();
+        btnCancelar = new javax.swing.JButton();
         pnPerfil = new com.tec.parquimetro.parquimetro.GUI.Componentes.PanelRedondo();
         lblPerfil6 = new javax.swing.JLabel();
         txtTelefono = new javax.swing.JTextField();
@@ -381,23 +508,57 @@ public class MenuInspector extends javax.swing.JFrame {
 
         lblPerfil5.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         lblPerfil5.setForeground(new java.awt.Color(255, 255, 255));
-        lblPerfil5.setText("PARQUIMETRO");
+        lblPerfil5.setText("Escriba la razón de la multa");
+
+        txtRazonMulta.setColumns(20);
+        txtRazonMulta.setRows(5);
+        jScrollPane2.setViewportView(txtRazonMulta);
+
+        btnEnviarMulta.setText("Enviar multa");
+        btnEnviarMulta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEnviarMultaActionPerformed(evt);
+            }
+        });
+
+        btnCancelar.setText("Cancelar");
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnPrincipalLayout = new javax.swing.GroupLayout(pnPrincipal);
         pnPrincipal.setLayout(pnPrincipalLayout);
         pnPrincipalLayout.setHorizontalGroup(
             pnPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnPrincipalLayout.createSequentialGroup()
-                .addGap(328, 328, 328)
-                .addComponent(lblPerfil5)
-                .addContainerGap(347, Short.MAX_VALUE))
+                .addGroup(pnPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnPrincipalLayout.createSequentialGroup()
+                        .addGap(266, 266, 266)
+                        .addComponent(lblPerfil5))
+                    .addGroup(pnPrincipalLayout.createSequentialGroup()
+                        .addGap(197, 197, 197)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 408, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(pnPrincipalLayout.createSequentialGroup()
+                        .addGap(229, 229, 229)
+                        .addComponent(btnEnviarMulta)
+                        .addGap(104, 104, 104)
+                        .addComponent(btnCancelar)))
+                .addContainerGap(208, Short.MAX_VALUE))
         );
         pnPrincipalLayout.setVerticalGroup(
             pnPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnPrincipalLayout.createSequentialGroup()
-                .addGap(262, 262, 262)
+                .addGap(115, 115, 115)
                 .addComponent(lblPerfil5)
-                .addContainerGap(370, Short.MAX_VALUE))
+                .addGap(69, 69, 69)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(105, 105, 105)
+                .addGroup(pnPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnEnviarMulta)
+                    .addComponent(btnCancelar))
+                .addContainerGap(122, Short.MAX_VALUE))
         );
 
         pbTabl.addTab("", pnPrincipal);
@@ -664,8 +825,8 @@ public class MenuInspector extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRevisarParqueosMouseExited
 
     private void btnRevisarParqueosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRevisarParqueosActionPerformed
-
         pbTabl.setSelectedIndex(0);
+        
     }//GEN-LAST:event_btnRevisarParqueosActionPerformed
 
     private void rondedBordes5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rondedBordes5ActionPerformed
@@ -891,8 +1052,27 @@ public class MenuInspector extends javax.swing.JFrame {
     }//GEN-LAST:event_txtNumParqueoActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-        // TODO add your handling code here:
+        try{
+            int placa = Integer.parseInt(txtPlaca.getText());
+            int numParqueo = Integer.parseInt(txtNumParqueo.getText());
+            if(!verificarPlacaParqueo(placa, numParqueo, parqueo)){ //si es false, quiere decir que se debe de realizar la multa
+                pbTabl.setSelectedIndex(3);
+            }
+        }
+        catch (NumberFormatException e){
+            JOptionPane.showMessageDialog(null, "Debe de ingresar numeros enteros");
+        }
+        
     }//GEN-LAST:event_btnBuscarActionPerformed
+
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+        pbTabl.setSelectedIndex(0);
+    }//GEN-LAST:event_btnCancelarActionPerformed
+
+    private void btnEnviarMultaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnviarMultaActionPerformed
+        int placa = Integer.parseInt(txtPlaca.getText());
+        crearMulta(placa);
+    }//GEN-LAST:event_btnEnviarMultaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -924,7 +1104,7 @@ public class MenuInspector extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MenuInspector(inspector).setVisible(true);
+                new MenuInspector(inspector, parqueo).setVisible(true);
             }
         });
     }
@@ -932,6 +1112,8 @@ public class MenuInspector extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.tec.parquimetro.parquimetro.GUI.RondedBordes btnActualizarPerfil;
     private javax.swing.JButton btnBuscar;
+    private javax.swing.JButton btnCancelar;
+    private javax.swing.JButton btnEnviarMulta;
     private com.tec.parquimetro.parquimetro.GUI.RondedBordes btnPerfil;
     private com.tec.parquimetro.parquimetro.GUI.RondedBordes btnReportes;
     private com.tec.parquimetro.parquimetro.GUI.RondedBordes btnRestablecerContra;
@@ -942,6 +1124,7 @@ public class MenuInspector extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel labelBienvenido;
     private javax.swing.JLabel lblApellidos;
     private javax.swing.JLabel lblApellidos1;
@@ -971,6 +1154,7 @@ public class MenuInspector extends javax.swing.JFrame {
     private javax.swing.JTextField txtPlaca;
     private javax.swing.JTextField txtPt1Mail;
     private javax.swing.JTextField txtPt2Mail;
+    private javax.swing.JTextArea txtRazonMulta;
     private javax.swing.JTextField txtTelefono;
     private javax.swing.JTextField txtTerminal;
     // End of variables declaration//GEN-END:variables
