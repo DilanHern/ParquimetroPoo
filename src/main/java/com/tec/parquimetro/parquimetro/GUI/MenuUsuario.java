@@ -773,7 +773,7 @@ public class MenuUsuario extends javax.swing.JFrame {
                 .addComponent(btnAgregarVehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(tpPanelModificaciones, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(11, Short.MAX_VALUE))
+                .addContainerGap(28, Short.MAX_VALUE))
         );
 
         pbTabl.addTab("", pnVehiculos);
@@ -867,7 +867,7 @@ public class MenuUsuario extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10)
                     .addComponent(lblCantidadEspacios))
-                .addContainerGap(74, Short.MAX_VALUE))
+                .addContainerGap(91, Short.MAX_VALUE))
         );
 
         tpReportes.addTab("Espacios", jPanel2);
@@ -882,7 +882,7 @@ public class MenuUsuario extends javax.swing.JFrame {
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 517, Short.MAX_VALUE)
+            .addGap(0, 534, Short.MAX_VALUE)
         );
 
         tpReportes.addTab("principal", jPanel3);
@@ -1098,7 +1098,7 @@ public class MenuUsuario extends javax.swing.JFrame {
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 291, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(pnlAgregarTiempo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addContainerGap(34, Short.MAX_VALUE))
         );
 
         pbTabl.addTab("", pnMisParqueos);
@@ -1127,7 +1127,7 @@ public class MenuUsuario extends javax.swing.JFrame {
             .addGroup(pnPrincipalLayout.createSequentialGroup()
                 .addGap(262, 262, 262)
                 .addComponent(lblPerfil5)
-                .addContainerGap(371, Short.MAX_VALUE))
+                .addContainerGap(388, Short.MAX_VALUE))
         );
 
         pbTabl.addTab("", pnPrincipal);
@@ -1260,7 +1260,7 @@ public class MenuUsuario extends javax.swing.JFrame {
                 .addGroup(pnPerfil1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnVolverPerfil, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnActualizarTarjeta, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(184, Short.MAX_VALUE))
+                .addContainerGap(201, Short.MAX_VALUE))
         );
 
         pbTabl.addTab("", pnPerfil1);
@@ -1593,7 +1593,7 @@ public class MenuUsuario extends javax.swing.JFrame {
                 .addComponent(btnConsultarEspacio, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(tpParquearEspacio, javax.swing.GroupLayout.PREFERRED_SIZE, 386, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addContainerGap(41, Short.MAX_VALUE))
         );
 
         pbTabl.addTab("", pnParquear);
@@ -1814,10 +1814,13 @@ public class MenuUsuario extends javax.swing.JFrame {
                     .addComponent(txtPt2Mail, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtPt1Mail, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblApellidos2))
-                .addGap(95, 95, 95)
-                .addGroup(pnPerfilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnActualizarPerfil, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnRestablecerContra, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(pnPerfilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnPerfilLayout.createSequentialGroup()
+                        .addGap(95, 95, 95)
+                        .addComponent(btnRestablecerContra, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(pnPerfilLayout.createSequentialGroup()
+                        .addGap(82, 82, 82)
+                        .addComponent(btnActualizarPerfil, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(72, 72, 72))
         );
 

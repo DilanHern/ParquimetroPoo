@@ -59,7 +59,7 @@ public class MenuAdministrador extends javax.swing.JFrame {
     private static String contraseñaDe = "yqxt avpo uilp zvja";
     private static String emailPara;
     
-    private Properties mProperties;
+    private Properties mProperties = new Properties();
     private Session mSession;
     private MimeMessage mCorreo;
     //FIN DE ATRIBUTOS DE REPORTES
@@ -888,11 +888,7 @@ public class MenuAdministrador extends javax.swing.JFrame {
                             .addGroup(pnPerfilLayout.createSequentialGroup()
                                 .addComponent(txtNombre1, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 133, Short.MAX_VALUE)
-                                .addComponent(txtApellidos, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(pnPerfilLayout.createSequentialGroup()
-                                .addComponent(btnRestablecerContra, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(48, 48, 48)
-                                .addComponent(btnActualizarPerfil, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(txtApellidos, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(73, 73, 73))
                     .addGroup(pnPerfilLayout.createSequentialGroup()
                         .addGroup(pnPerfilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -903,7 +899,13 @@ public class MenuAdministrador extends javax.swing.JFrame {
                         .addGap(296, 296, 296))
                     .addGroup(pnPerfilLayout.createSequentialGroup()
                         .addComponent(lblApellidos3)
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(pnPerfilLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnRestablecerContra, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnActualizarPerfil, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(286, 286, 286))))
             .addGroup(pnPerfilLayout.createSequentialGroup()
                 .addGap(370, 370, 370)
                 .addComponent(lblPerfil)
@@ -1608,13 +1610,13 @@ public class MenuAdministrador extends javax.swing.JFrame {
         mProperties.setProperty("mail.smtp.ssl.protocols", "TLSv1.2");
         mProperties.setProperty("mail.smtp.auth", "true");
 
-        mSession = Session.getDefaultInstance(mProperties);
+       mSession = Session.getDefaultInstance(mProperties);
 
 
         try {        
             mCorreo = new MimeMessage(mSession);
             mCorreo.setFrom(new InternetAddress(emailDe));
-            mCorreo.setRecipient(Message.RecipientType.TO, new InternetAddress(correo)); //correo del usuario
+            mCorreo.setRecipient(Message.RecipientType.TO, new InternetAddress("carayacn@gmail.com")); //correo del usuario
             mCorreo.setSubject(asunto); //Asunto
             mCorreo.setText(cuerpo, "ISO-8859-1", "html");
 
@@ -1959,6 +1961,8 @@ public class MenuAdministrador extends javax.swing.JFrame {
         String apellidos;
         String identidicacion;
         String direccionFisica;
+        String pt1Correo;
+        String pt2Correo;
         int telefono;
         
         
@@ -1972,10 +1976,11 @@ public class MenuAdministrador extends javax.swing.JFrame {
                            if(validarConversion(txtTelefono.getText())){
                            
                                if(validarTelefono(Integer.parseInt(txtTelefono.getText()))){
+                                   
                                    String cuerpo = "Nombre: " + administrador.getNombre() + "\n" + "Apellidos: " + administrador.getApellidos() + "\n" + "Direccion fisica: " + administrador.getDireccionFisica() + "\n" + 
                                    "Identificacion: " + administrador.getIdentificacion() + "\n" + "Telefono: " + administrador.getTelefono();
                                    crearEmail(cuerpo, "PARAMETROS ACTUALIZADOS", administrador.getCorreo().getCorreo());
-                                   enviarEmail();
+                                  enviarEmail();
                                }
                                else{
                                     JOptionPane.showMessageDialog(null, "El telefono debe tener 8 digitos!");

@@ -20,6 +20,17 @@
         </plugins>
     </build>
     <dependencies>
+        
+        <dependency>
+            <groupId>javax.inject</groupId>
+            <artifactId>javax.inject</artifactId>
+            <version>1</version>
+        </dependency>
+        <dependency>
+            <groupId>javax.ejb</groupId>
+            <artifactId>javax.ejb-api</artifactId>
+            <version>3.2</version> 
+        </dependency>
         <dependency>
             <groupId>org.netbeans.external</groupId>
             <artifactId>AbsoluteLayout</artifactId>
@@ -30,29 +41,14 @@
             <artifactId>jcalendar</artifactId>
             <version>1.4</version>
         </dependency>
-        <dependency>
+                <dependency>
             <groupId>mail</groupId>
             <artifactId>mail-library</artifactId>
             <version>1.0.0</version>
         </dependency>
         <dependency>
-            <groupId>javax.activation</groupId>
-            <artifactId>javax.activation-library</artifactId>
-            <version>1.0.0</version>
-        </dependency>
-        <dependency>
-            <groupId>javax.inject</groupId>
-            <artifactId>javax-inyect-library</artifactId>
-            <version>1.0.0</version>
-        </dependency>
-        <dependency>
             <groupId>javax.faces</groupId>
             <artifactId>javax-faces-library</artifactId>
-            <version>1.0.0</version>
-        </dependency>
-        <dependency>
-            <groupId>javax.ejb</groupId>
-            <artifactId>javax-ejb-library</artifactId>
             <version>1.0.0</version>
         </dependency>
     </dependencies>

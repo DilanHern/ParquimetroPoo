@@ -412,7 +412,7 @@
                           <Component id="btnAgregarVehiculo" min="-2" pref="35" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="tpPanelModificaciones" min="-2" pref="292" max="-2" attributes="0"/>
-                          <EmptySpace pref="11" max="32767" attributes="0"/>
+                          <EmptySpace pref="28" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -1063,7 +1063,7 @@
                                       <Component id="jLabel10" alignment="3" min="-2" max="-2" attributes="0"/>
                                       <Component id="lblCantidadEspacios" alignment="3" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace pref="74" max="32767" attributes="0"/>
+                                  <EmptySpace pref="91" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -1151,7 +1151,7 @@
                         </DimensionLayout>
                         <DimensionLayout dim="1">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <EmptySpace min="0" pref="517" max="32767" attributes="0"/>
+                              <EmptySpace min="0" pref="534" max="32767" attributes="0"/>
                           </Group>
                         </DimensionLayout>
                       </Layout>
@@ -1205,7 +1205,7 @@
                           <Component id="jScrollPane2" min="-2" pref="291" max="-2" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Component id="pnlAgregarTiempo" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace pref="17" max="32767" attributes="0"/>
+                          <EmptySpace pref="34" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -1488,7 +1488,7 @@
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="262" max="-2" attributes="0"/>
                           <Component id="lblPerfil5" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace pref="371" max="32767" attributes="0"/>
+                          <EmptySpace pref="388" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -1608,7 +1608,7 @@
                               <Component id="btnVolverPerfil" alignment="3" min="-2" pref="42" max="-2" attributes="0"/>
                               <Component id="btnActualizarTarjeta" alignment="3" min="-2" pref="42" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace pref="184" max="32767" attributes="0"/>
+                          <EmptySpace pref="201" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -1826,7 +1826,7 @@
                           <Component id="btnConsultarEspacio" min="-2" pref="43" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                           <Component id="tpParquearEspacio" min="-2" pref="386" max="-2" attributes="0"/>
-                          <EmptySpace pref="24" max="32767" attributes="0"/>
+                          <EmptySpace pref="41" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -2501,10 +2501,15 @@
                               <Component id="txtPt1Mail" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
                               <Component id="lblApellidos2" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace min="-2" pref="95" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="btnActualizarPerfil" alignment="3" min="-2" pref="42" max="-2" attributes="0"/>
-                              <Component id="btnRestablecerContra" alignment="3" min="-2" pref="42" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" attributes="0">
+                                  <EmptySpace min="-2" pref="95" max="-2" attributes="0"/>
+                                  <Component id="btnRestablecerContra" min="-2" pref="42" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace min="-2" pref="82" max="-2" attributes="0"/>
+                                  <Component id="btnActualizarPerfil" min="-2" pref="42" max="-2" attributes="0"/>
+                              </Group>
                           </Group>
                           <EmptySpace min="-2" pref="72" max="-2" attributes="0"/>
                       </Group>
