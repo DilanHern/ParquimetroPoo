@@ -4,6 +4,10 @@
  */
 package com.tec.parquimetro.parquimetro.GUI;
 
+import com.itextpdf.text.BaseColor;
+import com.itextpdf.text.Phrase;
+import com.itextpdf.text.pdf.PdfPCell;
+import com.itextpdf.text.pdf.PdfWriter;
 import com.tec.parquimetro.parquimetro.Clases.Correo;
 import com.tec.parquimetro.parquimetro.Clases.Espacio;
 import com.tec.parquimetro.parquimetro.Clases.Login;
@@ -16,6 +20,9 @@ import com.tec.parquimetro.parquimetro.GUI.Componentes.RenderTable;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.time.Instant;
@@ -30,9 +37,12 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.BorderFactory;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListCellRenderer;
+import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
@@ -45,7 +55,32 @@ import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
-
+import com.itextpdf.text.BaseColor;
+import com.itextpdf.text.Chunk;
+import java.io.File;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Element;
+import com.itextpdf.text.FontFactory;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.Phrase;
+import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfWriter;
+import java.io.ByteArrayInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.awt.Color;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import com.itextpdf.text.Font;
+import java.util.ArrayList;
 
 
 /**
@@ -170,7 +205,32 @@ public class MenuUsuario extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         lblCantidadEspacios = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
+        btnReportesDisponibles = new com.tec.parquimetro.parquimetro.GUI.RondedBordes();
         jPanel3 = new javax.swing.JPanel();
+        jPanel7 = new javax.swing.JPanel();
+        jScrollPane6 = new javax.swing.JScrollPane();
+        tblParqueosUtilizados = new javax.swing.JTable();
+        jLabel20 = new javax.swing.JLabel();
+        lblCantidadEspaciosUtilizados = new javax.swing.JLabel();
+        jLabel23 = new javax.swing.JLabel();
+        btnFiltrarUtilizados = new com.tec.parquimetro.parquimetro.GUI.RondedBordes();
+        dcInicioParqueoUtilizado = new com.toedter.calendar.JDateChooser();
+        dcFinParqueoUtilizado = new com.toedter.calendar.JDateChooser();
+        btnDescargarUtilizados = new com.tec.parquimetro.parquimetro.GUI.RondedBordes();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel26 = new javax.swing.JLabel();
+        jPanel9 = new javax.swing.JPanel();
+        jScrollPane8 = new javax.swing.JScrollPane();
+        tblMultas = new javax.swing.JTable();
+        jLabel27 = new javax.swing.JLabel();
+        lblCantidadEspaciosUtilizados1 = new javax.swing.JLabel();
+        jLabel28 = new javax.swing.JLabel();
+        btnFiltrarMultas = new com.tec.parquimetro.parquimetro.GUI.RondedBordes();
+        dcInicioMultas = new com.toedter.calendar.JDateChooser();
+        dcFinMultas = new com.toedter.calendar.JDateChooser();
+        btnDescargarMultas = new com.tec.parquimetro.parquimetro.GUI.RondedBordes();
+        jLabel29 = new javax.swing.JLabel();
+        jLabel30 = new javax.swing.JLabel();
         pnMisParqueos = new com.tec.parquimetro.parquimetro.GUI.Componentes.PanelRedondo();
         lblPerfil4 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -836,41 +896,53 @@ public class MenuUsuario extends javax.swing.JFrame {
         jLabel11.setForeground(new java.awt.Color(255, 255, 255));
         jLabel11.setText("Parqueos Disponibles");
 
+        btnReportesDisponibles.setBackground(new java.awt.Color(153, 255, 51));
+        btnReportesDisponibles.setText("Descargar PDF");
+        btnReportesDisponibles.setColor1(new java.awt.Color(126, 217, 87));
+        btnReportesDisponibles.setColor2(new java.awt.Color(126, 217, 87));
+        btnReportesDisponibles.setColor3(new java.awt.Color(126, 217, 87));
+        btnReportesDisponibles.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnReportesDisponiblesActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(32, 32, 32)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 724, Short.MAX_VALUE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(32, 32, 32)
                         .addComponent(jLabel10)
                         .addGap(18, 18, 18)
-                        .addComponent(lblCantidadEspacios))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(319, 319, 319)
-                        .addComponent(jLabel11)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addGap(0, 52, Short.MAX_VALUE)
-                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 704, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblCantidadEspacios)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnReportesDisponibles, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(48, 48, 48))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(321, 321, 321)
+                .addComponent(jLabel11)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(42, 42, 42)
+                .addGap(36, 36, 36)
                 .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 314, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(37, 37, 37)
+                .addGap(35, 35, 35)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10)
-                    .addComponent(lblCantidadEspacios))
-                .addContainerGap(91, Short.MAX_VALUE))
+                    .addComponent(lblCantidadEspacios)
+                    .addComponent(btnReportesDisponibles, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(56, Short.MAX_VALUE))
         );
 
-        tpReportes.addTab("Espacios", jPanel2);
+        tpReportes.addTab("EspaciosVacios", jPanel2);
 
         jPanel3.setBackground(new java.awt.Color(57, 54, 66));
 
@@ -882,12 +954,246 @@ public class MenuUsuario extends javax.swing.JFrame {
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 534, Short.MAX_VALUE)
+            .addGap(0, 517, Short.MAX_VALUE)
         );
 
         tpReportes.addTab("principal", jPanel3);
 
-        tpReportes.setSelectedIndex(1);
+        jPanel7.setBackground(new java.awt.Color(29, 24, 39));
+
+        tblParqueosUtilizados.setBackground(new java.awt.Color(204, 204, 204));
+        tblParqueosUtilizados.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
+        tblParqueosUtilizados.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {},
+                {},
+                {},
+                {}
+            },
+            new String [] {
+
+            }
+        ));
+        tblParqueosUtilizados.setEnabled(false);
+        tblParqueosUtilizados.setGridColor(new java.awt.Color(126, 217, 87));
+        jScrollPane6.setViewportView(tblParqueosUtilizados);
+
+        jLabel20.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel20.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel20.setText("Espacios considerados en el reporte:");
+
+        lblCantidadEspaciosUtilizados.setForeground(new java.awt.Color(255, 255, 255));
+        lblCantidadEspaciosUtilizados.setText("-");
+
+        jLabel23.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel23.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel23.setText("Parqueos Utilizados");
+
+        btnFiltrarUtilizados.setBackground(new java.awt.Color(204, 102, 0));
+        btnFiltrarUtilizados.setText("Filtrar");
+        btnFiltrarUtilizados.setColor1(new java.awt.Color(204, 102, 0));
+        btnFiltrarUtilizados.setColor2(new java.awt.Color(204, 102, 0));
+        btnFiltrarUtilizados.setColor3(new java.awt.Color(204, 102, 0));
+        btnFiltrarUtilizados.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFiltrarUtilizadosActionPerformed(evt);
+            }
+        });
+
+        btnDescargarUtilizados.setBackground(new java.awt.Color(153, 255, 51));
+        btnDescargarUtilizados.setText("Descargar PDF");
+        btnDescargarUtilizados.setColor1(new java.awt.Color(126, 217, 87));
+        btnDescargarUtilizados.setColor2(new java.awt.Color(126, 217, 87));
+        btnDescargarUtilizados.setColor3(new java.awt.Color(126, 217, 87));
+        btnDescargarUtilizados.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDescargarUtilizadosActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setText("Inicio del periodo");
+
+        jLabel26.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel26.setText("Fin del periodo");
+
+        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
+        jPanel7.setLayout(jPanel7Layout);
+        jPanel7Layout.setHorizontalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel7Layout.createSequentialGroup()
+                .addGap(32, 32, 32)
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel7Layout.createSequentialGroup()
+                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(dcInicioParqueoUtilizado, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel26)
+                            .addComponent(dcFinParqueoUtilizado, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnFiltrarUtilizados, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
+                        .addComponent(jLabel20)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblCantidadEspaciosUtilizados, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnDescargarUtilizados, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 724, Short.MAX_VALUE))
+                .addGap(48, 48, 48))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel23)
+                .addGap(323, 323, 323))
+        );
+        jPanel7Layout.setVerticalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel7Layout.createSequentialGroup()
+                .addGap(36, 36, 36)
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel7Layout.createSequentialGroup()
+                        .addComponent(jLabel23, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(dcFinParqueoUtilizado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnFiltrarUtilizados, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel7Layout.createSequentialGroup()
+                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel26))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(dcInicioParqueoUtilizado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
+                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel20)
+                        .addComponent(lblCantidadEspaciosUtilizados))
+                    .addComponent(btnDescargarUtilizados, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(24, 24, 24))
+        );
+
+        tpReportes.addTab("EspaciosUtilizados", jPanel7);
+
+        jPanel9.setBackground(new java.awt.Color(29, 24, 39));
+
+        tblMultas.setBackground(new java.awt.Color(204, 204, 204));
+        tblMultas.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
+        tblMultas.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {},
+                {},
+                {},
+                {}
+            },
+            new String [] {
+
+            }
+        ));
+        tblMultas.setEnabled(false);
+        tblMultas.setGridColor(new java.awt.Color(126, 217, 87));
+        jScrollPane8.setViewportView(tblMultas);
+
+        jLabel27.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel27.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel27.setText("Espacios considerados en el reporte:");
+
+        lblCantidadEspaciosUtilizados1.setForeground(new java.awt.Color(255, 255, 255));
+        lblCantidadEspaciosUtilizados1.setText("-");
+
+        jLabel28.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel28.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel28.setText("Multas");
+
+        btnFiltrarMultas.setBackground(new java.awt.Color(204, 102, 0));
+        btnFiltrarMultas.setText("Filtrar");
+        btnFiltrarMultas.setColor1(new java.awt.Color(204, 102, 0));
+        btnFiltrarMultas.setColor2(new java.awt.Color(204, 102, 0));
+        btnFiltrarMultas.setColor3(new java.awt.Color(204, 102, 0));
+        btnFiltrarMultas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFiltrarMultasActionPerformed(evt);
+            }
+        });
+
+        btnDescargarMultas.setBackground(new java.awt.Color(153, 255, 51));
+        btnDescargarMultas.setText("Descargar PDF");
+        btnDescargarMultas.setColor1(new java.awt.Color(126, 217, 87));
+        btnDescargarMultas.setColor2(new java.awt.Color(126, 217, 87));
+        btnDescargarMultas.setColor3(new java.awt.Color(126, 217, 87));
+        btnDescargarMultas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDescargarMultasActionPerformed(evt);
+            }
+        });
+
+        jLabel29.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel29.setText("Inicio del periodo");
+
+        jLabel30.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel30.setText("Fin del periodo");
+
+        javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
+        jPanel9.setLayout(jPanel9Layout);
+        jPanel9Layout.setHorizontalGroup(
+            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel9Layout.createSequentialGroup()
+                .addGap(32, 32, 32)
+                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel9Layout.createSequentialGroup()
+                        .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(dcInicioMultas, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel29))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel30)
+                            .addComponent(dcFinMultas, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnFiltrarMultas, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel9Layout.createSequentialGroup()
+                        .addComponent(jLabel27)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblCantidadEspaciosUtilizados1, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnDescargarMultas, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane8, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 724, Short.MAX_VALUE))
+                .addGap(48, 48, 48))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel9Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel28)
+                .addGap(323, 323, 323))
+        );
+        jPanel9Layout.setVerticalGroup(
+            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel9Layout.createSequentialGroup()
+                .addGap(36, 36, 36)
+                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel9Layout.createSequentialGroup()
+                        .addComponent(jLabel28, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(dcFinMultas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnFiltrarMultas, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel9Layout.createSequentialGroup()
+                        .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel29)
+                            .addComponent(jLabel30))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(dcInicioMultas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
+                .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel27)
+                        .addComponent(lblCantidadEspaciosUtilizados1))
+                    .addComponent(btnDescargarMultas, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(24, 24, 24))
+        );
+
+        tpReportes.addTab("Multas", jPanel9);
 
         javax.swing.GroupLayout pnReportesLayout = new javax.swing.GroupLayout(pnReportes);
         pnReportes.setLayout(pnReportesLayout);
@@ -916,6 +1222,8 @@ public class MenuUsuario extends javax.swing.JFrame {
                 .addComponent(tpReportes)
                 .addGap(19, 19, 19))
         );
+
+        tpReportes.getAccessibleContext().setAccessibleName("Espacios Vacios");
 
         pbTabl.addTab("", pnReportes);
 
@@ -1764,7 +2072,7 @@ public class MenuUsuario extends javax.swing.JFrame {
                                             .addComponent(txtPt2Mail)))))
                             .addGroup(pnPerfilLayout.createSequentialGroup()
                                 .addComponent(btnRestablecerContra, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(btnActualizarPerfil, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(184, 184, 184)))
                         .addGap(85, 85, 85))
@@ -1814,14 +2122,11 @@ public class MenuUsuario extends javax.swing.JFrame {
                     .addComponent(txtPt2Mail, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtPt1Mail, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblApellidos2))
-                .addGroup(pnPerfilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnPerfilLayout.createSequentialGroup()
-                        .addGap(95, 95, 95)
-                        .addComponent(btnRestablecerContra, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(pnPerfilLayout.createSequentialGroup()
-                        .addGap(82, 82, 82)
-                        .addComponent(btnActualizarPerfil, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(72, 72, 72))
+                .addGap(82, 82, 82)
+                .addGroup(pnPerfilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnActualizarPerfil, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnRestablecerContra, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(85, 85, 85))
         );
 
         pbTabl.addTab("", pnPerfil);
@@ -1873,6 +2178,20 @@ public class MenuUsuario extends javax.swing.JFrame {
         
     }
     
+    private boolean validarFechasHoriario(LocalDateTime tiempoParqueo){
+    
+        Parqueo parqueo = new Parqueo();
+        parqueo.lecturaArchivo();
+        LocalTime tiempoParqueoTime = tiempoParqueo.toLocalTime();
+        // Validar que el tiempo de parqueo esté dentro del horario
+        if (tiempoParqueoTime.isBefore(parqueo.getHoraInicio()) || tiempoParqueoTime.isAfter(parqueo.getHoraFinal())) {
+            return false; // Fuera del horario permitido
+        } else {
+            return true; // Dentro del horario permitido
+        }
+        
+    }
+    
     private void btnPerfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPerfilActionPerformed
 
         pbTabl.setSelectedIndex(6); //lleva a la pestana de actualizar informacion del perfil'
@@ -1906,18 +2225,22 @@ public class MenuUsuario extends javax.swing.JFrame {
     }//GEN-LAST:event_btnParquearMouseExited
 
     private void btnParquearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnParquearActionPerformed
-
-        //valida que el usuario haya registrado un metodo de pago para poder reservar un espacio
-        if(usuario.getTarjeta() != null){
-            pbTabl.setSelectedIndex(5); //muestra la pestana 5 correspondiente al reservar un espacio
-            tpParquearEspacio.setSelectedIndex(2);//cambia la pestana del tab panel interno a la pestana inicial
-            txtEspacioConsultado.setEnabled(true);
-            btnConsultarEspacio.setVisible(true);
-        }else{
-            
-            JOptionPane.showMessageDialog(null, "Debe registar un metodo de pago antes de utilizar un espacio");
+        if(validarFechasHoriario(LocalDateTime.now())){
+                //valida que el usuario haya registrado un metodo de pago para poder reservar un espacio
+                if(usuario.getTarjeta() != null){
+                    pbTabl.setSelectedIndex(5); //muestra la pestana 5 correspondiente al reservar un espacio
+                    tpParquearEspacio.setSelectedIndex(2);//cambia la pestana del tab panel interno a la pestana inicial
+                    txtEspacioConsultado.setEnabled(true);
+                    btnConsultarEspacio.setVisible(true);
+                }else{
+                    JOptionPane.showMessageDialog(null, "Debe registrar un metodo de pago antes de utilizar un espacio");
+                }
             
         }
+        else{
+            JOptionPane.showMessageDialog(null, "El parqueo se encuentra cerrado, no puede reservar un espacio.");
+        }
+
     }//GEN-LAST:event_btnParquearActionPerformed
 
     private void btnCerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarSesionActionPerformed
@@ -1934,6 +2257,7 @@ public class MenuUsuario extends javax.swing.JFrame {
 
     private void btnReportesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReportesActionPerformed
        pbTabl.setSelectedIndex(1); //muestra la pestana del tab en la que se puede generar reportes
+       tpReportes.setSelectedIndex(1);
     }//GEN-LAST:event_btnReportesActionPerformed
 
     private void inicializarTabPanelVehiculos(){
@@ -2268,8 +2592,9 @@ public class MenuUsuario extends javax.swing.JFrame {
                                        usuario.actualizarDatos(usuarioActualizado);
                                         
                                         actualizarInformacion(usuario, identificacionGeneral);
-                                       
-                                         JOptionPane.showMessageDialog(null, "Datos actualizados existosamente!");
+                                         labelBienvenido.setText(usuario.getNombre() + " " + usuario.getApellidos());
+                                        lblId.setText(usuario.getIdentificacion());
+                                       JOptionPane.showMessageDialog(null, "Datos actualizados existosamente!");
                                    }
                                    
                                }
@@ -2464,6 +2789,8 @@ public class MenuUsuario extends javax.swing.JFrame {
     
     private void cbReportesItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbReportesItemStateChanged
 
+        if(mdlEspaciosGeneral.getDataVector()!= null)
+            mdlEspaciosGeneral.getDataVector().removeAllElements();
         //Se genera cada vez que el combo box cambia de valor
         //valida el valor seleccionado, y genera una respuesta en relacion a lo seleccionado
         if(cbReportes.getSelectedItem() == "Parqueos Disponibles")
@@ -2478,7 +2805,12 @@ public class MenuUsuario extends javax.swing.JFrame {
             TableRowSorter<TableModel> sorter = new TableRowSorter<TableModel>(mdlEspaciosGeneral);
             tblEspaciosGeneral.setRowSorter(sorter);
             sorter.setSortKeys(Arrays.asList(new RowSorter.SortKey(0, SortOrder.ASCENDING)));
+        } else if(cbReportes.getSelectedItem() == "Espacios utilizados"){
+            tpReportes.setSelectedIndex(2);//muestra la pestana del panel que tiene la tabla a cargar
+       } else if(cbReportes.getSelectedItem() == "Multas generadas"){
+            tpReportes.setSelectedIndex(3);//muestra la pestana del panel que tiene la tabla a cargar
         }
+        
     }//GEN-LAST:event_cbReportesItemStateChanged
 
     private void cbReportesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbReportesActionPerformed
@@ -2664,7 +2996,9 @@ public class MenuUsuario extends javax.swing.JFrame {
         //valida que el tiempo a parquear en minutos no sea 0
         if((int)spnTiempoParqueo.getValue() !=0){
         
-            //lee los datos que son alamacenados en el archivo de parametros
+            if(validarFechasHoriario(LocalDateTime.now().plusMinutes((int)spnTiempoParqueo.getValue()))){
+            
+                 //lee los datos que son alamacenados en el archivo de parametros
             Parqueo parqueo = new Parqueo();
             parqueo.lecturaArchivo();
             
@@ -2701,6 +3035,12 @@ public class MenuUsuario extends javax.swing.JFrame {
             tpParquearEspacio.setSelectedIndex(2);
             
             actualizarInformacion(usuario, usuario.getIdentificacion());
+                
+            }else{
+            
+                JOptionPane.showMessageDialog(null, "El horario del parqueo no permite que se parquee en este momento");
+            
+            }
             
         }else{
         
@@ -3129,6 +3469,368 @@ public class MenuUsuario extends javax.swing.JFrame {
         
     }//GEN-LAST:event_tblVehiculoMouseClicked
 
+    private void btnDescargarMultasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDescargarMultasActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnDescargarMultasActionPerformed
+
+    private void btnFiltrarMultasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFiltrarMultasActionPerformed
+       Date fechaInicio = dcInicioMultas.getDate();
+        Date fechaFinal = dcFinMultas.getDate();
+        if (fechaInicio != null) {
+            if(fechaFinal!=null){
+
+                if(fechaFinal.after(fechaInicio) || fechaFinal.equals(fechaInicio)){
+                    // Convertimos la fecha a LocalDate
+                    LocalDate inicio = fechaInicio.toInstant()
+                    .atZone(ZoneId.systemDefault())
+                    .toLocalDate();
+
+                    LocalDate finalF = fechaFinal.toInstant()
+                    .atZone(ZoneId.systemDefault())
+                    .toLocalDate();
+                    //cargaTablaEspaciosUtilzados(inicio, finalF);
+                }else{
+                    JOptionPane.showMessageDialog(null, "La fecha final debe ser igual o mayor a la fecha de inicio.");
+                }
+
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "No se seleccionó ninguna fecha final.");
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "No se seleccionó ninguna fecha de inicio.");
+        }
+    }//GEN-LAST:event_btnFiltrarMultasActionPerformed
+
+    private void btnDescargarUtilizadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDescargarUtilizadosActionPerformed
+
+        Date fechaInicio = dcInicioParqueoUtilizado.getDate();
+        Date fechaFinal = dcFinParqueoUtilizado.getDate();
+        if (fechaInicio != null) {
+            if(fechaFinal!=null){
+
+                if(fechaFinal.after(fechaInicio) || fechaFinal.equals(fechaInicio)){
+                    // Convertimos la fecha a LocalDate
+                    LocalDate inicio = fechaInicio.toInstant()
+                    .atZone(ZoneId.systemDefault())
+                    .toLocalDate();
+
+                    LocalDate finalF = fechaFinal.toInstant()
+                    .atZone(ZoneId.systemDefault())
+                    .toLocalDate();
+                    generarPdfEspaciosUtilzados(inicio, finalF);
+                }else{
+                    JOptionPane.showMessageDialog(null, "La fecha final debe ser igual o mayor a la fecha de inicio.");
+                }
+
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "No se seleccionó ninguna fecha final.");
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "No se seleccionó ninguna fecha de inicio.");
+        }
+
+    }//GEN-LAST:event_btnDescargarUtilizadosActionPerformed
+
+    private void btnFiltrarUtilizadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFiltrarUtilizadosActionPerformed
+
+        Date fechaInicio = dcInicioParqueoUtilizado.getDate();
+        Date fechaFinal = dcFinParqueoUtilizado.getDate();
+        if (fechaInicio != null) {
+            if(fechaFinal!=null){
+
+                if(fechaFinal.after(fechaInicio) || fechaFinal.equals(fechaInicio)){
+                    // Convertimos la fecha a LocalDate
+                    LocalDate inicio = fechaInicio.toInstant()
+                    .atZone(ZoneId.systemDefault())
+                    .toLocalDate();
+
+                    LocalDate finalF = fechaFinal.toInstant()
+                    .atZone(ZoneId.systemDefault())
+                    .toLocalDate();
+                    cargaTablaEspaciosUtilzados(inicio, finalF);
+                }else{
+                    JOptionPane.showMessageDialog(null, "La fecha final debe ser igual o mayor a la fecha de inicio.");
+                }
+
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "No se seleccionó ninguna fecha final.");
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "No se seleccionó ninguna fecha de inicio.");
+        }
+
+    }//GEN-LAST:event_btnFiltrarUtilizadosActionPerformed
+
+    private void btnReportesDisponiblesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReportesDisponiblesActionPerformed
+
+        JFileChooser fileChoo = new JFileChooser();
+        File f = new File("ParqueosVacios");
+        String rutaArchivo = "";
+        fileChoo.setSelectedFile(f);
+        int option = fileChoo.showSaveDialog(this);
+
+        if(option == JFileChooser.APPROVE_OPTION){
+
+            f = fileChoo.getSelectedFile();
+            rutaArchivo = f.toString();
+        }
+        try {
+            Document document = new Document();
+            PdfWriter.getInstance(document, new FileOutputStream(rutaArchivo+".pdf"));
+
+            document.open();
+            document.addAuthor("Parquimetro");
+
+            //Titulo del documento
+            Paragraph tituloPrincipal = new Paragraph("Reporte Parquimetro", FontFactory.getFont(FontFactory.HELVETICA_BOLD,20, Font.BOLD,new BaseColor(14, 41, 75)));
+            tituloPrincipal.setAlignment(1);
+            document.add(tituloPrincipal);
+            Paragraph titulo = new Paragraph("Espacios Vacios");
+            titulo.setAlignment(1);
+            document.add(titulo);
+
+            //FECHAS Y PERIODOS DEL REPORTE
+            document.add(Chunk.NEWLINE);//SALTO DE LINEA
+            Paragraph fecha = new Paragraph("Fecha de elaboracion: " + new Date().toString());
+            fecha.setAlignment(Element.ALIGN_LEFT);  // Alinear a la derecha
+            document.add(fecha);
+
+            Paragraph periodo = new Paragraph("Periodo: 15/10/2024 - 09/11/2024");
+            periodo.setAlignment(Element.ALIGN_LEFT);  // Alinear a la derecha
+            document.add(periodo);
+            // Agregar el párrafo al documento
+            //FIN FECHAS Y PERIODOS DEL REPORTE
+
+            document.add(Chunk.NEWLINE);//SALTO DE LINEA
+
+            //Genera la tabla por argumentos envia el numero de celdas por fila
+            PdfPTable tabla = new PdfPTable(1);
+            tabla.setWidthPercentage(50);
+
+            //ENCABEZADO DE LA TABLA
+            Phrase frase = new Phrase("Numero de espacio", new Font(Font.FontFamily.HELVETICA, 12, Font.NORMAL, new BaseColor(255, 255, 255))); // Texto en blanco
+            PdfPCell espacio = new PdfPCell(frase);
+            espacio.setHorizontalAlignment(Element.ALIGN_CENTER);
+            espacio.setPaddingTop(10);
+            espacio.setPaddingBottom(10);
+            espacio.setBackgroundColor(new BaseColor(14, 41, 75));  // Fondo azul oscuro
+
+            tabla.addCell(espacio);
+
+            //FIN DEL ENCABEZADO DE LA TABLA
+
+            //Controla la cantidad de elementos considerados en el reporte
+            int cant=0;
+
+            Parqueo parqueo = new Parqueo();
+            parqueo.lecturaArchivo();
+
+            ArrayList<Espacio> espacios =  parqueo.listarEspaciosVacios();
+            //carga los elementos a la tabla
+            for(Espacio obj : espacios){
+
+                tabla.addCell(String.valueOf(obj.getNumero()));
+                cant++;
+            }
+
+            //Pie de la tabla, informa el total de los elementos
+            PdfPCell footerCell = new PdfPCell(new Phrase("Total: " + cant, new Font(Font.FontFamily.HELVETICA, 12, Font.NORMAL, new BaseColor(255, 255, 255))));
+            footerCell.setBackgroundColor(new BaseColor(184,102,20));
+            footerCell.setBorderColor(new BaseColor(184,102,20));
+            footerCell.setColspan(3);  // Combina las 3 columnas
+            footerCell.setHorizontalAlignment(Element.ALIGN_RIGHT);  // Alinear el texto a la derecha
+            footerCell.setPaddingTop(5);
+            footerCell.setPaddingRight(10);
+            footerCell.setPaddingBottom(7);
+            tabla.addCell(footerCell);
+
+            document.add(tabla);
+
+            System.out.println("Listo");
+
+            document.close();
+
+        } catch (FileNotFoundException ex) {
+
+        } catch (DocumentException ex) {
+
+        }
+
+    }//GEN-LAST:event_btnReportesDisponiblesActionPerformed
+
+    private void cargaTablaEspaciosUtilzados(LocalDate inicio, LocalDate finalF){
+    
+            List<TicketParqueo> lista = usuario.listarParqueosUtilizados(inicio, finalF);
+            DefaultTableModel mdlEspaciosUtilzados = new DefaultTableModel();
+            if(lista!=null){
+                
+                int cantidadEspacios=0;
+                String identificadores [] = {"Vehiculo","Espacio", "Tiempo", "Total", "Fecha"};
+                mdlEspaciosUtilzados.setColumnIdentifiers(identificadores);
+                
+                for(TicketParqueo  ticket : lista){
+                
+                    mdlEspaciosUtilzados.addRow(new Object[]{ticket.getVehiculo().getPlaca(), ticket.getEspacio().getNumero(), ticket.getTiempoParqueo(),"₡"+ticket.getTotal(), ticket.getHoraSistema()});
+                    cantidadEspacios++;
+                }
+             
+                tblParqueosUtilizados.setModel(mdlEspaciosUtilzados);
+                //Ordena los datos de la tabla basados en la columna 0 de manera ascendente
+                TableRowSorter<TableModel> sorter = new TableRowSorter<TableModel>(mdlEspaciosUtilzados);
+                tblParqueosUtilizados.setRowSorter(sorter);
+                sorter.setSortKeys(Arrays.asList(new RowSorter.SortKey(0, SortOrder.ASCENDING)));
+            
+                 lblCantidadEspaciosUtilizados.setText(String.valueOf(cantidadEspacios));
+            }
+
+        
+    }
+    
+        private void generarPdfEspaciosUtilzados(LocalDate inicio, LocalDate finalF){
+    
+            List<TicketParqueo> lista = usuario.listarParqueosUtilizados(inicio, finalF);
+            
+            if(lista!=null){
+                
+                 JFileChooser fileChoo = new JFileChooser();
+                File f = new File("ParqueosUtilizados");
+                String rutaArchivo = "";
+                fileChoo.setSelectedFile(f);
+                int option = fileChoo.showSaveDialog(this);
+
+                if(option == JFileChooser.APPROVE_OPTION){
+
+                     f = fileChoo.getSelectedFile();
+                     rutaArchivo = f.toString();
+                }
+                try {
+                     Document document = new Document();
+                     PdfWriter.getInstance(document, new FileOutputStream(rutaArchivo+".pdf"));
+
+                     document.open();
+                     document.addAuthor("Parquimetro");
+
+                     //Titulo del documento
+                     Paragraph tituloPrincipal = new Paragraph("Reporte Parquimetro", FontFactory.getFont(FontFactory.HELVETICA_BOLD,20, Font.BOLD,new BaseColor(14, 41, 75)));
+                     tituloPrincipal.setAlignment(1);
+                      document.add(tituloPrincipal);
+                     Paragraph titulo = new Paragraph("Espacios utilizados");
+                     titulo.setAlignment(5);
+                     document.add(titulo);
+
+                     //FECHAS Y PERIODOS DEL REPORTE 
+                     document.add(Chunk.NEWLINE);//SALTO DE LINEA
+                     Paragraph fecha = new Paragraph("Fecha de elaboracion: " + new Date().toString());
+                     fecha.setAlignment(Element.ALIGN_LEFT);  // Alinear a la derecha
+                     document.add(fecha);
+
+                     Paragraph periodo = new Paragraph("Periodo: " + inicio.toString() +" - " + finalF.toString());
+                     periodo.setAlignment(Element.ALIGN_LEFT);  // Alinear a la derecha
+                     document.add(periodo);
+                     // Agregar el párrafo al documento
+                      //FIN FECHAS Y PERIODOS DEL REPORTE 
+
+                     document.add(Chunk.NEWLINE);//SALTO DE LINEA
+
+                     //Genera la tabla por argumentos envia el numero de celdas por fila
+                     PdfPTable tabla = new PdfPTable(5);
+                     tabla.setWidthPercentage(100);
+
+                     //ENCABEZADO DE LA TABLA
+                     Phrase frase = new Phrase("Espacio", new Font(Font.FontFamily.HELVETICA, 12, Font.NORMAL, new BaseColor(255, 255, 255))); // Texto en blanco
+                     PdfPCell espacio = new PdfPCell(frase);
+                     espacio.setHorizontalAlignment(Element.ALIGN_CENTER);
+                     espacio.setPaddingTop(10);
+                     espacio.setPaddingBottom(10);
+                     espacio.setBackgroundColor(new BaseColor(14, 41, 75));  // Fondo azul oscuro
+                      tabla.addCell(espacio);
+                      
+                     Phrase frasePlaca = new Phrase("Placa", new Font(Font.FontFamily.HELVETICA, 12, Font.NORMAL, new BaseColor(255, 255, 255))); // Texto en blanco
+                     PdfPCell placa = new PdfPCell(frasePlaca);
+                     placa.setHorizontalAlignment(Element.ALIGN_CENTER);
+                     placa.setPaddingTop(10);
+                     placa.setPaddingBottom(10);
+                     placa.setBackgroundColor(new BaseColor(14, 41, 75));  // Fondo azul oscuro
+                     tabla.addCell(placa);
+                      
+                     Phrase fraseTiempo= new Phrase("Tiempo", new Font(Font.FontFamily.HELVETICA, 12, Font.NORMAL, new BaseColor(255, 255, 255))); // Texto en blanco
+                     PdfPCell tiempo = new PdfPCell(fraseTiempo);
+                     tiempo.setHorizontalAlignment(Element.ALIGN_CENTER);
+                     tiempo.setPaddingTop(10);
+                     tiempo.setPaddingBottom(10);
+                     tiempo.setBackgroundColor(new BaseColor(14, 41, 75));  // Fondo azul oscuro
+                     tabla.addCell(tiempo);
+                     
+                     Phrase fraseTotal= new Phrase("Total", new Font(Font.FontFamily.HELVETICA, 12, Font.NORMAL, new BaseColor(255, 255, 255))); // Texto en blanco
+                     PdfPCell total = new PdfPCell(fraseTotal);
+                     total.setHorizontalAlignment(Element.ALIGN_CENTER);
+                     total.setPaddingTop(10);
+                     total.setPaddingBottom(10);
+                     total.setBackgroundColor(new BaseColor(14, 41, 75));  // Fondo azul oscuro
+                     tabla.addCell(total);
+                     
+                     Phrase fraseFecha= new Phrase("Fecha", new Font(Font.FontFamily.HELVETICA, 12, Font.NORMAL, new BaseColor(255, 255, 255))); // Texto en blanco
+                     PdfPCell fechaC = new PdfPCell(fraseFecha);
+                     fechaC.setHorizontalAlignment(Element.ALIGN_CENTER);
+                     fechaC.setPaddingTop(10);
+                     fechaC.setPaddingBottom(10);
+                     fechaC.setBackgroundColor(new BaseColor(14, 41, 75));  // Fondo azul oscuro
+                     tabla.addCell(fechaC);
+
+                     //FIN DEL ENCABEZADO DE LA TABLA
+
+                     //Controla la cantidad de elementos considerados en el reporte
+                     int cant=0;
+
+                     Parqueo parqueo = new Parqueo();
+                     parqueo.lecturaArchivo();
+
+                     ArrayList<Espacio> espacios =  parqueo.listarEspaciosVacios();
+                     //carga los elementos a la tabla
+                     for(TicketParqueo obj : lista){
+
+                         tabla.addCell(String.valueOf(obj.getEspacio().getNumero()));
+                         tabla.addCell(String.valueOf(obj.getVehiculo().getPlaca()));
+                         tabla.addCell(String.valueOf(obj.getTiempoParqueo())+ " minutos");
+                         tabla.addCell(" ₡ "+String.valueOf(obj.getTotal()));
+                         tabla.addCell(String.valueOf(obj.getHoraSistema().toString()));
+                         cant++;
+                     }
+
+
+                   //Pie de la tabla, informa el total de los elementos
+                   PdfPCell footerCell = new PdfPCell(new Phrase("Total: " + cant, new Font(Font.FontFamily.HELVETICA, 12, Font.NORMAL, new BaseColor(255, 255, 255))));
+                   footerCell.setBackgroundColor(new BaseColor(184,102,20)); 
+                   footerCell.setBorderColor(new BaseColor(184,102,20));
+                   footerCell.setColspan(5);  // Combina las 3 columnas
+                   footerCell.setHorizontalAlignment(Element.ALIGN_RIGHT);  // Alinear el texto a la derecha
+                   footerCell.setPaddingTop(5);
+                   footerCell.setPaddingRight(10);
+                   footerCell.setPaddingBottom(7);
+                    tabla.addCell(footerCell);                       
+
+                    document.add(tabla);
+
+                     System.out.println("Listo");
+
+                     document.close();
+                     JOptionPane.showMessageDialog(null, "Archivo descargado exitosamente.");
+
+                 } catch (FileNotFoundException ex) {
+
+                 } catch (DocumentException ex) {
+
+                 }
+                
+            }
+
+        
+    }
+    
+    
     
     //------------------------Carga de parqueos en la tabla mis parqueos-------------------------------
     
@@ -3240,11 +3942,16 @@ public class MenuUsuario extends javax.swing.JFrame {
     private com.tec.parquimetro.parquimetro.GUI.RondedBordes btnConsultarEspacio;
     private com.tec.parquimetro.parquimetro.GUI.RondedBordes btnConsultarOtroEspacio;
     private com.tec.parquimetro.parquimetro.GUI.RondedBordes btnConsultarOtroEspacio1;
+    private com.tec.parquimetro.parquimetro.GUI.RondedBordes btnDescargarMultas;
+    private com.tec.parquimetro.parquimetro.GUI.RondedBordes btnDescargarUtilizados;
+    private com.tec.parquimetro.parquimetro.GUI.RondedBordes btnFiltrarMultas;
+    private com.tec.parquimetro.parquimetro.GUI.RondedBordes btnFiltrarUtilizados;
     private com.tec.parquimetro.parquimetro.GUI.RondedBordes btnMetodoPago;
     private com.tec.parquimetro.parquimetro.GUI.RondedBordes btnParquear;
     private com.tec.parquimetro.parquimetro.GUI.RondedBordes btnParquearEspacio;
     private com.tec.parquimetro.parquimetro.GUI.RondedBordes btnPerfil;
     private com.tec.parquimetro.parquimetro.GUI.RondedBordes btnReportes;
+    private com.tec.parquimetro.parquimetro.GUI.RondedBordes btnReportesDisponibles;
     private com.tec.parquimetro.parquimetro.GUI.RondedBordes btnRepostarEspacio;
     private com.tec.parquimetro.parquimetro.GUI.RondedBordes btnRestablecerContra;
     private com.tec.parquimetro.parquimetro.GUI.RondedBordes btnVolverPerfil;
@@ -3252,6 +3959,11 @@ public class MenuUsuario extends javax.swing.JFrame {
     private com.tec.parquimetro.parquimetro.GUI.RondedBordes btnVolverVehiculos3;
     private javax.swing.JComboBox<String> cbPlacasVehiculo;
     private javax.swing.JComboBox<String> cbReportes;
+    private com.toedter.calendar.JDateChooser dcFinMultas;
+    private com.toedter.calendar.JDateChooser dcFinParqueoUtilizado;
+    private com.toedter.calendar.JDateChooser dcInicioMultas;
+    private com.toedter.calendar.JDateChooser dcInicioParqueoUtilizado;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
@@ -3263,9 +3975,16 @@ public class MenuUsuario extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel23;
+    private javax.swing.JLabel jLabel26;
+    private javax.swing.JLabel jLabel27;
+    private javax.swing.JLabel jLabel28;
+    private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel30;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -3279,16 +3998,22 @@ public class MenuUsuario extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel7;
+    private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JScrollPane jScrollPane6;
+    private javax.swing.JScrollPane jScrollPane8;
     private javax.swing.JLabel labelBienvenido;
     private javax.swing.JLabel lblApellidos;
     private javax.swing.JLabel lblApellidos1;
     private javax.swing.JLabel lblApellidos2;
     private javax.swing.JLabel lblApellidos3;
     private javax.swing.JLabel lblCantidadEspacios;
+    private javax.swing.JLabel lblCantidadEspaciosUtilizados;
+    private javax.swing.JLabel lblCantidadEspaciosUtilizados1;
     private javax.swing.JLabel lblEspacio;
     private javax.swing.JLabel lblEspacioDisponible;
     private javax.swing.JLabel lblEspacioExtra;
@@ -3344,6 +4069,8 @@ public class MenuUsuario extends javax.swing.JFrame {
     private javax.swing.JTextArea taDireccionFisica;
     private javax.swing.JTable tblEspaciosGeneral;
     private javax.swing.JTable tblMisParqueos;
+    private javax.swing.JTable tblMultas;
+    private javax.swing.JTable tblParqueosUtilizados;
     private javax.swing.JTable tblVehiculo;
     private java.awt.TextArea textArea1;
     private javax.swing.JTabbedPane tpPanelModificaciones;

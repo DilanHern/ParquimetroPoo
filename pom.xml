@@ -51,6 +51,11 @@
             <artifactId>javax-faces-library</artifactId>
             <version>1.0.0</version>
         </dependency>
+        <dependency>
+            <groupId>iTextPdf.library</groupId>
+            <artifactId>DDR-library</artifactId>
+            <version>1.0.0</version>
+        </dependency>
     </dependencies>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

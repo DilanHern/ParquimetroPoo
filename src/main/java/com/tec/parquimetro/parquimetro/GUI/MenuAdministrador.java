@@ -55,8 +55,8 @@ public class MenuAdministrador extends javax.swing.JFrame {
     public static Administrador administrador = new Administrador();
     
         //ATRIBUTOS PARA ENVIAR REPORTES
-    private static String emailDe = "dilanhernandez48@gmail.com";
-    private static String contraseñaDe = "yqxt avpo uilp zvja";
+    private static String emailDe = "parquimetrocartago@gmail.com";
+    private static String contraseñaDe = "Parquimetro2024";
     private static String emailPara;
     
     private Properties mProperties = new Properties();

@@ -109,5 +109,27 @@ public class Usuario extends Persona implements Serializable{
         
     }
     
+    public List<TicketParqueo> listarParqueosUtilizados(LocalDate inicio, LocalDate finalF){
+    
+        List<TicketParqueo> lista = new ArrayList<TicketParqueo>();
+        List<TicketParqueo> listaTicketVehiculo; //Almacena los ticket de los vehiculos que se recorrera
+        
+        for(Vehiculo vehiculo : vehiculos){
+        
+            listaTicketVehiculo = vehiculo.getTickets();
+            for(TicketParqueo ticket : listaTicketVehiculo){
+                LocalDate fechaTicket = ticket.getHoraSistema().toLocalDate();
+                
+                if((fechaTicket.isAfter(inicio) || fechaTicket.isEqual(inicio)) && (fechaTicket.isBefore(finalF) || fechaTicket.isEqual(finalF)) )
+                {
+                    lista.add(ticket);
+                }
+                
+            }
+            
+        }
+        
+        return lista;
+    }
     
 }
