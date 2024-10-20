@@ -18,7 +18,7 @@ public class Parqueo implements Serializable {
     private int tiempoMinimo;
     private int costoMulta;
     private ArrayList<Espacio> espacios;
-    
+    private ArrayList<Multa> multas;
     
     public Parqueo(){
     
@@ -360,7 +360,10 @@ public class Parqueo implements Serializable {
     
     }
 
-   
+   private void agregarMulta(Multa multa){
+       this.multas.add(multa);
+       cargarArchivo();
+   }
 
    
 }

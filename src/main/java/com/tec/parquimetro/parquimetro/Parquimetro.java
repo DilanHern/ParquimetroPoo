@@ -12,6 +12,7 @@ import com.tec.parquimetro.parquimetro.GUI.MenuInspector;
 import com.tec.parquimetro.parquimetro.GUI.MenuUsuario;
 import java.io.IOException;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +21,7 @@ public class Parquimetro {
 
     public static void main(String[] args) throws ClassNotFoundException {
         
-        Parqueo parqueo = new Parqueo(LocalTime.parse("08:30"), LocalTime.parse("10:30"), 1000, 30, 200);
+     Parqueo parqueo = new Parqueo(LocalTime.parse("08:30"), LocalTime.parse("10:30"), 1000, 30, 200);
             parqueo.agregarEspacios(100, 110);
             List<Espacio> espacios = parqueo.getEspacios();
             espacios.getFirst().setEstado(false);
@@ -37,14 +38,20 @@ public class Parquimetro {
             
             
          ArrayList<Persona> personas = new ArrayList<Persona>();
-         Correo correo = new Correo("camila", "gmail.com");
+         Correo correo = new Correo("carayacn", "gmail.com");
          
          Usuario usuario = new Usuario("Camila", "Araya Conejo", 61963811, "Cartago  Guadalupe", LocalDate.of(2024, 10, 8), "305610469", "2410", 85,correo);
          Persona inspector = new Inspector("Teodoro", "Araya Conejo", 78456456, "Cartago  Guadalupe", LocalDate.of(2024, 10, 8), "308950456", "2410", "78", correo);
          Persona admin = new Administrador("Antonio", "Araya Conejo", 89667412, "Cartago  Guadalupe", LocalDate.of(2023, 10, 8), "30964089", "8952", correo);
          
+         
          Vehiculo v1 = new Vehiculo("123456", (Usuario)usuario);
          Vehiculo v2 = new Vehiculo("234678", (Usuario)usuario);
+         
+         Multa multa = new Multa(1000, "aaa", LocalDateTime.now(),usuario,"123456");
+         Multa multa2 = new Multa(2000, "addddaa", LocalDateTime.now(),usuario,"123456");
+         v1.agregarMulta(multa);
+         v1.agregarMulta(multa2);
          
          usuario.agregarVehiculo(v2);
         usuario.agregarVehiculo(v1);
@@ -66,18 +73,20 @@ public class Parquimetro {
         
 
          
-       // ArrayList<Persona> personas = new ArrayList<Persona>();
+    //ArrayList<Persona> personas = new ArrayList<Persona>();
     //Administrador  usuario = new Administrador();
+    Inspector ins = new Inspector();
+    Usuario user= new Usuario();
        Login login = new Login();
       try{
-            Login.guardarUsuarios("listaUsuarios.dat", personas);
+            Login.guardarUsuarios("listaUsuarios.txt", personas);
         }
         catch (IOException e){
             System.out.println("malmamlal");
         }
         
         try{
-           personas = Login.cargarUsuarios("listaUsuarios.dat");
+           personas = Login.cargarUsuarios("listaUsuarios.txt");
             System.out.println("hola si");
         }
         catch (IOException e){
@@ -87,19 +96,22 @@ public class Parquimetro {
         for(Persona ob : personas){
          
             System.out.println(ob.getApellidos());
-             if(ob instanceof Administrador usuarioCast){
-                 System.out.println("hola");
-                 admin = usuarioCast;
+             if(ob instanceof Usuario usuarioCast){
+                 user = usuarioCast;
              }
              
          }
         
-       // MenuUsuario menuUser = new MenuUsuario(usuario);
-     //   menuUser.setVisible(true);
+       MenuUsuario menuUser = new MenuUsuario(user);
+         menuUser.setVisible(true);
          
          
          
-      MenuAdministrador menuIns = new MenuAdministrador((Administrador)admin);
-        menuIns.setVisible(true);
+        //MenuAdministrador menuIns = new MenuAdministrador((Administrador)admin);
+       // menuIns.setVisible(true);
+    //   Parqueo p = new Parqueo(); 
+     //  p.lecturaArchivo();
+      //  MenuInspector menuIns  = new MenuInspector(ins,p);
+    //   menuIns.setVisible(true);
     }
 }

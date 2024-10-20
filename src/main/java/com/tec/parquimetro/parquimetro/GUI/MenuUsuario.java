@@ -90,6 +90,7 @@ import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import com.itextpdf.text.Font;
+import com.tec.parquimetro.parquimetro.Clases.Multa;
 import java.util.ArrayList;
 
 
@@ -197,7 +198,6 @@ public class MenuUsuario extends javax.swing.JFrame {
             mTransport.connect(emailDe, contraseñaDe);
             mTransport.sendMessage(mCorreo, mCorreo.getRecipients(Message.RecipientType.TO));
             mTransport.close();
-            JOptionPane.showMessageDialog(null, "Correo enviado");
             
         } catch (NoSuchProviderException ex) {
             Logger.getLogger(MenuInspector.class.getName()).log(Level.SEVERE, null, ex);
@@ -286,7 +286,7 @@ public class MenuUsuario extends javax.swing.JFrame {
         jScrollPane8 = new javax.swing.JScrollPane();
         tblMultas = new javax.swing.JTable();
         jLabel27 = new javax.swing.JLabel();
-        lblCantidadEspaciosUtilizados1 = new javax.swing.JLabel();
+        lblCantidadMultas = new javax.swing.JLabel();
         jLabel28 = new javax.swing.JLabel();
         btnFiltrarMultas = new com.tec.parquimetro.parquimetro.GUI.RondedBordes();
         dcInicioMultas = new com.toedter.calendar.JDateChooser();
@@ -896,7 +896,7 @@ public class MenuUsuario extends javax.swing.JFrame {
                 .addComponent(btnAgregarVehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(tpPanelModificaciones, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(28, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pbTabl.addTab("", pnVehiculos);
@@ -1161,10 +1161,10 @@ public class MenuUsuario extends javax.swing.JFrame {
 
         jLabel27.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel27.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel27.setText("Espacios considerados en el reporte:");
+        jLabel27.setText("Multas consideradas en el reporte:");
 
-        lblCantidadEspaciosUtilizados1.setForeground(new java.awt.Color(255, 255, 255));
-        lblCantidadEspaciosUtilizados1.setText("-");
+        lblCantidadMultas.setForeground(new java.awt.Color(255, 255, 255));
+        lblCantidadMultas.setText("-");
 
         jLabel28.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel28.setForeground(new java.awt.Color(255, 255, 255));
@@ -1218,7 +1218,7 @@ public class MenuUsuario extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel9Layout.createSequentialGroup()
                         .addComponent(jLabel27)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblCantidadEspaciosUtilizados1, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblCantidadMultas, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnDescargarMultas, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane8, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 724, Short.MAX_VALUE))
@@ -1251,7 +1251,7 @@ public class MenuUsuario extends javax.swing.JFrame {
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel27)
-                        .addComponent(lblCantidadEspaciosUtilizados1))
+                        .addComponent(lblCantidadMultas))
                     .addComponent(btnDescargarMultas, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(24, 24, 24))
         );
@@ -2659,9 +2659,9 @@ public class MenuUsuario extends javax.swing.JFrame {
                                         lblId.setText(usuario.getIdentificacion());
                                        JOptionPane.showMessageDialog(null, "Datos actualizados existosamente!");
                                         //envio de correo
-                                        String cuerpo = "Nombre: " + usuario.getNombre() + "\n" + "Apellidos: " + usuario.getApellidos() + "\n" + "Direccion fisica: " + usuario.getDireccionFisica() + "\n" + 
+                                        String cuerpo = "Estimad@ " +usuario.getNombre()+", se le informa la actualizacion de sus datos en el sistema Parquimetro Cartago-> Nombre: " + usuario.getNombre() + "\n" + "Apellidos: " + usuario.getApellidos() + "\n" + "Direccion fisica: " + usuario.getDireccionFisica() + "\n" + 
                                         "Identificacion: " + usuario.getIdentificacion() + "\n" + "Telefono: " + usuario.getTelefono();
-                                        crearEmail(cuerpo, "PARAMETROS ACTUALIZADOS", usuario.getCorreo().getCorreo());
+                                        crearEmail(cuerpo, "DATOS PERSONALES ACTUALIZADOS", usuario.getCorreo().getCorreo());
                                         enviarEmail();
                                          JOptionPane.showMessageDialog(null, "Datos actualizados existosamente!");
                                    }
@@ -3548,10 +3548,208 @@ public class MenuUsuario extends javax.swing.JFrame {
         
     }//GEN-LAST:event_tblVehiculoMouseClicked
 
+    private void generarPdfMultas(LocalDate inicio, LocalDate finalF){
+    
+            List<Multa> lista = usuario.listarMultas(inicio, finalF);
+            
+            if(lista!=null){
+                
+                 JFileChooser fileChoo = new JFileChooser();
+                File f = new File("MultasGeneradas");
+                String rutaArchivo = "";
+                fileChoo.setSelectedFile(f);
+                int option = fileChoo.showSaveDialog(this);
+
+                if(option == JFileChooser.APPROVE_OPTION){
+
+                     f = fileChoo.getSelectedFile();
+                     rutaArchivo = f.toString();
+                }
+                try {
+                     Document document = new Document();
+                     PdfWriter.getInstance(document, new FileOutputStream(rutaArchivo+".pdf"));
+
+                     document.open();
+                     document.addAuthor("Parquimetro");
+
+                     //Titulo del documento
+                     Paragraph tituloPrincipal = new Paragraph("Reporte Parquimetro", FontFactory.getFont(FontFactory.HELVETICA_BOLD,20, Font.BOLD,new BaseColor(14, 41, 75)));
+                     tituloPrincipal.setAlignment(1);
+                      document.add(tituloPrincipal);
+                     Paragraph titulo = new Paragraph("Multas");
+                     titulo.setAlignment(5);
+                     document.add(titulo);
+
+                     //FECHAS Y PERIODOS DEL REPORTE 
+                     document.add(Chunk.NEWLINE);//SALTO DE LINEA
+                     Paragraph fecha = new Paragraph("Fecha de elaboracion: " + new Date().toString());
+                     fecha.setAlignment(Element.ALIGN_LEFT);  // Alinear a la derecha
+                     document.add(fecha);
+
+                     Paragraph periodo = new Paragraph("Periodo: " + inicio.toString() +" - " + finalF.toString());
+                     periodo.setAlignment(Element.ALIGN_LEFT);  // Alinear a la derecha
+                     document.add(periodo);
+                     // Agregar el párrafo al documento
+                      //FIN FECHAS Y PERIODOS DEL REPORTE 
+
+                     document.add(Chunk.NEWLINE);//SALTO DE LINEA
+
+                     //Genera la tabla por argumentos envia el numero de celdas por fila
+                     PdfPTable tabla = new PdfPTable(4);
+                     tabla.setWidthPercentage(100);
+
+                     //ENCABEZADO DE LA TABLA
+                     Phrase frase = new Phrase("Placa", new Font(Font.FontFamily.HELVETICA, 12, Font.NORMAL, new BaseColor(255, 255, 255))); // Texto en blanco
+                     PdfPCell espacio = new PdfPCell(frase);
+                     espacio.setHorizontalAlignment(Element.ALIGN_CENTER);
+                     espacio.setPaddingTop(10);
+                     espacio.setPaddingBottom(10);
+                     espacio.setBackgroundColor(new BaseColor(14, 41, 75));  // Fondo azul oscuro
+                      tabla.addCell(espacio);
+                      
+                     Phrase fraseTiempo= new Phrase("Fecha", new Font(Font.FontFamily.HELVETICA, 12, Font.NORMAL, new BaseColor(255, 255, 255))); // Texto en blanco
+                     PdfPCell tiempo = new PdfPCell(fraseTiempo);
+                     tiempo.setHorizontalAlignment(Element.ALIGN_CENTER);
+                     tiempo.setPaddingTop(10);
+                     tiempo.setPaddingBottom(10);
+                     tiempo.setBackgroundColor(new BaseColor(14, 41, 75));  // Fondo azul oscuro
+                     tabla.addCell(tiempo);
+                     
+                     Phrase fraseTotal= new Phrase("Razon", new Font(Font.FontFamily.HELVETICA, 12, Font.NORMAL, new BaseColor(255, 255, 255))); // Texto en blanco
+                     PdfPCell total = new PdfPCell(fraseTotal);
+                     total.setHorizontalAlignment(Element.ALIGN_CENTER);
+                     total.setPaddingTop(10);
+                     total.setPaddingBottom(10);
+                     total.setBackgroundColor(new BaseColor(14, 41, 75));  // Fondo azul oscuro
+                     tabla.addCell(total);
+                     
+                     Phrase fraseFecha= new Phrase("Costo", new Font(Font.FontFamily.HELVETICA, 12, Font.NORMAL, new BaseColor(255, 255, 255))); // Texto en blanco
+                     PdfPCell fechaC = new PdfPCell(fraseFecha);
+                     fechaC.setHorizontalAlignment(Element.ALIGN_CENTER);
+                     fechaC.setPaddingTop(10);
+                     fechaC.setPaddingBottom(10);
+                     fechaC.setBackgroundColor(new BaseColor(14, 41, 75));  // Fondo azul oscuro
+                     tabla.addCell(fechaC);
+
+                     //FIN DEL ENCABEZADO DE LA TABLA
+
+                     //Controla la cantidad de elementos considerados en el reporte
+                     int cant=0;
+                     int costoTotal=0;
+                     Parqueo parqueo = new Parqueo();
+                     parqueo.lecturaArchivo();
+
+                     //carga los elementos a la tabla
+                     for(Multa obj : lista){
+
+                         tabla.addCell(String.valueOf(obj.getPlaca()));
+                         tabla.addCell(String.valueOf(obj.getFechaMulta().toString()));
+                         tabla.addCell(obj.getRazon());
+                         tabla.addCell(String.valueOf(obj.getCosto()));
+                         costoTotal += obj.getCosto();
+                         cant++;
+                     }
+
+
+                  //Total de costo en multas
+                   PdfPCell cellCostoTotal = new PdfPCell(new Phrase("Costo Total: ₡" + costoTotal, new Font(Font.FontFamily.HELVETICA, 12, Font.NORMAL, new BaseColor(255, 255, 255))));
+                   cellCostoTotal.setBackgroundColor(new BaseColor(184,102,20)); 
+                   cellCostoTotal.setBorderColor(new BaseColor(184,102,20));
+                   cellCostoTotal.setColspan(4);  // Combina las 5 columnas
+                   cellCostoTotal.setHorizontalAlignment(Element.ALIGN_RIGHT);  // Alinear el texto a la derecha
+                   cellCostoTotal.setPaddingTop(5);
+                   cellCostoTotal.setPaddingRight(10);
+                   cellCostoTotal.setPaddingBottom(7);
+                    tabla.addCell(cellCostoTotal);                  
+                     
+                   //Pie de la tabla, informa el total de los elementos
+                   PdfPCell footerCell = new PdfPCell(new Phrase("Total de multas: " + cant, new Font(Font.FontFamily.HELVETICA, 12, Font.NORMAL, new BaseColor(255, 255, 255))));
+                   footerCell.setBackgroundColor(new BaseColor(184,102,20)); 
+                   footerCell.setBorderColor(new BaseColor(184,102,20));
+                   footerCell.setColspan(4);  // Combina las 5 columnas
+                   footerCell.setHorizontalAlignment(Element.ALIGN_RIGHT);  // Alinear el texto a la derecha
+                   footerCell.setPaddingTop(5);
+                   footerCell.setPaddingRight(10);
+                   footerCell.setPaddingBottom(7);
+                    tabla.addCell(footerCell);                       
+
+                    document.add(tabla);
+
+                     System.out.println("Listo");
+
+                     document.close();
+                     JOptionPane.showMessageDialog(null, "Archivo descargado exitosamente.");
+
+                 } catch (FileNotFoundException ex) {
+
+                 } catch (DocumentException ex) {
+
+                 }
+                
+            }
+
+        
+    }
+    
+    
     private void btnDescargarMultasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDescargarMultasActionPerformed
-        // TODO add your handling code here:
+        Date fechaInicio = dcInicioMultas.getDate();
+        Date fechaFinal = dcFinMultas.getDate();
+        if (fechaInicio != null) {
+            if(fechaFinal!=null){
+
+                if(fechaFinal.after(fechaInicio) || fechaFinal.equals(fechaInicio)){
+                    // Convertimos la fecha a LocalDate
+                    LocalDate inicio = fechaInicio.toInstant()
+                    .atZone(ZoneId.systemDefault())
+                    .toLocalDate();
+
+                    LocalDate finalF = fechaFinal.toInstant()
+                    .atZone(ZoneId.systemDefault())
+                    .toLocalDate();
+                    generarPdfMultas(inicio, finalF);
+                }else{
+                    JOptionPane.showMessageDialog(null, "La fecha final debe ser igual o mayor a la fecha de inicio.");
+                }
+
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "No se seleccionó ninguna fecha final.");
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "No se seleccionó ninguna fecha de inicio.");
+        }
     }//GEN-LAST:event_btnDescargarMultasActionPerformed
 
+    private void cargaTablaMultas(LocalDate inicio, LocalDate finalF){
+    
+            List<Multa> lista = usuario.listarMultas(inicio, finalF);
+            DefaultTableModel mdlMultas = new DefaultTableModel();
+            if(lista!=null){
+                
+                int cantidadMultas=0;
+                String identificadores [] = {"Vehiculo","Total", "Fecha", "Razon"};
+                mdlMultas.setColumnIdentifiers(identificadores);
+                
+                for(Multa  multa : lista){
+                
+                    mdlMultas.addRow(new Object[]{multa.getPlaca(), "₡"+multa.getCosto(), multa.getFechaMulta().toString(), multa.getRazon()});
+                    cantidadMultas++;
+                }
+             
+                tblMultas.setModel(mdlMultas);
+                //Ordena los datos de la tabla basados en la columna 3 (POR FECHA) de manera descendiente
+                TableRowSorter<TableModel> sorter = new TableRowSorter<TableModel>(mdlMultas);
+                tblMultas.setRowSorter(sorter);
+                sorter.setSortKeys(Arrays.asList(new RowSorter.SortKey(3, SortOrder.DESCENDING)));
+            
+                 lblCantidadMultas.setText(String.valueOf(cantidadMultas));
+            }
+
+        
+    }
+    
+    
     private void btnFiltrarMultasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFiltrarMultasActionPerformed
        Date fechaInicio = dcInicioMultas.getDate();
         Date fechaFinal = dcFinMultas.getDate();
@@ -3567,7 +3765,7 @@ public class MenuUsuario extends javax.swing.JFrame {
                     LocalDate finalF = fechaFinal.toInstant()
                     .atZone(ZoneId.systemDefault())
                     .toLocalDate();
-                    //cargaTablaEspaciosUtilzados(inicio, finalF);
+                    cargaTablaMultas(inicio, finalF);
                 }else{
                     JOptionPane.showMessageDialog(null, "La fecha final debe ser igual o mayor a la fecha de inicio.");
                 }
@@ -4092,7 +4290,7 @@ public class MenuUsuario extends javax.swing.JFrame {
     private javax.swing.JLabel lblApellidos3;
     private javax.swing.JLabel lblCantidadEspacios;
     private javax.swing.JLabel lblCantidadEspaciosUtilizados;
-    private javax.swing.JLabel lblCantidadEspaciosUtilizados1;
+    private javax.swing.JLabel lblCantidadMultas;
     private javax.swing.JLabel lblEspacio;
     private javax.swing.JLabel lblEspacioDisponible;
     private javax.swing.JLabel lblEspacioExtra;

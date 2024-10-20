@@ -166,14 +166,17 @@ public class MenuInspector extends javax.swing.JFrame {
         
         try{
             //buscar todos los usuarios
-            for (Persona cadaPersona : Login.cargarUsuarios("listaUsuarios.txt")){
+            ArrayList<Persona> personas = Login.cargarUsuarios("listaUsuarios.txt");
+            
+            for (Persona cadaPersona : personas){
+                
                 if (cadaPersona instanceof Usuario){
                     Usuario usuario = (Usuario) cadaPersona; // Hacer el cast a Usuario
                     if (usuario.getVehiculos() != null){ //si el usuario tiene vehiculos:
                         for (Vehiculo cadaVehiculo : usuario.getVehiculos()){ //revisa cada vehiculo
                             if (cadaVehiculo.getPlaca().equals(placa)){ //si la placa es la misma
                                 //genera la multa
-                                Multa nuevaMulta = new Multa (costo, txtRazonMulta.getText(), LocalDateTime.now());
+                                Multa nuevaMulta = new Multa (costo, txtRazonMulta.getText(), LocalDateTime.now(),(Usuario)cadaPersona,cadaVehiculo.getPlaca());
                                 cadaVehiculo.setNuevaMulta(nuevaMulta);
                                 //se envia el correo
                                 emailPara = usuario.getCorreo().getCorreo();
@@ -186,6 +189,7 @@ public class MenuInspector extends javax.swing.JFrame {
                     }
                 }
             }
+            Login.guardarUsuarios("listaUsuarios.txt", personas);
             //no encontro ningun usuario con esa 
             
         }
@@ -375,7 +379,7 @@ public class MenuInspector extends javax.swing.JFrame {
                         .addComponent(jLabel1)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRedondo1Layout.createSequentialGroup()
-                .addContainerGap(23, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(panelRedondo1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnReportes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(rondedBordes5, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -418,9 +422,11 @@ public class MenuInspector extends javax.swing.JFrame {
         lblPerfil1.setText("Revisar parqueos");
 
         jLabel2.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Ingrese el número de placa:");
 
         jLabel4.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Ingrese el número del parqueo:");
 
         txtNumParqueo.addActionListener(new java.awt.event.ActionListener() {
@@ -429,6 +435,9 @@ public class MenuInspector extends javax.swing.JFrame {
             }
         });
 
+        btnBuscar.setBackground(new java.awt.Color(204, 102, 0));
+        btnBuscar.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+        btnBuscar.setForeground(new java.awt.Color(255, 255, 255));
         btnBuscar.setText("Buscar");
         btnBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -455,8 +464,8 @@ public class MenuInspector extends javax.swing.JFrame {
                         .addGap(302, 302, 302)
                         .addComponent(lblPerfil1))
                     .addGroup(pnParquearLayout.createSequentialGroup()
-                        .addGap(348, 348, 348)
-                        .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(332, 332, 332)
+                        .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(257, Short.MAX_VALUE))
         );
         pnParquearLayout.setVerticalGroup(
@@ -472,9 +481,9 @@ public class MenuInspector extends javax.swing.JFrame {
                 .addGroup(pnParquearLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(txtNumParqueo, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(88, 88, 88)
-                .addComponent(btnBuscar)
-                .addContainerGap(232, Short.MAX_VALUE))
+                .addGap(52, 52, 52)
+                .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(258, Short.MAX_VALUE))
         );
 
         pbTabl.addTab("", pnParquear);
@@ -825,9 +834,7 @@ public class MenuInspector extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, 0)
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -1091,7 +1098,7 @@ public class MenuInspector extends javax.swing.JFrame {
             int placa = Integer.parseInt(txtPlaca.getText());
             int numParqueo = Integer.parseInt(txtNumParqueo.getText());
             if(!verificarPlacaParqueo(placa, numParqueo, parqueo)){ //si es false, quiere decir que se debe de realizar la multa
-                pbTabl.setSelectedIndex(3);
+                pbTabl.setSelectedIndex(2);
             }
         }
         catch (NumberFormatException e){

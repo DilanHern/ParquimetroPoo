@@ -132,4 +132,29 @@ public class Usuario extends Persona implements Serializable{
         return lista;
     }
     
+    public List<Multa> listarMultas(LocalDate inicio, LocalDate finalF){
+    
+        List<Multa> lista = new ArrayList<Multa>();
+        List<Multa> multasVehiculo; //Almacena las multas  de los vehiculos que se recorrera
+        
+        if(vehiculos!= null){
+            for(Vehiculo vehiculo : vehiculos){
+
+                multasVehiculo = vehiculo.getMultas();
+                for(Multa multa : multasVehiculo){
+                    LocalDate fechaMulta= multa.getFechaMulta().toLocalDate();
+
+                    if((fechaMulta.isAfter(inicio) || fechaMulta.isEqual(inicio)) && (fechaMulta.isBefore(finalF) || fechaMulta.isEqual(finalF)) )
+                    {
+                        lista.add(multa);
+                    }
+
+                }
+
+            }
+        }
+        
+        return lista;
+    }
+    
 }

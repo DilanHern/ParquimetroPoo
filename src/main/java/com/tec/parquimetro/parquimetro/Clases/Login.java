@@ -141,7 +141,7 @@ public class Login {
          try{
              try {
                  //carga la lista de los usuarios para ser buscado entre los usuarios
-                 this.setListaUsuarios(cargarUsuarios("listaUsuarios.dat"));
+                 this.setListaUsuarios(cargarUsuarios("listaUsuarios.txt"));
              } catch (ClassNotFoundException ex) {
                  
              }

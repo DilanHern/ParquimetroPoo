@@ -98,6 +98,9 @@ public class Vehiculo implements Serializable {
         return ticketsUtilizados;
     }
     
+   public List<Multa>  getMultas(){
+        return listaMultas;
+    }
     
     public TicketParqueo  getTicketVigente(){
         return ticketVigente;
@@ -105,6 +108,11 @@ public class Vehiculo implements Serializable {
     public void agregarTicket(TicketParqueo  ticket){
     
         ticketsUtilizados.add(ticket);
+    }
+    
+    public void agregarMulta(Multa  multa){
+    
+        listaMultas.add(multa);
     }
     
     public void establecerTicketVigente(TicketParqueo  ticket){
