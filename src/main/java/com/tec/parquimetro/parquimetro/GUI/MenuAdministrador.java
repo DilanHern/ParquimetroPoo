@@ -55,8 +55,8 @@ public class MenuAdministrador extends javax.swing.JFrame {
     public static Administrador administrador = new Administrador();
     
         //ATRIBUTOS PARA ENVIAR REPORTES
-    private static String emailDe = "parquimetrocartago@gmail.com";
-    private static String contraseñaDe = "Parquimetro2024";
+    private static String emailDe = "paquimetrocartago@gmail.com";
+    private static String contraseñaDe = "vofx ztal oawe yary";
     private static String emailPara;
     
     private Properties mProperties = new Properties();
@@ -1500,7 +1500,11 @@ public class MenuAdministrador extends javax.swing.JFrame {
                                  parqueo.setHoraInicio(horaInicio);
                                  
                                  parqueo.actualizarParametros(parqueo);
-                                 
+                                 //envio de correo
+                                 String cuerpo = "COSTO DE LA MULTA: " + parqueo.getCostoMulta() + "\nPRECIO POR HORA: " + parqueo.getPrecioHora() +
+                                 "\nTIEMPO MINIMO: " + parqueo.getTiempoMinimo() + "\nHORA DE INICIO: " + parqueo.getHoraInicio() + "\nHORA FINAL: " + parqueo.getHoraFinal();
+                                crearEmail(cuerpo, "PARAMETROS ACTUAILIZADOS", administrador.getCorreo().getCorreo());
+                                enviarEmail();
                                  JOptionPane.showMessageDialog(null, "Parametros actualizados exitosamente!");
                         
                         }
@@ -1616,7 +1620,7 @@ public class MenuAdministrador extends javax.swing.JFrame {
         try {        
             mCorreo = new MimeMessage(mSession);
             mCorreo.setFrom(new InternetAddress(emailDe));
-            mCorreo.setRecipient(Message.RecipientType.TO, new InternetAddress("carayacn@gmail.com")); //correo del usuario
+            mCorreo.setRecipient(Message.RecipientType.TO, new InternetAddress(correo)); //correo del usuario
             mCorreo.setSubject(asunto); //Asunto
             mCorreo.setText(cuerpo, "ISO-8859-1", "html");
 
@@ -1980,7 +1984,7 @@ public class MenuAdministrador extends javax.swing.JFrame {
                                    String cuerpo = "Nombre: " + administrador.getNombre() + "\n" + "Apellidos: " + administrador.getApellidos() + "\n" + "Direccion fisica: " + administrador.getDireccionFisica() + "\n" + 
                                    "Identificacion: " + administrador.getIdentificacion() + "\n" + "Telefono: " + administrador.getTelefono();
                                    crearEmail(cuerpo, "PARAMETROS ACTUALIZADOS", administrador.getCorreo().getCorreo());
-                                  enviarEmail();
+                                   enviarEmail();
                                }
                                else{
                                     JOptionPane.showMessageDialog(null, "El telefono debe tener 8 digitos!");

@@ -7,15 +7,18 @@ import com.tec.parquimetro.parquimetro.Clases.Administrador;
 import com.tec.parquimetro.parquimetro.Clases.Espacio;
 import com.tec.parquimetro.parquimetro.Clases.Inspector;
 import com.tec.parquimetro.parquimetro.Clases.Login;
+import com.tec.parquimetro.parquimetro.Clases.Multa;
 import com.tec.parquimetro.parquimetro.Clases.Parqueo;
 import com.tec.parquimetro.parquimetro.Clases.Persona;
 import com.tec.parquimetro.parquimetro.Clases.Usuario;
 import com.tec.parquimetro.parquimetro.Clases.Vehiculo;
+import static com.tec.parquimetro.parquimetro.GUI.MenuAdministrador.administrador;
 import java.awt.Color;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
@@ -52,8 +55,8 @@ public class MenuInspector extends javax.swing.JFrame {
      * Creates new form MenuInspector
      */
     //ATRIBUTOS PARA ENVIAR REPORTES
-    private static String emailDe = "dilanhernandez48@gmail.com";
-    private static String contraseñaDe = "yqxt avpo uilp zvja";
+    private static String emailDe = "paquimetrocartago@gmail.com";
+    private static String contraseñaDe = "vofx ztal oawe yary";
     private static String emailPara;
     
     private Properties mProperties;
@@ -159,7 +162,7 @@ public class MenuInspector extends javax.swing.JFrame {
      }
      
      //FUNCION PARA CREAR UNA MULTA
-     public void crearMulta(int placa){
+     public void crearMulta(int placa, int costo){
         
         try{
             //buscar todos los usuarios
@@ -169,9 +172,12 @@ public class MenuInspector extends javax.swing.JFrame {
                     if (usuario.getVehiculos() != null){ //si el usuario tiene vehiculos:
                         for (Vehiculo cadaVehiculo : usuario.getVehiculos()){ //revisa cada vehiculo
                             if (cadaVehiculo.getPlaca().equals(placa)){ //si la placa es la misma
+                                //genera la multa
+                                Multa nuevaMulta = new Multa (costo, txtRazonMulta.getText(), LocalDateTime.now());
+                                cadaVehiculo.setNuevaMulta(nuevaMulta);
                                 //se envia el correo
                                 emailPara = usuario.getCorreo().getCorreo();
-                                crearEmail(txtRazonMulta.getText(), "MULTA", emailPara);
+                                crearEmail(txtRazonMulta.getText() + "\nCOSTO: " + txtCosto.getText(), "MULTA", emailPara);
                                 enviarEmail();
                                 pbTabl.setSelectedIndex(0);
                                 return; //termina
@@ -226,6 +232,9 @@ public class MenuInspector extends javax.swing.JFrame {
         txtRazonMulta = new javax.swing.JTextArea();
         btnEnviarMulta = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
+        txtCosto = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
         pnPerfil = new com.tec.parquimetro.parquimetro.GUI.Componentes.PanelRedondo();
         lblPerfil6 = new javax.swing.JLabel();
         txtTelefono = new javax.swing.JTextField();
@@ -368,7 +377,7 @@ public class MenuInspector extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRedondo1Layout.createSequentialGroup()
                 .addContainerGap(23, Short.MAX_VALUE)
                 .addGroup(panelRedondo1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnReportes, javax.swing.GroupLayout.DEFAULT_SIZE, 145, Short.MAX_VALUE)
+                    .addComponent(btnReportes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(rondedBordes5, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnRevisarParqueos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnPerfil, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -527,6 +536,18 @@ public class MenuInspector extends javax.swing.JFrame {
             }
         });
 
+        jLabel5.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jLabel5.setText("Costo de la multa");
+
+        txtCosto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCostoActionPerformed(evt);
+            }
+        });
+
+        jLabel6.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel6.setText("₡");
+
         javax.swing.GroupLayout pnPrincipalLayout = new javax.swing.GroupLayout(pnPrincipal);
         pnPrincipal.setLayout(pnPrincipalLayout);
         pnPrincipalLayout.setHorizontalGroup(
@@ -537,27 +558,39 @@ public class MenuInspector extends javax.swing.JFrame {
                         .addGap(266, 266, 266)
                         .addComponent(lblPerfil5))
                     .addGroup(pnPrincipalLayout.createSequentialGroup()
-                        .addGap(197, 197, 197)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 408, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(pnPrincipalLayout.createSequentialGroup()
                         .addGap(229, 229, 229)
                         .addComponent(btnEnviarMulta)
                         .addGap(104, 104, 104)
-                        .addComponent(btnCancelar)))
-                .addContainerGap(208, Short.MAX_VALUE))
+                        .addComponent(btnCancelar))
+                    .addGroup(pnPrincipalLayout.createSequentialGroup()
+                        .addGap(193, 193, 193)
+                        .addGroup(pnPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 408, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(pnPrincipalLayout.createSequentialGroup()
+                                .addComponent(jLabel5)
+                                .addGap(28, 28, 28)
+                                .addComponent(txtCosto, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(4, 4, 4)
+                                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(212, Short.MAX_VALUE))
         );
         pnPrincipalLayout.setVerticalGroup(
             pnPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnPrincipalLayout.createSequentialGroup()
                 .addGap(115, 115, 115)
                 .addComponent(lblPerfil5)
-                .addGap(69, 69, 69)
+                .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(105, 105, 105)
+                .addGap(74, 74, 74)
+                .addGroup(pnPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(txtCosto, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6))
+                .addGap(66, 66, 66)
                 .addGroup(pnPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnEnviarMulta)
                     .addComponent(btnCancelar))
-                .addContainerGap(122, Short.MAX_VALUE))
+                .addContainerGap(110, Short.MAX_VALUE))
         );
 
         pbTabl.addTab("", pnPrincipal);
@@ -921,7 +954,7 @@ public class MenuInspector extends javax.swing.JFrame {
         
     }
  
- public boolean validacionIdentificacion(String identificacion) {
+ public static boolean validacionIdentificacion(String identificacion) {
         
         if(identificacion.length()>= 2 && identificacion.length() <= 25){
             return true;
@@ -1000,7 +1033,10 @@ public class MenuInspector extends javax.swing.JFrame {
                                
                                     if(validarTerminalInspeccion(txtTerminal.getText())){
                                        
-                                           Persona inspector = new Inspector();
+                                    String cuerpo = "Nombre: " + inspector.getNombre() + "\n" + "Apellidos: " + inspector.getApellidos() + "\n" + "Direccion fisica: " + inspector.getDireccionFisica() + "\n" + 
+                                    "Identificacion: " + inspector.getIdentificacion() + "\n" + "Telefono: " + inspector.getTelefono();
+                                    crearEmail(cuerpo, "DATOS ACTUALIZADOS", inspector.getCorreo().getCorreo());
+                                    enviarEmail();
                                        
                                        }
                                        else{
@@ -1070,8 +1106,19 @@ public class MenuInspector extends javax.swing.JFrame {
 
     private void btnEnviarMultaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnviarMultaActionPerformed
         int placa = Integer.parseInt(txtPlaca.getText());
-        crearMulta(placa);
+        try {
+            int costo = Integer.parseInt(txtCosto.getText());
+            crearMulta(placa, costo);
+        }
+        catch (NumberFormatException e){
+            JOptionPane.showMessageDialog(null, "Debe de ingresar numeros enteros");
+        }
+        
     }//GEN-LAST:event_btnEnviarMultaActionPerformed
+
+    private void txtCostoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCostoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCostoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1121,6 +1168,8 @@ public class MenuInspector extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
@@ -1147,6 +1196,7 @@ public class MenuInspector extends javax.swing.JFrame {
     private com.tec.parquimetro.parquimetro.GUI.RondedBordes rondedBordes5;
     private javax.swing.JTextArea taDireccionFisica;
     private javax.swing.JTextField txtApellidos;
+    private javax.swing.JTextField txtCosto;
     private javax.swing.JTextField txtIdentificacion;
     private javax.swing.JTextField txtNombre1;
     private javax.swing.JTextField txtNumParqueo;

@@ -23,6 +23,7 @@ public class LoginJFrame extends javax.swing.JFrame {
     private boolean MensajeErrorI = false; //booleano para saber si se puede mostrar el mensaje de error Identificacon
     private boolean MensajeErrorP = false; //booleano para saber si se puede mostrar el mensjae de error Pin
     private PanelRegistrarse panelRegistrarse;
+    private PanelOlvidePin panelOlvidePin;
     /**
      * Creates new form LoginJFrame
      */
@@ -31,9 +32,26 @@ public class LoginJFrame extends javax.swing.JFrame {
     public void getBotonCancelarDeRegistrarse(){
         botonCancelarDeRegistrarseActionPerformed(null);
     }
+    
     //getter de panelVentana
     public javax.swing.JPanel getPanelVentana(){
         return panelVentana;
+    }
+    
+    //getter de getLabelCrearCuenta
+    public javax.swing.JLabel getLabelCrearCuenta(){
+        return labelCrearCuenta;
+    }
+    
+    //getter de getBotonRegistrarse
+    public javax.swing.JButton getBotonRegistrarse(){
+        return botonRegistrarse;
+    }
+
+    
+    //getter de panelOlvidePin
+    public javax.swing.JPanel getPanelOlvidePin(){
+        return panelOlvidePin;
     }
     
     //getter de panelLogin
@@ -172,6 +190,7 @@ public class LoginJFrame extends javax.swing.JFrame {
         initComponents();
     }
 
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -376,7 +395,15 @@ public class LoginJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_campoIdentificacionFocusLost
 
     private void botonOlvidePinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonOlvidePinActionPerformed
-        // TODO add your handling code here:
+        panelOlvidePin = new PanelOlvidePin(this);
+        panelOlvidePin.setBounds(0, 0, 1080, 720);
+        panelLogin.setVisible(false);
+        labelCrearCuenta.setVisible(false);
+        botonRegistrarse.setVisible(false);
+        
+        panelVentana.add(panelOlvidePin);
+        panelVentana.revalidate();
+        panelVentana.repaint();
     }//GEN-LAST:event_botonOlvidePinActionPerformed
 
     private void botonRegistrarseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonRegistrarseActionPerformed

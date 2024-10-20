@@ -16,6 +16,7 @@ public class Vehiculo implements Serializable {
     private Espacio espacio;
     private TicketParqueo ticketVigente;
     private List<TicketParqueo> ticketsUtilizados;
+    private ArrayList<Multa> listaMultas;
     
     
     
@@ -29,6 +30,7 @@ public class Vehiculo implements Serializable {
         this.ticketVigente = null;
         this.espacio = null;
         ticketsUtilizados = new ArrayList<TicketParqueo>();
+        listaMultas = new ArrayList<Multa>();
     }
     
     public Vehiculo(String placa, Usuario usuario){
@@ -37,8 +39,12 @@ public class Vehiculo implements Serializable {
         this.modelo = "";
         this.usuario = usuario;
         ticketsUtilizados = new ArrayList<TicketParqueo>();
+        listaMultas = new ArrayList<Multa>();
     }
 
+    public void setNuevaMulta(Multa nuevaMulta){
+        listaMultas.add(nuevaMulta);
+    }
  
     public String getPlaca() {
         return placa;
