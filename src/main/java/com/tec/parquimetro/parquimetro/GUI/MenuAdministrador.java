@@ -2,23 +2,28 @@
 package com.tec.parquimetro.parquimetro.GUI;
 
 import com.tec.parquimetro.parquimetro.Clases.Administrador;
+import com.tec.parquimetro.parquimetro.Clases.Correo;
 import com.tec.parquimetro.parquimetro.Clases.Espacio;
 import com.tec.parquimetro.parquimetro.Clases.Inspector;
+import com.tec.parquimetro.parquimetro.Clases.Login;
 import com.tec.parquimetro.parquimetro.Clases.Parqueo;
 import com.tec.parquimetro.parquimetro.Clases.Persona;
 import com.tec.parquimetro.parquimetro.Clases.Usuario;
 import java.awt.Color;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Properties;
+import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.mail.Message;
@@ -211,10 +216,10 @@ public class MenuAdministrador extends javax.swing.JFrame {
         pnlUsuarios = new com.tec.parquimetro.parquimetro.GUI.Componentes.PanelRedondo();
         jLabel6 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tblUsuarios = new javax.swing.JTable();
         btnActualizarPerfil2 = new com.tec.parquimetro.parquimetro.GUI.RondedBordes();
-        btnRestablecerContra1 = new com.tec.parquimetro.parquimetro.GUI.RondedBordes();
-        jTextField1 = new javax.swing.JTextField();
+        btnEliminarUsuario = new com.tec.parquimetro.parquimetro.GUI.RondedBordes();
+        txtIdEliminar = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         pnReportes = new com.tec.parquimetro.parquimetro.GUI.Componentes.PanelRedondo();
         jLabel8 = new javax.swing.JLabel();
@@ -254,6 +259,7 @@ public class MenuAdministrador extends javax.swing.JFrame {
         lblTerminal = new javax.swing.JLabel();
         btnActualizarPerfil3 = new com.tec.parquimetro.parquimetro.GUI.RondedBordes();
         lblApellidos9 = new javax.swing.JLabel();
+        dcFechaIngreso = new com.toedter.calendar.JDateChooser();
 
         javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
         jDesktopPane1.setLayout(jDesktopPane1Layout);
@@ -961,23 +967,23 @@ public class MenuAdministrador extends javax.swing.JFrame {
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Usuarios");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblUsuarios.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Identificacion", "Nombre", "Telefono", "Terminal", "Correo"
+                "Identificacion", "Nombre", "Telefono", "Terminal", "Correo", "Fecha de ingreso"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane3.setViewportView(jTable1);
+        jScrollPane3.setViewportView(tblUsuarios);
 
         btnActualizarPerfil2.setBackground(new java.awt.Color(255, 145, 77));
         btnActualizarPerfil2.setText("Agregar Usuario");
@@ -991,15 +997,15 @@ public class MenuAdministrador extends javax.swing.JFrame {
             }
         });
 
-        btnRestablecerContra1.setBackground(new java.awt.Color(195, 69, 69));
-        btnRestablecerContra1.setText("Eliminar Usuario");
-        btnRestablecerContra1.setColor1(new java.awt.Color(195, 69, 69));
-        btnRestablecerContra1.setColor2(new java.awt.Color(195, 69, 69));
-        btnRestablecerContra1.setColor3(new java.awt.Color(195, 69, 69));
-        btnRestablecerContra1.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        btnRestablecerContra1.addActionListener(new java.awt.event.ActionListener() {
+        btnEliminarUsuario.setBackground(new java.awt.Color(195, 69, 69));
+        btnEliminarUsuario.setText("Eliminar Usuario");
+        btnEliminarUsuario.setColor1(new java.awt.Color(195, 69, 69));
+        btnEliminarUsuario.setColor2(new java.awt.Color(195, 69, 69));
+        btnEliminarUsuario.setColor3(new java.awt.Color(195, 69, 69));
+        btnEliminarUsuario.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        btnEliminarUsuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRestablecerContra1ActionPerformed(evt);
+                btnEliminarUsuarioActionPerformed(evt);
             }
         });
 
@@ -1017,9 +1023,9 @@ public class MenuAdministrador extends javax.swing.JFrame {
                     .addComponent(jLabel5)
                     .addGroup(pnlUsuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addGroup(pnlUsuariosLayout.createSequentialGroup()
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 535, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtIdEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 535, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnRestablecerContra1, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(btnEliminarUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 751, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(42, 42, 42))
             .addGroup(pnlUsuariosLayout.createSequentialGroup()
@@ -1038,8 +1044,8 @@ public class MenuAdministrador extends javax.swing.JFrame {
                 .addComponent(jLabel5)
                 .addGap(3, 3, 3)
                 .addGroup(pnlUsuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnRestablecerContra1, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnEliminarUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtIdEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(28, 28, 28)
                 .addComponent(btnActualizarPerfil2, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -1339,8 +1345,12 @@ public class MenuAdministrador extends javax.swing.JFrame {
                                 .addComponent(lblNombre2)))
                         .addGroup(pnAnadirUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(pnAnadirUsuarioLayout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnAgregarUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(pnAnadirUsuarioLayout.createSequentialGroup()
                                 .addGap(51, 51, 51)
                                 .addGroup(pnAnadirUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(dcFechaIngreso, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(lblApellidos4)
                                     .addComponent(lblTelefono4)
                                     .addComponent(lblApellidos5)
@@ -1348,10 +1358,7 @@ public class MenuAdministrador extends javax.swing.JFrame {
                                         .addComponent(txtApellidosU)
                                         .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 280, Short.MAX_VALUE)
                                         .addComponent(txtPt2MailU))
-                                    .addComponent(lblApellidos9)))
-                            .addGroup(pnAnadirUsuarioLayout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnAgregarUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                    .addComponent(lblApellidos9))))))
                 .addGap(85, 85, 85))
         );
         pnAnadirUsuarioLayout.setVerticalGroup(
@@ -1396,7 +1403,9 @@ public class MenuAdministrador extends javax.swing.JFrame {
                     .addComponent(lblApellidos8)
                     .addComponent(lblApellidos9))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cbTipoUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(pnAnadirUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(dcFechaIngreso, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(cbTipoUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(lblTerminal)
                 .addGap(18, 18, 18)
@@ -1451,6 +1460,14 @@ public class MenuAdministrador extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+      private void actualizarInformacion(Administrador admin, String identificacion){
+    
+        //Utilizado para actualizar los usuarios al modificar su informacion
+        Login login = new Login();
+         login.actualizarPersona(admin,identificacion);
+        
+    }
+    
     private void btnReportesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReportesActionPerformed
         pbTabl.setSelectedIndex(4);
         tpReportes.setSelectedIndex(1);
@@ -1460,8 +1477,23 @@ public class MenuAdministrador extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_rondedBordes5ActionPerformed
 
+    private void cargarDatosPerfil(){
+         //coloca la informacion cactual del usuario dentro de los campos de texto
+        txtNombre1.setText(administrador.getNombre());
+        txtApellidos.setText(administrador.getApellidos());
+        txtTelefono.setText(String.valueOf(administrador.getTelefono()));
+        taDireccionFisica.setText(administrador.getDireccionFisica());
+        txtIdentificacion.setText(administrador.getIdentificacion());
+        txtPt1Mail.setText(administrador.getCorreo().getStr1());
+        txtPt2Mail.setText(administrador.getCorreo().getStr2());
+    
+    
+    }
+    
     private void btnPerfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPerfilActionPerformed
         pbTabl.setSelectedIndex(2);
+        cargarDatosPerfil();
+        
     }//GEN-LAST:event_btnPerfilActionPerformed
 
     private void spnTiempoMinimoStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_spnTiempoMinimoStateChanged
@@ -1501,7 +1533,7 @@ public class MenuAdministrador extends javax.swing.JFrame {
                                  
                                  parqueo.actualizarParametros(parqueo);
                                  //envio de correo
-                                 String cuerpo = "COSTO DE LA MULTA: " + parqueo.getCostoMulta() + "\nPRECIO POR HORA: " + parqueo.getPrecioHora() +
+                                 String cuerpo = "Se le informa la actualizacion de parametros dentro del sistema -> \n COSTO DE LA MULTA: " + parqueo.getCostoMulta() + "\nPRECIO POR HORA: " + parqueo.getPrecioHora() +
                                  "\nTIEMPO MINIMO: " + parqueo.getTiempoMinimo() + "\nHORA DE INICIO: " + parqueo.getHoraInicio() + "\nHORA FINAL: " + parqueo.getHoraFinal();
                                 crearEmail(cuerpo, "PARAMETROS ACTUAILIZADOS", administrador.getCorreo().getCorreo());
                                 enviarEmail();
@@ -1638,7 +1670,6 @@ public class MenuAdministrador extends javax.swing.JFrame {
             mTransport.connect(emailDe, contraseñaDe);
             mTransport.sendMessage(mCorreo, mCorreo.getRecipients(Message.RecipientType.TO));
             mTransport.close();
-            JOptionPane.showMessageDialog(null, "Correo enviado");
             
         } catch (NoSuchProviderException ex) {
             Logger.getLogger(MenuInspector.class.getName()).log(Level.SEVERE, null, ex);
@@ -1760,10 +1791,18 @@ public class MenuAdministrador extends javax.swing.JFrame {
             }
             else if(camposNoExistentes!="" && camposExistentes != ""){
             
-            JOptionPane.showMessageDialog(null, "Los espacios  " + camposExistentes + "ya existen. Se ha agregadado exitosamente " + camposNoExistentes );
+                JOptionPane.showMessageDialog(null, "Los espacios  " + camposExistentes + "ya existen. Se ha agregadado exitosamente " + camposNoExistentes );
+                String cuerpo = "Se le informa la actualizacion de los espacios en Parquimetro cartago-> Se ha añadido los espacios " + camposExistentes;
+                                        crearEmail(cuerpo, "ACTUALIZACION DE ESPACIOS PARQUIMETRO CARTAGO", administrador.getCorreo().getCorreo());
+                                        enviarEmail();
             
             }
             else{
+                
+                   String cuerpo = "Se le informa la actualizacion de los espacios en Parquimetro cartago-> Se ha añadido los espacios " + camposExistentes;
+                                    crearEmail(cuerpo, "ACTUALIZACION DE ESPACIOS PARQUIMETRO CARTAGO", administrador.getCorreo().getCorreo());
+                                    enviarEmail();
+                
                 JOptionPane.showMessageDialog(null, "Se ha agregado exitosamente " + camposNoExistentes );
             }
             cargarTablaEspacios(parqueo.getEspacios());
@@ -1900,9 +1939,45 @@ public class MenuAdministrador extends javax.swing.JFrame {
        pbTabl.setSelectedIndex(1);
     }//GEN-LAST:event_jLabel1MouseClicked
 
+    private void cargarTablaUsuarios() throws ClassNotFoundException{
+    
+        List<Persona> personas = new ArrayList<Persona>();
+        
+        try{
+           personas = Login.cargarUsuarios("listaUsuarios.dat");
+        }
+        catch (IOException e){
+            System.out.println("Error en apertura y lectura de archivo");
+        }
+        
+            
+        
+        //carga de la tabla
+        DefaultTableModel tableUsuarios = new DefaultTableModel();//formato para tabla espacios en la pestana de configuracion
+        String identificadores [] = {"Identificacion", "Nombre", "Telefono", "Terminal","Correo","Fecha de ingreso"};
+        tableUsuarios.setColumnIdentifiers(identificadores);
+        tblUsuarios.setModel(tableUsuarios);
+        for(Persona persona : personas){
+            if(persona instanceof Administrador administradorCast){
+                
+                tableUsuarios.addRow(new Object[]{persona.getIdentificacion(), persona.getNombre()+" "+persona.getApellidos(),persona.getTelefono(), "Administrador", persona.getCorreo().getCorreo(), persona.getFechaIngreso().toString()});
+                
+             }else if(persona instanceof Inspector inspectorCast){
+                 
+                  tableUsuarios.addRow(new Object[]{persona.getIdentificacion(), persona.getNombre()+" "+persona.getApellidos(),persona.getTelefono(), ((Inspector) persona).getTerminalInspeccion(), persona.getCorreo().getCorreo(), persona.getFechaIngreso().toString()});
+             }
+            
+        }
+    }
+    
     private void btnUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUsuariosActionPerformed
         pbTabl.setSelectedIndex(3);
-        System.out.println("ENTRO");
+         try{
+           cargarTablaUsuarios();
+        } catch (ClassNotFoundException ex) {
+             System.out.println("");
+        }
+        
     }//GEN-LAST:event_btnUsuariosActionPerformed
 
     private void btnUsuariosMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnUsuariosMouseEntered
@@ -1959,14 +2034,35 @@ public class MenuAdministrador extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtApellidosActionPerformed
 
+     private boolean validarCorreo(String pt1, String pt2){
+   
+       if(pt1.length() < 3){
+       
+            JOptionPane.showMessageDialog(null, "El nombre de usuario de la direccion electronica debe tener minimo 3 caracteres!");
+            return false;
+       }else{
+       
+           if(pt2.length() <3){
+           
+                JOptionPane.showMessageDialog(null, "El dominio del correo electronico debe tener minimo 3 caracteres!");
+                return false;
+           }
+           else
+               return true;
+       }
+   
+   }
+    
     private void btnActualizarPerfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarPerfilActionPerformed
        
         String nombre;
         String apellidos;
-        String identidicacion;
+        String identificacion;
         String direccionFisica;
         String pt1Correo;
         String pt2Correo;
+       String identificacionGeneral;
+        LocalDate fechaIngreso;
         int telefono;
         
         
@@ -1981,10 +2077,41 @@ public class MenuAdministrador extends javax.swing.JFrame {
                            
                                if(validarTelefono(Integer.parseInt(txtTelefono.getText()))){
                                    
-                                   String cuerpo = "Nombre: " + administrador.getNombre() + "\n" + "Apellidos: " + administrador.getApellidos() + "\n" + "Direccion fisica: " + administrador.getDireccionFisica() + "\n" + 
-                                   "Identificacion: " + administrador.getIdentificacion() + "\n" + "Telefono: " + administrador.getTelefono();
-                                   crearEmail(cuerpo, "PARAMETROS ACTUALIZADOS", administrador.getCorreo().getCorreo());
-                                   enviarEmail();
+                                     if(validarCorreo(txtPt1Mail.getText(), txtPt2Mail.getText())){
+                                     
+                                         
+                                         //Almacena los datos de los campos de texto en las variables para ser alamacenadas
+                                       nombre = txtNombre1.getText();
+                                       apellidos= txtApellidos.getText();
+                                       direccionFisica = taDireccionFisica.getText();
+                                       identificacion = txtIdentificacion.getText();
+                                       pt1Correo = txtPt1Mail.getText();
+                                       pt2Correo =  txtPt2Mail.getText();
+                                       telefono = Integer.valueOf(txtTelefono.getText());
+                                       Correo correo = new Correo(pt1Correo, pt2Correo);
+                                       fechaIngreso = LocalDate.now();
+                                       
+                                       //Almacena la identificacion del usuario anteriormente de ser modificada
+                                       identificacionGeneral = administrador.getIdentificacion();
+                                       
+                                       Administrador  admin = new Administrador(nombre, apellidos,telefono, direccionFisica, fechaIngreso, identificacion,"", correo);
+                                       
+                                       //modifica la informacion modificada en el archivo de datos
+                                       administrador.actualizarDatos(admin);
+                                        
+                                        actualizarInformacion(administrador, identificacionGeneral);
+                                         labelBienvenido.setText(administrador.getNombre() + " " + administrador.getApellidos());
+                                        lblId.setText(administrador.getIdentificacion());
+                                       JOptionPane.showMessageDialog(null, "Datos actualizados existosamente!");
+                                       
+                                         
+                                         String cuerpo = "Se le informa la actualizacion de sus datos personales en Parquimetro cartago->\n Nombre: " + administrador.getNombre() + "\n" + "Apellidos: " + administrador.getApellidos() + "\n" + "Direccion fisica: " + administrador.getDireccionFisica() + "\n" + 
+                                    "Identificacion: " + administrador.getIdentificacion() + "\n" + "Telefono: " + administrador.getTelefono();
+                                    crearEmail(cuerpo, "ACTUALIZACION DE SUS DATOS PERSONALES", administrador.getCorreo().getCorreo());
+                                    enviarEmail();
+                                         
+                                     }
+                                   
                                }
                                else{
                                     JOptionPane.showMessageDialog(null, "El telefono debe tener 8 digitos!");
@@ -2017,21 +2144,42 @@ public class MenuAdministrador extends javax.swing.JFrame {
 
     private void btnActualizarPerfil2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarPerfil2ActionPerformed
         pbTabl.setSelectedIndex(5);
+        
+        txtNombreU.setText("");
+        txtApellidosU.setText("");
+        taDireccionFisicaU.setText("");
+        txtIdentificacionU.setText("");
+        txtPt1MailU.setText("");
+        txtPt2MailU.setText("");
+        txtTelefonoU.setText("");
+        txtTerminal.setText("");
     }//GEN-LAST:event_btnActualizarPerfil2ActionPerformed
 
-    private void btnRestablecerContra1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRestablecerContra1ActionPerformed
+    private void btnEliminarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarUsuarioActionPerformed
            
             String[] options = { "Si", "No" };
             var selection = JOptionPane.showOptionDialog(null, "Esta segur@ de eliminar el usuario?", "Alerta!!", 
                                                               0, 3, null, options, options[0]);
             if (selection == 0) {
 
-
+                Login login = new Login();
+                if(login.eliminarPersona(txtIdEliminar.getText())){
+                    JOptionPane.showMessageDialog(null, "Eliminado exitosamente!");
+                        try{
+                          cargarTablaUsuarios();
+                       } catch (ClassNotFoundException ex) {
+                            System.out.println("");
+                       }
+                }else{
+                    JOptionPane.showMessageDialog(null, "No se eliminara!");
+                }
+                txtIdEliminar.setText("");
+                
               }
             else{
                 JOptionPane.showMessageDialog(null, "No se actualizara!");
             }
-    }//GEN-LAST:event_btnRestablecerContra1ActionPerformed
+    }//GEN-LAST:event_btnEliminarUsuarioActionPerformed
 
     private void txtTelefonoUActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTelefonoUActionPerformed
         // TODO add your handling code here:
@@ -2050,15 +2198,28 @@ public class MenuAdministrador extends javax.swing.JFrame {
     
     }
     
+    private String generarPin(){
+    
+        Random random = new Random();
+        int pinNumerico = random.nextInt(1000);
+        return String.format("%04d", pinNumerico);
+    }
+    
     private void btnAgregarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarUsuarioActionPerformed
 
         String nombre;
         String apellidos;
-        String identidicacion;
+        String identificacion;
         String direccionFisica;
+        String pt1Correo;
+        String pt2Correo;
+       String identificacionGeneral;
+       String terminal;
+        LocalDate fechaIngreso;
         int telefono;
         int tipoUsuario;
-        
+        Login login = new Login();
+        Correo correo;
         
         if(validarNombre(txtNombreU.getText())){
         
@@ -2072,21 +2233,58 @@ public class MenuAdministrador extends javax.swing.JFrame {
                            
                                if(validarTelefono(Integer.parseInt(txtTelefonoU.getText()))){
                                
-                                   if(cbTipoUsuario.getSelectedItem() == "Administrador"){
-                                   
-                                       Persona administrador = new Administrador();
-                                   }
-                                   else{
-                                   
-                                       if(validarTerminalInspeccion(txtTerminal.getText())){
-                                       
-                                           Persona inspector = new Inspector();
-                                       
-                                       }
-                                       else{
-                                            JOptionPane.showMessageDialog(null, "La terminal debe tener 6 caracteres!");
-                                       }
-                                       
+                                            String pin = generarPin();
+
+                                          //Almacena los datos de los campos de texto en las variables para ser alamacenadas
+                                           nombre = txtNombreU.getText();
+                                           apellidos= txtApellidosU.getText();
+                                           direccionFisica = taDireccionFisicaU.getText();
+                                           identificacion = txtIdentificacionU.getText();
+                                           pt1Correo = txtPt1MailU.getText();
+                                           pt2Correo =  txtPt2MailU.getText();
+                                           telefono = Integer.valueOf(txtTelefonoU.getText());
+                                           correo = new Correo(pt1Correo, pt2Correo);
+                                           fechaIngreso =  dcFechaIngreso.getDate().toInstant()
+                                            .atZone(ZoneId.systemDefault())
+                                            .toLocalDate();
+                                           
+                                            if(cbTipoUsuario.getSelectedItem() == "Administrador"){
+
+                                                Persona  admin = new Administrador(nombre, apellidos,telefono, direccionFisica, fechaIngreso, identificacion,pin, correo);
+                                                login.agregarPersona(admin);
+                                                String cuerpo = "Se le informa el registro como administrador en el sistema Parquimetro Cartago, su PIN es -> "+pin;
+                                                 crearEmail(cuerpo, "REGISTRO EN EL SISTEMA", correo.getCorreo());
+                                                 enviarEmail();
+                                                  JOptionPane.showMessageDialog(null, "Usuario guardado existosamente!");
+                                                    pbTabl.setSelectedIndex(3);
+                                                    
+                                                    try{
+                                                        cargarTablaUsuarios();
+                                                     } catch (ClassNotFoundException ex) {
+                                                          System.out.println("");
+                                                     }
+                                            }
+                                            else{
+
+                                                if(validarTerminalInspeccion(txtTerminal.getText())){
+
+                                                    terminal = txtTerminal.getText();
+                                                    Persona  inspector = new Inspector(nombre, apellidos,telefono, direccionFisica, fechaIngreso, identificacion,pin,terminal, correo);
+                                                    login.agregarPersona(inspector);
+                                                    String cuerpo = "Se le informa el registro como inspector en el sistema Parquimetro Cartago, su PIN es -> "+pin;
+                                                    crearEmail(cuerpo, "REGISTRO EN EL SISTEMA", correo.getCorreo());
+                                                    enviarEmail();
+                                                    JOptionPane.showMessageDialog(null, "Usuario guardado existosamente!");
+                                                    pbTabl.setSelectedIndex(3);
+                                               }
+                                                else{
+                                                     JOptionPane.showMessageDialog(null, "La terminal debe tener 6 caracteres!");
+                                                }
+                                             try{
+                                                cargarTablaUsuarios();
+                                             } catch (ClassNotFoundException ex) {
+                                                  System.out.println("");
+                                             }
                                    }
                                    
                                    
@@ -2264,14 +2462,15 @@ public class MenuAdministrador extends javax.swing.JFrame {
     private com.tec.parquimetro.parquimetro.GUI.RondedBordes btnAgregarUsuario;
     private com.tec.parquimetro.parquimetro.GUI.RondedBordes btnConfinguracion;
     private com.tec.parquimetro.parquimetro.GUI.RondedBordes btnEliminar;
+    private com.tec.parquimetro.parquimetro.GUI.RondedBordes btnEliminarUsuario;
     private com.tec.parquimetro.parquimetro.GUI.RondedBordes btnPerfil;
     private com.tec.parquimetro.parquimetro.GUI.RondedBordes btnReportes;
     private com.tec.parquimetro.parquimetro.GUI.RondedBordes btnRestablecerContra;
-    private com.tec.parquimetro.parquimetro.GUI.RondedBordes btnRestablecerContra1;
     private com.tec.parquimetro.parquimetro.GUI.RondedBordes btnUsuarios;
     private javax.swing.JComboBox<String> cbEspaciosGeneral;
     private javax.swing.JComboBox<String> cbReportes;
     private javax.swing.JComboBox<String> cbTipoUsuario;
+    private com.toedter.calendar.JDateChooser dcFechaIngreso;
     private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -2292,8 +2491,6 @@ public class MenuAdministrador extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JSpinner jSpinner3;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel labelBienvenido;
     private javax.swing.JLabel lblApellidos;
     private javax.swing.JLabel lblApellidos1;
@@ -2345,10 +2542,12 @@ public class MenuAdministrador extends javax.swing.JFrame {
     private javax.swing.JTextArea taDireccionFisicaU;
     private javax.swing.JTable tblEspacios;
     private javax.swing.JTable tblEspaciosGeneral;
+    private javax.swing.JTable tblUsuarios;
     private javax.swing.JTabbedPane tpReportes;
     private javax.swing.JTextField txtApellidos;
     private javax.swing.JTextField txtApellidosU;
     private javax.swing.JTextField txtCostoMulta;
+    private javax.swing.JTextField txtIdEliminar;
     private javax.swing.JTextField txtIdentificacion;
     private javax.swing.JTextField txtIdentificacionU;
     private javax.swing.JTextField txtNombre1;

@@ -1229,9 +1229,9 @@
                               <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="1" max="-2" attributes="0">
                                   <Group type="102" attributes="0">
-                                      <Component id="jTextField1" min="-2" pref="535" max="-2" attributes="0"/>
+                                      <Component id="txtIdEliminar" min="-2" pref="535" max="-2" attributes="0"/>
                                       <EmptySpace max="32767" attributes="0"/>
-                                      <Component id="btnRestablecerContra1" min="-2" pref="190" max="-2" attributes="0"/>
+                                      <Component id="btnEliminarUsuario" min="-2" pref="190" max="-2" attributes="0"/>
                                   </Group>
                                   <Component id="jScrollPane3" min="-2" pref="751" max="-2" attributes="0"/>
                               </Group>
@@ -1256,8 +1256,8 @@
                           <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="3" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="btnRestablecerContra1" alignment="3" min="-2" pref="42" max="-2" attributes="0"/>
-                              <Component id="jTextField1" alignment="3" min="-2" pref="39" max="-2" attributes="0"/>
+                              <Component id="btnEliminarUsuario" alignment="3" min="-2" pref="42" max="-2" attributes="0"/>
+                              <Component id="txtIdEliminar" alignment="3" min="-2" pref="39" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
                           <Component id="btnActualizarPerfil2" min="-2" pref="44" max="-2" attributes="0"/>
@@ -1285,15 +1285,16 @@
 
                   <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
                   <SubComponents>
-                    <Component class="javax.swing.JTable" name="jTable1">
+                    <Component class="javax.swing.JTable" name="tblUsuarios">
                       <Properties>
                         <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                          <Table columnCount="5" rowCount="0">
+                          <Table columnCount="6" rowCount="0">
                             <Column editable="false" title="Identificacion" type="java.lang.Object"/>
                             <Column editable="false" title="Nombre" type="java.lang.Object"/>
                             <Column editable="false" title="Telefono" type="java.lang.Object"/>
                             <Column editable="false" title="Terminal" type="java.lang.Object"/>
                             <Column editable="false" title="Correo" type="java.lang.Object"/>
+                            <Column editable="false" title="Fecha de ingreso" type="java.lang.Object"/>
                           </Table>
                         </Property>
                       </Properties>
@@ -1323,7 +1324,7 @@
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnActualizarPerfil2ActionPerformed"/>
                   </Events>
                 </Component>
-                <Component class="com.tec.parquimetro.parquimetro.GUI.RondedBordes" name="btnRestablecerContra1">
+                <Component class="com.tec.parquimetro.parquimetro.GUI.RondedBordes" name="btnEliminarUsuario">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="45" green="45" red="c3" type="rgb"/>
@@ -1343,10 +1344,10 @@
                     </Property>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnRestablecerContra1ActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnEliminarUsuarioActionPerformed"/>
                   </Events>
                 </Component>
-                <Component class="javax.swing.JTextField" name="jTextField1">
+                <Component class="javax.swing.JTextField" name="txtIdEliminar">
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel5">
                   <Properties>
@@ -1678,9 +1679,14 @@
                                       </Group>
                                   </Group>
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Group type="102" attributes="0">
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="btnAgregarUsuario" min="-2" pref="145" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Group type="102" alignment="0" attributes="0">
                                           <EmptySpace min="-2" pref="51" max="-2" attributes="0"/>
                                           <Group type="103" groupAlignment="0" attributes="0">
+                                              <Component id="dcFechaIngreso" min="-2" pref="280" max="-2" attributes="0"/>
                                               <Component id="lblApellidos4" alignment="0" min="-2" max="-2" attributes="0"/>
                                               <Component id="lblTelefono4" alignment="0" min="-2" max="-2" attributes="0"/>
                                               <Component id="lblApellidos5" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -1691,10 +1697,6 @@
                                               </Group>
                                               <Component id="lblApellidos9" alignment="0" min="-2" max="-2" attributes="0"/>
                                           </Group>
-                                      </Group>
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <EmptySpace max="-2" attributes="0"/>
-                                          <Component id="btnAgregarUsuario" min="-2" pref="145" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
                               </Group>
@@ -1754,7 +1756,10 @@
                               <Component id="lblApellidos9" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="cbTipoUsuario" min="-2" pref="42" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="dcFechaIngreso" max="32767" attributes="0"/>
+                              <Component id="cbTipoUsuario" pref="42" max="32767" attributes="0"/>
+                          </Group>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Component id="lblTerminal" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -2016,6 +2021,8 @@
                     </Property>
                     <Property name="text" type="java.lang.String" value="Fecha de ingreso"/>
                   </Properties>
+                </Component>
+                <Component class="com.toedter.calendar.JDateChooser" name="dcFechaIngreso">
                 </Component>
               </SubComponents>
             </Container>

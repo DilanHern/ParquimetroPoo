@@ -15,10 +15,4 @@ public class Administrador extends Persona implements Serializable{
     
     }
     
-    public boolean actualizarAdministrador(Administrador administrador){
-    
-        return true;
-    
-    }
-    
 }

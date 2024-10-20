@@ -44,6 +44,7 @@ public class Persona implements Serializable{
         this.telefono = telefono;
         this.nombre =nombre;
         this.correo = correo;
+        System.out.println(correo.getStr2());
     }
     
     

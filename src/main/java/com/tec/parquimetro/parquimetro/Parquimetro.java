@@ -20,7 +20,7 @@ public class Parquimetro {
 
     public static void main(String[] args) throws ClassNotFoundException {
         
-        /*    Parqueo parqueo = new Parqueo(LocalTime.parse("08:30"), LocalTime.parse("10:30"), 1000, 30, 200);
+        Parqueo parqueo = new Parqueo(LocalTime.parse("08:30"), LocalTime.parse("10:30"), 1000, 30, 200);
             parqueo.agregarEspacios(100, 110);
             List<Espacio> espacios = parqueo.getEspacios();
             espacios.getFirst().setEstado(false);
@@ -62,19 +62,19 @@ public class Parquimetro {
          
          personas = new ArrayList<Persona>();
          
-         Persona.lecturaArchivo(personas);*/
+         Persona.lecturaArchivo(personas);
         
 
          
-        ArrayList<Persona> personas = new ArrayList<Persona>();
-      Usuario  usuario = new Usuario();
+       // ArrayList<Persona> personas = new ArrayList<Persona>();
+    //Administrador  usuario = new Administrador();
        Login login = new Login();
-      /*try{
+      try{
             Login.guardarUsuarios("listaUsuarios.dat", personas);
         }
         catch (IOException e){
             System.out.println("malmamlal");
-        }*/
+        }
         
         try{
            personas = Login.cargarUsuarios("listaUsuarios.dat");
@@ -87,19 +87,19 @@ public class Parquimetro {
         for(Persona ob : personas){
          
             System.out.println(ob.getApellidos());
-             if(ob instanceof Usuario usuarioCast){
+             if(ob instanceof Administrador usuarioCast){
                  System.out.println("hola");
-                 usuario = usuarioCast;
+                 admin = usuarioCast;
              }
              
          }
         
-        MenuUsuario menuUser = new MenuUsuario(usuario);
-        menuUser.setVisible(true);
+       // MenuUsuario menuUser = new MenuUsuario(usuario);
+     //   menuUser.setVisible(true);
          
          
          
-      //  MenuAdministrador menuIns = new MenuAdministrador(usuario);
-        //menuIns.setVisible(true);
+      MenuAdministrador menuIns = new MenuAdministrador((Administrador)admin);
+        menuIns.setVisible(true);
     }
 }

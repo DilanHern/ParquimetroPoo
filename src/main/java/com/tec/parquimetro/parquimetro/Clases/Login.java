@@ -171,4 +171,72 @@ public class Login {
         
     }
     
+        //recibe una persona y su identificacion(puede ser la antigua) y la actualice en los usuarios
+    public boolean eliminarPersona(String identificacion){
+        
+         try{
+             try {
+                 //carga la lista de los usuarios para ser buscado entre los usuarios
+                 this.setListaUsuarios(cargarUsuarios("listaUsuarios.dat"));
+             } catch (ClassNotFoundException ex) {
+                 
+             }
+        }
+        catch (IOException e){
+            System.out.println("malmamlal");
+        }
+        
+         Persona persona = new Persona();
+         //busca dentro de la lista el usuario
+        for(Persona obj : listaUsuarios){
+            //busca el usuario que coincide con la identificacion
+            if(obj.getIdentificacion().equals(identificacion)){
+                //remueve el usuario de la lista
+                persona=obj;
+                break;
+            }
+        
+        }
+        if(persona!=null){
+            listaUsuarios.remove(persona);
+            
+             try{
+                guardarUsuarios("listaUsuarios.dat", listaUsuarios);
+            }
+            catch (IOException e){
+                System.out.println("El archivo no se logro abrir");
+            }
+            
+            return true;
+        }
+
+        return false;
+    }
+    
+    public void agregarPersona(Persona usuario){
+        
+         try{
+             try {
+                 //carga la lista de los usuarios para ser buscado entre los usuarios
+                 this.setListaUsuarios(cargarUsuarios("listaUsuarios.dat"));
+             } catch (ClassNotFoundException ex) {
+                 
+             }
+        }
+        catch (IOException e){
+            System.out.println("malmamlal");
+        }
+         
+        this.listaUsuarios.add(usuario);
+        
+        try{
+            System.out.println(usuario.getCorreo().getCorreo() + "dd");
+            System.out.println("yaa");
+            guardarUsuarios("listaUsuarios.dat", listaUsuarios);
+        }
+        catch (IOException e){
+            System.out.println("malmamlal");
+        }
+        
+    }
 }
