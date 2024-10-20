@@ -13,6 +13,7 @@ import com.tec.parquimetro.parquimetro.Clases.TicketParqueo;
 import com.tec.parquimetro.parquimetro.Clases.Usuario;
 import com.tec.parquimetro.parquimetro.Clases.Vehiculo;
 import com.tec.parquimetro.parquimetro.GUI.Componentes.RenderTable;
+import static com.tec.parquimetro.parquimetro.GUI.MenuInspector.inspector;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
@@ -30,6 +31,17 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.NoSuchProviderException;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.AddressException;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import javax.swing.BorderFactory;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListCellRenderer;
@@ -64,6 +76,16 @@ public class MenuUsuario extends javax.swing.JFrame {
      int precioMinuto = 0;
      public static Usuario usuario = new Usuario();
      public static int columna, row;
+     
+    //ATRIBUTOS PARA ENVIAR REPORTES
+    private static String emailDe = "paquimetrocartago@gmail.com";
+    private static String contraseñaDe = "vofx ztal oawe yary";
+    private static String emailPara;
+    
+    private Properties mProperties = new Properties();
+    private Session mSession;
+    private MimeMessage mCorreo;
+    //FIN DE ATRIBUTOS DE REPORTES
              
     public MenuUsuario(Usuario pusuario) {
         
@@ -106,7 +128,50 @@ public class MenuUsuario extends javax.swing.JFrame {
         
         pbTabl.setSelectedIndex(3); //muestra el tab 3 (inicio)
     }
+    
+    //FUNCION PARA CREAR EL MAIL
+     public void crearEmail(String cuerpo, String asunto, String correo){
+         //Protocolo para el envio de correos
+        mProperties.put("mail.smtp.host", "smtp.gmail.com");
+        mProperties.put("mail.smtp.ssl.trust", "smtp.gmail.com");
+        mProperties.setProperty("mail.smtp.starttls.enable", "true");
+        mProperties.setProperty("mail.smtp.port", "587");
+        mProperties.setProperty("mail.smtp.user", emailDe);
+        mProperties.setProperty("mail.smtp.ssl.protocols", "TLSv1.2");
+        mProperties.setProperty("mail.smtp.auth", "true");
 
+       mSession = Session.getDefaultInstance(mProperties);
+
+
+        try {        
+            mCorreo = new MimeMessage(mSession);
+            mCorreo.setFrom(new InternetAddress(emailDe));
+            mCorreo.setRecipient(Message.RecipientType.TO, new InternetAddress(correo)); //correo del usuario
+            mCorreo.setSubject(asunto); //Asunto
+            mCorreo.setText(cuerpo, "ISO-8859-1", "html");
+
+        } catch (AddressException ex) {
+            Logger.getLogger(MenuInspector.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (MessagingException ex) {
+            Logger.getLogger(MenuInspector.class.getName()).log(Level.SEVERE, null, ex);
+        }
+     }
+     
+     //FUNCION PARA ENVIAR LOS EMAILS
+     public void enviarEmail(){
+        try {
+            Transport mTransport = mSession.getTransport("smtp");
+            mTransport.connect(emailDe, contraseñaDe);
+            mTransport.sendMessage(mCorreo, mCorreo.getRecipients(Message.RecipientType.TO));
+            mTransport.close();
+            JOptionPane.showMessageDialog(null, "Correo enviado");
+            
+        } catch (NoSuchProviderException ex) {
+            Logger.getLogger(MenuInspector.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (MessagingException ex) {
+            Logger.getLogger(MenuInspector.class.getName()).log(Level.SEVERE, null, ex);
+        }
+     }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -2268,7 +2333,11 @@ public class MenuUsuario extends javax.swing.JFrame {
                                        usuario.actualizarDatos(usuarioActualizado);
                                         
                                         actualizarInformacion(usuario, identificacionGeneral);
-                                       
+                                        //envio de correo
+                                        String cuerpo = "Nombre: " + usuario.getNombre() + "\n" + "Apellidos: " + usuario.getApellidos() + "\n" + "Direccion fisica: " + usuario.getDireccionFisica() + "\n" + 
+                                        "Identificacion: " + usuario.getIdentificacion() + "\n" + "Telefono: " + usuario.getTelefono();
+                                        crearEmail(cuerpo, "PARAMETROS ACTUALIZADOS", usuario.getCorreo().getCorreo());
+                                        enviarEmail();
                                          JOptionPane.showMessageDialog(null, "Datos actualizados existosamente!");
                                    }
                                    
@@ -2695,6 +2764,11 @@ public class MenuUsuario extends javax.swing.JFrame {
             //guarda los datos al archivo Parametros.txt
             parqueo.cargarArchivo();
             
+            //enviar correo
+            String cuerpo = "Su vehiculo " + vehiculo.getMarca() + " " + vehiculo.getMarca() + "de placa " + vehiculo.getPlaca() + 
+            "fue parqueado exitosamente con un tiempo de " + spnTiempoParqueo.getValue() + "minutos.";
+            crearEmail(cuerpo, "SU PARQUEO DE VEHICULO FUE REGISTRADO", usuario.getCorreo().getCorreo());
+            enviarEmail();
             JOptionPane.showMessageDialog(null, "Espacio registrado exitosamente!");
             txtEspacioConsultado.enable(true);
             btnConsultarEspacio.setVisible(true);
@@ -2924,6 +2998,11 @@ public class MenuUsuario extends javax.swing.JFrame {
            //El vehiculo cambia a su nuevo ticket vigente
             vehiculo.generarTicketTiempoExtra(tiempoExtra, total); 
             
+            //enviar correo
+            String cuerpo = "TIEMPO AGREGADO: " + String.valueOf(spnTiempoExtra) + "TIEMPO ACUMULADO UTILIZADO: " + String.valueOf(spnAcumuladoExtra) +
+            "TIEMPO TOTAL: " + String.valueOf(total) + "PLACA DEL VEHICULO APLICADO: " + vehiculo.getPlaca() + "VEHICULO APLICADO: " + vehiculo.getMarca() + " " + vehiculo.getModelo();
+            crearEmail(cuerpo, "TIEMPO EXTRA AGREGADO", usuario.getCorreo().getCorreo());
+            enviarEmail();
             JOptionPane.showMessageDialog(null, "Tiempo actualizado!");
             inicializarTBMisParqueos();
             //oculta el panel

@@ -11,6 +11,7 @@ import com.tec.parquimetro.parquimetro.Clases.Parqueo;
 import com.tec.parquimetro.parquimetro.Clases.Persona;
 import com.tec.parquimetro.parquimetro.Clases.Usuario;
 import com.tec.parquimetro.parquimetro.Clases.Vehiculo;
+import static com.tec.parquimetro.parquimetro.GUI.MenuAdministrador.administrador;
 import java.awt.Color;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -52,8 +53,8 @@ public class MenuInspector extends javax.swing.JFrame {
      * Creates new form MenuInspector
      */
     //ATRIBUTOS PARA ENVIAR REPORTES
-    private static String emailDe = "dilanhernandez48@gmail.com";
-    private static String contraseñaDe = "yqxt avpo uilp zvja";
+    private static String emailDe = "paquimetrocartago@gmail.com";
+    private static String contraseñaDe = "vofx ztal oawe yary";
     private static String emailPara;
     
     private Properties mProperties;
@@ -921,7 +922,7 @@ public class MenuInspector extends javax.swing.JFrame {
         
     }
  
- public boolean validacionIdentificacion(String identificacion) {
+ public static boolean validacionIdentificacion(String identificacion) {
         
         if(identificacion.length()>= 2 && identificacion.length() <= 25){
             return true;
@@ -1000,7 +1001,10 @@ public class MenuInspector extends javax.swing.JFrame {
                                
                                     if(validarTerminalInspeccion(txtTerminal.getText())){
                                        
-                                           Persona inspector = new Inspector();
+                                    String cuerpo = "Nombre: " + inspector.getNombre() + "\n" + "Apellidos: " + inspector.getApellidos() + "\n" + "Direccion fisica: " + inspector.getDireccionFisica() + "\n" + 
+                                    "Identificacion: " + inspector.getIdentificacion() + "\n" + "Telefono: " + inspector.getTelefono();
+                                    crearEmail(cuerpo, "DATOS ACTUALIZADOS", inspector.getCorreo().getCorreo());
+                                    enviarEmail();
                                        
                                        }
                                        else{

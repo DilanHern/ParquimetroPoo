@@ -26,8 +26,8 @@ public class PanelRegistrarse extends javax.swing.JPanel {
     /**
      * Creates new form PanelRegistrarse
      */
-    public PanelRegistrarse(LoginJFrame loginFrame) {
-        this.loginJFrame = loginFrame;
+    public PanelRegistrarse(LoginJFrame loginJFrame) {
+        this.loginJFrame = loginJFrame;
         initComponents();
     }
     
