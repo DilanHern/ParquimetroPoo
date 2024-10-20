@@ -352,6 +352,7 @@ public class MenuUsuario extends javax.swing.JFrame {
         lblEspacio = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
         btnRepostarEspacio = new com.tec.parquimetro.parquimetro.GUI.RondedBordes();
+        btnConsultarOtroEspacio2 = new com.tec.parquimetro.parquimetro.GUI.RondedBordes();
         jPanel6 = new javax.swing.JPanel();
         lblPerfil17 = new javax.swing.JLabel();
         pnPerfil = new com.tec.parquimetro.parquimetro.GUI.Componentes.PanelRedondo();
@@ -1002,7 +1003,7 @@ public class MenuUsuario extends javax.swing.JFrame {
                     .addComponent(jLabel10)
                     .addComponent(lblCantidadEspacios)
                     .addComponent(btnReportesDisponibles, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(56, Short.MAX_VALUE))
+                .addContainerGap(73, Short.MAX_VALUE))
         );
 
         tpReportes.addTab("EspaciosVacios", jPanel2);
@@ -1017,7 +1018,7 @@ public class MenuUsuario extends javax.swing.JFrame {
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 517, Short.MAX_VALUE)
+            .addGap(0, 534, Short.MAX_VALUE)
         );
 
         tpReportes.addTab("principal", jPanel3);
@@ -1127,7 +1128,7 @@ public class MenuUsuario extends javax.swing.JFrame {
                             .addComponent(jLabel26))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(dcInicioParqueoUtilizado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
                 .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1245,7 +1246,7 @@ public class MenuUsuario extends javax.swing.JFrame {
                             .addComponent(jLabel30))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(dcInicioMultas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
                 .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1849,7 +1850,7 @@ public class MenuUsuario extends javax.swing.JFrame {
         lblEspacio.setText(".");
 
         jLabel18.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel18.setText("¿El espacio esta libre? Reportelo y podrá parquear en el");
+        jLabel18.setText("¿El espacio esta libre? Reportelo y podrá parquear en el, o consulte otro espacio.");
 
         btnRepostarEspacio.setText("Reportar");
         btnRepostarEspacio.setColor1(new java.awt.Color(204, 0, 0));
@@ -1861,40 +1862,59 @@ public class MenuUsuario extends javax.swing.JFrame {
             }
         });
 
+        btnConsultarOtroEspacio2.setBackground(new java.awt.Color(102, 102, 102));
+        btnConsultarOtroEspacio2.setText("Consultar otro espacio");
+        btnConsultarOtroEspacio2.setColor1(new java.awt.Color(102, 102, 102));
+        btnConsultarOtroEspacio2.setColor2(new java.awt.Color(102, 102, 102));
+        btnConsultarOtroEspacio2.setColor3(new java.awt.Color(102, 102, 102));
+        btnConsultarOtroEspacio2.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        btnConsultarOtroEspacio2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConsultarOtroEspacio2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addContainerGap(265, Short.MAX_VALUE)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                        .addComponent(lblPerfil16)
-                        .addGap(334, 334, 334))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                        .addComponent(jLabel17)
-                        .addGap(179, 179, 179))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                        .addComponent(lblPerfil1)
-                        .addGap(339, 339, 339))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                        .addComponent(jLabel18)
-                        .addGap(206, 206, 206))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                        .addComponent(btnRepostarEspacio, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(317, 317, 317))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                        .addComponent(lblEspacio, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(320, 320, 320))))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(369, 369, 369)
+                        .addComponent(lblPerfil16))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(218, 218, 218)
+                        .addComponent(jLabel17))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(371, 371, 371)
+                        .addComponent(lblPerfil1))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(352, 352, 352)
+                        .addComponent(lblEspacio, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                .addContainerGap(188, Short.MAX_VALUE)
+                .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 448, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(174, 174, 174))
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(346, 346, 346)
+                        .addComponent(btnRepostarEspacio, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(292, 292, 292)
+                        .addComponent(btnConsultarOtroEspacio2, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(24, 24, 24)
+                .addGap(18, 18, 18)
                 .addComponent(lblPerfil16)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel17)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(12, 12, 12)
                 .addComponent(lblPerfil1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblEspacio)
@@ -1902,7 +1922,9 @@ public class MenuUsuario extends javax.swing.JFrame {
                 .addComponent(jLabel18)
                 .addGap(18, 18, 18)
                 .addComponent(btnRepostarEspacio, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnConsultarOtroEspacio2, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(62, Short.MAX_VALUE))
         );
 
         tpParquearEspacio.addTab("tab1", jPanel4);
@@ -1937,9 +1959,6 @@ public class MenuUsuario extends javax.swing.JFrame {
                         .addComponent(jLabel3)
                         .addGap(258, 258, 258))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnParquearLayout.createSequentialGroup()
-                        .addComponent(lblPerfil17)
-                        .addGap(356, 356, 356))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnParquearLayout.createSequentialGroup()
                         .addGroup(pnParquearLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(btnConsultarEspacio, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(pnParquearLayout.createSequentialGroup()
@@ -1947,8 +1966,13 @@ public class MenuUsuario extends javax.swing.JFrame {
                                 .addGap(10, 10, 10)))
                         .addGap(327, 327, 327))))
             .addGroup(pnParquearLayout.createSequentialGroup()
-                .addGap(14, 14, 14)
-                .addComponent(tpParquearEspacio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(pnParquearLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnParquearLayout.createSequentialGroup()
+                        .addGap(14, 14, 14)
+                        .addComponent(tpParquearEspacio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(pnParquearLayout.createSequentialGroup()
+                        .addGap(373, 373, 373)
+                        .addComponent(lblPerfil17)))
                 .addGap(0, 17, Short.MAX_VALUE))
         );
         pnParquearLayout.setVerticalGroup(
@@ -2657,7 +2681,7 @@ public class MenuUsuario extends javax.swing.JFrame {
                                         actualizarInformacion(usuario, identificacionGeneral);
                                          labelBienvenido.setText(usuario.getNombre() + " " + usuario.getApellidos());
                                         lblId.setText(usuario.getIdentificacion());
-                                       JOptionPane.showMessageDialog(null, "Datos actualizados existosamente!");
+                                       JOptionPane.showMessageDialog(null, "Espere un momento por favor... Estamos procesando su informacion!");
                                         //envio de correo
                                         String cuerpo = "Estimad@ " +usuario.getNombre()+", se le informa la actualizacion de sus datos en el sistema Parquimetro Cartago-> Nombre: " + usuario.getNombre() + "\n" + "Apellidos: " + usuario.getApellidos() + "\n" + "Direccion fisica: " + usuario.getDireccionFisica() + "\n" + 
                                         "Identificacion: " + usuario.getIdentificacion() + "\n" + "Telefono: " + usuario.getTelefono();
@@ -3098,9 +3122,10 @@ public class MenuUsuario extends javax.swing.JFrame {
             //guarda los datos al archivo Parametros.txt
             parqueo.cargarArchivo();
             
+            JOptionPane.showMessageDialog(null, "Espere un momento por favor... Estamos procesando su informacion!");
             //enviar correo
-            String cuerpo = "Su vehiculo " + vehiculo.getMarca() + " " + vehiculo.getMarca() + "de placa " + vehiculo.getPlaca() + 
-            "fue parqueado exitosamente con un tiempo de " + spnTiempoParqueo.getValue() + "minutos.";
+            String cuerpo = "Se le informa que su vehiculo  " + vehiculo.getMarca() + " " + vehiculo.getMarca() + " de placa " + vehiculo.getPlaca() + 
+            " fue parqueado exitosamente con un tiempo de " + spnTiempoParqueo.getValue() + " minutos. HORA DE FINALIZACION: " + LocalTime.now().plusMinutes(ticket.getTiempoParqueo()) + "  ESPACIO: " + ticket.getEspacio().getNumero() + " COSTO TOTAL:  ₡" + ticket.getTotal();
             crearEmail(cuerpo, "SU PARQUEO DE VEHICULO FUE REGISTRADO", usuario.getCorreo().getCorreo());
             enviarEmail();
             JOptionPane.showMessageDialog(null, "Espacio registrado exitosamente!");
@@ -3328,19 +3353,20 @@ public class MenuUsuario extends javax.swing.JFrame {
         int tiempoExtra = (int)spnTiempoExtra.getValue();
         String placa = lblVehiculoExtra.getText();
         
-        if(true){
+        if(validarFechasHoriario(LocalDateTime.now().plusMinutes(tiempoExtra+tiempoAcumulado))){
         
            //genera un nuevo ticket al ser tiempo extra
-           int total = (tiempoAcumulado + tiempoExtra) * precioMinuto; //genera el total del tiempo extra
+           int total = (tiempoAcumulado + tiempoExtra)/30 * precioMinuto; //genera el total del tiempo extra
            
            Vehiculo vehiculo = usuario.buscarVehiculo(placa);
             
            //El vehiculo cambia a su nuevo ticket vigente
             vehiculo.generarTicketTiempoExtra(tiempoExtra, total); 
-            
+            TicketParqueo ticket =  vehiculo.getTicketVigente();
+           JOptionPane.showMessageDialog(null, "Espere un momento por favor... Estamos procesando su informacion!");
             //enviar correo
-            String cuerpo = "TIEMPO AGREGADO: " + String.valueOf(spnTiempoExtra) + "TIEMPO ACUMULADO UTILIZADO: " + String.valueOf(spnAcumuladoExtra) +
-            "TIEMPO TOTAL: " + String.valueOf(total) + "PLACA DEL VEHICULO APLICADO: " + vehiculo.getPlaca() + "VEHICULO APLICADO: " + vehiculo.getMarca() + " " + vehiculo.getModelo();
+            String cuerpo = "TIEMPO AGREGADO: " + String.valueOf(spnTiempoExtra.getValue()) + " minutos TIEMPO ACUMULADO UTILIZADO: " + String.valueOf(spnAcumuladoExtra.getValue()) +
+            " minutos COSTO TOTAL: ₡" + String.valueOf(total) + " PLACA DEL VEHICULO APLICADO: " + vehiculo.getPlaca() + " VEHICULO APLICADO: " + vehiculo.getMarca() + " " + vehiculo.getModelo() +" HORA DE FINALIZACION: " +ticket.getHoraSistema().plusMinutes(ticket.getTiempoParqueo()) + " ESPACIO: " + ticket.getEspacio().getNumero();
             crearEmail(cuerpo, "TIEMPO EXTRA AGREGADO", usuario.getCorreo().getCorreo());
             enviarEmail();
             JOptionPane.showMessageDialog(null, "Tiempo actualizado!");
@@ -3349,6 +3375,9 @@ public class MenuUsuario extends javax.swing.JFrame {
             pnlAgregarTiempo.setVisible(false);
             actualizarInformacion(usuario, usuario.getIdentificacion());
             
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "El tiempo excede el horario del parqueo");
         }
     }//GEN-LAST:event_btnConfirmarTiempoExtraActionPerformed
 
@@ -3938,6 +3967,12 @@ public class MenuUsuario extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnReportesDisponiblesActionPerformed
 
+    private void btnConsultarOtroEspacio2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarOtroEspacio2ActionPerformed
+        txtEspacioConsultado.enable(true);
+         btnConsultarEspacio.setVisible(true);
+         tpParquearEspacio.setSelectedIndex(2);
+    }//GEN-LAST:event_btnConsultarOtroEspacio2ActionPerformed
+
     private void cargaTablaEspaciosUtilzados(LocalDate inicio, LocalDate finalF){
     
             List<TicketParqueo> lista = usuario.listarParqueosUtilizados(inicio, finalF);
@@ -4219,6 +4254,7 @@ public class MenuUsuario extends javax.swing.JFrame {
     private com.tec.parquimetro.parquimetro.GUI.RondedBordes btnConsultarEspacio;
     private com.tec.parquimetro.parquimetro.GUI.RondedBordes btnConsultarOtroEspacio;
     private com.tec.parquimetro.parquimetro.GUI.RondedBordes btnConsultarOtroEspacio1;
+    private com.tec.parquimetro.parquimetro.GUI.RondedBordes btnConsultarOtroEspacio2;
     private com.tec.parquimetro.parquimetro.GUI.RondedBordes btnDescargarMultas;
     private com.tec.parquimetro.parquimetro.GUI.RondedBordes btnDescargarUtilizados;
     private com.tec.parquimetro.parquimetro.GUI.RondedBordes btnFiltrarMultas;
