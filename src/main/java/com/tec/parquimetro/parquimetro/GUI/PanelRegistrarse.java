@@ -161,46 +161,35 @@ public class PanelRegistrarse extends javax.swing.JPanel {
             if (numTar.length() == 16 && codigo.length() == 3 && (mesVencimientoInt > 0 && mesVencimientoInt < 13) && anoVencimiento.length() == 4 ) {
                 //validar que la tarjeta es unica
                 Tarjeta tarjetaNueva = new Tarjeta(numTarInt,mesVencimientoInt, anoVencimientoInt, codigoInt);
-                //cargamos la lista de cuentas
-                try {
-                    ArrayList<Persona> buscarTarjeta = cargarUsuarios("listaUsuarios.txt");  //le asignamos al login la lista de usuarios cargada
-                    System.out.println("NO dio error buscando la tarjeta");
-                    //verificamos que no exista el numero de tarjeta para ningun usuario
-                    boolean existe = false;
-                    for (Persona persona : buscarTarjeta){
-                        if (persona instanceof Usuario){
-                            Usuario usuario = (Usuario) persona; // Hacer el cast a Usuario
-                            //comprobar numero de la tarjeta
-                            if (usuario.getTarjeta() == null){
-                                //nada
-                            }
-                            
-                            else {
-                                
-                                if (usuario.getTarjeta().getNumeroTarjeta() == tarjetaNueva.getNumeroTarjeta()) {
-                                    JOptionPane.showMessageDialog(null, "Ya existe un usuario con esta tarjeta de crédito", "ERROR", JOptionPane.INFORMATION_MESSAGE);
-                                    existe = true;
-                                    return null; 
-                                }
-                            }
-                            return buscarTarjeta;//borrar y descomentar
+                ArrayList<Persona> buscarTarjeta = cargarUsuarios("listaUsuarios.txt");  //le asignamos al login la lista de usuarios cargada
+                System.out.println("NO dio error buscando la tarjeta");
+                //verificamos que no exista el numero de tarjeta para ningun usuario
+                boolean existe = false;
+                for (Persona persona : buscarTarjeta){
+                    if (persona instanceof Usuario){
+                        Usuario usuario = (Usuario) persona; // Hacer el cast a Usuario
+                        //comprobar numero de la tarjeta
+                        if (usuario.getTarjeta() == null){
+                            //nada
                         }
-                    }
-                    //si no existe una persona con esta tarjeta:
-                    if(!existe){
-                        return buscarTarjeta;
-                    }
-                    else{
-                        return null;
+                        
+                        else {
+                            
+                            if (usuario.getTarjeta().getNumeroTarjeta() == tarjetaNueva.getNumeroTarjeta()) {
+                                JOptionPane.showMessageDialog(null, "Ya existe un usuario con esta tarjeta de crédito", "ERROR", JOptionPane.INFORMATION_MESSAGE);
+                                existe = true;
+                                return null;
+                            }
+                        }
+                        return buscarTarjeta;//borrar y descomentar
                     }
                 }
-                catch (IOException e){
-                    System.out.println("dio error buscando la tarjeta");
+                //si no existe una persona con esta tarjeta:
+                if(!existe){
+                    return buscarTarjeta;   
+                }
+                else{
                     return null;
-                }
-                catch (ClassNotFoundException e1){
-                    JOptionPane.showMessageDialog(null, "No se pudo cargar la lista de cuentas, error con las clases", "ERROR", JOptionPane.INFORMATION_MESSAGE);
-                    return null;   
                 }
             }
             else

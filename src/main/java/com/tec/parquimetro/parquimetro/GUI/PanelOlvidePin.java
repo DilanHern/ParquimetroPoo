@@ -191,7 +191,6 @@ public class PanelOlvidePin extends javax.swing.JPanel {
         else{ //escribio la identificacion
             //revisar la identificacion
             if (MenuInspector.validacionIdentificacion(txtIdentificacion.getText())){ //si la identificacion fue bien escrita
-                try {
                 ArrayList<Persona> listaUsuarios = Login.cargarUsuarios("listaUsuarios.txt");
                 for (Persona cadaPersona : listaUsuarios){ //buscamos todas las identificaciones
                     if(cadaPersona.getIdentificacion().equals(txtIdentificacion.getText())){
@@ -207,12 +206,6 @@ public class PanelOlvidePin extends javax.swing.JPanel {
                     }
                 }
                 JOptionPane.showMessageDialog(null, "No se encontró un usuario con esa identificación");
-
-                } catch (IOException ex) {
-                    JOptionPane.showMessageDialog(null, "Hubo un error cargando la lista de usuarios");
-                } catch (ClassNotFoundException ex) {
-                    JOptionPane.showMessageDialog(null, "Hubo un error cargando la lista de usuarios, la clases no fueron encontradas");
-                }
             }
             else{
                 JOptionPane.showMessageDialog(null, "La identificacion debe tener entre 2 a 25 caracteres!");

@@ -8,8 +8,11 @@ import com.tec.parquimetro.parquimetro.Clases.Inspector;
 import com.tec.parquimetro.parquimetro.Clases.Login;
 import com.tec.parquimetro.parquimetro.Clases.Parqueo;
 import com.tec.parquimetro.parquimetro.Clases.Persona;
+import com.tec.parquimetro.parquimetro.Clases.TicketParqueo;
 import com.tec.parquimetro.parquimetro.Clases.Usuario;
+import com.tec.parquimetro.parquimetro.Clases.Vehiculo;
 import java.awt.Color;
+import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.time.Instant;
@@ -35,6 +38,7 @@ import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.swing.BorderFactory;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JSpinner;
 import javax.swing.RowSorter;
@@ -232,7 +236,22 @@ public class MenuAdministrador extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         lblCantidadEspacios = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
+        btnDescargarEspaciosPDF = new com.tec.parquimetro.parquimetro.GUI.RondedBordes();
         jPanel3 = new javax.swing.JPanel();
+        jPanel4 = new javax.swing.JPanel();
+        jLabel14 = new javax.swing.JLabel();
+        btnDescargarMultasPDF = new com.tec.parquimetro.parquimetro.GUI.RondedBordes();
+        dcFinMulta = new com.toedter.calendar.JDateChooser();
+        jLabel2 = new javax.swing.JLabel();
+        dcInicioMulta = new com.toedter.calendar.JDateChooser();
+        jLabel26 = new javax.swing.JLabel();
+        jPanel5 = new javax.swing.JPanel();
+        jLabel15 = new javax.swing.JLabel();
+        btnDescargarEspaciosIngPDF = new com.tec.parquimetro.parquimetro.GUI.RondedBordes();
+        dcFinEspacio = new com.toedter.calendar.JDateChooser();
+        jLabel12 = new javax.swing.JLabel();
+        dcInicioEspacio = new com.toedter.calendar.JDateChooser();
+        jLabel27 = new javax.swing.JLabel();
         cbReportes = new javax.swing.JComboBox<>();
         pnAnadirUsuario = new com.tec.parquimetro.parquimetro.GUI.Componentes.PanelRedondo();
         lblPerfil1 = new javax.swing.JLabel();
@@ -1100,7 +1119,20 @@ public class MenuAdministrador extends javax.swing.JFrame {
         lblCantidadEspacios.setForeground(new java.awt.Color(255, 255, 255));
         lblCantidadEspacios.setText("-");
 
-        jLabel11.setText("Reporte");
+        jLabel11.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel11.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel11.setText("Espacios");
+
+        btnDescargarEspaciosPDF.setBackground(new java.awt.Color(153, 255, 51));
+        btnDescargarEspaciosPDF.setText("Descargar PDF");
+        btnDescargarEspaciosPDF.setColor1(new java.awt.Color(126, 217, 87));
+        btnDescargarEspaciosPDF.setColor2(new java.awt.Color(126, 217, 87));
+        btnDescargarEspaciosPDF.setColor3(new java.awt.Color(126, 217, 87));
+        btnDescargarEspaciosPDF.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDescargarEspaciosPDFActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -1119,13 +1151,16 @@ public class MenuAdministrador extends javax.swing.JFrame {
                                 .addGap(10, 10, 10)))
                         .addGap(19, 19, 19))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(jLabel10)
                                 .addGap(18, 18, 18)
-                                .addComponent(lblCantidadEspacios))
+                                .addComponent(lblCantidadEspacios)
+                                .addGap(266, 266, 266)
+                                .addComponent(btnDescargarEspaciosPDF, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(25, 25, 25))
                             .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 704, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(31, Short.MAX_VALUE))))
+                        .addGap(0, 31, Short.MAX_VALUE))))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1134,16 +1169,16 @@ public class MenuAdministrador extends javax.swing.JFrame {
                 .addComponent(jLabel9)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(cbEspaciosGeneral, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(31, 31, 31)
-                        .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 314, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel10)
-                            .addComponent(lblCantidadEspacios)))
+                    .addComponent(cbEspaciosGeneral, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel11))
-                .addContainerGap(74, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 313, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel10)
+                    .addComponent(lblCantidadEspacios)
+                    .addComponent(btnDescargarEspaciosPDF, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(46, Short.MAX_VALUE))
         );
 
         tpReportes.addTab("Espacios", jPanel2);
@@ -1162,6 +1197,138 @@ public class MenuAdministrador extends javax.swing.JFrame {
         );
 
         tpReportes.addTab("principal", jPanel3);
+
+        jPanel4.setBackground(new java.awt.Color(29, 24, 39));
+
+        jLabel14.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel14.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel14.setText("Ingreso de multas");
+
+        btnDescargarMultasPDF.setBackground(new java.awt.Color(153, 255, 51));
+        btnDescargarMultasPDF.setText("Descargar PDF");
+        btnDescargarMultasPDF.setColor1(new java.awt.Color(126, 217, 87));
+        btnDescargarMultasPDF.setColor2(new java.awt.Color(126, 217, 87));
+        btnDescargarMultasPDF.setColor3(new java.awt.Color(126, 217, 87));
+        btnDescargarMultasPDF.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDescargarMultasPDFActionPerformed(evt);
+            }
+        });
+
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setText("Inicio del periodo");
+
+        jLabel26.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel26.setText("Fin del periodo");
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(0, 111, Short.MAX_VALUE)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel26))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addComponent(dcInicioMulta, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(194, 194, 194)
+                        .addComponent(dcFinMulta, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(101, 101, 101))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnDescargarMultasPDF, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel14))
+                .addGap(298, 298, 298))
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(102, 102, 102)
+                .addComponent(jLabel14)
+                .addGap(69, 69, 69)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel26))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(dcInicioMulta, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(dcFinMulta, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 70, Short.MAX_VALUE)
+                .addComponent(btnDescargarMultasPDF, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(153, 153, 153))
+        );
+
+        tpReportes.addTab("Ingreso de multas", jPanel4);
+
+        jPanel5.setBackground(new java.awt.Color(29, 24, 39));
+
+        jLabel15.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel15.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel15.setText("Ingreso de espacios");
+
+        btnDescargarEspaciosIngPDF.setBackground(new java.awt.Color(153, 255, 51));
+        btnDescargarEspaciosIngPDF.setText("Descargar PDF");
+        btnDescargarEspaciosIngPDF.setColor1(new java.awt.Color(126, 217, 87));
+        btnDescargarEspaciosIngPDF.setColor2(new java.awt.Color(126, 217, 87));
+        btnDescargarEspaciosIngPDF.setColor3(new java.awt.Color(126, 217, 87));
+        btnDescargarEspaciosIngPDF.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDescargarEspaciosIngPDFActionPerformed(evt);
+            }
+        });
+
+        jLabel12.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel12.setText("Inicio del periodo");
+
+        jLabel27.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel27.setText("Fin del periodo");
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addGap(0, 111, Short.MAX_VALUE)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addComponent(jLabel12)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel27))
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addComponent(dcInicioEspacio, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(194, 194, 194)
+                        .addComponent(dcFinEspacio, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(101, 101, 101))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnDescargarEspaciosIngPDF, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel15))
+                .addGap(298, 298, 298))
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addGap(102, 102, 102)
+                .addComponent(jLabel15)
+                .addGap(69, 69, 69)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel27))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(dcInicioEspacio, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(dcFinEspacio, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 70, Short.MAX_VALUE)
+                .addComponent(btnDescargarEspaciosIngPDF, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(153, 153, 153))
+        );
+
+        tpReportes.addTab("Ingreso de espacios", jPanel5);
 
         cbReportes.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Estadisticas detalladas de espacios", "Estadisticas resumidas de espacios", "Ingresos de dinero por estacionamiento", "Ingresos de dinero por multas", "Historial de los espacios usados", "Historial de multas", "Espacios de parqueo" }));
         cbReportes.addItemListener(new java.awt.event.ItemListener() {
@@ -1943,12 +2110,7 @@ public class MenuAdministrador extends javax.swing.JFrame {
     
         List<Persona> personas = new ArrayList<Persona>();
         
-        try{
-           personas = Login.cargarUsuarios("listaUsuarios.dat");
-        }
-        catch (IOException e){
-            System.out.println("Error en apertura y lectura de archivo");
-        }
+        personas = Login.cargarUsuarios("listaUsuarios.dat");
         
             
         
@@ -2337,9 +2499,16 @@ public class MenuAdministrador extends javax.swing.JFrame {
 
     private void cbReportesItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbReportesItemStateChanged
        
+        
         if(cbReportes.getSelectedItem() == "Espacios de parqueo")
         {
              tpReportes.setSelectedIndex(0);
+        } else if(cbReportes.getSelectedItem() == "Ingresos de dinero por multas")
+        {
+             tpReportes.setSelectedIndex(2);
+        }else if(cbReportes.getSelectedItem() == "Ingresos de dinero por estacionamiento")
+        {
+             tpReportes.setSelectedIndex(3);
         }
     }//GEN-LAST:event_cbReportesItemStateChanged
 
@@ -2391,6 +2560,33 @@ public class MenuAdministrador extends javax.swing.JFrame {
         lblCantidadEspacios.setText(String.valueOf(cantidadEspacios));
     }
     
+        private void generarReporteGeneralEspaciosOcupados(List<Espacio>  espacios){
+        
+        int cantidadEspacios=0;
+        String identificadores [] = {"Numero", "Placa","Costo", "TiempoInicial","TiempoFinal"};
+        
+         mdlEspaciosGeneral.getDataVector().removeAllElements();
+        mdlEspaciosGeneral.setColumnIdentifiers(identificadores);
+        
+        tblEspaciosGeneral.setModel(mdlEspaciosGeneral);
+
+        mdlEspaciosGeneral.getDataVector().removeAllElements();
+            
+        
+        for(Espacio obj : espacios){
+             if(obj.getVehiculos()!=null){
+                  Vehiculo vehiculo = obj.getVehiculos().getFirst();
+                    TicketParqueo ticket = vehiculo.getTicketVigente();
+                    mdlEspaciosGeneral.addRow(new Object[]{obj.getNumero(), vehiculo.getPlaca(), vehiculo.getTicketVigente().getTotal(), ticket.getHoraSistema(), ticket.getHoraSistema().plusMinutes(ticket.getTiempoParqueo())});
+                    cantidadEspacios++;
+                 
+             }
+           
+                
+        }
+    
+        lblCantidadEspacios.setText(String.valueOf(cantidadEspacios));
+    }
     
     private void cbEspaciosGeneralItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbEspaciosGeneralItemStateChanged
         
@@ -2406,9 +2602,14 @@ public class MenuAdministrador extends javax.swing.JFrame {
 
             generarReporteGeneralEspaciosVacios(parqueo.listarEspaciosVacios());
             
+        }else  if(cbEspaciosGeneral.getSelectedItem() == "Espacios ocupados"){
+
+            generarReporteGeneralEspaciosOcupados(parqueo.listarEspaciosOcupados());
+            
         }
         
-                 TableRowSorter<TableModel> sorter = new TableRowSorter<TableModel>(mdlEspaciosGeneral);
+        
+         TableRowSorter<TableModel> sorter = new TableRowSorter<TableModel>(mdlEspaciosGeneral);
           tblEspaciosGeneral.setRowSorter(sorter);
           sorter.setSortKeys(Arrays.asList(new RowSorter.SortKey(0, SortOrder.ASCENDING)));
     }//GEN-LAST:event_cbEspaciosGeneralItemStateChanged
@@ -2416,6 +2617,146 @@ public class MenuAdministrador extends javax.swing.JFrame {
     private void cbEspaciosGeneralActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbEspaciosGeneralActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cbEspaciosGeneralActionPerformed
+
+    private void btnDescargarEspaciosPDFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDescargarEspaciosPDFActionPerformed
+
+        String opcion = cbEspaciosGeneral.getSelectedItem().toString();
+        String nombreArchivo="";
+        String ruta;
+        Parqueo parqueo = new Parqueo();
+        
+        int tipoReporte = 0; //1->general 2->ocupados 3->vacios
+        
+        if(opcion == "Todos los espacios"){
+        
+            nombreArchivo="EspaciosGeneral";
+            tipoReporte=1;
+            
+        }else if (opcion == "Espacios ocupados"){
+            
+            nombreArchivo="EspaciosOcupados";
+            tipoReporte=2;
+            
+        }else if(opcion == "Espacios vacios"){
+            
+            nombreArchivo = "EspacioVacios";
+            tipoReporte=3;
+        }
+        
+        JFileChooser fileChoo = new JFileChooser();
+        File f = new File(nombreArchivo);
+        String rutaArchivo = "";
+        fileChoo.setSelectedFile(f);
+        int option = fileChoo.showSaveDialog(this);
+
+        if(option == JFileChooser.APPROVE_OPTION){
+
+            f = fileChoo.getSelectedFile();
+            rutaArchivo = f.toString();
+        }
+        
+        if(tipoReporte==1)
+            parqueo.generarEspaciosGeneralPDF(rutaArchivo);
+        else if(tipoReporte ==2)
+            parqueo.generarEspaciosOcupadosPDF(rutaArchivo);
+        else if (tipoReporte==3)
+            parqueo.generarEspaciosVaciosPDF(rutaArchivo);
+        
+        if(tipoReporte!= 0)
+            JOptionPane.showMessageDialog(null, "Archivo descargado exitosamente!");
+    }//GEN-LAST:event_btnDescargarEspaciosPDFActionPerformed
+
+    private void btnDescargarMultasPDFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDescargarMultasPDFActionPerformed
+        Date fechaInicio = dcInicioMulta.getDate();
+        Date fechaFinal = dcFinMulta.getDate();
+        if (fechaInicio != null) {
+            if(fechaFinal!=null){
+
+                if(fechaFinal.after(fechaInicio) || fechaFinal.equals(fechaInicio)){
+                    // Convertimos la fecha a LocalDate
+                    LocalDate inicio = fechaInicio.toInstant()
+                    .atZone(ZoneId.systemDefault())
+                    .toLocalDate();
+
+                    LocalDate finalF = fechaFinal.toInstant()
+                    .atZone(ZoneId.systemDefault())
+                    .toLocalDate();
+                    
+                    
+                    JFileChooser fileChoo = new JFileChooser();
+                    File f = new File("IngresosMultas");
+                    String rutaArchivo = "";
+                    fileChoo.setSelectedFile(f);
+                    Parqueo parqueo = new Parqueo();
+                    parqueo.lecturaArchivo();
+                    int option = fileChoo.showSaveDialog(this);
+
+                    if(option == JFileChooser.APPROVE_OPTION){
+
+                        f = fileChoo.getSelectedFile();
+                        rutaArchivo = f.toString();
+                    }
+                    parqueo.generaIngresosMultasPDF(rutaArchivo, inicio, finalF);
+                    JOptionPane.showMessageDialog(null, "Archivo descargado exitosamente!");
+                    
+                }else{
+                    JOptionPane.showMessageDialog(null, "La fecha final debe ser igual o mayor a la fecha de inicio.");
+                }
+
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "No se seleccionó ninguna fecha final.");
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "No se seleccionó ninguna fecha de inicio.");
+        }
+    }//GEN-LAST:event_btnDescargarMultasPDFActionPerformed
+
+    private void btnDescargarEspaciosIngPDFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDescargarEspaciosIngPDFActionPerformed
+        Date fechaInicio = dcInicioEspacio.getDate();
+        Date fechaFinal = dcFinEspacio.getDate();
+        if (fechaInicio != null) {
+            if(fechaFinal!=null){
+
+                if(fechaFinal.after(fechaInicio) || fechaFinal.equals(fechaInicio)){
+                    // Convertimos la fecha a LocalDate
+                    LocalDate inicio = fechaInicio.toInstant()
+                    .atZone(ZoneId.systemDefault())
+                    .toLocalDate();
+
+                    LocalDate finalF = fechaFinal.toInstant()
+                    .atZone(ZoneId.systemDefault())
+                    .toLocalDate();
+                    
+                    
+                    JFileChooser fileChoo = new JFileChooser();
+                    File f = new File("IngresosEstacionamiento");
+                    String rutaArchivo = "";
+                    fileChoo.setSelectedFile(f);
+                    Parqueo parqueo = new Parqueo();
+                    parqueo.lecturaArchivo();
+                    int option = fileChoo.showSaveDialog(this);
+
+                    if(option == JFileChooser.APPROVE_OPTION){
+
+                        f = fileChoo.getSelectedFile();
+                        rutaArchivo = f.toString();
+                    }
+                    parqueo.generaIngresosEstacionamientoPDF(rutaArchivo, inicio, finalF);
+                    JOptionPane.showMessageDialog(null, "Archivo descargado exitosamente!");
+                    
+                }else{
+                    JOptionPane.showMessageDialog(null, "La fecha final debe ser igual o mayor a la fecha de inicio.");
+                }
+
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "No se seleccionó ninguna fecha final.");
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "No se seleccionó ninguna fecha de inicio.");
+        }
+    }//GEN-LAST:event_btnDescargarEspaciosIngPDFActionPerformed
 
     /**
      * @param args the command line arguments
@@ -2461,6 +2802,9 @@ public class MenuAdministrador extends javax.swing.JFrame {
     private com.tec.parquimetro.parquimetro.GUI.RondedBordes btnAgregarEspacio;
     private com.tec.parquimetro.parquimetro.GUI.RondedBordes btnAgregarUsuario;
     private com.tec.parquimetro.parquimetro.GUI.RondedBordes btnConfinguracion;
+    private com.tec.parquimetro.parquimetro.GUI.RondedBordes btnDescargarEspaciosIngPDF;
+    private com.tec.parquimetro.parquimetro.GUI.RondedBordes btnDescargarEspaciosPDF;
+    private com.tec.parquimetro.parquimetro.GUI.RondedBordes btnDescargarMultasPDF;
     private com.tec.parquimetro.parquimetro.GUI.RondedBordes btnEliminar;
     private com.tec.parquimetro.parquimetro.GUI.RondedBordes btnEliminarUsuario;
     private com.tec.parquimetro.parquimetro.GUI.RondedBordes btnPerfil;
@@ -2471,10 +2815,20 @@ public class MenuAdministrador extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cbReportes;
     private javax.swing.JComboBox<String> cbTipoUsuario;
     private com.toedter.calendar.JDateChooser dcFechaIngreso;
+    private com.toedter.calendar.JDateChooser dcFinEspacio;
+    private com.toedter.calendar.JDateChooser dcFinMulta;
+    private com.toedter.calendar.JDateChooser dcInicioEspacio;
+    private com.toedter.calendar.JDateChooser dcInicioMulta;
     private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel26;
+    private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -2485,6 +2839,8 @@ public class MenuAdministrador extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;

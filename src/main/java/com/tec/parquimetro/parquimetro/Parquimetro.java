@@ -21,10 +21,9 @@ public class Parquimetro {
 
     public static void main(String[] args) throws ClassNotFoundException {
         
-    /* Parqueo parqueo = new Parqueo(LocalTime.parse("08:30"), LocalTime.parse("17:30"), 1000, 30, 200);
+  /*Parqueo parqueo = new Parqueo(LocalTime.parse("08:30"), LocalTime.parse("17:30"), 1000, 30, 200);
             parqueo.agregarEspacios(100, 110);
             List<Espacio> espacios = parqueo.getEspacios();
-            espacios.getFirst().setEstado(false);
             Parqueo parqueo1 = new Parqueo();
             
            parqueo.cargarArchivo();
@@ -73,45 +72,41 @@ public class Parquimetro {
         
 
          
-    ArrayList<Persona> personas = new ArrayList<Persona>();
-    //Administrador  usuario = new Administrador();
+  ArrayList<Persona> personas = new ArrayList<Persona>();
+ Administrador  usuario = new Administrador();
     Inspector ins = new Inspector();
     Usuario user= new Usuario();
        Login login = new Login();
-     /* try{
+   /* try{
             Login.guardarUsuarios("listaUsuarios.txt", personas);
         }
         catch (IOException e){
             System.out.println("malmamlal");
-        }
-        */
-        try{
-           personas = Login.cargarUsuarios("listaUsuarios.txt");
-            System.out.println("hola si");
-        }
-        catch (IOException e){
-            System.out.println("malmamlal");
-        }
+        }*/
+        
+       personas = Login.cargarUsuarios("listaUsuarios.txt");
          
         for(Persona ob : personas){
          
             System.out.println(ob.getApellidos());
+             if(ob instanceof Administrador usuarioCast){
+                 usuario = usuarioCast;
+             }
              if(ob instanceof Usuario usuarioCast){
                  user = usuarioCast;
              }
-             
          }
         
-       MenuUsuario menuUser = new MenuUsuario(user);
-         menuUser.setVisible(true);
+    MenuUsuario menuUser = new MenuUsuario(user);
+      menuUser.setVisible(true);
          
          
          
-        //MenuAdministrador menuIns = new MenuAdministrador((Administrador)admin);
-       // menuIns.setVisible(true);
-    //   Parqueo p = new Parqueo(); 
-     //  p.lecturaArchivo();
-      //  MenuInspector menuIns  = new MenuInspector(ins,p);
-    //   menuIns.setVisible(true);
+ //    MenuAdministrador menuIns = new MenuAdministrador(usuario);
+    // menuIns.setVisible(true);
+   /*   Parqueo p = new Parqueo(); 
+      p.lecturaArchivo();
+      MenuInspector menuIns  = new MenuInspector(ins,p);
+      menuIns.setVisible(true);*/
     }
 }

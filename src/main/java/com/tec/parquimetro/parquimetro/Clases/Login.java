@@ -12,7 +12,10 @@ import java.io.FileOutputStream;
 //cargar archivos
 import java.io.ObjectInputStream;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.time.LocalDate;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -113,17 +116,24 @@ public class Login {
     }
     
     //funcion cargarUsuarios: carga la lista de estudiantes. Retorna la lista de personas
-    public static ArrayList<Persona> cargarUsuarios(String nombreArchivo) throws IOException, ClassNotFoundException {
+    public static ArrayList<Persona> cargarUsuarios(String nombreArchivo){
         ObjectInputStream ois = null; //crea el objeto ObjectInputStream util para leer archivos
         try {
             ois = new ObjectInputStream(new FileInputStream(nombreArchivo)); //se inicializa el objeto y guarda el archivo "nombreArchivo"
             Object objeto = ois.readObject(); //lee el archivo guardado en ois y devuelve un tipo "Object"
             ArrayList<Persona> resultado = (ArrayList<Persona>) objeto; //se realiza un casting de objeto a ArrayList<Estudiante>
             System.out.println("El archivo se cargo correctamente");
+            System.out.println("ya");
             return resultado;
                     
         } 
-        finally {
+        catch (FileNotFoundException ex) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+        }        finally {
             if (ois != null) { //si ois se utilizó
                 try {
                     ois.close(); //lo cierra
@@ -133,31 +143,21 @@ public class Login {
                 }
             }
         }
+        return null;
     }
     
     //recibe una persona y su identificacion(puede ser la antigua) y la actualice en los usuarios
     public void actualizarPersona(Persona usuario, String identificacion){
         
-         try{
-             try {
-                 //carga la lista de los usuarios para ser buscado entre los usuarios
-                 this.setListaUsuarios(cargarUsuarios("listaUsuarios.txt"));
-             } catch (ClassNotFoundException ex) {
-                 
-             }
-        }
-        catch (IOException e){
-            System.out.println("malmamlal");
-        }
+         this.setListaUsuarios(cargarUsuarios("listaUsuarios.txt"));
         
          //busca dentro de la lista el usuario
         for(Persona obj : listaUsuarios){
             //busca el usuario que coincide con la identificacion
             if(obj.getIdentificacion().equals(usuario.getIdentificacion())){
                 //remueve el usuario de la lista
-                listaUsuarios.remove(obj);
-                //agrega el nuevo usuario
-                listaUsuarios.add(usuario);
+                System.out.println("siiiii");
+                obj=usuario;
                 break;
             }
         
@@ -174,17 +174,7 @@ public class Login {
         //recibe una persona y su identificacion(puede ser la antigua) y la actualice en los usuarios
     public boolean eliminarPersona(String identificacion){
         
-         try{
-             try {
-                 //carga la lista de los usuarios para ser buscado entre los usuarios
-                 this.setListaUsuarios(cargarUsuarios("listaUsuarios.dat"));
-             } catch (ClassNotFoundException ex) {
-                 
-             }
-        }
-        catch (IOException e){
-            System.out.println("malmamlal");
-        }
+       this.setListaUsuarios(cargarUsuarios("listaUsuarios.txt"));
         
          Persona persona = new Persona();
          //busca dentro de la lista el usuario
@@ -213,19 +203,32 @@ public class Login {
         return false;
     }
     
-    public void agregarPersona(Persona usuario){
+   public boolean buscarPlaca(String placa){
         
-         try{
-             try {
-                 //carga la lista de los usuarios para ser buscado entre los usuarios
-                 this.setListaUsuarios(cargarUsuarios("listaUsuarios.dat"));
-             } catch (ClassNotFoundException ex) {
+       this.setListaUsuarios(cargarUsuarios("listaUsuarios.txt"));
+        
+         Persona persona = new Persona();
+         //busca dentro de la lista el usuario
+        for(Persona obj : listaUsuarios){
+
+             if(obj instanceof Usuario usuarioCast){
+                 
+                 for(Vehiculo v : usuarioCast.getVehiculos()){
+                     if(v.getPlaca().equals(placa)){
+                         return true;
+                     }
+                 }
                  
              }
+        
         }
-        catch (IOException e){
-            System.out.println("malmamlal");
-        }
+       
+        return false;
+    }
+    
+    public void agregarPersona(Persona usuario){
+        
+        this.setListaUsuarios(cargarUsuarios("listaUsuarios.txt")); 
          
         this.listaUsuarios.add(usuario);
         

@@ -152,7 +152,6 @@ public class MenuInspector extends javax.swing.JFrame {
             mTransport.connect(emailDe, contraseñaDe);
             mTransport.sendMessage(mCorreo, mCorreo.getRecipients(Message.RecipientType.TO));
             mTransport.close();
-            JOptionPane.showMessageDialog(null, "Correo enviado");
             
         } catch (NoSuchProviderException ex) {
             Logger.getLogger(MenuInspector.class.getName()).log(Level.SEVERE, null, ex);
@@ -173,17 +172,24 @@ public class MenuInspector extends javax.swing.JFrame {
                 if (cadaPersona instanceof Usuario){
                     Usuario usuario = (Usuario) cadaPersona; // Hacer el cast a Usuario
                     if (usuario.getVehiculos() != null){ //si el usuario tiene vehiculos:
+                        
                         for (Vehiculo cadaVehiculo : usuario.getVehiculos()){ //revisa cada vehiculo
-                            if (cadaVehiculo.getPlaca().equals(placa)){ //si la placa es la misma
+                            if (usuario.buscarVehiculo(String.valueOf(placa))!= null){ //si la placa es la misma
                                 //genera la multa
                                 Multa nuevaMulta = new Multa (costo, txtRazonMulta.getText(), LocalDateTime.now(),(Usuario)cadaPersona,cadaVehiculo.getPlaca());
                                 cadaVehiculo.setNuevaMulta(nuevaMulta);
+                                
+                                Parqueo pq = new Parqueo();
+                                pq.lecturaArchivo();
+                                pq.agregarMulta(nuevaMulta);
+                                 JOptionPane.showMessageDialog(null, "Espere un momento por favor, estamos procesando su informacion.", "ERROR", JOptionPane.INFORMATION_MESSAGE);
                                 //se envia el correo
                                 emailPara = usuario.getCorreo().getCorreo();
-                                crearEmail(txtRazonMulta.getText() + "\nCOSTO: " + txtCosto.getText(), "MULTA", emailPara);
+                                crearEmail(txtRazonMulta.getText() + "\nCOSTO: " + parqueo.getCostoMulta(), "MULTA", emailPara);
                                 enviarEmail();
                                 pbTabl.setSelectedIndex(0);
-                                return; //termina
+                                JOptionPane.showMessageDialog(null, "Guardado exitosamente", "ERROR", JOptionPane.INFORMATION_MESSAGE);
+                                break;
                             }
                         }
                     }
@@ -196,9 +202,6 @@ public class MenuInspector extends javax.swing.JFrame {
         catch (IOException e){
             JOptionPane.showMessageDialog(null, "No se pudo cargar la lista de usuarios, no se podrá enviar un correo", "ERROR", JOptionPane.INFORMATION_MESSAGE);
             
-        }
-        catch (ClassNotFoundException ex){
-            JOptionPane.showMessageDialog(null, "Error en las clases. No se pudo cargar la lista de usuarios, no se podrá enviar un correo", "ERROR", JOptionPane.INFORMATION_MESSAGE);
         }
      }
      
@@ -236,9 +239,6 @@ public class MenuInspector extends javax.swing.JFrame {
         txtRazonMulta = new javax.swing.JTextArea();
         btnEnviarMulta = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
-        jLabel5 = new javax.swing.JLabel();
-        txtCosto = new javax.swing.JTextField();
-        jLabel6 = new javax.swing.JLabel();
         pnPerfil = new com.tec.parquimetro.parquimetro.GUI.Componentes.PanelRedondo();
         lblPerfil6 = new javax.swing.JLabel();
         txtTelefono = new javax.swing.JTextField();
@@ -380,11 +380,12 @@ public class MenuInspector extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRedondo1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(panelRedondo1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnReportes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(rondedBordes5, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnRevisarParqueos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnPerfil, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(panelRedondo1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(rondedBordes5, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(panelRedondo1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(btnReportes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnRevisarParqueos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnPerfil, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGap(25, 25, 25))
         );
         panelRedondo1Layout.setVerticalGroup(
@@ -466,7 +467,7 @@ public class MenuInspector extends javax.swing.JFrame {
                     .addGroup(pnParquearLayout.createSequentialGroup()
                         .addGap(332, 332, 332)
                         .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(257, Short.MAX_VALUE))
+                .addContainerGap(272, Short.MAX_VALUE))
         );
         pnParquearLayout.setVerticalGroup(
             pnParquearLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -483,7 +484,7 @@ public class MenuInspector extends javax.swing.JFrame {
                     .addComponent(txtNumParqueo, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(52, 52, 52)
                 .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(258, Short.MAX_VALUE))
+                .addContainerGap(215, Short.MAX_VALUE))
         );
 
         pbTabl.addTab("", pnParquear);
@@ -503,7 +504,7 @@ public class MenuInspector extends javax.swing.JFrame {
         pnReportesLayout.setHorizontalGroup(
             pnReportesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnReportesLayout.createSequentialGroup()
-                .addContainerGap(692, Short.MAX_VALUE)
+                .addContainerGap(708, Short.MAX_VALUE)
                 .addComponent(lblPerfil3)
                 .addGap(40, 40, 40))
         );
@@ -512,7 +513,7 @@ public class MenuInspector extends javax.swing.JFrame {
             .addGroup(pnReportesLayout.createSequentialGroup()
                 .addGap(31, 31, 31)
                 .addComponent(lblPerfil3)
-                .addContainerGap(601, Short.MAX_VALUE))
+                .addContainerGap(558, Short.MAX_VALUE))
         );
 
         pbTabl.addTab("", pnReportes);
@@ -545,18 +546,6 @@ public class MenuInspector extends javax.swing.JFrame {
             }
         });
 
-        jLabel5.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jLabel5.setText("Costo de la multa");
-
-        txtCosto.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtCostoActionPerformed(evt);
-            }
-        });
-
-        jLabel6.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jLabel6.setText("₡");
-
         javax.swing.GroupLayout pnPrincipalLayout = new javax.swing.GroupLayout(pnPrincipal);
         pnPrincipal.setLayout(pnPrincipalLayout);
         pnPrincipalLayout.setHorizontalGroup(
@@ -573,15 +562,8 @@ public class MenuInspector extends javax.swing.JFrame {
                         .addComponent(btnCancelar))
                     .addGroup(pnPrincipalLayout.createSequentialGroup()
                         .addGap(193, 193, 193)
-                        .addGroup(pnPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 408, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(pnPrincipalLayout.createSequentialGroup()
-                                .addComponent(jLabel5)
-                                .addGap(28, 28, 28)
-                                .addComponent(txtCosto, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(4, 4, 4)
-                                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(212, Short.MAX_VALUE))
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 408, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(227, Short.MAX_VALUE))
         );
         pnPrincipalLayout.setVerticalGroup(
             pnPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -590,16 +572,11 @@ public class MenuInspector extends javax.swing.JFrame {
                 .addComponent(lblPerfil5)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(74, 74, 74)
-                .addGroup(pnPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(txtCosto, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6))
-                .addGap(66, 66, 66)
+                .addGap(168, 168, 168)
                 .addGroup(pnPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnEnviarMulta)
                     .addComponent(btnCancelar))
-                .addContainerGap(110, Short.MAX_VALUE))
+                .addContainerGap(68, Short.MAX_VALUE))
         );
 
         pbTabl.addTab("", pnPrincipal);
@@ -716,7 +693,7 @@ public class MenuInspector extends javax.swing.JFrame {
         pnPerfilLayout.setHorizontalGroup(
             pnPerfilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnPerfilLayout.createSequentialGroup()
-                .addContainerGap(111, Short.MAX_VALUE)
+                .addContainerGap(126, Short.MAX_VALUE)
                 .addGroup(pnPerfilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnPerfilLayout.createSequentialGroup()
                         .addGroup(pnPerfilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -793,7 +770,7 @@ public class MenuInspector extends javax.swing.JFrame {
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(txtTerminal, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 85, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
                 .addGroup(pnPerfilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnRestablecerContra, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnActualizarPerfil, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -834,7 +811,7 @@ public class MenuInspector extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -1113,19 +1090,26 @@ public class MenuInspector extends javax.swing.JFrame {
 
     private void btnEnviarMultaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnviarMultaActionPerformed
         int placa = Integer.parseInt(txtPlaca.getText());
+        int costo = parqueo.getCostoMulta();
         try {
-            int costo = Integer.parseInt(txtCosto.getText());
-            crearMulta(placa, costo);
+            Login login = new Login();
+            ArrayList<Persona> personas = Login.cargarUsuarios("listaUsuarios.txt");
+            login.setListaUsuarios(personas);
+            if(login.buscarPlaca(String.valueOf(placa))){
+                crearMulta(placa, costo);
+            }else{
+            
+                Multa nuevaMulta = new Multa (costo, txtRazonMulta.getText(), LocalDateTime.now(),null,String.valueOf(placa));
+                 Parqueo pq = new Parqueo();
+                 pq.lecturaArchivo();
+                 pq.agregarMulta(nuevaMulta);
+                
+            }
         }
         catch (NumberFormatException e){
-            JOptionPane.showMessageDialog(null, "Debe de ingresar numeros enteros");
-        }
+            JOptionPane.showMessageDialog(null, "Debe de ingresar numeros enteros");}
         
     }//GEN-LAST:event_btnEnviarMultaActionPerformed
-
-    private void txtCostoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCostoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtCostoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1175,8 +1159,6 @@ public class MenuInspector extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
@@ -1203,7 +1185,6 @@ public class MenuInspector extends javax.swing.JFrame {
     private com.tec.parquimetro.parquimetro.GUI.RondedBordes rondedBordes5;
     private javax.swing.JTextArea taDireccionFisica;
     private javax.swing.JTextField txtApellidos;
-    private javax.swing.JTextField txtCosto;
     private javax.swing.JTextField txtIdentificacion;
     private javax.swing.JTextField txtNombre1;
     private javax.swing.JTextField txtNumParqueo;

@@ -136,47 +136,38 @@ public class LoginJFrame extends javax.swing.JFrame {
             Login login1 = new Login();
             //login1.crear();
             //cargamos la lista de cuentas
-            try {
-                
-                login1.setListaUsuarios(cargarUsuarios("listaUsuarios.txt")); 
-                //comprobar que el usuario con la identificacion
-                Persona usuarioAIngresar = login1.verificarIdentificacion(campoIdentificacion.getText()); //CAMBIAR A LO QUE EL USUARIO INGRESE
-                if (usuarioAIngresar == null){
-                    JOptionPane.showMessageDialog(null, "No existe una cuenta con esta identificacion", "ERROR", JOptionPane.ERROR_MESSAGE);
-                }
-                else{ //la identificacion le pertenece a un usuario
-                    if (login1.verificarPin(new String(campoPin.getPassword()), usuarioAIngresar)) { //si retorna true quiere decir que el pin es correcto
-                        //verificar que tipo de cuenta es
-                        if (usuarioAIngresar instanceof Administrador){
-                            //abrir app del Administrador
-                            System.out.println("SE ABRIO LA APP DE ADMIN");
-                        }
-                        else if (usuarioAIngresar instanceof Inspector){
-                            System.out.println("SE ABRIO LA APP DE INSpector");
-                        }
-                        else if (usuarioAIngresar instanceof Usuario){
-                            if (new File("Parametros.txt").exists()){ //comprobar si los parametros ya fueron configurados por el administrador
-                                //abrir app del Usuario
-                                System.out.println("SE ABRIO LA APP DE USUARIO");
-                            }
-                            else {
-                                JOptionPane.showMessageDialog(null, "El parquímetro no ha sido configurado por un administrador, ponerse en contacto con alguno", "ERROR", JOptionPane.ERROR_MESSAGE);
-                            }
+            login1.setListaUsuarios(cargarUsuarios("listaUsuarios.txt"));
+            //comprobar que el usuario con la identificacion
+            Persona usuarioAIngresar = login1.verificarIdentificacion(campoIdentificacion.getText()); //CAMBIAR A LO QUE EL USUARIO INGRESE
+            if (usuarioAIngresar == null){
+                JOptionPane.showMessageDialog(null, "No existe una cuenta con esta identificacion", "ERROR", JOptionPane.ERROR_MESSAGE);
+            }
+            else{ //la identificacion le pertenece a un usuario
+                if (login1.verificarPin(new String(campoPin.getPassword()), usuarioAIngresar)) { //si retorna true quiere decir que el pin es correcto
+                    //verificar que tipo de cuenta es
+                    if (usuarioAIngresar instanceof Administrador){
+                        //abrir app del Administrador
+                        System.out.println("SE ABRIO LA APP DE ADMIN");
+                    }
+                    else if (usuarioAIngresar instanceof Inspector){
+                        System.out.println("SE ABRIO LA APP DE INSpector");
+                    }
+                    else if (usuarioAIngresar instanceof Usuario){
+                        if (new File("Parametros.txt").exists()){ //comprobar si los parametros ya fueron configurados por el administrador
+                            //abrir app del Usuario
+                            System.out.println("SE ABRIO LA APP DE USUARIO");
                         }
                         else {
-                            JOptionPane.showMessageDialog(null, "Hubo un error en la lógica del programa, ponerse en contacto con los creadores", "ERROR", JOptionPane.ERROR_MESSAGE);
+                            JOptionPane.showMessageDialog(null, "El parquímetro no ha sido configurado por un administrador, ponerse en contacto con alguno", "ERROR", JOptionPane.ERROR_MESSAGE);
                         }
                     }
                     else {
-                        JOptionPane.showMessageDialog(null, "El pin ingresado es incorrecto", "ERROR", JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(null, "Hubo un error en la lógica del programa, ponerse en contacto con los creadores", "ERROR", JOptionPane.ERROR_MESSAGE);
                     }
                 }
-            }
-            catch (IOException e){
-                JOptionPane.showMessageDialog(null, "No se pudo cargar la lista de cuentas", "ERROR", JOptionPane.INFORMATION_MESSAGE);
-            }
-            catch (ClassNotFoundException e1){
-                JOptionPane.showMessageDialog(null, "No se pudo cargar la lista de cuentas, error con las clases", "ERROR", JOptionPane.INFORMATION_MESSAGE);
+                else {
+                    JOptionPane.showMessageDialog(null, "El pin ingresado es incorrecto", "ERROR", JOptionPane.ERROR_MESSAGE);
+                }
             }
         }
     }

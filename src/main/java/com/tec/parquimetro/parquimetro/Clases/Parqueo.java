@@ -1,9 +1,23 @@
 
 package com.tec.parquimetro.parquimetro.Clases;
+import com.itextpdf.text.BaseColor;
+import com.itextpdf.text.Chunk;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Element;
+import com.itextpdf.text.Font;
+import com.itextpdf.text.FontFactory;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.Phrase;
+import com.itextpdf.text.pdf.PdfPCell;
+import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfWriter;
 import java.io.*; //manejo de archivos
 import java.nio.channels.OverlappingFileLockException;
+import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
 import java.util.Properties;
@@ -23,7 +37,7 @@ public class Parqueo implements Serializable {
     public Parqueo(){
     
         this.espacios = new ArrayList<Espacio>();
-    
+         this.multas = new ArrayList<Multa>();
     }
     
     //constructor
@@ -34,8 +48,8 @@ public class Parqueo implements Serializable {
         this.horaInicio = horaInicio;
         this.precioHora = precioHora;
         this.tiempoMinimo = tiempoMinimo;
-
         this.espacios = new ArrayList<Espacio>();
+        this.multas = new ArrayList<Multa>();
 
     }
 
@@ -155,6 +169,11 @@ public class Parqueo implements Serializable {
         this.espacios = espacios;
     }
     
+    public void setMultas(ArrayList<Multa> multas){
+    
+        this.multas = multas;
+    }
+    
     //metodos
     
     public void actualizarParametros(Parqueo parqueo){
@@ -204,7 +223,7 @@ public class Parqueo implements Serializable {
                         this.setPrecioHora(auxiliar.precioHora);
                         this.setTiempoMinimo(auxiliar.tiempoMinimo);
                         this.setEspacios(auxiliar.espacios);
-                        
+                        this.setMultas(auxiliar.multas);
                     } catch (EOFException e) { //validacion para que no llegue al final de laist, se genera un excepcion y esta hace que pare el ciclo
                         break;
                     } catch (ClassNotFoundException e) {
@@ -267,7 +286,7 @@ public class Parqueo implements Serializable {
         ArrayList<Espacio> espaciosOcupados = new ArrayList<Espacio>();
         
         for(Espacio espacio : espacios){
-            
+            System.out.println(espacio.getVehiculos().toString());
             if(!espacio.getEstado())
                 espaciosOcupados.add(espacio);
             
@@ -360,10 +379,532 @@ public class Parqueo implements Serializable {
     
     }
 
-   private void agregarMulta(Multa multa){
+   public void agregarMulta(Multa multa){
+       
        this.multas.add(multa);
        cargarArchivo();
+       System.out.println(multa.getCosto());
    }
 
+   public void generarEspaciosVaciosPDF(String rutaArchivo){
+       
+        try {
+            Document document = new Document();
+            PdfWriter.getInstance(document, new FileOutputStream(rutaArchivo+".pdf"));
+
+            document.open();
+            document.addAuthor("Parquimetro");
+
+            //Titulo del documento
+            Paragraph tituloPrincipal = new Paragraph("Reporte Parquimetro", FontFactory.getFont(FontFactory.HELVETICA_BOLD,20, Font.BOLD,new BaseColor(14, 41, 75)));
+            tituloPrincipal.setAlignment(1);
+            document.add(tituloPrincipal);
+            Paragraph titulo = new Paragraph("Espacios Vacios");
+            titulo.setAlignment(1);
+            document.add(titulo);
+
+            //FECHAS  DEL REPORTE
+            document.add(Chunk.NEWLINE);//SALTO DE LINEA
+            Paragraph fecha = new Paragraph("Fecha de elaboracion: " + new Date().toString());
+            fecha.setAlignment(Element.ALIGN_LEFT);  // Alinear a la derecha
+            document.add(fecha);
+            //FIN FECHAS  DEL REPORTE
+
+            document.add(Chunk.NEWLINE);//SALTO DE LINEA
+
+            //Genera la tabla por argumentos envia el numero de celdas por fila
+            PdfPTable tabla = new PdfPTable(1);
+            tabla.setWidthPercentage(50);
+
+            //ENCABEZADO DE LA TABLA
+            Phrase frase = new Phrase("Numero de espacio", new Font(Font.FontFamily.HELVETICA, 12, Font.NORMAL, new BaseColor(255, 255, 255))); // Texto en blanco
+            PdfPCell espacio = new PdfPCell(frase);
+            espacio.setHorizontalAlignment(Element.ALIGN_CENTER);
+            espacio.setPaddingTop(10);
+            espacio.setPaddingBottom(10);
+            espacio.setBackgroundColor(new BaseColor(14, 41, 75));  // Fondo azul oscuro
+
+            tabla.addCell(espacio);
+            
+            
+            //FIN DEL ENCABEZADO DE LA TABLA
+
+            //Controla la cantidad de elementos considerados en el reporte
+            int cant=0;
+
+            Parqueo parqueo = new Parqueo();
+            parqueo.lecturaArchivo();
+
+            ArrayList<Espacio> espacios =  parqueo.listarEspaciosVacios();
+            //carga los elementos a la tabla
+            for(Espacio obj : espacios){
+                
+                tabla.addCell(String.valueOf(obj.getNumero()));
+                cant++;
+            }
+
+            //Pie de la tabla, informa el total de los elementos
+            PdfPCell footerCell = new PdfPCell(new Phrase("Total de espacios: " + cant, new Font(Font.FontFamily.HELVETICA, 12, Font.NORMAL, new BaseColor(255, 255, 255))));
+            footerCell.setBackgroundColor(new BaseColor(184,102,20));
+            footerCell.setBorderColor(new BaseColor(184,102,20));
+            footerCell.setColspan(1);  // Combina las 3 columnas
+            footerCell.setHorizontalAlignment(Element.ALIGN_RIGHT);  // Alinear el texto a la derecha
+            footerCell.setPaddingTop(5);
+            footerCell.setPaddingRight(10);
+            footerCell.setPaddingBottom(7);
+            tabla.addCell(footerCell);
+
+            document.add(tabla);
+
+            document.close();
+
+        } catch (FileNotFoundException ex) {
+
+        } catch (DocumentException ex) {
+
+        }
+       
+   }
+   
+   public void generarEspaciosGeneralPDF(String rutaArchivo){
+       
+        try {
+            Document document = new Document();
+            PdfWriter.getInstance(document, new FileOutputStream(rutaArchivo+".pdf"));
+
+            document.open();
+            document.addAuthor("Parquimetro");
+
+            //Titulo del documento
+            Paragraph tituloPrincipal = new Paragraph("Reporte Parquimetro", FontFactory.getFont(FontFactory.HELVETICA_BOLD,20, Font.BOLD,new BaseColor(14, 41, 75)));
+            tituloPrincipal.setAlignment(1);
+            document.add(tituloPrincipal);
+            Paragraph titulo = new Paragraph("Espacios Generales");
+            titulo.setAlignment(1);
+            document.add(titulo);
+
+            //FECHAS  DEL REPORTE
+            document.add(Chunk.NEWLINE);//SALTO DE LINEA
+            Paragraph fecha = new Paragraph("Fecha de elaboracion: " + new Date().toString());
+            fecha.setAlignment(Element.ALIGN_LEFT);  // Alinear a la derecha
+            document.add(fecha);
+            //FIN FECHAS  DEL REPORTE
+
+            document.add(Chunk.NEWLINE);//SALTO DE LINEA
+
+            //Genera la tabla por argumentos envia el numero de celdas por fila
+            PdfPTable tabla = new PdfPTable(2);
+            tabla.setWidthPercentage(50);
+
+            //ENCABEZADO DE LA TABLA
+            Phrase frase = new Phrase("Numero de espacio", new Font(Font.FontFamily.HELVETICA, 12, Font.NORMAL, new BaseColor(255, 255, 255))); // Texto en blanco
+            PdfPCell espacio = new PdfPCell(frase);
+            espacio.setHorizontalAlignment(Element.ALIGN_CENTER);
+            espacio.setPaddingTop(10);
+            espacio.setPaddingBottom(10);
+            espacio.setBackgroundColor(new BaseColor(14, 41, 75));  // Fondo azul oscuro
+
+            tabla.addCell(espacio);
+
+            Phrase estadoF = new Phrase("Estado del espacio", new Font(Font.FontFamily.HELVETICA, 12, Font.NORMAL, new BaseColor(255, 255, 255))); // Texto en blanco
+            PdfPCell estado = new PdfPCell(estadoF);
+            estado.setHorizontalAlignment(Element.ALIGN_CENTER);
+            estado.setPaddingTop(10);
+            estado.setPaddingBottom(10);
+            estado.setBackgroundColor(new BaseColor(14, 41, 75));  // Fondo azul oscuro
+
+            tabla.addCell(estado);
+            
+            
+            //FIN DEL ENCABEZADO DE LA TABLA
+
+            //Controla la cantidad de elementos considerados en el reporte
+            int cant=0;
+
+            Parqueo parqueo = new Parqueo();
+            parqueo.lecturaArchivo();
+
+            ArrayList<Espacio> espacios =  parqueo.listarEspacios();
+            //carga los elementos a la tabla
+            String estadoEspacio = "";
+            for(Espacio obj : espacios){
+
+                if(obj.getEstado())
+                    estadoEspacio = "Libre";
+                else
+                    estadoEspacio = "Ocupado";
+                
+                tabla.addCell(String.valueOf(obj.getNumero()));
+                tabla.addCell(estadoEspacio);
+                cant++;
+            }
+
+            //Pie de la tabla, informa el total de los elementos
+            PdfPCell footerCell = new PdfPCell(new Phrase("Total de espacios: " + cant, new Font(Font.FontFamily.HELVETICA, 12, Font.NORMAL, new BaseColor(255, 255, 255))));
+            footerCell.setBackgroundColor(new BaseColor(184,102,20));
+            footerCell.setBorderColor(new BaseColor(184,102,20));
+            footerCell.setColspan(3);  // Combina las 3 columnas
+            footerCell.setHorizontalAlignment(Element.ALIGN_RIGHT);  // Alinear el texto a la derecha
+            footerCell.setPaddingTop(5);
+            footerCell.setPaddingRight(10);
+            footerCell.setPaddingBottom(7);
+            tabla.addCell(footerCell);
+
+            document.add(tabla);
+
+            document.close();
+
+        } catch (FileNotFoundException ex) {
+
+        } catch (DocumentException ex) {
+
+        }
+       
+   }
+ 
+      public void generarEspaciosOcupadosPDF(String rutaArchivo){
+       
+        try {
+            Document document = new Document();
+            PdfWriter.getInstance(document, new FileOutputStream(rutaArchivo+".pdf"));
+
+            document.open();
+            document.addAuthor("Parquimetro");
+
+            //Titulo del documento
+            Paragraph tituloPrincipal = new Paragraph("Reporte Parquimetro", FontFactory.getFont(FontFactory.HELVETICA_BOLD,20, Font.BOLD,new BaseColor(14, 41, 75)));
+            tituloPrincipal.setAlignment(1);
+            document.add(tituloPrincipal);
+            Paragraph titulo = new Paragraph("Espacios Ocupados");
+            titulo.setAlignment(1);
+            document.add(titulo);
+
+            //FECHAS  DEL REPORTE
+            document.add(Chunk.NEWLINE);//SALTO DE LINEA
+            Paragraph fecha = new Paragraph("Fecha de elaboracion: " + new Date().toString());
+            fecha.setAlignment(Element.ALIGN_LEFT);  // Alinear a la derecha
+            document.add(fecha);
+            //FIN FECHAS  DEL REPORTE
+
+            document.add(Chunk.NEWLINE);//SALTO DE LINEA
+
+            //Genera la tabla por argumentos envia el numero de celdas por fila
+            PdfPTable tabla = new PdfPTable(5);
+            tabla.setWidthPercentage(100);
+
+            //ENCABEZADO DE LA TABLA
+            Phrase frase = new Phrase("Numero de espacio", new Font(Font.FontFamily.HELVETICA, 12, Font.NORMAL, new BaseColor(255, 255, 255))); // Texto en blanco
+            PdfPCell espacio = new PdfPCell(frase);
+            espacio.setHorizontalAlignment(Element.ALIGN_CENTER);
+            espacio.setPaddingTop(10);
+            espacio.setPaddingBottom(10);
+            espacio.setBackgroundColor(new BaseColor(14, 41, 75));  // Fondo azul oscuro
+
+            tabla.addCell(espacio);
+
+            frase = new Phrase("Placa", new Font(Font.FontFamily.HELVETICA, 12, Font.NORMAL, new BaseColor(255, 255, 255))); // Texto en blanco
+            PdfPCell placa = new PdfPCell(frase);
+            placa.setHorizontalAlignment(Element.ALIGN_CENTER);
+            placa.setPaddingTop(10);
+            placa.setPaddingBottom(10);
+            placa.setBackgroundColor(new BaseColor(14, 41, 75));  // Fondo azul oscuro
+
+            tabla.addCell(placa);
+            
+            frase = new Phrase("Costo", new Font(Font.FontFamily.HELVETICA, 12, Font.NORMAL, new BaseColor(255, 255, 255))); // Texto en blanco
+            PdfPCell costo = new PdfPCell(frase);
+            costo.setHorizontalAlignment(Element.ALIGN_CENTER);
+            costo.setPaddingTop(10);
+            costo.setPaddingBottom(10);
+            costo.setBackgroundColor(new BaseColor(14, 41, 75));  // Fondo azul oscuro
+
+            tabla.addCell(costo);
+            
+            frase = new Phrase("Tiempo inicial", new Font(Font.FontFamily.HELVETICA, 12, Font.NORMAL, new BaseColor(255, 255, 255))); // Texto en blanco
+            PdfPCell tInicial = new PdfPCell(frase);
+            tInicial.setHorizontalAlignment(Element.ALIGN_CENTER);
+            tInicial.setPaddingTop(10);
+            tInicial.setPaddingBottom(10);
+            tInicial.setBackgroundColor(new BaseColor(14, 41, 75));  // Fondo azul oscuro
+
+            tabla.addCell(tInicial);
+            
+             frase = new Phrase("Tiempo final", new Font(Font.FontFamily.HELVETICA, 12, Font.NORMAL, new BaseColor(255, 255, 255))); // Texto en blanco
+            PdfPCell tFinal = new PdfPCell(frase);
+            tFinal.setHorizontalAlignment(Element.ALIGN_CENTER);
+            tFinal.setPaddingTop(10);
+            tFinal.setPaddingBottom(10);
+            tFinal.setBackgroundColor(new BaseColor(14, 41, 75));  // Fondo azul oscuro
+
+            tabla.addCell(tFinal);
+            
+            //FIN DEL ENCABEZADO DE LA TABLA
+
+            //Controla la cantidad de elementos considerados en el reporte
+            int cant=0;
+
+            Parqueo parqueo = new Parqueo();
+            parqueo.lecturaArchivo();
+
+            ArrayList<Espacio> espacios =  parqueo.listarEspaciosOcupados();
+            //carga los elementos a la tabla
+            String estadoEspacio = "";
+            TicketParqueo ticket;
+            for(Espacio obj : espacios){
+
+                ticket = obj.getVehiculos().getFirst().getTicketVigente();
+                
+                tabla.addCell(String.valueOf(obj.getNumero()));
+                tabla.addCell(obj.getVehiculos().getFirst().getPlaca());
+                tabla.addCell(String.valueOf(ticket.getTotal()));
+                tabla.addCell(ticket.getHoraSistema().toString());
+                tabla.addCell(ticket.getHoraSistema().plusMinutes(ticket.getTipoTicket()).toString());
+                cant++;
+            }
+
+            //Pie de la tabla, informa el total de los elementos
+            PdfPCell footerCell = new PdfPCell(new Phrase("Total de espacios: " + cant, new Font(Font.FontFamily.HELVETICA, 12, Font.NORMAL, new BaseColor(255, 255, 255))));
+            footerCell.setBackgroundColor(new BaseColor(184,102,20));
+            footerCell.setBorderColor(new BaseColor(184,102,20));
+            footerCell.setColspan(5);  // Combina las 5 columnas
+            footerCell.setHorizontalAlignment(Element.ALIGN_RIGHT);  // Alinear el texto a la derecha
+            footerCell.setPaddingTop(5);
+            footerCell.setPaddingRight(10);
+            footerCell.setPaddingBottom(7);
+            tabla.addCell(footerCell);
+
+            document.add(tabla);
+
+            document.close();
+
+        } catch (FileNotFoundException ex) {
+
+        } catch (DocumentException ex) {
+
+        }
+       
+   }
+      
+      public long obtenerIngresoMultaDiario(LocalDate dia){
+          System.out.println("900");
+          long ingresos =0;
+          if(this.multas!=null)
+            for(Multa multa : this.multas){
+                System.out.println(10000);
+                if(multa.getFechaMulta().toLocalDate().isEqual(dia)){
+                    ingresos+= multa.getCosto();
+                }
+            }
+          
+          return ingresos;
+      }
+      
+      public void generaIngresosMultasPDF(String rutaArchivo, LocalDate inicio, LocalDate finalF){
+       
+        try {
+                Document document = new Document();
+                PdfWriter.getInstance(document, new FileOutputStream(rutaArchivo+".pdf"));
+
+                document.open();
+                document.addAuthor("Parquimetro");
+
+                //Titulo del documento
+                Paragraph tituloPrincipal = new Paragraph("Reporte Parquimetro", FontFactory.getFont(FontFactory.HELVETICA_BOLD,20, Font.BOLD,new BaseColor(14, 41, 75)));
+                tituloPrincipal.setAlignment(1);
+                document.add(tituloPrincipal);
+                Paragraph titulo = new Paragraph("Ingresos de multas");
+                titulo.setAlignment(1);
+                document.add(titulo);
+
+                //FECHAS  DEL REPORTE
+                document.add(Chunk.NEWLINE);//SALTO DE LINEA
+                Paragraph fecha = new Paragraph("Fecha de elaboracion: " + new Date().toString());
+                fecha.setAlignment(Element.ALIGN_LEFT);  // Alinear a la derecha
+                document.add(fecha);
+
+                Paragraph periodo = new Paragraph("Periodo: " + inicio.toString() +" - " + finalF.toString());
+                periodo.setAlignment(Element.ALIGN_LEFT);  // Alinear a la derecha
+                document.add(periodo);
+                 // Agregar el párrafo al documento
+                 //FIN FECHAS Y PERIODOS DEL REPORTE 
+
+                document.add(Chunk.NEWLINE);//SALTO DE LINEA
+
+                //Genera la tabla por argumentos envia el numero de celdas por fila
+                PdfPTable tabla = new PdfPTable(2);
+                tabla.setWidthPercentage(100);
+
+                //ENCABEZADO DE LA TABLA
+                Phrase frase = new Phrase("Dia", new Font(Font.FontFamily.HELVETICA, 12, Font.NORMAL, new BaseColor(255, 255, 255))); // Texto en blanco
+                PdfPCell espacio = new PdfPCell(frase);
+                espacio.setHorizontalAlignment(Element.ALIGN_CENTER);
+                espacio.setPaddingTop(10);
+                espacio.setPaddingBottom(10);
+                espacio.setBackgroundColor(new BaseColor(14, 41, 75));  // Fondo azul oscuro
+
+                tabla.addCell(espacio);
+
+                frase = new Phrase("Ingresos", new Font(Font.FontFamily.HELVETICA, 12, Font.NORMAL, new BaseColor(255, 255, 255))); // Texto en blanco
+                PdfPCell ingresos = new PdfPCell(frase);
+                ingresos.setHorizontalAlignment(Element.ALIGN_CENTER);
+                ingresos.setPaddingTop(10);
+                ingresos.setPaddingBottom(10);
+                ingresos.setBackgroundColor(new BaseColor(14, 41, 75));  // Fondo azul oscuro
+
+                tabla.addCell(ingresos);
+
+                //FIN DEL ENCABEZADO DE LA TABLA
+                long ingresoTotal =0;
+                //carga los elementos a la tabla
+                Parqueo parqueo = new Parqueo();
+                parqueo.lecturaArchivo();
+               LocalDate dia=inicio;
+               while(!dia.isAfter(finalF)){
+                   System.out.println(dia.toString());
+                    long ingresoDiario=parqueo.obtenerIngresoMultaDiario(dia);
+                    tabla.addCell(dia.toString());
+                    tabla.addCell(String.valueOf(ingresoDiario));
+                    ingresoTotal+=ingresoDiario;
+                    dia = dia.plusDays(1);
+               }
+
+                //Pie de la tabla, informa el total de los elementos
+                PdfPCell footerCell = new PdfPCell(new Phrase("Total de ingresos: " + ingresoTotal, new Font(Font.FontFamily.HELVETICA, 12, Font.NORMAL, new BaseColor(255, 255, 255))));
+                footerCell.setBackgroundColor(new BaseColor(184,102,20));
+                footerCell.setBorderColor(new BaseColor(184,102,20));
+                footerCell.setColspan(2);  // Combina las 3 columnas
+                footerCell.setHorizontalAlignment(Element.ALIGN_RIGHT);  // Alinear el texto a la derecha
+                footerCell.setPaddingTop(2);
+                footerCell.setPaddingRight(10);
+                footerCell.setPaddingBottom(7);
+                tabla.addCell(footerCell);
+
+                document.add(tabla);
+
+                document.close();
+
+        } catch (FileNotFoundException ex) {
+
+        } catch (DocumentException ex) {
+
+        }
+       
+   }
+      
+      private long calcularMontoEstacionamiento(LocalDate dia){
+      
+        long ingresos=0;
+          
+       List<Persona> personas = new ArrayList<Persona>();
+       personas = Login.cargarUsuarios("listaUsuarios.txt");
+          
+       for(Persona ob : personas){
+         
+            System.out.println(ob.getApellidos());
+             if(ob instanceof Usuario usuarioCast){
+                 
+                 for(Vehiculo v : usuarioCast.getVehiculos()){
+                 
+                     for(TicketParqueo t : v.getTickets()){
+                     
+                         if(t.getHoraSistema().toLocalDate().isEqual(dia)){
+                             ingresos+= t.getTotal();
+                          }
+                     }
+                 }
+             }
+             
+         }
+          return ingresos;
+      }
+      
+   public void generaIngresosEstacionamientoPDF(String rutaArchivo, LocalDate inicio, LocalDate finalF){
+       
+        try {
+                Document document = new Document();
+                PdfWriter.getInstance(document, new FileOutputStream(rutaArchivo+".pdf"));
+
+                document.open();
+                document.addAuthor("Parquimetro");
+
+                //Titulo del documento
+                Paragraph tituloPrincipal = new Paragraph("Reporte Parquimetro", FontFactory.getFont(FontFactory.HELVETICA_BOLD,20, Font.BOLD,new BaseColor(14, 41, 75)));
+                tituloPrincipal.setAlignment(1);
+                document.add(tituloPrincipal);
+                Paragraph titulo = new Paragraph("Ingresos de estacionamientos");
+                titulo.setAlignment(1);
+                document.add(titulo);
+
+                //FECHAS  DEL REPORTE
+                document.add(Chunk.NEWLINE);//SALTO DE LINEA
+                Paragraph fecha = new Paragraph("Fecha de elaboracion: " + new Date().toString());
+                fecha.setAlignment(Element.ALIGN_LEFT);  // Alinear a la derecha
+                document.add(fecha);
+
+                Paragraph periodo = new Paragraph("Periodo: " + inicio.toString() +" - " + finalF.toString());
+                periodo.setAlignment(Element.ALIGN_LEFT);  // Alinear a la derecha
+                document.add(periodo);
+                 // Agregar el párrafo al documento
+                 //FIN FECHAS Y PERIODOS DEL REPORTE 
+
+                document.add(Chunk.NEWLINE);//SALTO DE LINEA
+
+                //Genera la tabla por argumentos envia el numero de celdas por fila
+                PdfPTable tabla = new PdfPTable(2);
+                tabla.setWidthPercentage(100);
+
+                //ENCABEZADO DE LA TABLA
+                Phrase frase = new Phrase("Dia", new Font(Font.FontFamily.HELVETICA, 12, Font.NORMAL, new BaseColor(255, 255, 255))); // Texto en blanco
+                PdfPCell espacio = new PdfPCell(frase);
+                espacio.setHorizontalAlignment(Element.ALIGN_CENTER);
+                espacio.setPaddingTop(10);
+                espacio.setPaddingBottom(10);
+                espacio.setBackgroundColor(new BaseColor(14, 41, 75));  // Fondo azul oscuro
+
+                tabla.addCell(espacio);
+
+                frase = new Phrase("Ingresos", new Font(Font.FontFamily.HELVETICA, 12, Font.NORMAL, new BaseColor(255, 255, 255))); // Texto en blanco
+                PdfPCell ingresos = new PdfPCell(frase);
+                ingresos.setHorizontalAlignment(Element.ALIGN_CENTER);
+                ingresos.setPaddingTop(10);
+                ingresos.setPaddingBottom(10);
+                ingresos.setBackgroundColor(new BaseColor(14, 41, 75));  // Fondo azul oscuro
+
+                tabla.addCell(ingresos);
+
+                //FIN DEL ENCABEZADO DE LA TABLA
+                long ingresoTotal =0;
+                //carga los elementos a la tabla
+               LocalDate dia=inicio;
+               while(!dia.isAfter(finalF)){
+                    long ingresoDiario=calcularMontoEstacionamiento(dia);
+                    tabla.addCell(dia.toString());
+                    tabla.addCell(String.valueOf(ingresoDiario));
+                    ingresoTotal+=ingresoDiario;
+                    dia = dia.plusDays(1);
+               }
+
+                //Pie de la tabla, informa el total de los elementos
+                PdfPCell footerCell = new PdfPCell(new Phrase("Total de ingresos: " + ingresoTotal, new Font(Font.FontFamily.HELVETICA, 12, Font.NORMAL, new BaseColor(255, 255, 255))));
+                footerCell.setBackgroundColor(new BaseColor(184,102,20));
+                footerCell.setBorderColor(new BaseColor(184,102,20));
+                footerCell.setColspan(2);  // Combina las 3 columnas
+                footerCell.setHorizontalAlignment(Element.ALIGN_RIGHT);  // Alinear el texto a la derecha
+                footerCell.setPaddingTop(2);
+                footerCell.setPaddingRight(10);
+                footerCell.setPaddingBottom(7);
+                tabla.addCell(footerCell);
+
+                document.add(tabla);
+
+                document.close();
+
+        } catch (FileNotFoundException ex) {
+
+        } catch (DocumentException ex) {
+
+        }
+       
+   }
    
 }

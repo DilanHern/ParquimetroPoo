@@ -1591,27 +1591,27 @@ public class MenuUsuario extends javax.swing.JFrame {
                                     .addComponent(lblNombre6)
                                     .addComponent(txtCodigoTarjeta, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGap(94, 94, 94))
-                    .addGroup(pnPerfil1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnPerfil1Layout.createSequentialGroup()
-                            .addComponent(lblPerfil6)
-                            .addGap(323, 323, 323))
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnPerfil1Layout.createSequentialGroup()
-                            .addComponent(btnVolverPerfil, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(btnActualizarTarjeta, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(248, 248, 248)))
+                    .addGroup(pnPerfil1Layout.createSequentialGroup()
+                        .addComponent(btnVolverPerfil, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnActualizarTarjeta, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(248, 248, 248))
                     .addGroup(pnPerfil1Layout.createSequentialGroup()
                         .addComponent(lblNombre2)
                         .addGap(181, 181, 181)
                         .addComponent(lblNombre5)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnPerfil1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblPerfil6)
+                .addGap(338, 338, 338))
         );
         pnPerfil1Layout.setVerticalGroup(
             pnPerfil1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnPerfil1Layout.createSequentialGroup()
-                .addGap(38, 38, 38)
+                .addGap(50, 50, 50)
                 .addComponent(lblPerfil6)
-                .addGap(30, 30, 30)
+                .addGap(18, 18, 18)
                 .addComponent(lblNombre3)
                 .addGap(18, 18, 18)
                 .addComponent(txtNumeroTarjeta, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1632,7 +1632,7 @@ public class MenuUsuario extends javax.swing.JFrame {
                 .addGroup(pnPerfil1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnVolverPerfil, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnActualizarTarjeta, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(201, Short.MAX_VALUE))
+                .addContainerGap(184, Short.MAX_VALUE))
         );
 
         pbTabl.addTab("", pnPerfil1);
@@ -2261,7 +2261,7 @@ public class MenuUsuario extends javax.swing.JFrame {
     
         //Utilizado para actualizar los usuarios al modificar su informacion
         Login login = new Login();
-         login.actualizarPersona(usuario,identificacion);
+        login.actualizarPersona(usuario,identificacion);
         
     }
     
@@ -2892,7 +2892,7 @@ public class MenuUsuario extends javax.swing.JFrame {
             Parqueo parqueo = new Parqueo();
             parqueo.lecturaArchivo();//obtiene los datos que posee el parqueo
 
-            generarReporteGeneralEspaciosVacios(parqueo.getEspacios());
+            generarReporteGeneralEspaciosVacios(parqueo.listarEspaciosVacios());
         
             //Ordena los datos de la tabla basados en la columna 0 de manera ascendente
             TableRowSorter<TableModel> sorter = new TableRowSorter<TableModel>(mdlEspaciosGeneral);
@@ -3019,7 +3019,6 @@ public class MenuUsuario extends javax.swing.JFrame {
                         
                         for(Vehiculo obj : espacio.getVehiculos()){
                         
-                            System.out.println("hola");
                             if(usuario.buscarVehiculo(obj.getPlaca())!= null){ //valdia si el espacio es uno de los vehiculos del usuario
                                 
                                 JOptionPane.showMessageDialog(null, "El espacio ingresado ya se encuentra ocupado por uno de sus vehiculos placa: " + obj.getPlaca());
@@ -3121,7 +3120,7 @@ public class MenuUsuario extends javax.swing.JFrame {
             vehiculo.establecerTicketVigente(ticket);
             //guarda los datos al archivo Parametros.txt
             parqueo.cargarArchivo();
-            
+            actualizarInformacion(usuario, usuario.getIdentificacion());
             JOptionPane.showMessageDialog(null, "Espere un momento por favor... Estamos procesando su informacion!");
             //enviar correo
             String cuerpo = "Se le informa que su vehiculo  " + vehiculo.getMarca() + " " + vehiculo.getMarca() + " de placa " + vehiculo.getPlaca() + 
@@ -3133,7 +3132,7 @@ public class MenuUsuario extends javax.swing.JFrame {
             btnConsultarEspacio.setVisible(true);
             tpParquearEspacio.setSelectedIndex(2);
             
-            actualizarInformacion(usuario, usuario.getIdentificacion());
+           
                 
             }else{
             
