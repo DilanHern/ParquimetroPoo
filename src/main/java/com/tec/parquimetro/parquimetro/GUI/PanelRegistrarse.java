@@ -400,9 +400,12 @@ public class PanelRegistrarse extends javax.swing.JPanel {
         });
 
         lbPin.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        lbPin.setForeground(new java.awt.Color(255, 255, 255));
         lbPin.setText("PIN");
 
+        lbNumTar.setBackground(new java.awt.Color(51, 55, 55));
         lbNumTar.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        lbNumTar.setForeground(new java.awt.Color(255, 255, 255));
         lbNumTar.setText("Tarjeta de credito");
 
         txtNumTar.addActionListener(new java.awt.event.ActionListener() {
@@ -418,9 +421,11 @@ public class PanelRegistrarse extends javax.swing.JPanel {
         });
 
         jLabel1.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Codigo de validación");
 
         jLabel2.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Fecha de vencimiento");
 
         txtMes.addActionListener(new java.awt.event.ActionListener() {
@@ -430,6 +435,7 @@ public class PanelRegistrarse extends javax.swing.JPanel {
         });
 
         jLabel3.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("/");
 
         txtAno.addActionListener(new java.awt.event.ActionListener() {

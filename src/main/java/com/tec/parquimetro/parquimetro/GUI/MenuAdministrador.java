@@ -293,6 +293,14 @@ public class MenuAdministrador extends javax.swing.JFrame {
         btnActualizarPerfil3 = new com.tec.parquimetro.parquimetro.GUI.RondedBordes();
         lblApellidos9 = new javax.swing.JLabel();
         dcFechaIngreso = new com.toedter.calendar.JDateChooser();
+        jPanel8 = new javax.swing.JPanel();
+        jLabel19 = new javax.swing.JLabel();
+        jLabel20 = new javax.swing.JLabel();
+        jLabel21 = new javax.swing.JLabel();
+        txtPinAnterior = new javax.swing.JTextField();
+        txtPinNuevo = new javax.swing.JTextField();
+        rondedBordes1 = new com.tec.parquimetro.parquimetro.GUI.RondedBordes();
+        rondedBordes2 = new com.tec.parquimetro.parquimetro.GUI.RondedBordes();
 
         javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
         jDesktopPane1.setLayout(jDesktopPane1Layout);
@@ -917,16 +925,20 @@ public class MenuAdministrador extends javax.swing.JFrame {
                                 .addGroup(pnPerfilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(txtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(lblIdentificacion)
-                                    .addComponent(txtIdentificacion, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(txtIdentificacion, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(pnPerfilLayout.createSequentialGroup()
+                                        .addGap(71, 71, 71)
+                                        .addComponent(btnRestablecerContra, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(pnPerfilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(lblTelefono2)
                                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(lblApellidos1)
-                                    .addComponent(txtPt2Mail, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(txtPt2Mail, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(btnActualizarPerfil, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(pnPerfilLayout.createSequentialGroup()
                                 .addComponent(txtNombre1, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 133, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 136, Short.MAX_VALUE)
                                 .addComponent(txtApellidos, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(73, 73, 73))
                     .addGroup(pnPerfilLayout.createSequentialGroup()
@@ -938,13 +950,7 @@ public class MenuAdministrador extends javax.swing.JFrame {
                         .addGap(296, 296, 296))
                     .addGroup(pnPerfilLayout.createSequentialGroup()
                         .addComponent(lblApellidos3)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(pnPerfilLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(btnRestablecerContra, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnActualizarPerfil, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(286, 286, 286))))
+                        .addGap(0, 0, Short.MAX_VALUE))))
             .addGroup(pnPerfilLayout.createSequentialGroup()
                 .addGap(370, 370, 370)
                 .addComponent(lblPerfil)
@@ -953,7 +959,7 @@ public class MenuAdministrador extends javax.swing.JFrame {
         pnPerfilLayout.setVerticalGroup(
             pnPerfilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnPerfilLayout.createSequentialGroup()
-                .addContainerGap(42, Short.MAX_VALUE)
+                .addContainerGap(40, Short.MAX_VALUE)
                 .addComponent(lblPerfil)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(pnPerfilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -1732,6 +1738,97 @@ public class MenuAdministrador extends javax.swing.JFrame {
 
         pbTabl.addTab("", pnAnadirUsuario);
 
+        jPanel8.setBackground(new java.awt.Color(57, 54, 66));
+
+        jLabel19.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jLabel19.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel19.setText("Restablecer mi PIN");
+
+        jLabel20.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jLabel20.setText("Ingrese el PIN anterior:");
+
+        jLabel21.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jLabel21.setText("Ingrese el nuevo PIN:");
+
+        txtPinAnterior.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtPinAnteriorActionPerformed(evt);
+            }
+        });
+
+        txtPinNuevo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtPinNuevoActionPerformed(evt);
+            }
+        });
+
+        rondedBordes1.setText("Restablecer PIN");
+        rondedBordes1.setColor1(new java.awt.Color(126, 217, 87));
+        rondedBordes1.setColor2(new java.awt.Color(126, 217, 87));
+        rondedBordes1.setColor3(new java.awt.Color(126, 217, 87));
+        rondedBordes1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rondedBordes1ActionPerformed(evt);
+            }
+        });
+
+        rondedBordes2.setText("Cancelar");
+        rondedBordes2.setColor1(new java.awt.Color(204, 102, 0));
+        rondedBordes2.setColor2(new java.awt.Color(204, 102, 0));
+        rondedBordes2.setColor3(new java.awt.Color(204, 102, 0));
+        rondedBordes2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rondedBordes2ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
+        jPanel8.setLayout(jPanel8Layout);
+        jPanel8Layout.setHorizontalGroup(
+            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel8Layout.createSequentialGroup()
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel8Layout.createSequentialGroup()
+                        .addGap(307, 307, 307)
+                        .addComponent(jLabel19))
+                    .addGroup(jPanel8Layout.createSequentialGroup()
+                        .addGap(161, 161, 161)
+                        .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel20, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel21, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(97, 97, 97)
+                        .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtPinAnterior, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtPinNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel8Layout.createSequentialGroup()
+                        .addGap(202, 202, 202)
+                        .addComponent(rondedBordes1, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(113, 113, 113)
+                        .addComponent(rondedBordes2, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(282, Short.MAX_VALUE))
+        );
+        jPanel8Layout.setVerticalGroup(
+            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel8Layout.createSequentialGroup()
+                .addGap(90, 90, 90)
+                .addComponent(jLabel19)
+                .addGap(112, 112, 112)
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel20)
+                    .addComponent(txtPinAnterior, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(69, 69, 69)
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel21)
+                    .addComponent(txtPinNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 164, Short.MAX_VALUE)
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(rondedBordes1, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(rondedBordes2, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(89, 89, 89))
+        );
+
+        pbTabl.addTab("tab7", jPanel8);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -1997,6 +2094,26 @@ public class MenuAdministrador extends javax.swing.JFrame {
         }
      }
     
+     public void cambiarPin(){
+         if (txtPinAnterior.getText().equals(administrador.getPin())){
+             try{ //verificar si el pin ingresado es un entero
+                 int pinNuevo = Integer.parseInt(txtPinAnterior.getText());
+                 if (pinNuevo <= 9999 && pinNuevo >= 1000){
+                     administrador.setPin(txtPinAnterior.getText());
+                     JOptionPane.showMessageDialog(null, "Su PIN ha sido cambiado con éxito!");
+                 }
+                 else{
+                     JOptionPane.showMessageDialog(null, "El PIN nuevo debe de ser de 4 digitos");
+                 }
+             }
+             catch(NumberFormatException e){
+                 JOptionPane.showMessageDialog(null, "El PIN nuevo debe de ser numeros enteros");
+             }
+         }
+         else{
+             JOptionPane.showMessageDialog(null, "El PIN anterior ingresado es erróneo");
+         }
+     }
     
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
         // TODO add your handling code here:
@@ -2337,7 +2454,7 @@ public class MenuAdministrador extends javax.swing.JFrame {
     }//GEN-LAST:event_btnPerfilMouseExited
 
     private void btnRestablecerContraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRestablecerContraActionPerformed
-
+        pbTabl.setSelectedIndex(6);
     }//GEN-LAST:event_btnRestablecerContraActionPerformed
 
     private void txtTelefonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTelefonoActionPerformed
@@ -3010,6 +3127,22 @@ public class MenuAdministrador extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnDescargarMultaHechaPDFActionPerformed
 
+    private void txtPinAnteriorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPinAnteriorActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtPinAnteriorActionPerformed
+
+    private void txtPinNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPinNuevoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtPinNuevoActionPerformed
+
+    private void rondedBordes1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rondedBordes1ActionPerformed
+        cambiarPin();
+    }//GEN-LAST:event_rondedBordes1ActionPerformed
+
+    private void rondedBordes2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rondedBordes2ActionPerformed
+        pbTabl.setSelectedIndex(2);
+    }//GEN-LAST:event_rondedBordes2ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -3088,7 +3221,10 @@ public class MenuAdministrador extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel28;
@@ -3107,6 +3243,7 @@ public class MenuAdministrador extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
+    private javax.swing.JPanel jPanel8;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
@@ -3154,6 +3291,8 @@ public class MenuAdministrador extends javax.swing.JFrame {
     private com.tec.parquimetro.parquimetro.GUI.Componentes.PanelRedondo pnPerfil;
     private com.tec.parquimetro.parquimetro.GUI.Componentes.PanelRedondo pnReportes;
     private com.tec.parquimetro.parquimetro.GUI.Componentes.PanelRedondo pnlUsuarios;
+    private com.tec.parquimetro.parquimetro.GUI.RondedBordes rondedBordes1;
+    private com.tec.parquimetro.parquimetro.GUI.RondedBordes rondedBordes2;
     private com.tec.parquimetro.parquimetro.GUI.RondedBordes rondedBordes5;
     private javax.swing.JSpinner spnHoraFinal;
     private javax.swing.JSpinner spnHoraInicio;
@@ -3174,6 +3313,8 @@ public class MenuAdministrador extends javax.swing.JFrame {
     private javax.swing.JTextField txtIdentificacionU;
     private javax.swing.JTextField txtNombre1;
     private javax.swing.JTextField txtNombreU;
+    private javax.swing.JTextField txtPinAnterior;
+    private javax.swing.JTextField txtPinNuevo;
     private javax.swing.JTextField txtPrecio;
     private javax.swing.JTextField txtPt1Mail;
     private javax.swing.JTextField txtPt1MailU;

@@ -316,6 +316,8 @@ public class LoginJFrame extends javax.swing.JFrame {
         panelLogin.add(labelErrorPin, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 311, 219, -1));
 
         labelCrearCuenta.setBackground(new java.awt.Color(255, 255, 255));
+        labelCrearCuenta.setFont(new java.awt.Font("Dialog", 1, 11)); // NOI18N
+        labelCrearCuenta.setForeground(new java.awt.Color(204, 204, 204));
         labelCrearCuenta.setText("Para crear una cuenta:");
 
         botonRegistrarse.setText("Presione aquí");
@@ -343,8 +345,8 @@ public class LoginJFrame extends javax.swing.JFrame {
                         .addGap(167, 167, 167)
                         .addComponent(panelLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(panelVentanaLayout.createSequentialGroup()
-                        .addGap(418, 418, 418)
-                        .addComponent(labelCrearCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(413, 413, 413)
+                        .addComponent(labelCrearCuenta)
                         .addGap(4, 4, 4)
                         .addComponent(botonRegistrarse)))
                 .addGap(195, 195, 195))
