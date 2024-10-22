@@ -8,6 +8,7 @@ import com.tec.parquimetro.parquimetro.Clases.Administrador;
 import com.tec.parquimetro.parquimetro.Clases.Inspector;
 import com.tec.parquimetro.parquimetro.Clases.Login;
 import static com.tec.parquimetro.parquimetro.Clases.Login.cargarUsuarios;
+import com.tec.parquimetro.parquimetro.Clases.Parqueo;
 import com.tec.parquimetro.parquimetro.Clases.Persona;
 import com.tec.parquimetro.parquimetro.Clases.Usuario;
 import java.awt.Color;
@@ -138,24 +139,36 @@ public class LoginJFrame extends javax.swing.JFrame {
             //cargamos la lista de cuentas
             login1.setListaUsuarios(cargarUsuarios("listaUsuarios.txt"));
             //comprobar que el usuario con la identificacion
-            Persona usuarioAIngresar = login1.verificarIdentificacion(campoIdentificacion.getText()); //CAMBIAR A LO QUE EL USUARIO INGRESE
-            if (usuarioAIngresar == null){
+            
+            Persona usuarioAIngresar = login1.verificarIdentificacion(campoIdentificacion.getText()); //Busca la identificacion en el login
+            if (usuarioAIngresar == null){ //si la persona no existe
                 JOptionPane.showMessageDialog(null, "No existe una cuenta con esta identificacion", "ERROR", JOptionPane.ERROR_MESSAGE);
             }
             else{ //la identificacion le pertenece a un usuario
                 if (login1.verificarPin(new String(campoPin.getPassword()), usuarioAIngresar)) { //si retorna true quiere decir que el pin es correcto
                     //verificar que tipo de cuenta es
                     if (usuarioAIngresar instanceof Administrador){
+                        Administrador administrador = (Administrador) usuarioAIngresar; //convertimos de persona a administrador
                         //abrir app del Administrador
-                        System.out.println("SE ABRIO LA APP DE ADMIN");
+                        MenuAdministrador menuAdmin = new MenuAdministrador(administrador);
+                        menuAdmin.setVisible(true); 
+                        this.setVisible(false);
                     }
                     else if (usuarioAIngresar instanceof Inspector){
-                        System.out.println("SE ABRIO LA APP DE INSpector");
+                        Inspector inspector = (Inspector) usuarioAIngresar;
+                        //abrir app del inspector
+                        Parqueo parqueo = new Parqueo();
+                        parqueo.lecturaArchivo();
+                        MenuInspector menuInspector = new MenuInspector(inspector, parqueo);
+                        menuInspector.setVisible(false);
                     }
                     else if (usuarioAIngresar instanceof Usuario){
                         if (new File("Parametros.txt").exists()){ //comprobar si los parametros ya fueron configurados por el administrador
                             //abrir app del Usuario
-                            System.out.println("SE ABRIO LA APP DE USUARIO");
+                            Usuario usuario = (Usuario) usuarioAIngresar;
+                            MenuUsuario menuUsuario = new MenuUsuario(usuario);
+                            menuUsuario.setVisible(true);
+                            this.setVisible(false);
                         }
                         else {
                             JOptionPane.showMessageDialog(null, "El parquímetro no ha sido configurado por un administrador, ponerse en contacto con alguno", "ERROR", JOptionPane.ERROR_MESSAGE);
