@@ -309,6 +309,14 @@ public class MenuInspector extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         txtTerminal = new javax.swing.JTextField();
         jPanel3 = new javax.swing.JPanel();
+        jPanel4 = new javax.swing.JPanel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        txtPinAnterior = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
+        txtPinNuevo = new javax.swing.JTextField();
+        rondedBordes1 = new com.tec.parquimetro.parquimetro.GUI.RondedBordes();
+        rondedBordes2 = new com.tec.parquimetro.parquimetro.GUI.RondedBordes();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -1017,6 +1025,93 @@ public class MenuInspector extends javax.swing.JFrame {
 
         pbTabl.addTab("tab5", jPanel3);
 
+        jPanel4.setBackground(new java.awt.Color(57, 54, 66));
+
+        jLabel5.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel5.setText("Restablecer mi PIN");
+
+        jLabel6.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel6.setText("Ingrese el PIN anterior:");
+
+        txtPinAnterior.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtPinAnteriorActionPerformed(evt);
+            }
+        });
+
+        jLabel7.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel7.setText("Ingrese el nuevo PIN:");
+
+        rondedBordes1.setText("Restablecer PIN");
+        rondedBordes1.setColor1(new java.awt.Color(126, 217, 87));
+        rondedBordes1.setColor2(new java.awt.Color(126, 217, 87));
+        rondedBordes1.setColor3(new java.awt.Color(126, 217, 87));
+        rondedBordes1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rondedBordes1ActionPerformed(evt);
+            }
+        });
+
+        rondedBordes2.setText("Cancelar");
+        rondedBordes2.setColor1(new java.awt.Color(204, 102, 0));
+        rondedBordes2.setColor2(new java.awt.Color(204, 102, 0));
+        rondedBordes2.setColor3(new java.awt.Color(204, 102, 0));
+        rondedBordes2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rondedBordes2ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(295, 295, 295)
+                        .addComponent(jLabel5))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(161, 161, 161)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel7))
+                        .addGap(144, 144, 144)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtPinAnterior)
+                            .addComponent(txtPinNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(184, 184, 184)
+                        .addComponent(rondedBordes1, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(126, 126, 126)
+                        .addComponent(rondedBordes2, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(228, Short.MAX_VALUE))
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(82, 82, 82)
+                .addComponent(jLabel5)
+                .addGap(92, 92, 92)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(txtPinAnterior, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(97, 97, 97)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7)
+                    .addComponent(txtPinNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 124, Short.MAX_VALUE)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(rondedBordes2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(rondedBordes1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(94, 94, 94))
+        );
+
+        pbTabl.addTab("tab6", jPanel4);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -1141,16 +1236,7 @@ public class MenuInspector extends javax.swing.JFrame {
     }//GEN-LAST:event_btnReportesMouseExited
 
     private void btnRestablecerContraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRestablecerContraActionPerformed
-            String[] options = { "Si", "No" };
-            var selection = JOptionPane.showOptionDialog(null, "Esta segur@ de restablecer la contrasena?", "Alerta!!", 
-                                                              0, 3, null, options, options[0]);
-            if (selection == 0) {
-
-
-              }
-            else{
-                JOptionPane.showMessageDialog(null, "No se actualizara!");
-            }
+            pbTabl.setSelectedIndex(5);
     }//GEN-LAST:event_btnRestablecerContraActionPerformed
 
         //VALIDACIONES DATOS DE PERFIL
@@ -1252,6 +1338,28 @@ public class MenuInspector extends javax.swing.JFrame {
         else
             return false;
     
+    }
+       
+    //funcion que permite cambiar el PIN del Inspector
+    public void cambiarPin(){
+        if (txtPinAnterior.getText().equals(inspector.getPin())){
+            try{ //verificar si el pin ingresado es un entero
+                int pinNuevo = Integer.parseInt(txtPinAnterior.getText());
+                if (pinNuevo <= 9999 && pinNuevo >= 1000){
+                    inspector.setPin(txtPinAnterior.getText());
+                    JOptionPane.showMessageDialog(null, "Su PIN ha sido cambiado con éxito!");
+                 }
+                else{
+                    JOptionPane.showMessageDialog(null, "El PIN nuevo debe de ser de 4 digitos");
+                }
+            }
+            catch(NumberFormatException e){
+              JOptionPane.showMessageDialog(null, "El PIN nuevo debe de ser numeros enteros");
+            }
+        }
+        else{
+          JOptionPane.showMessageDialog(null, "El PIN anterior ingresado es erróneo");
+        }
     }
     
     
@@ -1538,6 +1646,18 @@ public class MenuInspector extends javax.swing.JFrame {
         sorter.setSortKeys(Arrays.asList(new RowSorter.SortKey(0, SortOrder.ASCENDING)));
     }//GEN-LAST:event_cbEspaciosGeneralItemStateChanged
 
+    private void txtPinAnteriorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPinAnteriorActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtPinAnteriorActionPerformed
+
+    private void rondedBordes1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rondedBordes1ActionPerformed
+        cambiarPin();
+    }//GEN-LAST:event_rondedBordes1ActionPerformed
+
+    private void rondedBordes2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rondedBordes2ActionPerformed
+        pbTabl.setSelectedIndex(3);
+    }//GEN-LAST:event_rondedBordes2ActionPerformed
+
      private void generarReporteGeneralEspacios(List<Espacio>  espacios){
         
         int cantidadEspacios=0;
@@ -1673,10 +1793,14 @@ public class MenuInspector extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
@@ -1702,6 +1826,8 @@ public class MenuInspector extends javax.swing.JFrame {
     private com.tec.parquimetro.parquimetro.GUI.Componentes.PanelRedondo pnPerfil;
     private com.tec.parquimetro.parquimetro.GUI.Componentes.PanelRedondo pnPrincipal;
     private com.tec.parquimetro.parquimetro.GUI.Componentes.PanelRedondo pnReportes;
+    private com.tec.parquimetro.parquimetro.GUI.RondedBordes rondedBordes1;
+    private com.tec.parquimetro.parquimetro.GUI.RondedBordes rondedBordes2;
     private com.tec.parquimetro.parquimetro.GUI.RondedBordes rondedBordes5;
     private javax.swing.JTextArea taDireccionFisica;
     private javax.swing.JTable tblEspaciosGeneral;
@@ -1710,6 +1836,8 @@ public class MenuInspector extends javax.swing.JFrame {
     private javax.swing.JTextField txtIdentificacion;
     private javax.swing.JTextField txtNombre1;
     private javax.swing.JTextField txtNumParqueo;
+    private javax.swing.JTextField txtPinAnterior;
+    private javax.swing.JTextField txtPinNuevo;
     private javax.swing.JTextField txtPlaca;
     private javax.swing.JTextField txtPt1Mail;
     private javax.swing.JTextField txtPt2Mail;

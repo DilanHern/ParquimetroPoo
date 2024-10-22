@@ -376,6 +376,14 @@ public class MenuUsuario extends javax.swing.JFrame {
         btnActualizarPerfil = new com.tec.parquimetro.parquimetro.GUI.RondedBordes();
         btnRestablecerContra = new com.tec.parquimetro.parquimetro.GUI.RondedBordes();
         btnMetodoPago = new com.tec.parquimetro.parquimetro.GUI.RondedBordes();
+        jPanel8 = new javax.swing.JPanel();
+        jLabel24 = new javax.swing.JLabel();
+        jLabel25 = new javax.swing.JLabel();
+        txtPinAnterior = new javax.swing.JTextField();
+        jLabel31 = new javax.swing.JLabel();
+        txtPinNuevo = new javax.swing.JTextField();
+        btnRestablecerPin = new com.tec.parquimetro.parquimetro.GUI.RondedBordes();
+        btnCancelar = new com.tec.parquimetro.parquimetro.GUI.RondedBordes();
 
         jMenuItem1.setText("jMenuItem1");
 
@@ -879,7 +887,7 @@ public class MenuUsuario extends javax.swing.JFrame {
                 .addGroup(pnVehiculosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnVehiculosLayout.createSequentialGroup()
                         .addComponent(tpPanelModificaciones, javax.swing.GroupLayout.PREFERRED_SIZE, 727, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(63, Short.MAX_VALUE))
+                        .addContainerGap(142, Short.MAX_VALUE))
                     .addGroup(pnVehiculosLayout.createSequentialGroup()
                         .addGroup(pnVehiculosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(btnAgregarVehiculo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -978,7 +986,7 @@ public class MenuUsuario extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(32, 32, 32)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 724, Short.MAX_VALUE)
+                    .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 800, Short.MAX_VALUE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel10)
                         .addGap(18, 18, 18)
@@ -1003,7 +1011,7 @@ public class MenuUsuario extends javax.swing.JFrame {
                     .addComponent(jLabel10)
                     .addComponent(lblCantidadEspacios)
                     .addComponent(btnReportesDisponibles, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(73, Short.MAX_VALUE))
+                .addContainerGap(53, Short.MAX_VALUE))
         );
 
         tpReportes.addTab("EspaciosVacios", jPanel2);
@@ -1014,11 +1022,11 @@ public class MenuUsuario extends javax.swing.JFrame {
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 804, Short.MAX_VALUE)
+            .addGap(0, 880, Short.MAX_VALUE)
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 534, Short.MAX_VALUE)
+            .addGap(0, 514, Short.MAX_VALUE)
         );
 
         tpReportes.addTab("principal", jPanel3);
@@ -1104,7 +1112,7 @@ public class MenuUsuario extends javax.swing.JFrame {
                         .addComponent(lblCantidadEspaciosUtilizados, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnDescargarUtilizados, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 724, Short.MAX_VALUE))
+                    .addComponent(jScrollPane6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 800, Short.MAX_VALUE))
                 .addGap(48, 48, 48))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -1128,7 +1136,7 @@ public class MenuUsuario extends javax.swing.JFrame {
                             .addComponent(jLabel26))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(dcInicioParqueoUtilizado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1222,7 +1230,7 @@ public class MenuUsuario extends javax.swing.JFrame {
                         .addComponent(lblCantidadMultas, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnDescargarMultas, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane8, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 724, Short.MAX_VALUE))
+                    .addComponent(jScrollPane8, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 800, Short.MAX_VALUE))
                 .addGap(48, 48, 48))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel9Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -1246,7 +1254,7 @@ public class MenuUsuario extends javax.swing.JFrame {
                             .addComponent(jLabel30))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(dcInicioMultas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1420,7 +1428,7 @@ public class MenuUsuario extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lblVehiculoExtra, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(lblTiempoTotal, javax.swing.GroupLayout.DEFAULT_SIZE, 323, Short.MAX_VALUE)))
+                        .addComponent(lblTiempoTotal, javax.swing.GroupLayout.DEFAULT_SIZE, 402, Short.MAX_VALUE)))
                 .addGap(22, 22, 22))
         );
         pnlAgregarTiempoLayout.setVerticalGroup(
@@ -1470,7 +1478,7 @@ public class MenuUsuario extends javax.swing.JFrame {
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 291, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(pnlAgregarTiempo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(34, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pbTabl.addTab("", pnMisParqueos);
@@ -1492,14 +1500,14 @@ public class MenuUsuario extends javax.swing.JFrame {
             .addGroup(pnPrincipalLayout.createSequentialGroup()
                 .addGap(328, 328, 328)
                 .addComponent(lblPerfil5)
-                .addContainerGap(386, Short.MAX_VALUE))
+                .addContainerGap(462, Short.MAX_VALUE))
         );
         pnPrincipalLayout.setVerticalGroup(
             pnPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnPrincipalLayout.createSequentialGroup()
                 .addGap(262, 262, 262)
                 .addComponent(lblPerfil5)
-                .addContainerGap(388, Short.MAX_VALUE))
+                .addContainerGap(369, Short.MAX_VALUE))
         );
 
         pbTabl.addTab("", pnPrincipal);
@@ -1592,14 +1600,15 @@ public class MenuUsuario extends javax.swing.JFrame {
                                     .addComponent(txtCodigoTarjeta, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGap(94, 94, 94))
                     .addGroup(pnPerfil1Layout.createSequentialGroup()
-                        .addComponent(btnVolverPerfil, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnActualizarTarjeta, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(248, 248, 248))
-                    .addGroup(pnPerfil1Layout.createSequentialGroup()
-                        .addComponent(lblNombre2)
-                        .addGap(181, 181, 181)
-                        .addComponent(lblNombre5)
+                        .addGroup(pnPerfil1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(pnPerfil1Layout.createSequentialGroup()
+                                .addComponent(btnVolverPerfil, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(btnActualizarTarjeta, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(pnPerfil1Layout.createSequentialGroup()
+                                .addComponent(lblNombre2)
+                                .addGap(181, 181, 181)
+                                .addComponent(lblNombre5)))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnPerfil1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -1632,7 +1641,7 @@ public class MenuUsuario extends javax.swing.JFrame {
                 .addGroup(pnPerfil1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnVolverPerfil, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnActualizarTarjeta, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(184, Short.MAX_VALUE))
+                .addContainerGap(182, Short.MAX_VALUE))
         );
 
         pbTabl.addTab("", pnPerfil1);
@@ -1973,7 +1982,7 @@ public class MenuUsuario extends javax.swing.JFrame {
                     .addGroup(pnParquearLayout.createSequentialGroup()
                         .addGap(373, 373, 373)
                         .addComponent(lblPerfil17)))
-                .addGap(0, 17, Short.MAX_VALUE))
+                .addGap(0, 93, Short.MAX_VALUE))
         );
         pnParquearLayout.setVerticalGroup(
             pnParquearLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1988,7 +1997,7 @@ public class MenuUsuario extends javax.swing.JFrame {
                 .addComponent(btnConsultarEspacio, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(tpParquearEspacio, javax.swing.GroupLayout.PREFERRED_SIZE, 386, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(41, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pbTabl.addTab("", pnParquear);
@@ -2129,46 +2138,44 @@ public class MenuUsuario extends javax.swing.JFrame {
         pnPerfilLayout.setHorizontalGroup(
             pnPerfilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnPerfilLayout.createSequentialGroup()
-                .addContainerGap(147, Short.MAX_VALUE)
+                .addGap(100, 100, 100)
                 .addGroup(pnPerfilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnPerfilLayout.createSequentialGroup()
-                        .addGroup(pnPerfilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(pnPerfilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblIdentificacion)
+                            .addComponent(lblTelefono1)
+                            .addGroup(pnPerfilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(txtTelefono)
+                                .addComponent(txtIdentificacion, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(lblApellidos3)
+                            .addComponent(lblNombre1)
                             .addGroup(pnPerfilLayout.createSequentialGroup()
-                                .addGroup(pnPerfilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblIdentificacion)
-                                    .addComponent(lblTelefono1)
-                                    .addGroup(pnPerfilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addComponent(txtTelefono, javax.swing.GroupLayout.DEFAULT_SIZE, 237, Short.MAX_VALUE)
-                                        .addComponent(txtIdentificacion))
-                                    .addComponent(lblApellidos3)
-                                    .addComponent(lblNombre1)
-                                    .addGroup(pnPerfilLayout.createSequentialGroup()
-                                        .addComponent(txtPt1Mail, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(37, 37, 37)
-                                        .addComponent(lblApellidos2))
-                                    .addComponent(txtNombre1, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(49, 49, 49)
-                                .addGroup(pnPerfilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblApellidos)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnPerfilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(lblApellidos1)
-                                        .addComponent(lblTelefono2)
-                                        .addComponent(txtApellidos, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGroup(pnPerfilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 280, Short.MAX_VALUE)
-                                            .addComponent(txtPt2Mail)))))
-                            .addGroup(pnPerfilLayout.createSequentialGroup()
-                                .addComponent(btnRestablecerContra, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(btnActualizarPerfil, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(184, 184, 184)))
-                        .addGap(85, 85, 85))
+                                .addComponent(txtPt1Mail, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(37, 37, 37)
+                                .addComponent(lblApellidos2))
+                            .addComponent(txtNombre1, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(49, 49, 49)
+                        .addGroup(pnPerfilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblApellidos)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnPerfilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(lblApellidos1)
+                                .addComponent(lblTelefono2)
+                                .addComponent(txtApellidos, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(pnPerfilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jScrollPane1)
+                                    .addComponent(txtPt2Mail, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnPerfilLayout.createSequentialGroup()
+                        .addComponent(btnRestablecerContra, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnActualizarPerfil, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(184, 184, 184))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnPerfilLayout.createSequentialGroup()
                         .addComponent(btnMetodoPago, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(319, 319, 319))
+                        .addGap(234, 234, 234))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnPerfilLayout.createSequentialGroup()
                         .addComponent(lblPerfil)
-                        .addGap(374, 374, 374))))
+                        .addGap(289, 289, 289)))
+                .addContainerGap(211, Short.MAX_VALUE))
         );
         pnPerfilLayout.setVerticalGroup(
             pnPerfilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2218,6 +2225,50 @@ public class MenuUsuario extends javax.swing.JFrame {
 
         pbTabl.addTab("", pnPerfil);
 
+        jPanel8.setBackground(new java.awt.Color(57, 54, 66));
+        jPanel8.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel24.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jLabel24.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel24.setText("Restablecer mi PIN");
+        jPanel8.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 110, -1, -1));
+
+        jLabel25.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jLabel25.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel25.setText("Ingrese el PIN anterior:");
+        jPanel8.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(216, 216, -1, -1));
+        jPanel8.add(txtPinAnterior, new org.netbeans.lib.awtextra.AbsoluteConstraints(488, 209, 139, 36));
+
+        jLabel31.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jLabel31.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel31.setText("Ingrese el PIN anterior:");
+        jPanel8.add(jLabel31, new org.netbeans.lib.awtextra.AbsoluteConstraints(216, 353, -1, -1));
+        jPanel8.add(txtPinNuevo, new org.netbeans.lib.awtextra.AbsoluteConstraints(488, 348, 139, 32));
+
+        btnRestablecerPin.setText("Restablecer PIN");
+        btnRestablecerPin.setColor1(new java.awt.Color(126, 217, 87));
+        btnRestablecerPin.setColor2(new java.awt.Color(126, 217, 87));
+        btnRestablecerPin.setColor3(new java.awt.Color(126, 217, 87));
+        btnRestablecerPin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRestablecerPinActionPerformed(evt);
+            }
+        });
+        jPanel8.add(btnRestablecerPin, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 490, 135, 46));
+
+        btnCancelar.setText("Cancelar");
+        btnCancelar.setColor1(new java.awt.Color(204, 102, 0));
+        btnCancelar.setColor2(new java.awt.Color(204, 102, 0));
+        btnCancelar.setColor3(new java.awt.Color(204, 102, 0));
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarActionPerformed(evt);
+            }
+        });
+        jPanel8.add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 490, 105, 46));
+
+        pbTabl.addTab("tab8", jPanel8);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -2226,17 +2277,16 @@ public class MenuUsuario extends javax.swing.JFrame {
                 .addGap(24, 24, 24)
                 .addComponent(panelRedondo1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(pbTabl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(25, Short.MAX_VALUE))
+                .addComponent(pbTabl)
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(23, 23, 23)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(pbTabl, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(panelRedondo1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(14, Short.MAX_VALUE))
+                    .addComponent(panelRedondo1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(pbTabl, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
         );
 
         pbTabl.getAccessibleContext().setAccessibleName("principal");
@@ -2249,8 +2299,8 @@ public class MenuUsuario extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, 0)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -2720,17 +2770,7 @@ public class MenuUsuario extends javax.swing.JFrame {
     }//GEN-LAST:event_btnActualizarPerfilActionPerformed
 
     private void btnRestablecerContraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRestablecerContraActionPerformed
-            
-            String[] options = { "Si", "No" };
-            var selection = JOptionPane.showOptionDialog(null, "Esta segur@ de restablecer la contrasena?", "Alerta!!", 
-                                                              0, 3, null, options, options[0]);
-            if (selection == 0) {
-
-
-              }
-            else{
-                JOptionPane.showMessageDialog(null, "No se actualizara!");
-            }
+        pbTabl.setSelectedIndex(7); 
     }//GEN-LAST:event_btnRestablecerContraActionPerformed
 
     private void btnMetodoPagoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMetodoPagoActionPerformed
@@ -3974,6 +4014,35 @@ public class MenuUsuario extends javax.swing.JFrame {
          tpParquearEspacio.setSelectedIndex(2);
     }//GEN-LAST:event_btnConsultarOtroEspacio2ActionPerformed
 
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+        pbTabl.setSelectedIndex(6);
+    }//GEN-LAST:event_btnCancelarActionPerformed
+
+    public void cambiarPin(){
+         if (txtPinAnterior.getText().equals(usuario.getPin())){
+             try{ //verificar si el pin ingresado es un entero
+                 int pinNuevo = Integer.parseInt(txtPinAnterior.getText());
+                 if (pinNuevo <= 9999 && pinNuevo >= 1000){
+                     usuario.setPin(txtPinAnterior.getText());
+                     JOptionPane.showMessageDialog(null, "Su PIN ha sido cambiado con éxito!");
+                 }
+                 else{
+                     JOptionPane.showMessageDialog(null, "El PIN nuevo debe de ser de 4 digitos");
+                 }
+             }
+             catch(NumberFormatException e){
+                 JOptionPane.showMessageDialog(null, "El PIN nuevo debe de ser numeros enteros");
+             }
+         }
+         else{
+             JOptionPane.showMessageDialog(null, "El PIN anterior ingresado es erróneo");
+         }
+     }
+    
+    private void btnRestablecerPinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRestablecerPinActionPerformed
+        cambiarPin();
+    }//GEN-LAST:event_btnRestablecerPinActionPerformed
+
     private void cargaTablaEspaciosUtilzados(LocalDate inicio, LocalDate finalF){
     
             List<TicketParqueo> lista = usuario.listarParqueosUtilizados(inicio, finalF);
@@ -4248,6 +4317,7 @@ public class MenuUsuario extends javax.swing.JFrame {
     private com.tec.parquimetro.parquimetro.GUI.RondedBordes btnActualizarPerfil;
     private com.tec.parquimetro.parquimetro.GUI.RondedBordes btnActualizarTarjeta;
     private com.tec.parquimetro.parquimetro.GUI.RondedBordes btnAgregarVehiculo;
+    private com.tec.parquimetro.parquimetro.GUI.RondedBordes btnCancelar;
     private com.tec.parquimetro.parquimetro.GUI.RondedBordes btnCerrarSesion;
     private com.tec.parquimetro.parquimetro.GUI.RondedBordes btnConfirmarActualzacionVehiculo;
     private com.tec.parquimetro.parquimetro.GUI.RondedBordes btnConfirmarAgregarVehiculo;
@@ -4268,6 +4338,7 @@ public class MenuUsuario extends javax.swing.JFrame {
     private com.tec.parquimetro.parquimetro.GUI.RondedBordes btnReportesDisponibles;
     private com.tec.parquimetro.parquimetro.GUI.RondedBordes btnRepostarEspacio;
     private com.tec.parquimetro.parquimetro.GUI.RondedBordes btnRestablecerContra;
+    private com.tec.parquimetro.parquimetro.GUI.RondedBordes btnRestablecerPin;
     private com.tec.parquimetro.parquimetro.GUI.RondedBordes btnVolverPerfil;
     private com.tec.parquimetro.parquimetro.GUI.RondedBordes btnVolverVehiculos2;
     private com.tec.parquimetro.parquimetro.GUI.RondedBordes btnVolverVehiculos3;
@@ -4293,12 +4364,15 @@ public class MenuUsuario extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
+    private javax.swing.JLabel jLabel24;
+    private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel30;
+    private javax.swing.JLabel jLabel31;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -4313,6 +4387,7 @@ public class MenuUsuario extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
+    private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
@@ -4400,6 +4475,8 @@ public class MenuUsuario extends javax.swing.JFrame {
     private javax.swing.JTextField txtModeloAgregar;
     private javax.swing.JTextField txtNombre1;
     private javax.swing.JTextField txtNumeroTarjeta;
+    private javax.swing.JTextField txtPinAnterior;
+    private javax.swing.JTextField txtPinNuevo;
     private javax.swing.JTextField txtPlacaActualizar;
     private javax.swing.JTextField txtPlacaAgregar;
     private javax.swing.JTextField txtPt1Mail;
