@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package com.tec.parquimetro.parquimetro.Clases;
+import static com.tec.parquimetro.parquimetro.GUI.MenuUsuario.usuario;
 import java.util.ArrayList;
 import java.io.IOException;
 import java.io.File; //verificar si un archivo existe
@@ -28,6 +29,7 @@ public class Login {
     //constructor
     public Login() {
      listaUsuarios = new ArrayList<>(); 
+     listaUsuarios=cargarUsuarios("listaUsuarios.txt");
     }
     
     //setters 
@@ -56,6 +58,36 @@ public class Login {
             }
         }
         return null;
+    }
+    
+        //funcion verificarCorreo: esta funcion se encarga de verificar si el correo ingresado existe:
+    public Persona verificarCorreo(Correo correo){
+        for (Persona persona: listaUsuarios){
+            if (persona.getCorreo()== null){ //no hacer nada
+            }
+            else if (persona.getCorreo().getCorreo().equals(correo.getCorreo())){
+                return persona;
+            }
+        }
+        return null;
+    }
+    
+       //funcion verificarPlaca: esta funcion se encarga de verificar si placa ya existe:
+    public boolean verificarPlaca(String placa){
+        for (Persona persona: listaUsuarios){
+            if (persona instanceof Usuario usuarioCast){
+            
+                if(usuarioCast.getVehiculos()!=null){
+                
+                    for(Vehiculo v : usuarioCast.getVehiculos()){
+                        if(v.getPlaca().equals(placa))
+                            return true;
+                    }
+                }
+                
+            }
+        }
+        return false;
     }
     
     //funcion verificarContraseña: esta funcion se encarga verificar si el pin ingresado coincide con el del usuario:

@@ -16,12 +16,15 @@ import java.nio.channels.OverlappingFileLockException;
 import java.text.DecimalFormat;
 import java.time.Duration;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
 import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 public class Parqueo implements Serializable {
@@ -177,6 +180,59 @@ public class Parqueo implements Serializable {
     
     //metodos
     
+    //actualiza los espacios de manera automatica (en caso de haber cumplido el tiempo de parqueo)
+        
+    public void verificarReservados() {
+    
+        for(Espacio e : espacios){
+        
+            if(!e.getEstado()){ //esta ocupado
+            
+                TicketParqueo t =e.getTickets().getLast();
+                LocalDateTime fechaFinal = t.getHoraSistema().plusMinutes(t.getTiempoParqueo());
+                
+                if(LocalDateTime.now().isBefore(fechaFinal)){
+                
+                    //desaparcar el vehiculo
+                    e.setEstado(false);
+                    
+                    List<Persona> personas = Login.cargarUsuarios("listaUsuarios.txt");
+                    
+                    for (Persona persona: personas){
+                        if (persona instanceof Usuario usuarioCast){
+
+                            if(usuarioCast.getVehiculos()!=null){
+
+                                for(Vehiculo v : usuarioCast.getVehiculos()){
+                                    if(v.getPlaca().equals(t.getVehiculo().getPlaca())){
+                                    
+                                        v.agregarTicket(t);
+                                        v.establecerTicketVigente(null);
+
+                                        e.removerVehiculo(v.getPlaca());
+
+                                        v.setEspacio(null);
+
+                                        this.cargarArchivo();
+                                    }
+                                  }
+                             }
+
+                        }
+                    }
+                    try {
+                        Login.guardarUsuarios("listaUsuarios.txt", (ArrayList<Persona>) personas);
+                    } catch (IOException ex) {
+                        Logger.getLogger(Parqueo.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+            
+            }
+        
+        }
+    
+    }
+    
     public void actualizarParametros(Parqueo parqueo){
     
         System.out.println("yaaaa");
@@ -197,7 +253,7 @@ public class Parqueo implements Serializable {
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("Parametros.txt"))) {
                         // Escribir cada estudiante en el archivo
                        oos.writeObject(this);
-                        System.out.println("Archivo escrito con éxito.");
+                        
 
 
         } catch (OverlappingFileLockException  e) { //valida que el objeto no haya sido abierto o que se este utilizando en otra parte
@@ -226,6 +282,7 @@ public class Parqueo implements Serializable {
                         this.setTiempoMinimo(auxiliar.tiempoMinimo);
                         this.setEspacios(auxiliar.espacios);
                         this.setMultas(auxiliar.multas);
+                        verificarReservados();
                     } catch (EOFException e) { //validacion para que no llegue al final de laist, se genera un excepcion y esta hace que pare el ciclo
                         break;
                     } catch (ClassNotFoundException e) {
@@ -263,13 +320,13 @@ public class Parqueo implements Serializable {
    }
    
     public ArrayList<Espacio> listarEspacios(){
-        
+        verificarReservados();
         return espacios;
     
     }
     
     public ArrayList<Espacio> listarEspaciosVacios(){
-        
+        verificarReservados();
         ArrayList<Espacio> espaciosVacios = new ArrayList<Espacio>();
         
         for(Espacio espacio : espacios){
@@ -284,7 +341,7 @@ public class Parqueo implements Serializable {
     }
     
    public ArrayList<Espacio> listarEspaciosOcupados(){
-        
+        verificarReservados();
         ArrayList<Espacio> espaciosOcupados = new ArrayList<Espacio>();
         
         for(Espacio espacio : espacios){
@@ -362,7 +419,7 @@ public class Parqueo implements Serializable {
     }
     
     public Espacio buscarEspacio(int numero){
-        
+        verificarReservados();
         
         //Busca entre los espacios registrados un espacio que coincida con el numero que se busca
         //E: Numero de tipo entero, valor a comparar
@@ -389,7 +446,7 @@ public class Parqueo implements Serializable {
    }
 
    public void generarEspaciosVaciosPDF(String rutaArchivo){
-       
+       verificarReservados();
         try {
             Document document = new Document();
             PdfWriter.getInstance(document, new FileOutputStream(rutaArchivo+".pdf"));
@@ -469,7 +526,7 @@ public class Parqueo implements Serializable {
    }
    
    public void generarEspaciosGeneralPDF(String rutaArchivo){
-       
+       verificarReservados();
         try {
             Document document = new Document();
             PdfWriter.getInstance(document, new FileOutputStream(rutaArchivo+".pdf"));
@@ -565,7 +622,7 @@ public class Parqueo implements Serializable {
    }
  
       public void generarEspaciosOcupadosPDF(String rutaArchivo){
-       
+       verificarReservados();
         try {
             Document document = new Document();
             PdfWriter.getInstance(document, new FileOutputStream(rutaArchivo+".pdf"));
@@ -688,7 +745,7 @@ public class Parqueo implements Serializable {
    }
       
       public long obtenerIngresoMultaDiario(LocalDate dia){
-          System.out.println("900");
+          verificarReservados();
           long ingresos =0;
           if(this.multas!=null)
             for(Multa multa : this.multas){
@@ -702,7 +759,7 @@ public class Parqueo implements Serializable {
       }
       
       public void generaIngresosMultasPDF(String rutaArchivo, LocalDate inicio, LocalDate finalF){
-       
+       verificarReservados();
         try {
                 Document document = new Document();
                 PdfWriter.getInstance(document, new FileOutputStream(rutaArchivo+".pdf"));
@@ -794,7 +851,7 @@ public class Parqueo implements Serializable {
    }
       
       private long calcularMontoEstacionamiento(LocalDate dia){
-      
+      verificarReservados();
        long ingresos=0;
           
        List<Persona> personas = new ArrayList<Persona>();
@@ -821,7 +878,7 @@ public class Parqueo implements Serializable {
       }
       
    public void generaIngresosEstacionamientoPDF(String rutaArchivo, LocalDate inicio, LocalDate finalF){
-       
+       verificarReservados();
         try {
                 Document document = new Document();
                 PdfWriter.getInstance(document, new FileOutputStream(rutaArchivo+".pdf"));
@@ -910,7 +967,7 @@ public class Parqueo implements Serializable {
    }
    
    private int[] obtenerTiempoUso(int espacio, LocalDate dia){
-   
+       verificarReservados();
        int[] calculos = new int[2];
        
        int ingresos=0;
@@ -935,7 +992,7 @@ public class Parqueo implements Serializable {
    
    
       public void generarEspaciosUsadosPDF(String rutaArchivo, LocalDate inicio, LocalDate finalF){
-       
+       verificarReservados();
         try {
                 Document document = new Document();
                 PdfWriter.getInstance(document, new FileOutputStream(rutaArchivo+".pdf"));
@@ -1053,7 +1110,7 @@ public class Parqueo implements Serializable {
       
       
     public void generarMultasHechasPDF(String rutaArchivo, LocalDate inicio, LocalDate finalF){
-       
+       verificarReservados();
        List<Multa> lista = this.multas;
             
             if(lista!=null){
@@ -1290,7 +1347,7 @@ public class Parqueo implements Serializable {
    }
 
      public PdfPTable generarEstadisticaDetallada(int espacio, LocalDate dia, PdfPTable tabla){
-    
+        verificarReservados();
         double minOcupadas=0;
         double horasVacio=0;
         Duration horasParqueoAbierto = Duration.between(horaInicio, horaFinal);
@@ -1325,8 +1382,8 @@ public class Parqueo implements Serializable {
        return tabla;
     }
     
-        public void generarEspaciosDetalladosPDF(String rutaArchivo, LocalDate inicio, LocalDate finalF, int inicioEsp, int finEsp){
-       
+    public void generarEspaciosDetalladosPDF(String rutaArchivo, LocalDate inicio, LocalDate finalF, int inicioEsp, int finEsp){
+       verificarReservados();
        List<Multa> lista = this.multas;
             
             if(lista!=null){
@@ -1457,7 +1514,7 @@ public class Parqueo implements Serializable {
    }
         
    public PdfPTable generarEstadisticaResumida(int espacio, LocalDate dia, PdfPTable tabla){
-    
+                verificarReservados();
                 double minOcupadas=0;
                 double horasVacio=0;
                 Duration horasParqueoAbierto = Duration.between(horaInicio, horaFinal);

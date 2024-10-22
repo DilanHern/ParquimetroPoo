@@ -2790,7 +2790,7 @@ public class MenuAdministrador extends javax.swing.JFrame {
        String identificacionGeneral;
         LocalDate fechaIngreso;
         int telefono;
-        
+        Login login = new Login();
         
         if(validarNombre(txtNombre1.getText())){
         
@@ -2806,35 +2806,45 @@ public class MenuAdministrador extends javax.swing.JFrame {
                                      if(validarCorreo(txtPt1Mail.getText(), txtPt2Mail.getText())){
                                      
                                          
-                                         //Almacena los datos de los campos de texto en las variables para ser alamacenadas
-                                       nombre = txtNombre1.getText();
-                                       apellidos= txtApellidos.getText();
-                                       direccionFisica = taDireccionFisica.getText();
-                                       identificacion = txtIdentificacion.getText();
-                                       pt1Correo = txtPt1Mail.getText();
-                                       pt2Correo =  txtPt2Mail.getText();
-                                       telefono = Integer.valueOf(txtTelefono.getText());
-                                       Correo correo = new Correo(pt1Correo, pt2Correo);
-                                       fechaIngreso = LocalDate.now();
-                                       
-                                       //Almacena la identificacion del usuario anteriormente de ser modificada
-                                       identificacionGeneral = administrador.getIdentificacion();
-                                       
-                                       Administrador  admin = new Administrador(nombre, apellidos,telefono, direccionFisica, fechaIngreso, identificacion,"", correo);
-                                       
-                                       //modifica la informacion modificada en el archivo de datos
-                                       administrador.actualizarDatos(admin);
-                                        
-                                        actualizarInformacion(administrador, identificacionGeneral);
-                                         labelBienvenido.setText(administrador.getNombre() + " " + administrador.getApellidos());
-                                        lblId.setText(administrador.getIdentificacion());
-                                       JOptionPane.showMessageDialog(null, "Datos actualizados existosamente!");
-                                       
+                                         if(login.verificarIdentificacion(txtIdentificacion.getText())!=null){
                                          
-                                         String cuerpo = "Se le informa la actualizacion de sus datos personales en Parquimetro cartago->\n Nombre: " + administrador.getNombre() + "\n" + "Apellidos: " + administrador.getApellidos() + "\n" + "Direccion fisica: " + administrador.getDireccionFisica() + "\n" + 
-                                    "Identificacion: " + administrador.getIdentificacion() + "\n" + "Telefono: " + administrador.getTelefono();
-                                    crearEmail(cuerpo, "ACTUALIZACION DE SUS DATOS PERSONALES", administrador.getCorreo().getCorreo());
-                                    enviarEmail();
+                                                        //Almacena los datos de los campos de texto en las variables para ser alamacenadas
+                                              nombre = txtNombre1.getText();
+                                              apellidos= txtApellidos.getText();
+                                              direccionFisica = taDireccionFisica.getText();
+                                              identificacion = txtIdentificacion.getText();
+                                              pt1Correo = txtPt1Mail.getText();
+                                              pt2Correo =  txtPt2Mail.getText();
+                                              telefono = Integer.valueOf(txtTelefono.getText());
+                                              Correo correo = new Correo(pt1Correo, pt2Correo);
+                                              fechaIngreso = LocalDate.now();
+
+                                              if(login.verificarCorreo(correo) != null){
+
+                                                    //Almacena la identificacion del usuario anteriormente de ser modificada
+                                                    identificacionGeneral = administrador.getIdentificacion();
+
+                                                    Administrador  admin = new Administrador(nombre, apellidos,telefono, direccionFisica, fechaIngreso, identificacion,"", correo);
+
+                                                    //modifica la informacion modificada en el archivo de datos
+                                                    administrador.actualizarDatos(admin);
+
+                                                     actualizarInformacion(administrador, identificacionGeneral);
+                                                      labelBienvenido.setText(administrador.getNombre() + " " + administrador.getApellidos());
+                                                     lblId.setText(administrador.getIdentificacion());
+                                                    JOptionPane.showMessageDialog(null, "Datos actualizados existosamente!");
+
+
+                                                      String cuerpo = "Se le informa la actualizacion de sus datos personales en Parquimetro cartago->\n Nombre: " + administrador.getNombre() + "\n" + "Apellidos: " + administrador.getApellidos() + "\n" + "Direccion fisica: " + administrador.getDireccionFisica() + "\n" + 
+                                                 "Identificacion: " + administrador.getIdentificacion() + "\n" + "Telefono: " + administrador.getTelefono();
+                                                 crearEmail(cuerpo, "ACTUALIZACION DE SUS DATOS PERSONALES", administrador.getCorreo().getCorreo());
+                                                 enviarEmail();
+                                             
+                                              }else{
+                                            JOptionPane.showMessageDialog(null, "El correo ya existe!");}
+                                         } else{
+                                            JOptionPane.showMessageDialog(null, "La identificacion ya existe!");
+                                       }
                                          
                                      }
                                    
@@ -2958,62 +2968,75 @@ public class MenuAdministrador extends javax.swing.JFrame {
                            if(validarConversion(txtTelefonoU.getText())){
                            
                                if(validarTelefono(Integer.parseInt(txtTelefonoU.getText()))){
-                               
+                                   
+                                   if(login.verificarIdentificacion(txtIdentificacion.getText())!=null){
+
                                             String pin = generarPin();
 
-                                          //Almacena los datos de los campos de texto en las variables para ser alamacenadas
-                                           nombre = txtNombreU.getText();
-                                           apellidos= txtApellidosU.getText();
-                                           direccionFisica = taDireccionFisicaU.getText();
-                                           identificacion = txtIdentificacionU.getText();
-                                           pt1Correo = txtPt1MailU.getText();
-                                           pt2Correo =  txtPt2MailU.getText();
-                                           telefono = Integer.valueOf(txtTelefonoU.getText());
-                                           correo = new Correo(pt1Correo, pt2Correo);
-                                           fechaIngreso =  dcFechaIngreso.getDate().toInstant()
-                                            .atZone(ZoneId.systemDefault())
-                                            .toLocalDate();
-                                           
-                                            if(cbTipoUsuario.getSelectedItem() == "Administrador"){
+                                              //Almacena los datos de los campos de texto en las variables para ser alamacenadas
+                                               nombre = txtNombreU.getText();
+                                               apellidos= txtApellidosU.getText();
+                                               direccionFisica = taDireccionFisicaU.getText();
+                                               identificacion = txtIdentificacionU.getText();
+                                               pt1Correo = txtPt1MailU.getText();
+                                               pt2Correo =  txtPt2MailU.getText();
+                                               telefono = Integer.valueOf(txtTelefonoU.getText());
+                                               correo = new Correo(pt1Correo, pt2Correo);
+                                               fechaIngreso =  dcFechaIngreso.getDate().toInstant()
+                                                .atZone(ZoneId.systemDefault())
+                                                .toLocalDate();
 
-                                                Persona  admin = new Administrador(nombre, apellidos,telefono, direccionFisica, fechaIngreso, identificacion,pin, correo);
-                                                login.agregarPersona(admin);
-                                                String cuerpo = "Se le informa el registro como administrador en el sistema Parquimetro Cartago, su PIN es -> "+pin;
-                                                 crearEmail(cuerpo, "REGISTRO EN EL SISTEMA", correo.getCorreo());
-                                                 enviarEmail();
-                                                  JOptionPane.showMessageDialog(null, "Usuario guardado existosamente!");
-                                                    pbTabl.setSelectedIndex(3);
-                                                    
-                                                    try{
-                                                        cargarTablaUsuarios();
-                                                     } catch (ClassNotFoundException ex) {
-                                                          System.out.println("");
-                                                     }
-                                            }
-                                            else{
+                                               if(login.verificarCorreo(correo) != null){
 
-                                                if(validarTerminalInspeccion(txtTerminal.getText())){
+                                                        if(cbTipoUsuario.getSelectedItem() == "Administrador"){
 
-                                                    terminal = txtTerminal.getText();
-                                                    Persona  inspector = new Inspector(nombre, apellidos,telefono, direccionFisica, fechaIngreso, identificacion,pin,terminal, correo);
-                                                    login.agregarPersona(inspector);
-                                                    String cuerpo = "Se le informa el registro como inspector en el sistema Parquimetro Cartago, su PIN es -> "+pin;
-                                                    crearEmail(cuerpo, "REGISTRO EN EL SISTEMA", correo.getCorreo());
-                                                    enviarEmail();
-                                                    JOptionPane.showMessageDialog(null, "Usuario guardado existosamente!");
-                                                    pbTabl.setSelectedIndex(3);
-                                               }
-                                                else{
-                                                     JOptionPane.showMessageDialog(null, "La terminal debe tener 6 caracteres!");
-                                                }
-                                             try{
-                                                cargarTablaUsuarios();
-                                             } catch (ClassNotFoundException ex) {
-                                                  System.out.println("");
-                                             }
+                                                             Persona  admin = new Administrador(nombre, apellidos,telefono, direccionFisica, fechaIngreso, identificacion,pin, correo);
+                                                             login.agregarPersona(admin);
+                                                             String cuerpo = "Se le informa el registro como administrador en el sistema Parquimetro Cartago, su PIN es -> "+pin;
+                                                              crearEmail(cuerpo, "REGISTRO EN EL SISTEMA", correo.getCorreo());
+                                                              enviarEmail();
+                                                               JOptionPane.showMessageDialog(null, "Usuario guardado existosamente!");
+                                                                 pbTabl.setSelectedIndex(3);
+
+                                                                 try{
+                                                                     cargarTablaUsuarios();
+                                                                  } catch (ClassNotFoundException ex) {
+                                                                       System.out.println("");
+                                                                  }
+                                                         }
+                                                         else{
+
+                                                             if(validarTerminalInspeccion(txtTerminal.getText())){
+
+                                                                 terminal = txtTerminal.getText();
+                                                                 Persona  inspector = new Inspector(nombre, apellidos,telefono, direccionFisica, fechaIngreso, identificacion,pin,terminal, correo);
+                                                                 login.agregarPersona(inspector);
+                                                                 String cuerpo = "Se le informa el registro como inspector en el sistema Parquimetro Cartago, su PIN es -> "+pin;
+                                                                 crearEmail(cuerpo, "REGISTRO EN EL SISTEMA", correo.getCorreo());
+                                                                 enviarEmail();
+                                                                 JOptionPane.showMessageDialog(null, "Usuario guardado existosamente!");
+                                                                 pbTabl.setSelectedIndex(3);
+                                                            }
+                                                             else{
+                                                                  JOptionPane.showMessageDialog(null, "La terminal debe tener 6 caracteres!");
+                                                             }
+                                                          try{
+                                                             cargarTablaUsuarios();
+                                                          } catch (ClassNotFoundException ex) {
+                                                               System.out.println("");
+                                                          }
+
+
+                                                        }
+
+                                       } else{
+                                        JOptionPane.showMessageDialog(null, "El correo ya existe!");
                                    }
-                                   
-                                   
+                                       
+                                   }else{
+                                    JOptionPane.showMessageDialog(null, "La identificacion ya existe!");
+                               }
+                               
                                }
                                else{
                                     JOptionPane.showMessageDialog(null, "El telefono debe tener 8 digitos!");

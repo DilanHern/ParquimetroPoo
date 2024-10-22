@@ -21,8 +21,8 @@ import java.util.List;
 public class Parquimetro {
 
     public static void main(String[] args) throws ClassNotFoundException {
- /*       
-  Parqueo parqueo = new Parqueo(LocalTime.parse("08:30"), LocalTime.parse("17:30"), 1000, 30, 200);
+     
+ /* Parqueo parqueo = new Parqueo(LocalTime.parse("08:30"), LocalTime.parse("17:30"), 1000, 30, 200);
             parqueo.agregarEspacios(100, 110);
             List<Espacio> espacios = parqueo.getEspacios();
             Parqueo parqueo1 = new Parqueo();
@@ -65,13 +65,7 @@ public class Parquimetro {
          
          personas.add(usuario);
          personas.add(inspector);
-         personas.add(admin);
-         
-         Persona.grabarArchivo(personas);
-         
-         personas = new ArrayList<Persona>();
-         
-         Persona.lecturaArchivo(personas);*/
+         personas.add(admin);*/
         
 
          
@@ -114,8 +108,8 @@ public class Parquimetro {
       p.lecturaArchivo();
       MenuInspector menuIns  = new MenuInspector(ins,p);
       menuIns.setVisible(true);*/
-     Correo correo = new Correo("correo", "gmail.com");
-     Persona admin = new Administrador("Usuario", "Administrador", 12345678, "-", LocalDate.now(), "123456789", "8952", correo);
+     //Correo correo = new Correo("correo", "gmail.com");
+  //   Persona admin = new Administrador("Usuario", "Administrador", 12345678, "-", LocalDate.now(), "123456789", "8952", correo);
      
      LoginJFrame login = new LoginJFrame();
      login.setVisible(true);

@@ -1390,7 +1390,7 @@ public class MenuInspector extends javax.swing.JFrame {
        String terminal;
         LocalDate fechaIngreso;
         int telefono;
-        
+        Login login = new Login();
         if(validarNombre(txtNombre1.getText())){
         
                 if(validarApellidos(txtApellidos.getText())){
@@ -1404,39 +1404,45 @@ public class MenuInspector extends javax.swing.JFrame {
                                
                                     if(validarTerminalInspeccion(txtTerminal.getText())){
                                        
-                                        //Almacena los datos de los campos de texto en las variables para ser alamacenadas
-                                       nombre = txtNombre1.getText();
-                                       apellidos= txtApellidos.getText();
-                                       direccionFisica = taDireccionFisica.getText();
-                                       identificacion = txtIdentificacion.getText();
-                                       pt1Correo = txtPt1Mail.getText();
-                                       pt2Correo =  txtPt2Mail.getText();
-                                       terminal =  txtTerminal.getText();
-                                       telefono = Integer.valueOf(txtTelefono.getText());
-                                       Correo correo = new Correo(pt1Correo, pt2Correo);
-                                       fechaIngreso = LocalDate.now();
+                                         if(login.verificarIdentificacion(txtIdentificacion.getText())!=null){
                                        
-                                       //Almacena la identificacion del usuario anteriormente de ser modificada
-                                       identificacionGeneral = inspector.getIdentificacion();
-                                       
-                                       Inspector  inspector = new Inspector(nombre, apellidos,telefono, direccionFisica, fechaIngreso, identificacion,"", terminal,correo);
-                                       
-                                       //modifica la informacion modificada en el archivo de datos
-                                       inspector.actualizarDatos(inspector);
+                                            //Almacena los datos de los campos de texto en las variables para ser alamacenadas
+                                            nombre = txtNombre1.getText();
+                                            apellidos= txtApellidos.getText();
+                                            direccionFisica = taDireccionFisica.getText();
+                                            identificacion = txtIdentificacion.getText();
+                                            pt1Correo = txtPt1Mail.getText();
+                                            pt2Correo =  txtPt2Mail.getText();
+                                            telefono = Integer.valueOf(txtTelefono.getText());
+                                            Correo correo = new Correo(pt1Correo, pt2Correo);
+                                            fechaIngreso = LocalDate.now();
+                                            terminal =txtTerminal.getText();
+                                            if(login.verificarCorreo(correo) != null){
+                                                //Almacena la identificacion del usuario anteriormente de ser modificada
+                                                identificacionGeneral = inspector.getIdentificacion();
+
+                                                Inspector  inspector = new Inspector(nombre, apellidos,telefono, direccionFisica, fechaIngreso, identificacion,"", terminal,correo);
+
+                                                //modifica la informacion modificada en el archivo de datos
+                                                inspector.actualizarDatos(inspector);
+
+                                                 actualizarInformacion(inspector, identificacionGeneral);
+                                                  labelBienvenido.setText(inspector.getNombre() + " " + inspector.getApellidos());
+                                                 lblId.setText(inspector.getIdentificacion());
+                                                JOptionPane.showMessageDialog(null, "Datos actualizados existosamente!");
                                         
-                                        actualizarInformacion(inspector, identificacionGeneral);
-                                         labelBienvenido.setText(inspector.getNombre() + " " + inspector.getApellidos());
-                                        lblId.setText(inspector.getIdentificacion());
-                                       JOptionPane.showMessageDialog(null, "Datos actualizados existosamente!");
+                                                String cuerpo = "Nombre: " + inspector.getNombre() + "\n" + "Apellidos: " + inspector.getApellidos() + "\n" + "Direccion fisica: " + inspector.getDireccionFisica() + "\n" + 
+                                                "Identificacion: " + inspector.getIdentificacion() + "\n" + "Telefono: " + inspector.getTelefono();
+                                                crearEmail(cuerpo, "DATOS ACTUALIZADOS", inspector.getCorreo().getCorreo());
+                                                enviarEmail();
                                         
-                                        
-                                        
-                                        
-                                    String cuerpo = "Nombre: " + inspector.getNombre() + "\n" + "Apellidos: " + inspector.getApellidos() + "\n" + "Direccion fisica: " + inspector.getDireccionFisica() + "\n" + 
-                                    "Identificacion: " + inspector.getIdentificacion() + "\n" + "Telefono: " + inspector.getTelefono();
-                                    crearEmail(cuerpo, "DATOS ACTUALIZADOS", inspector.getCorreo().getCorreo());
-                                    enviarEmail();
-                                       
+                                            }else{
+                                            JOptionPane.showMessageDialog(null, "El correo ya existe!");
+                                       }
+                                     
+                                            }else{
+                                            JOptionPane.showMessageDialog(null, "La identificacion ya existe!");
+                                       }
                                        }
                                        else{
                                             JOptionPane.showMessageDialog(null, "La terminal debe tener 6 caracteres!");

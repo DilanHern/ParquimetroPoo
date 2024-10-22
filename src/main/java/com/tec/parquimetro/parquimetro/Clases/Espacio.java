@@ -52,6 +52,8 @@ public class Espacio implements Serializable{
         return tickets;
     }
     
+
+    
     public Vehiculo buscarVehiculo(String placa){
     
         for(Vehiculo obj : getVehiculos()){

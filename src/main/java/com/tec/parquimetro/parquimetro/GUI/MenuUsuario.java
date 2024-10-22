@@ -1963,27 +1963,26 @@ public class MenuUsuario extends javax.swing.JFrame {
         pnParquearLayout.setHorizontalGroup(
             pnParquearLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnParquearLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(pnParquearLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnParquearLayout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addGap(258, 258, 258))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnParquearLayout.createSequentialGroup()
-                        .addGroup(pnParquearLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(btnConsultarEspacio, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(pnParquearLayout.createSequentialGroup()
-                                .addComponent(txtEspacioConsultado, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(10, 10, 10)))
-                        .addGap(327, 327, 327))))
-            .addGroup(pnParquearLayout.createSequentialGroup()
                 .addGroup(pnParquearLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnParquearLayout.createSequentialGroup()
                         .addGap(14, 14, 14)
                         .addComponent(tpParquearEspacio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(pnParquearLayout.createSequentialGroup()
                         .addGap(373, 373, 373)
-                        .addComponent(lblPerfil17)))
-                .addGap(0, 93, Short.MAX_VALUE))
+                        .addComponent(lblPerfil17))
+                    .addGroup(pnParquearLayout.createSequentialGroup()
+                        .addGap(344, 344, 344)
+                        .addComponent(txtEspacioConsultado, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(0, 96, Short.MAX_VALUE))
+            .addGroup(pnParquearLayout.createSequentialGroup()
+                .addGroup(pnParquearLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnParquearLayout.createSequentialGroup()
+                        .addGap(273, 273, 273)
+                        .addComponent(jLabel3))
+                    .addGroup(pnParquearLayout.createSequentialGroup()
+                        .addGap(330, 330, 330)
+                        .addComponent(btnConsultarEspacio, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pnParquearLayout.setVerticalGroup(
             pnParquearLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1994,11 +1993,11 @@ public class MenuUsuario extends javax.swing.JFrame {
                 .addComponent(jLabel3)
                 .addGap(18, 18, 18)
                 .addComponent(txtEspacioConsultado, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnConsultarEspacio, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
+                .addComponent(btnConsultarEspacio, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(12, 12, 12)
                 .addComponent(tpParquearEspacio, javax.swing.GroupLayout.PREFERRED_SIZE, 386, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(24, Short.MAX_VALUE))
         );
 
         pbTabl.addTab("", pnParquear);
@@ -2695,7 +2694,7 @@ public class MenuUsuario extends javax.swing.JFrame {
         String identificacionGeneral;
         LocalDate fechaIngreso;
         int telefono;
-        
+        Login login = new Login();
         
         if(validarNombre(txtNombre1.getText())){
         
@@ -2709,37 +2708,46 @@ public class MenuUsuario extends javax.swing.JFrame {
                                if(validarTelefono(Integer.parseInt(txtTelefono.getText()))){
                                
                                    if(validarCorreo(txtPt1Mail.getText(), txtPt2Mail.getText())){
-                                   
-                                       //Almacena los datos de los campos de texto en las variables para ser alamacenadas
-                                       nombre = txtNombre1.getText();
-                                       apellidos= txtApellidos.getText();
-                                       direccionFisica = taDireccionFisica.getText();
-                                       identificacion = txtIdentificacion.getText();
-                                       parte1Correo = txtPt1Mail.getText();
-                                       parte2Correo =  txtPt2Mail.getText();
-                                       telefono = Integer.valueOf(txtTelefono.getText());
-                                       Correo correo = new Correo(parte1Correo, parte2Correo);
-                                       fechaIngreso = LocalDate.now();
-                                       System.out.println(fechaIngreso);
+                                       if(login.verificarIdentificacion(txtIdentificacion.getText())!=null){
                                        
-                                       //Almacena la identificacion del usuario anteriormente de ser modificada
-                                       identificacionGeneral = usuario.getIdentificacion();
-                                       Usuario usuarioActualizado = new Usuario(nombre, apellidos,telefono, direccionFisica, fechaIngreso, identificacion,"",0, correo);
-                                       
-                                       //modifica la informacion modificada en el archivo de datos
-                                       usuario.actualizarDatos(usuarioActualizado);
-                                        
-                                        actualizarInformacion(usuario, identificacionGeneral);
-                                         labelBienvenido.setText(usuario.getNombre() + " " + usuario.getApellidos());
-                                        lblId.setText(usuario.getIdentificacion());
-                                       JOptionPane.showMessageDialog(null, "Espere un momento por favor... Estamos procesando su informacion!");
-                                        //envio de correo
-                                        String cuerpo = "Estimad@ " +usuario.getNombre()+", se le informa la actualizacion de sus datos en el sistema Parquimetro Cartago-> Nombre: " + usuario.getNombre() + "\n" + "Apellidos: " + usuario.getApellidos() + "\n" + "Direccion fisica: " + usuario.getDireccionFisica() + "\n" + 
-                                        "Identificacion: " + usuario.getIdentificacion() + "\n" + "Telefono: " + usuario.getTelefono();
-                                        crearEmail(cuerpo, "DATOS PERSONALES ACTUALIZADOS", usuario.getCorreo().getCorreo());
-                                        enviarEmail();
-                                         JOptionPane.showMessageDialog(null, "Datos actualizados existosamente!");
-                                   }
+                                            //Almacena los datos de los campos de texto en las variables para ser alamacenadas
+                                            nombre = txtNombre1.getText();
+                                            apellidos= txtApellidos.getText();
+                                            direccionFisica = taDireccionFisica.getText();
+                                            identificacion = txtIdentificacion.getText();
+                                            parte1Correo = txtPt1Mail.getText();
+                                            parte2Correo =  txtPt2Mail.getText();
+                                            telefono = Integer.valueOf(txtTelefono.getText());
+                                            Correo correo = new Correo(parte1Correo, parte2Correo);
+                                            fechaIngreso = LocalDate.now();
+                                           
+                                            if(login.verificarCorreo(correo) != null){
+                                                
+                                                 //Almacena la identificacion del usuario anteriormente de ser modificada
+                                                identificacionGeneral = usuario.getIdentificacion();
+                                                Usuario usuarioActualizado = new Usuario(nombre, apellidos,telefono, direccionFisica, fechaIngreso, identificacion,"",0, correo);
+
+                                                //modifica la informacion modificada en el archivo de datos
+                                                usuario.actualizarDatos(usuarioActualizado);
+
+                                                 actualizarInformacion(usuario, identificacionGeneral);
+                                                  labelBienvenido.setText(usuario.getNombre() + " " + usuario.getApellidos());
+                                                 lblId.setText(usuario.getIdentificacion());
+                                                JOptionPane.showMessageDialog(null, "Espere un momento por favor... Estamos procesando su informacion!");
+                                                 //envio de correo
+                                                 String cuerpo = "Estimad@ " +usuario.getNombre()+", se le informa la actualizacion de sus datos en el sistema Parquimetro Cartago-> Nombre: " + usuario.getNombre() + "\n" + "Apellidos: " + usuario.getApellidos() + "\n" + "Direccion fisica: " + usuario.getDireccionFisica() + "\n" + 
+                                                 "Identificacion: " + usuario.getIdentificacion() + "\n" + "Telefono: " + usuario.getTelefono();
+                                                 crearEmail(cuerpo, "DATOS PERSONALES ACTUALIZADOS", usuario.getCorreo().getCorreo());
+                                                 enviarEmail();
+                                                  JOptionPane.showMessageDialog(null, "Datos actualizados existosamente!");
+
+                                            }} else{
+                                    JOptionPane.showMessageDialog(null, "El correo ya existe!");
+                                            
+                                           
+                                   }} else{
+                                    JOptionPane.showMessageDialog(null, "La identificacion ya existe!");
+                               }
                                    
                                }
                                else{
@@ -3468,31 +3476,33 @@ public class MenuUsuario extends javax.swing.JFrame {
         placa = txtPlacaAgregar.getText();
         marca = txtMarcaAgregar.getText();
         modelo = txtModeloAgregar.getText();
-        
+        Login login = new Login();
         //valida
         if(validarPlaca(placa)){
-                if(true){
-                if(validarModeloMarca(marca)){
+                if(login.verificarPlaca(placa)){
+                    if(validarModeloMarca(marca)){
+                        if(validarModeloMarca(modelo)){
 
-                    if(validarModeloMarca(modelo)){
+                                Vehiculo vehiculo = new Vehiculo(placa, modelo, marca, usuario);
+                                //agrega el vehiculo al usuario
+                                usuario.agregarVehiculo(vehiculo);
+                                JOptionPane.showMessageDialog(null, "Vehiculo agregado exitosamente");
 
-                            Vehiculo vehiculo = new Vehiculo(placa, modelo, marca, usuario);
-                            //agrega el vehiculo al usuario
-                            usuario.agregarVehiculo(vehiculo);
-                            JOptionPane.showMessageDialog(null, "Vehiculo agregado exitosamente");
-
-                            tpPanelModificaciones.setVisible(false);
-                            //refresca la tabla de vehiculos
-                            inicializarTablaVehiculos();
-                            btnAgregarVehiculo.setVisible(true);
-                            actualizarInformacion(usuario, usuario.getIdentificacion());
-                    }
-                    else
-                        JOptionPane.showMessageDialog(null, "Al ingresar un modelo debe tener menos de 15 caracteres");
+                                tpPanelModificaciones.setVisible(false);
+                                //refresca la tabla de vehiculos
+                                inicializarTablaVehiculos();
+                                btnAgregarVehiculo.setVisible(true);
+                                actualizarInformacion(usuario, usuario.getIdentificacion());
+                        }
+                        else
+                            JOptionPane.showMessageDialog(null, "Al ingresar un modelo debe tener menos de 15 caracteres");
+                     
                 }
                 else
                     JOptionPane.showMessageDialog(null, "Al ingresar una marca debe tener menos de 15 caracteres");
             }
+                else
+                    JOptionPane.showMessageDialog(null, "Ya existe esta placa registrada");
         }    
         else
              JOptionPane.showMessageDialog(null, "Debe ingresar la placa con 6 digitos");
@@ -3532,25 +3542,30 @@ public class MenuUsuario extends javax.swing.JFrame {
         placa = txtPlacaActualizar.getText();
         marca = txtMarcaActualizar.getText();
         modelo = txtModeloActualizar.getText();
+        Login login = new Login();
         
-        if(validarPlaca(placa)){
+        if(validarPlaca(placa) ){
         
-            if(validarModeloMarca(marca)){
-            
-                if(validarModeloMarca(modelo)){
-                    
-                        Vehiculo vehiculo = usuario.buscarVehiculo(lblPlaccaActualizar.getText());
-                        //actualiza el vehiculo con sus datos
-                        vehiculo.actualizarVehiculo(placa, modelo, marca);
-                        JOptionPane.showMessageDialog(null, "Vehiculo actualizado exitosamente");
-                        
-                        tpPanelModificaciones.setVisible(false);
-                        inicializarTablaVehiculos(); //refresca los datos de la tabla
-                        btnAgregarVehiculo.setVisible(true);
-                        actualizarInformacion(usuario, usuario.getIdentificacion());
+            if(login.verificarPlaca(placa)){
+                if(validarModeloMarca(marca)){
+
+                    if(validarModeloMarca(modelo)){
+
+                            Vehiculo vehiculo = usuario.buscarVehiculo(lblPlaccaActualizar.getText());
+                            //actualiza el vehiculo con sus datos
+                            vehiculo.actualizarVehiculo(placa, modelo, marca);
+                            JOptionPane.showMessageDialog(null, "Vehiculo actualizado exitosamente");
+
+                            tpPanelModificaciones.setVisible(false);
+                            inicializarTablaVehiculos(); //refresca los datos de la tabla
+                            btnAgregarVehiculo.setVisible(true);
+                            actualizarInformacion(usuario, usuario.getIdentificacion());
+                    }
+                    else
+                        JOptionPane.showMessageDialog(null, "Al ingresar un modelo debe tener menos de 15 caracteres");
                 }
-                else
-                    JOptionPane.showMessageDialog(null, "Al ingresar un modelo debe tener menos de 15 caracteres");
+                    else
+                        JOptionPane.showMessageDialog(null, "La placa ya existe");
             }
             else
                 JOptionPane.showMessageDialog(null, "Al ingresar una marca debe tener menos de 15 caracteres");
