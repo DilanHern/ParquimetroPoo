@@ -266,6 +266,30 @@ public class MenuAdministrador extends javax.swing.JFrame {
         jLabel18 = new javax.swing.JLabel();
         dcInicioMultaHecha = new com.toedter.calendar.JDateChooser();
         jLabel29 = new javax.swing.JLabel();
+        jPanel9 = new javax.swing.JPanel();
+        jLabel22 = new javax.swing.JLabel();
+        btnDescargarEspaciosDetallados = new com.tec.parquimetro.parquimetro.GUI.RondedBordes();
+        dcFinalEspaciosDetallados = new com.toedter.calendar.JDateChooser();
+        jLabel23 = new javax.swing.JLabel();
+        dcInicioEspaciosDetallados = new com.toedter.calendar.JDateChooser();
+        jLabel30 = new javax.swing.JLabel();
+        lblHora9 = new javax.swing.JLabel();
+        lblHora10 = new javax.swing.JLabel();
+        spnRangoIniciallDetalle = new javax.swing.JSpinner();
+        spnRangoFinalDetalle = new javax.swing.JSpinner();
+        lblHora11 = new javax.swing.JLabel();
+        jPanel10 = new javax.swing.JPanel();
+        jLabel24 = new javax.swing.JLabel();
+        btnDescargarEspaciosResumidos = new com.tec.parquimetro.parquimetro.GUI.RondedBordes();
+        dcFinEspaciosResumidos = new com.toedter.calendar.JDateChooser();
+        jLabel25 = new javax.swing.JLabel();
+        dcInicioEspaciosResumidos = new com.toedter.calendar.JDateChooser();
+        jLabel31 = new javax.swing.JLabel();
+        spnRangoFinalResumido = new javax.swing.JSpinner();
+        lblHora6 = new javax.swing.JLabel();
+        spnRangoInicialResumido = new javax.swing.JSpinner();
+        lblHora7 = new javax.swing.JLabel();
+        lblHora8 = new javax.swing.JLabel();
         cbReportes = new javax.swing.JComboBox<>();
         pnAnadirUsuario = new com.tec.parquimetro.parquimetro.GUI.Componentes.PanelRedondo();
         lblPerfil1 = new javax.swing.JLabel();
@@ -664,7 +688,7 @@ public class MenuAdministrador extends javax.swing.JFrame {
                     .addGroup(panelRedondo2Layout.createSequentialGroup()
                         .addGap(56, 56, 56)
                         .addComponent(lblHora3)
-                        .addGap(0, 50, Short.MAX_VALUE))
+                        .addGap(0, 53, Short.MAX_VALUE))
                     .addGroup(panelRedondo2Layout.createSequentialGroup()
                         .addGap(80, 80, 80)
                         .addComponent(lblHora4)
@@ -1056,7 +1080,7 @@ public class MenuAdministrador extends javax.swing.JFrame {
         pnlUsuariosLayout.setHorizontalGroup(
             pnlUsuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlUsuariosLayout.createSequentialGroup()
-                .addContainerGap(42, Short.MAX_VALUE)
+                .addContainerGap(45, Short.MAX_VALUE)
                 .addGroup(pnlUsuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnActualizarPerfil2, javax.swing.GroupLayout.PREFERRED_SIZE, 751, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5)
@@ -1180,7 +1204,7 @@ public class MenuAdministrador extends javax.swing.JFrame {
                                 .addComponent(btnDescargarEspaciosPDF, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(25, 25, 25))
                             .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 704, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 31, Short.MAX_VALUE))))
+                        .addGap(0, 34, Short.MAX_VALUE))))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1193,12 +1217,12 @@ public class MenuAdministrador extends javax.swing.JFrame {
                     .addComponent(jLabel11))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 313, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10)
                     .addComponent(lblCantidadEspacios)
                     .addComponent(btnDescargarEspaciosPDF, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(46, Short.MAX_VALUE))
+                .addContainerGap(38, Short.MAX_VALUE))
         );
 
         tpReportes.addTab("Espacios", jPanel2);
@@ -1209,11 +1233,11 @@ public class MenuAdministrador extends javax.swing.JFrame {
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 767, Short.MAX_VALUE)
+            .addGap(0, 770, Short.MAX_VALUE)
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 517, Short.MAX_VALUE)
+            .addGap(0, 501, Short.MAX_VALUE)
         );
 
         tpReportes.addTab("principal", jPanel3);
@@ -1246,7 +1270,7 @@ public class MenuAdministrador extends javax.swing.JFrame {
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(0, 111, Short.MAX_VALUE)
+                .addGap(0, 114, Short.MAX_VALUE)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addComponent(jLabel2)
@@ -1277,7 +1301,7 @@ public class MenuAdministrador extends javax.swing.JFrame {
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(dcInicioMulta, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(dcFinMulta, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 70, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
                 .addComponent(btnDescargarMultasPDF, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(153, 153, 153))
         );
@@ -1312,7 +1336,7 @@ public class MenuAdministrador extends javax.swing.JFrame {
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGap(0, 111, Short.MAX_VALUE)
+                .addGap(0, 114, Short.MAX_VALUE)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addComponent(jLabel12)
@@ -1343,7 +1367,7 @@ public class MenuAdministrador extends javax.swing.JFrame {
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(dcInicioEspacio, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(dcFinEspacio, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 70, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
                 .addComponent(btnDescargarEspaciosIngPDF, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(153, 153, 153))
         );
@@ -1378,7 +1402,7 @@ public class MenuAdministrador extends javax.swing.JFrame {
         jPanel6Layout.setHorizontalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
-                .addGap(0, 111, Short.MAX_VALUE)
+                .addGap(0, 114, Short.MAX_VALUE)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel6Layout.createSequentialGroup()
                         .addComponent(jLabel13)
@@ -1409,7 +1433,7 @@ public class MenuAdministrador extends javax.swing.JFrame {
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(dcInicioEspacioUse, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(dcFinEspacioUse, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 70, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
                 .addComponent(btnDescargarEspaciosUsadosPDF, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(153, 153, 153))
         );
@@ -1444,7 +1468,7 @@ public class MenuAdministrador extends javax.swing.JFrame {
         jPanel7Layout.setHorizontalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel7Layout.createSequentialGroup()
-                .addGap(0, 111, Short.MAX_VALUE)
+                .addGap(0, 114, Short.MAX_VALUE)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel7Layout.createSequentialGroup()
                         .addComponent(jLabel18)
@@ -1475,12 +1499,266 @@ public class MenuAdministrador extends javax.swing.JFrame {
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(dcInicioMultaHecha, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(dcFinMultaHecha, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 70, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
                 .addComponent(btnDescargarMultaHechaPDF, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(153, 153, 153))
         );
 
         tpReportes.addTab("Multas Hechas", jPanel7);
+
+        jPanel9.setBackground(new java.awt.Color(29, 24, 39));
+
+        jLabel22.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel22.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel22.setText("Espacios detallados");
+
+        btnDescargarEspaciosDetallados.setBackground(new java.awt.Color(153, 255, 51));
+        btnDescargarEspaciosDetallados.setText("Descargar PDF");
+        btnDescargarEspaciosDetallados.setColor1(new java.awt.Color(126, 217, 87));
+        btnDescargarEspaciosDetallados.setColor2(new java.awt.Color(126, 217, 87));
+        btnDescargarEspaciosDetallados.setColor3(new java.awt.Color(126, 217, 87));
+        btnDescargarEspaciosDetallados.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDescargarEspaciosDetalladosActionPerformed(evt);
+            }
+        });
+
+        jLabel23.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel23.setText("Inicio del periodo");
+
+        jLabel30.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel30.setText("Fin del periodo");
+
+        lblHora9.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        lblHora9.setForeground(new java.awt.Color(255, 255, 255));
+        lblHora9.setText("Indique un rango de numero de espacios");
+
+        lblHora10.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        lblHora10.setForeground(new java.awt.Color(255, 255, 255));
+        lblHora10.setText("Inicio");
+
+        spnRangoIniciallDetalle.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                spnRangoIniciallDetalleStateChanged(evt);
+            }
+        });
+
+        spnRangoFinalDetalle.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                spnRangoFinalDetalleStateChanged(evt);
+            }
+        });
+        spnRangoFinalDetalle.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                spnRangoFinalDetalleMouseClicked(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                spnRangoFinalDetalleMousePressed(evt);
+            }
+        });
+
+        lblHora11.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        lblHora11.setForeground(new java.awt.Color(255, 255, 255));
+        lblHora11.setText("Final");
+
+        javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
+        jPanel9.setLayout(jPanel9Layout);
+        jPanel9Layout.setHorizontalGroup(
+            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel9Layout.createSequentialGroup()
+                .addGap(0, 114, Short.MAX_VALUE)
+                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel9Layout.createSequentialGroup()
+                        .addComponent(jLabel23)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel30))
+                    .addGroup(jPanel9Layout.createSequentialGroup()
+                        .addComponent(dcInicioEspaciosDetallados, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(194, 194, 194)
+                        .addComponent(dcFinalEspaciosDetallados, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(101, 101, 101))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel9Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel9Layout.createSequentialGroup()
+                        .addComponent(btnDescargarEspaciosDetallados, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(298, 298, 298))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel9Layout.createSequentialGroup()
+                        .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel9Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(lblHora9)
+                                .addGap(44, 44, 44))
+                            .addGroup(jPanel9Layout.createSequentialGroup()
+                                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(spnRangoIniciallDetalle, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lblHora10))
+                                .addGap(56, 56, 56)
+                                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblHora11)
+                                    .addComponent(spnRangoFinalDetalle, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(204, 204, 204))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel9Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jLabel22)
+                .addGap(311, 311, 311))
+        );
+        jPanel9Layout.setVerticalGroup(
+            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel9Layout.createSequentialGroup()
+                .addGap(46, 46, 46)
+                .addComponent(jLabel22)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lblHora9)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblHora10)
+                    .addComponent(lblHora11))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(spnRangoFinalDetalle, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(spnRangoIniciallDetalle, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(14, 14, 14)
+                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel23, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel30))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(dcInicioEspaciosDetallados, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(dcFinalEspaciosDetallados, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
+                .addComponent(btnDescargarEspaciosDetallados, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(153, 153, 153))
+        );
+
+        tpReportes.addTab("Espacios Detalles", jPanel9);
+
+        jPanel10.setBackground(new java.awt.Color(29, 24, 39));
+
+        jLabel24.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel24.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel24.setText("Espacios resumidos");
+
+        btnDescargarEspaciosResumidos.setBackground(new java.awt.Color(153, 255, 51));
+        btnDescargarEspaciosResumidos.setText("Descargar PDF");
+        btnDescargarEspaciosResumidos.setColor1(new java.awt.Color(126, 217, 87));
+        btnDescargarEspaciosResumidos.setColor2(new java.awt.Color(126, 217, 87));
+        btnDescargarEspaciosResumidos.setColor3(new java.awt.Color(126, 217, 87));
+        btnDescargarEspaciosResumidos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDescargarEspaciosResumidosActionPerformed(evt);
+            }
+        });
+
+        jLabel25.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel25.setText("Inicio del periodo");
+
+        jLabel31.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel31.setText("Fin del periodo");
+
+        spnRangoFinalResumido.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                spnRangoFinalResumidoStateChanged(evt);
+            }
+        });
+        spnRangoFinalResumido.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                spnRangoFinalResumidoMouseClicked(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                spnRangoFinalResumidoMousePressed(evt);
+            }
+        });
+
+        lblHora6.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        lblHora6.setForeground(new java.awt.Color(255, 255, 255));
+        lblHora6.setText("Inicio");
+
+        spnRangoInicialResumido.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                spnRangoInicialResumidoStateChanged(evt);
+            }
+        });
+
+        lblHora7.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        lblHora7.setForeground(new java.awt.Color(255, 255, 255));
+        lblHora7.setText("Final");
+
+        lblHora8.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        lblHora8.setForeground(new java.awt.Color(255, 255, 255));
+        lblHora8.setText("Indique un rango de numero de espacios");
+
+        javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
+        jPanel10.setLayout(jPanel10Layout);
+        jPanel10Layout.setHorizontalGroup(
+            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel10Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jLabel24)
+                .addGap(293, 293, 293))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel10Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel10Layout.createSequentialGroup()
+                        .addComponent(btnDescargarEspaciosResumidos, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(298, 298, 298))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel10Layout.createSequentialGroup()
+                        .addComponent(lblHora8)
+                        .addGap(237, 237, 237))))
+            .addGroup(jPanel10Layout.createSequentialGroup()
+                .addGap(0, 114, Short.MAX_VALUE)
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel10Layout.createSequentialGroup()
+                        .addComponent(jLabel25)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel31))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel10Layout.createSequentialGroup()
+                        .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel10Layout.createSequentialGroup()
+                                .addComponent(dcInicioEspaciosResumidos, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(194, 194, 194)
+                                .addComponent(dcFinEspaciosResumidos, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel10Layout.createSequentialGroup()
+                                .addGap(133, 133, 133)
+                                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(spnRangoInicialResumido, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lblHora6))
+                                .addGap(56, 56, 56)
+                                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblHora7)
+                                    .addComponent(spnRangoFinalResumido, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addGap(101, 101, 101))
+        );
+        jPanel10Layout.setVerticalGroup(
+            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel10Layout.createSequentialGroup()
+                .addGap(42, 42, 42)
+                .addComponent(jLabel24)
+                .addGap(18, 18, 18)
+                .addComponent(lblHora8)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblHora6)
+                    .addComponent(lblHora7))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(spnRangoFinalResumido, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(spnRangoInicialResumido, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel25, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel31))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(dcInicioEspaciosResumidos, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(dcFinEspaciosResumidos, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
+                .addComponent(btnDescargarEspaciosResumidos, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(153, 153, 153))
+        );
+
+        tpReportes.addTab("Espacios Resumidos", jPanel10);
 
         cbReportes.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Estadisticas detalladas de espacios", "Estadisticas resumidas de espacios", "Ingresos de dinero por estacionamiento", "Ingresos de dinero por multas", "Historial de los espacios usados", "Historial de multas", "Espacios de parqueo" }));
         cbReportes.addItemListener(new java.awt.event.ItemListener() {
@@ -1515,8 +1793,6 @@ public class MenuAdministrador extends javax.swing.JFrame {
                 .addComponent(tpReportes)
                 .addGap(16, 16, 16))
         );
-
-        tpReportes.getAccessibleContext().setAccessibleName("Espacios");
 
         pbTabl.addTab("tab5", pnReportes);
 
@@ -1642,7 +1918,7 @@ public class MenuAdministrador extends javax.swing.JFrame {
                         .addComponent(lblPerfil1)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnAnadirUsuarioLayout.createSequentialGroup()
-                        .addContainerGap(101, Short.MAX_VALUE)
+                        .addContainerGap(104, Short.MAX_VALUE)
                         .addGroup(pnAnadirUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(btnActualizarPerfil3, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(pnAnadirUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2784,6 +3060,13 @@ public class MenuAdministrador extends javax.swing.JFrame {
         }else if(cbReportes.getSelectedItem() == "Historial de multas")
         {
              tpReportes.setSelectedIndex(5);
+             
+        }else if(cbReportes.getSelectedItem() == "Estadisticas detalladas de espacios")
+        {
+             tpReportes.setSelectedIndex(6);
+        }else if(cbReportes.getSelectedItem() == "Estadisticas resumidas de espacios")
+        {
+             tpReportes.setSelectedIndex(7);
         }
         
     }//GEN-LAST:event_cbReportesItemStateChanged
@@ -3143,6 +3426,134 @@ public class MenuAdministrador extends javax.swing.JFrame {
         pbTabl.setSelectedIndex(2);
     }//GEN-LAST:event_rondedBordes2ActionPerformed
 
+    private void btnDescargarEspaciosDetalladosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDescargarEspaciosDetalladosActionPerformed
+       Date fechaInicio = dcInicioEspaciosDetallados.getDate();
+        Date fechaFinal = dcFinalEspaciosDetallados.getDate();
+        int inicioEsp = (int)spnRangoIniciallDetalle.getValue();
+        int finEsp = (int)spnRangoFinalDetalle.getValue();
+        if (fechaInicio != null) {
+            if(fechaFinal!=null){
+
+                if(fechaFinal.after(fechaInicio) || fechaFinal.equals(fechaInicio)){
+                    // Convertimos la fecha a LocalDate
+                    LocalDate inicio = fechaInicio.toInstant()
+                    .atZone(ZoneId.systemDefault())
+                    .toLocalDate();
+
+                    LocalDate finalF = fechaFinal.toInstant()
+                    .atZone(ZoneId.systemDefault())
+                    .toLocalDate();
+                    
+                    
+                    JFileChooser fileChoo = new JFileChooser();
+                    File f = new File("EstadisticasDetallaldasEspacio");
+                    String rutaArchivo = "";
+                    fileChoo.setSelectedFile(f);
+                    Parqueo parqueo = new Parqueo();
+                    parqueo.lecturaArchivo();
+                    int option = fileChoo.showSaveDialog(this);
+
+                    if(option == JFileChooser.APPROVE_OPTION){
+
+                        f = fileChoo.getSelectedFile();
+                        rutaArchivo = f.toString();
+                    }
+                    parqueo.generarEspaciosDetalladosPDF(rutaArchivo, inicio, finalF, inicioEsp, finEsp);
+                    JOptionPane.showMessageDialog(null, "Archivo descargado exitosamente!");
+                    
+                }else{
+                    JOptionPane.showMessageDialog(null, "La fecha final debe ser igual o mayor a la fecha de inicio.");
+                }
+
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "No se seleccionó ninguna fecha final.");
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "No se seleccionó ninguna fecha de inicio.");
+        }
+    }//GEN-LAST:event_btnDescargarEspaciosDetalladosActionPerformed
+
+    private void btnDescargarEspaciosResumidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDescargarEspaciosResumidosActionPerformed
+        Date fechaInicio = dcInicioEspaciosResumidos.getDate();
+        Date fechaFinal = dcFinEspaciosResumidos.getDate();
+        int inicioEsp = (int)spnRangoInicialResumido.getValue();
+        int finEsp = (int)spnRangoFinalResumido.getValue();
+        if (fechaInicio != null) {
+            if(fechaFinal!=null){
+
+                if(fechaFinal.after(fechaInicio) || fechaFinal.equals(fechaInicio)){
+                    // Convertimos la fecha a LocalDate
+                    LocalDate inicio = fechaInicio.toInstant()
+                    .atZone(ZoneId.systemDefault())
+                    .toLocalDate();
+
+                    LocalDate finalF = fechaFinal.toInstant()
+                    .atZone(ZoneId.systemDefault())
+                    .toLocalDate();
+                    
+                    
+                    JFileChooser fileChoo = new JFileChooser();
+                    File f = new File("EstadisticasResumidasEspacio");
+                    String rutaArchivo = "";
+                    fileChoo.setSelectedFile(f);
+                    Parqueo parqueo = new Parqueo();
+                    parqueo.lecturaArchivo();
+                    int option = fileChoo.showSaveDialog(this);
+
+                    if(option == JFileChooser.APPROVE_OPTION){
+
+                        f = fileChoo.getSelectedFile();
+                        rutaArchivo = f.toString();
+                    }
+                    parqueo.generarEspaciosResumidoPDF(rutaArchivo, inicio, finalF,inicioEsp,finEsp);
+                    JOptionPane.showMessageDialog(null, "Archivo descargado exitosamente!");
+                    
+                }else{
+                    JOptionPane.showMessageDialog(null, "La fecha final debe ser igual o mayor a la fecha de inicio.");
+                }
+
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "No se seleccionó ninguna fecha final.");
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "No se seleccionó ninguna fecha de inicio.");
+        }
+    }//GEN-LAST:event_btnDescargarEspaciosResumidosActionPerformed
+
+    private void spnRangoFinalResumidoStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_spnRangoFinalResumidoStateChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_spnRangoFinalResumidoStateChanged
+
+    private void spnRangoFinalResumidoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_spnRangoFinalResumidoMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_spnRangoFinalResumidoMouseClicked
+
+    private void spnRangoFinalResumidoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_spnRangoFinalResumidoMousePressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_spnRangoFinalResumidoMousePressed
+
+    private void spnRangoInicialResumidoStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_spnRangoInicialResumidoStateChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_spnRangoInicialResumidoStateChanged
+
+    private void spnRangoIniciallDetalleStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_spnRangoIniciallDetalleStateChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_spnRangoIniciallDetalleStateChanged
+
+    private void spnRangoFinalDetalleStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_spnRangoFinalDetalleStateChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_spnRangoFinalDetalleStateChanged
+
+    private void spnRangoFinalDetalleMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_spnRangoFinalDetalleMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_spnRangoFinalDetalleMouseClicked
+
+    private void spnRangoFinalDetalleMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_spnRangoFinalDetalleMousePressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_spnRangoFinalDetalleMousePressed
+
     /**
      * @param args the command line arguments
      */
@@ -3187,8 +3598,10 @@ public class MenuAdministrador extends javax.swing.JFrame {
     private com.tec.parquimetro.parquimetro.GUI.RondedBordes btnAgregarEspacio;
     private com.tec.parquimetro.parquimetro.GUI.RondedBordes btnAgregarUsuario;
     private com.tec.parquimetro.parquimetro.GUI.RondedBordes btnConfinguracion;
+    private com.tec.parquimetro.parquimetro.GUI.RondedBordes btnDescargarEspaciosDetallados;
     private com.tec.parquimetro.parquimetro.GUI.RondedBordes btnDescargarEspaciosIngPDF;
     private com.tec.parquimetro.parquimetro.GUI.RondedBordes btnDescargarEspaciosPDF;
+    private com.tec.parquimetro.parquimetro.GUI.RondedBordes btnDescargarEspaciosResumidos;
     private com.tec.parquimetro.parquimetro.GUI.RondedBordes btnDescargarEspaciosUsadosPDF;
     private com.tec.parquimetro.parquimetro.GUI.RondedBordes btnDescargarMultaHechaPDF;
     private com.tec.parquimetro.parquimetro.GUI.RondedBordes btnDescargarMultasPDF;
@@ -3204,10 +3617,14 @@ public class MenuAdministrador extends javax.swing.JFrame {
     private com.toedter.calendar.JDateChooser dcFechaIngreso;
     private com.toedter.calendar.JDateChooser dcFinEspacio;
     private com.toedter.calendar.JDateChooser dcFinEspacioUse;
+    private com.toedter.calendar.JDateChooser dcFinEspaciosResumidos;
     private com.toedter.calendar.JDateChooser dcFinMulta;
     private com.toedter.calendar.JDateChooser dcFinMultaHecha;
+    private com.toedter.calendar.JDateChooser dcFinalEspaciosDetallados;
     private com.toedter.calendar.JDateChooser dcInicioEspacio;
     private com.toedter.calendar.JDateChooser dcInicioEspacioUse;
+    private com.toedter.calendar.JDateChooser dcInicioEspaciosDetallados;
+    private com.toedter.calendar.JDateChooser dcInicioEspaciosResumidos;
     private com.toedter.calendar.JDateChooser dcInicioMulta;
     private com.toedter.calendar.JDateChooser dcInicioMultaHecha;
     private javax.swing.JDesktopPane jDesktopPane1;
@@ -3225,11 +3642,17 @@ public class MenuAdministrador extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel23;
+    private javax.swing.JLabel jLabel24;
+    private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel30;
+    private javax.swing.JLabel jLabel31;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -3237,6 +3660,7 @@ public class MenuAdministrador extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
@@ -3244,6 +3668,7 @@ public class MenuAdministrador extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
+    private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
@@ -3265,10 +3690,16 @@ public class MenuAdministrador extends javax.swing.JFrame {
     private javax.swing.JLabel lblCosto;
     private javax.swing.JLabel lblHora;
     private javax.swing.JLabel lblHora1;
+    private javax.swing.JLabel lblHora10;
+    private javax.swing.JLabel lblHora11;
     private javax.swing.JLabel lblHora2;
     private javax.swing.JLabel lblHora3;
     private javax.swing.JLabel lblHora4;
     private javax.swing.JLabel lblHora5;
+    private javax.swing.JLabel lblHora6;
+    private javax.swing.JLabel lblHora7;
+    private javax.swing.JLabel lblHora8;
+    private javax.swing.JLabel lblHora9;
     private javax.swing.JLabel lblId;
     private javax.swing.JLabel lblIdentificacion;
     private javax.swing.JLabel lblIdentificacion1;
@@ -3297,7 +3728,11 @@ public class MenuAdministrador extends javax.swing.JFrame {
     private javax.swing.JSpinner spnHoraFinal;
     private javax.swing.JSpinner spnHoraInicio;
     private javax.swing.JSpinner spnRangoFinal;
+    private javax.swing.JSpinner spnRangoFinalDetalle;
+    private javax.swing.JSpinner spnRangoFinalResumido;
     private javax.swing.JSpinner spnRangoInicial;
+    private javax.swing.JSpinner spnRangoInicialResumido;
+    private javax.swing.JSpinner spnRangoIniciallDetalle;
     private javax.swing.JSpinner spnTiempoMinimo;
     private javax.swing.JTextArea taDireccionFisica;
     private javax.swing.JTextArea taDireccionFisicaU;

@@ -630,7 +630,7 @@
                                   <Group type="102" attributes="0">
                                       <EmptySpace min="-2" pref="56" max="-2" attributes="0"/>
                                       <Component id="lblHora3" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace min="0" pref="50" max="32767" attributes="0"/>
+                                      <EmptySpace min="0" pref="53" max="32767" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
                                       <EmptySpace min="-2" pref="80" max="-2" attributes="0"/>
@@ -1221,7 +1221,7 @@
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="1" attributes="0">
-                          <EmptySpace pref="42" max="32767" attributes="0"/>
+                          <EmptySpace pref="45" max="32767" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="btnActualizarPerfil2" alignment="0" min="-2" pref="751" max="-2" attributes="0"/>
                               <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
@@ -1421,9 +1421,6 @@
                       <Color blue="42" green="36" red="39" type="rgb"/>
                     </Property>
                   </Properties>
-                  <AccessibilityProperties>
-                    <Property name="AccessibleContext.accessibleName" type="java.lang.String" value="Espacios"/>
-                  </AccessibilityProperties>
 
                   <Layout class="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout"/>
                   <SubComponents>
@@ -1471,7 +1468,7 @@
                                               </Group>
                                               <Component id="jScrollPane5" min="-2" pref="704" max="-2" attributes="0"/>
                                           </Group>
-                                          <EmptySpace min="0" pref="31" max="32767" attributes="0"/>
+                                          <EmptySpace min="0" pref="34" max="32767" attributes="0"/>
                                       </Group>
                                   </Group>
                               </Group>
@@ -1489,13 +1486,13 @@
                                   </Group>
                                   <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                                   <Component id="jScrollPane5" min="-2" pref="313" max="-2" attributes="0"/>
-                                  <EmptySpace pref="40" max="32767" attributes="0"/>
+                                  <EmptySpace pref="32" max="32767" attributes="0"/>
                                   <Group type="103" groupAlignment="3" attributes="0">
                                       <Component id="jLabel10" alignment="3" min="-2" max="-2" attributes="0"/>
                                       <Component id="lblCantidadEspacios" alignment="3" min="-2" max="-2" attributes="0"/>
                                       <Component id="btnDescargarEspaciosPDF" alignment="3" min="-2" pref="39" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace pref="46" max="32767" attributes="0"/>
+                                  <EmptySpace pref="38" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -1616,12 +1613,12 @@
                       <Layout>
                         <DimensionLayout dim="0">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <EmptySpace min="0" pref="767" max="32767" attributes="0"/>
+                              <EmptySpace min="0" pref="770" max="32767" attributes="0"/>
                           </Group>
                         </DimensionLayout>
                         <DimensionLayout dim="1">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <EmptySpace min="0" pref="517" max="32767" attributes="0"/>
+                              <EmptySpace min="0" pref="501" max="32767" attributes="0"/>
                           </Group>
                         </DimensionLayout>
                       </Layout>
@@ -1644,7 +1641,7 @@
                         <DimensionLayout dim="0">
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" attributes="0">
-                                  <EmptySpace min="0" pref="111" max="32767" attributes="0"/>
+                                  <EmptySpace min="0" pref="114" max="32767" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Group type="102" attributes="0">
                                           <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
@@ -1684,7 +1681,7 @@
                                       <Component id="dcInicioMulta" min="-2" pref="27" max="-2" attributes="0"/>
                                       <Component id="dcFinMulta" min="-2" pref="27" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace pref="70" max="32767" attributes="0"/>
+                                  <EmptySpace pref="54" max="32767" attributes="0"/>
                                   <Component id="btnDescargarMultasPDF" min="-2" pref="39" max="-2" attributes="0"/>
                                   <EmptySpace min="-2" pref="153" max="-2" attributes="0"/>
                               </Group>
@@ -1763,7 +1760,7 @@
                         <DimensionLayout dim="0">
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="0" attributes="0">
-                                  <EmptySpace min="0" pref="111" max="32767" attributes="0"/>
+                                  <EmptySpace min="0" pref="114" max="32767" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Group type="102" alignment="0" attributes="0">
                                           <Component id="jLabel12" min="-2" max="-2" attributes="0"/>
@@ -1803,7 +1800,7 @@
                                       <Component id="dcInicioEspacio" alignment="1" min="-2" pref="27" max="-2" attributes="0"/>
                                       <Component id="dcFinEspacio" alignment="1" min="-2" pref="27" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace pref="70" max="32767" attributes="0"/>
+                                  <EmptySpace pref="54" max="32767" attributes="0"/>
                                   <Component id="btnDescargarEspaciosIngPDF" min="-2" pref="39" max="-2" attributes="0"/>
                                   <EmptySpace min="-2" pref="153" max="-2" attributes="0"/>
                               </Group>
@@ -1882,7 +1879,7 @@
                         <DimensionLayout dim="0">
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="0" attributes="0">
-                                  <EmptySpace min="0" pref="111" max="32767" attributes="0"/>
+                                  <EmptySpace min="0" pref="114" max="32767" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Group type="102" alignment="0" attributes="0">
                                           <Component id="jLabel13" min="-2" max="-2" attributes="0"/>
@@ -1922,7 +1919,7 @@
                                       <Component id="dcInicioEspacioUse" alignment="1" min="-2" pref="27" max="-2" attributes="0"/>
                                       <Component id="dcFinEspacioUse" alignment="1" min="-2" pref="27" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace pref="70" max="32767" attributes="0"/>
+                                  <EmptySpace pref="54" max="32767" attributes="0"/>
                                   <Component id="btnDescargarEspaciosUsadosPDF" min="-2" pref="39" max="-2" attributes="0"/>
                                   <EmptySpace min="-2" pref="153" max="-2" attributes="0"/>
                               </Group>
@@ -2001,7 +1998,7 @@
                         <DimensionLayout dim="0">
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="0" attributes="0">
-                                  <EmptySpace min="0" pref="111" max="32767" attributes="0"/>
+                                  <EmptySpace min="0" pref="114" max="32767" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Group type="102" alignment="0" attributes="0">
                                           <Component id="jLabel18" min="-2" max="-2" attributes="0"/>
@@ -2041,7 +2038,7 @@
                                       <Component id="dcInicioMultaHecha" alignment="1" min="-2" pref="27" max="-2" attributes="0"/>
                                       <Component id="dcFinMultaHecha" alignment="1" min="-2" pref="27" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace pref="70" max="32767" attributes="0"/>
+                                  <EmptySpace pref="54" max="32767" attributes="0"/>
                                   <Component id="btnDescargarMultaHechaPDF" min="-2" pref="39" max="-2" attributes="0"/>
                                   <EmptySpace min="-2" pref="153" max="-2" attributes="0"/>
                               </Group>
@@ -2102,6 +2099,412 @@
                         </Component>
                       </SubComponents>
                     </Container>
+                    <Container class="javax.swing.JPanel" name="jPanel9">
+                      <Properties>
+                        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                          <Color blue="27" green="18" red="1d" type="rgb"/>
+                        </Property>
+                      </Properties>
+                      <Constraints>
+                        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
+                          <JTabbedPaneConstraints tabName="Espacios Detalles">
+                            <Property name="tabTitle" type="java.lang.String" value="Espacios Detalles"/>
+                          </JTabbedPaneConstraints>
+                        </Constraint>
+                      </Constraints>
+
+                      <Layout>
+                        <DimensionLayout dim="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace min="0" pref="114" max="32767" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Component id="jLabel23" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace max="32767" attributes="0"/>
+                                          <Component id="jLabel30" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Component id="dcInicioEspaciosDetallados" min="-2" pref="190" max="-2" attributes="0"/>
+                                          <EmptySpace min="-2" pref="194" max="-2" attributes="0"/>
+                                          <Component id="dcFinalEspaciosDetallados" min="-2" pref="171" max="-2" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                                  <EmptySpace min="-2" pref="101" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="1" attributes="0">
+                                  <EmptySpace max="32767" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Group type="102" alignment="1" attributes="0">
+                                          <Component id="btnDescargarEspaciosDetallados" min="-2" pref="128" max="-2" attributes="0"/>
+                                          <EmptySpace min="-2" pref="298" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Group type="102" alignment="1" attributes="0">
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Group type="102" alignment="1" attributes="0">
+                                                  <EmptySpace pref="27" max="-2" attributes="0"/>
+                                                  <Component id="lblHora9" min="-2" max="-2" attributes="0"/>
+                                                  <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
+                                              </Group>
+                                              <Group type="102" alignment="0" attributes="0">
+                                                  <Group type="103" groupAlignment="0" attributes="0">
+                                                      <Component id="spnRangoIniciallDetalle" alignment="0" min="-2" pref="137" max="-2" attributes="0"/>
+                                                      <Component id="lblHora10" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                  </Group>
+                                                  <EmptySpace min="-2" pref="56" max="-2" attributes="0"/>
+                                                  <Group type="103" groupAlignment="0" attributes="0">
+                                                      <Component id="lblHora11" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                      <Component id="spnRangoFinalDetalle" alignment="0" min="-2" pref="137" max="-2" attributes="0"/>
+                                                  </Group>
+                                              </Group>
+                                          </Group>
+                                          <EmptySpace min="-2" pref="204" max="-2" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                              </Group>
+                              <Group type="102" alignment="1" attributes="0">
+                                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                  <Component id="jLabel22" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="311" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                        </DimensionLayout>
+                        <DimensionLayout dim="1">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
+                                  <Component id="jLabel22" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                  <Component id="lblHora9" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="lblHora10" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="lblHora11" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="spnRangoFinalDetalle" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
+                                      <Component id="spnRangoIniciallDetalle" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="1" attributes="0">
+                                      <Component id="jLabel23" alignment="1" min="-2" pref="26" max="-2" attributes="0"/>
+                                      <Component id="jLabel30" alignment="1" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="1" attributes="0">
+                                      <Component id="dcInicioEspaciosDetallados" alignment="1" min="-2" pref="27" max="-2" attributes="0"/>
+                                      <Component id="dcFinalEspaciosDetallados" alignment="1" min="-2" pref="27" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace pref="54" max="32767" attributes="0"/>
+                                  <Component id="btnDescargarEspaciosDetallados" min="-2" pref="39" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="153" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                        </DimensionLayout>
+                      </Layout>
+                      <SubComponents>
+                        <Component class="javax.swing.JLabel" name="jLabel22">
+                          <Properties>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Dialog" size="14" style="1"/>
+                            </Property>
+                            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                            </Property>
+                            <Property name="text" type="java.lang.String" value="Espacios detallados"/>
+                          </Properties>
+                        </Component>
+                        <Component class="com.tec.parquimetro.parquimetro.GUI.RondedBordes" name="btnDescargarEspaciosDetallados">
+                          <Properties>
+                            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                              <Color blue="33" green="ff" red="99" type="rgb"/>
+                            </Property>
+                            <Property name="text" type="java.lang.String" value="Descargar PDF"/>
+                            <Property name="color1" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                              <Color blue="57" green="d9" red="7e" type="rgb"/>
+                            </Property>
+                            <Property name="color2" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                              <Color blue="57" green="d9" red="7e" type="rgb"/>
+                            </Property>
+                            <Property name="color3" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                              <Color blue="57" green="d9" red="7e" type="rgb"/>
+                            </Property>
+                          </Properties>
+                          <Events>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnDescargarEspaciosDetalladosActionPerformed"/>
+                          </Events>
+                        </Component>
+                        <Component class="com.toedter.calendar.JDateChooser" name="dcFinalEspaciosDetallados">
+                        </Component>
+                        <Component class="javax.swing.JLabel" name="jLabel23">
+                          <Properties>
+                            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                            </Property>
+                            <Property name="text" type="java.lang.String" value="Inicio del periodo"/>
+                          </Properties>
+                        </Component>
+                        <Component class="com.toedter.calendar.JDateChooser" name="dcInicioEspaciosDetallados">
+                        </Component>
+                        <Component class="javax.swing.JLabel" name="jLabel30">
+                          <Properties>
+                            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                            </Property>
+                            <Property name="text" type="java.lang.String" value="Fin del periodo"/>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JLabel" name="lblHora9">
+                          <Properties>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Dialog" size="14" style="0"/>
+                            </Property>
+                            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                            </Property>
+                            <Property name="text" type="java.lang.String" value="Indique un rango de numero de espacios"/>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JLabel" name="lblHora10">
+                          <Properties>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Dialog" size="14" style="0"/>
+                            </Property>
+                            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                            </Property>
+                            <Property name="text" type="java.lang.String" value="Inicio"/>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JSpinner" name="spnRangoIniciallDetalle">
+                          <Events>
+                            <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="spnRangoIniciallDetalleStateChanged"/>
+                          </Events>
+                        </Component>
+                        <Component class="javax.swing.JSpinner" name="spnRangoFinalDetalle">
+                          <Events>
+                            <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="spnRangoFinalDetalleStateChanged"/>
+                            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="spnRangoFinalDetalleMouseClicked"/>
+                            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="spnRangoFinalDetalleMousePressed"/>
+                          </Events>
+                        </Component>
+                        <Component class="javax.swing.JLabel" name="lblHora11">
+                          <Properties>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Dialog" size="14" style="0"/>
+                            </Property>
+                            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                            </Property>
+                            <Property name="text" type="java.lang.String" value="Final"/>
+                          </Properties>
+                        </Component>
+                      </SubComponents>
+                    </Container>
+                    <Container class="javax.swing.JPanel" name="jPanel10">
+                      <Properties>
+                        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                          <Color blue="27" green="18" red="1d" type="rgb"/>
+                        </Property>
+                      </Properties>
+                      <Constraints>
+                        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
+                          <JTabbedPaneConstraints tabName="Espacios Resumidos">
+                            <Property name="tabTitle" type="java.lang.String" value="Espacios Resumidos"/>
+                          </JTabbedPaneConstraints>
+                        </Constraint>
+                      </Constraints>
+
+                      <Layout>
+                        <DimensionLayout dim="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" alignment="1" attributes="0">
+                                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                  <Component id="jLabel24" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="293" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="1" attributes="0">
+                                  <EmptySpace max="32767" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Group type="102" alignment="1" attributes="0">
+                                          <Component id="btnDescargarEspaciosResumidos" min="-2" pref="128" max="-2" attributes="0"/>
+                                          <EmptySpace min="-2" pref="298" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Group type="102" alignment="1" attributes="0">
+                                          <Component id="lblHora8" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace min="-2" pref="237" max="-2" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                              </Group>
+                              <Group type="102" attributes="0">
+                                  <EmptySpace min="0" pref="114" max="32767" attributes="0"/>
+                                  <Group type="103" groupAlignment="1" attributes="0">
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Component id="jLabel25" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace max="32767" attributes="0"/>
+                                          <Component id="jLabel31" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                              <Group type="102" alignment="0" attributes="0">
+                                                  <Component id="dcInicioEspaciosResumidos" min="-2" pref="190" max="-2" attributes="0"/>
+                                                  <EmptySpace min="-2" pref="194" max="-2" attributes="0"/>
+                                                  <Component id="dcFinEspaciosResumidos" min="-2" pref="171" max="-2" attributes="0"/>
+                                              </Group>
+                                              <Group type="102" alignment="0" attributes="0">
+                                                  <EmptySpace min="-2" pref="133" max="-2" attributes="0"/>
+                                                  <Group type="103" groupAlignment="0" attributes="0">
+                                                      <Component id="spnRangoInicialResumido" alignment="0" min="-2" pref="137" max="-2" attributes="0"/>
+                                                      <Component id="lblHora6" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                  </Group>
+                                                  <EmptySpace min="-2" pref="56" max="-2" attributes="0"/>
+                                                  <Group type="103" groupAlignment="0" attributes="0">
+                                                      <Component id="lblHora7" min="-2" max="-2" attributes="0"/>
+                                                      <Component id="spnRangoFinalResumido" min="-2" pref="137" max="-2" attributes="0"/>
+                                                  </Group>
+                                              </Group>
+                                          </Group>
+                                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                                  <EmptySpace min="-2" pref="101" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                        </DimensionLayout>
+                        <DimensionLayout dim="1">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
+                                  <Component id="jLabel24" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Component id="lblHora8" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="lblHora6" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="lblHora7" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="spnRangoFinalResumido" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
+                                      <Component id="spnRangoInicialResumido" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="1" attributes="0">
+                                      <Component id="jLabel25" alignment="1" min="-2" pref="26" max="-2" attributes="0"/>
+                                      <Component id="jLabel31" alignment="1" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="1" attributes="0">
+                                      <Component id="dcInicioEspaciosResumidos" alignment="1" min="-2" pref="27" max="-2" attributes="0"/>
+                                      <Component id="dcFinEspaciosResumidos" alignment="1" min="-2" pref="27" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace pref="54" max="32767" attributes="0"/>
+                                  <Component id="btnDescargarEspaciosResumidos" min="-2" pref="39" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="153" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                        </DimensionLayout>
+                      </Layout>
+                      <SubComponents>
+                        <Component class="javax.swing.JLabel" name="jLabel24">
+                          <Properties>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Dialog" size="14" style="1"/>
+                            </Property>
+                            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                            </Property>
+                            <Property name="text" type="java.lang.String" value="Espacios resumidos"/>
+                          </Properties>
+                        </Component>
+                        <Component class="com.tec.parquimetro.parquimetro.GUI.RondedBordes" name="btnDescargarEspaciosResumidos">
+                          <Properties>
+                            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                              <Color blue="33" green="ff" red="99" type="rgb"/>
+                            </Property>
+                            <Property name="text" type="java.lang.String" value="Descargar PDF"/>
+                            <Property name="color1" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                              <Color blue="57" green="d9" red="7e" type="rgb"/>
+                            </Property>
+                            <Property name="color2" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                              <Color blue="57" green="d9" red="7e" type="rgb"/>
+                            </Property>
+                            <Property name="color3" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                              <Color blue="57" green="d9" red="7e" type="rgb"/>
+                            </Property>
+                          </Properties>
+                          <Events>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnDescargarEspaciosResumidosActionPerformed"/>
+                          </Events>
+                        </Component>
+                        <Component class="com.toedter.calendar.JDateChooser" name="dcFinEspaciosResumidos">
+                        </Component>
+                        <Component class="javax.swing.JLabel" name="jLabel25">
+                          <Properties>
+                            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                            </Property>
+                            <Property name="text" type="java.lang.String" value="Inicio del periodo"/>
+                          </Properties>
+                        </Component>
+                        <Component class="com.toedter.calendar.JDateChooser" name="dcInicioEspaciosResumidos">
+                        </Component>
+                        <Component class="javax.swing.JLabel" name="jLabel31">
+                          <Properties>
+                            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                            </Property>
+                            <Property name="text" type="java.lang.String" value="Fin del periodo"/>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JSpinner" name="spnRangoFinalResumido">
+                          <Events>
+                            <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="spnRangoFinalResumidoStateChanged"/>
+                            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="spnRangoFinalResumidoMouseClicked"/>
+                            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="spnRangoFinalResumidoMousePressed"/>
+                          </Events>
+                        </Component>
+                        <Component class="javax.swing.JLabel" name="lblHora6">
+                          <Properties>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Dialog" size="14" style="0"/>
+                            </Property>
+                            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                            </Property>
+                            <Property name="text" type="java.lang.String" value="Inicio"/>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JSpinner" name="spnRangoInicialResumido">
+                          <Events>
+                            <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="spnRangoInicialResumidoStateChanged"/>
+                          </Events>
+                        </Component>
+                        <Component class="javax.swing.JLabel" name="lblHora7">
+                          <Properties>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Dialog" size="14" style="0"/>
+                            </Property>
+                            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                            </Property>
+                            <Property name="text" type="java.lang.String" value="Final"/>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JLabel" name="lblHora8">
+                          <Properties>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Dialog" size="14" style="0"/>
+                            </Property>
+                            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                            </Property>
+                            <Property name="text" type="java.lang.String" value="Indique un rango de numero de espacios"/>
+                          </Properties>
+                        </Component>
+                      </SubComponents>
+                    </Container>
                   </SubComponents>
                 </Container>
                 <Component class="javax.swing.JComboBox" name="cbReportes">
@@ -2156,7 +2559,7 @@
                                   <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="1" attributes="0">
-                                  <EmptySpace pref="101" max="32767" attributes="0"/>
+                                  <EmptySpace pref="104" max="32767" attributes="0"/>
                                   <Group type="103" groupAlignment="1" attributes="0">
                                       <Component id="btnActualizarPerfil3" min="-2" pref="145" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
