@@ -33,7 +33,7 @@ public class PanelOlvidePin extends javax.swing.JPanel {
     private static String contraseñaDe = "vofx ztal oawe yary";
     private static String emailPara;
     
-    private Properties mProperties;
+    private Properties mProperties = new Properties();;
     private Session mSession;
     private MimeMessage mCorreo;
     //FIN DE ATRIBUTOS DE REPORTES
