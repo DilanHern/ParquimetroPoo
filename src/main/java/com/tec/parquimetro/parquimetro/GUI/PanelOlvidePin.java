@@ -196,6 +196,7 @@ public class PanelOlvidePin extends javax.swing.JPanel {
                 ArrayList<Persona> listaUsuarios = Login.cargarUsuarios("listaUsuarios.txt");
                 for (Persona cadaPersona : listaUsuarios){ //buscamos todas las identificaciones
                     if(cadaPersona.getIdentificacion().equals(txtIdentificacion.getText())){
+                        System.out.println("aaaaaaa");
                         //crear nuevo pin
                         Random random = new Random(); //Generar un número aleatorio entre 1000 y 9999
                         int numeroAleatorio = 1000 + random.nextInt(9000);
@@ -204,6 +205,12 @@ public class PanelOlvidePin extends javax.swing.JPanel {
                         String cuerpo = "TU NUEVO PIN: " + String.valueOf(numeroAleatorio);
                         crearEmail(cuerpo, "CAMBIO DE PIN", cadaPersona.getCorreo().getCorreo());
                         enviarEmail();
+                         JOptionPane.showMessageDialog(null, "Se ha enviado un correo de recuperacion!");
+                        try {
+                            Login.guardarUsuarios("listaUsuarios.txt", listaUsuarios);
+                        } catch (IOException ex) {
+                            Logger.getLogger(PanelOlvidePin.class.getName()).log(Level.SEVERE, null, ex);
+                        }
                         return;
                     }
                 }

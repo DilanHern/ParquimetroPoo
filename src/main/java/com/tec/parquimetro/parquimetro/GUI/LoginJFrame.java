@@ -160,7 +160,8 @@ public class LoginJFrame extends javax.swing.JFrame {
                         Parqueo parqueo = new Parqueo();
                         parqueo.lecturaArchivo();
                         MenuInspector menuInspector = new MenuInspector(inspector, parqueo);
-                        menuInspector.setVisible(false);
+                        menuInspector.setVisible(true);
+                        this.setVisible(false);
                     }
                     else if (usuarioAIngresar instanceof Usuario){
                         if (new File("Parametros.txt").exists()){ //comprobar si los parametros ya fueron configurados por el administrador
