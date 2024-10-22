@@ -252,6 +252,20 @@ public class MenuAdministrador extends javax.swing.JFrame {
         jLabel12 = new javax.swing.JLabel();
         dcInicioEspacio = new com.toedter.calendar.JDateChooser();
         jLabel27 = new javax.swing.JLabel();
+        jPanel6 = new javax.swing.JPanel();
+        jLabel16 = new javax.swing.JLabel();
+        btnDescargarEspaciosUsadosPDF = new com.tec.parquimetro.parquimetro.GUI.RondedBordes();
+        dcFinEspacioUse = new com.toedter.calendar.JDateChooser();
+        jLabel13 = new javax.swing.JLabel();
+        dcInicioEspacioUse = new com.toedter.calendar.JDateChooser();
+        jLabel28 = new javax.swing.JLabel();
+        jPanel7 = new javax.swing.JPanel();
+        jLabel17 = new javax.swing.JLabel();
+        btnDescargarMultaHechaPDF = new com.tec.parquimetro.parquimetro.GUI.RondedBordes();
+        dcFinMultaHecha = new com.toedter.calendar.JDateChooser();
+        jLabel18 = new javax.swing.JLabel();
+        dcInicioMultaHecha = new com.toedter.calendar.JDateChooser();
+        jLabel29 = new javax.swing.JLabel();
         cbReportes = new javax.swing.JComboBox<>();
         pnAnadirUsuario = new com.tec.parquimetro.parquimetro.GUI.Componentes.PanelRedondo();
         lblPerfil1 = new javax.swing.JLabel();
@@ -1330,6 +1344,138 @@ public class MenuAdministrador extends javax.swing.JFrame {
 
         tpReportes.addTab("Ingreso de espacios", jPanel5);
 
+        jPanel6.setBackground(new java.awt.Color(29, 24, 39));
+
+        jLabel16.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel16.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel16.setText("Espacios utilizados");
+
+        btnDescargarEspaciosUsadosPDF.setBackground(new java.awt.Color(153, 255, 51));
+        btnDescargarEspaciosUsadosPDF.setText("Descargar PDF");
+        btnDescargarEspaciosUsadosPDF.setColor1(new java.awt.Color(126, 217, 87));
+        btnDescargarEspaciosUsadosPDF.setColor2(new java.awt.Color(126, 217, 87));
+        btnDescargarEspaciosUsadosPDF.setColor3(new java.awt.Color(126, 217, 87));
+        btnDescargarEspaciosUsadosPDF.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDescargarEspaciosUsadosPDFActionPerformed(evt);
+            }
+        });
+
+        jLabel13.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel13.setText("Inicio del periodo");
+
+        jLabel28.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel28.setText("Fin del periodo");
+
+        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
+        jPanel6.setLayout(jPanel6Layout);
+        jPanel6Layout.setHorizontalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addGap(0, 111, Short.MAX_VALUE)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addComponent(jLabel13)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel28))
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addComponent(dcInicioEspacioUse, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(194, 194, 194)
+                        .addComponent(dcFinEspacioUse, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(101, 101, 101))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnDescargarEspaciosUsadosPDF, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel16))
+                .addGap(298, 298, 298))
+        );
+        jPanel6Layout.setVerticalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addGap(102, 102, 102)
+                .addComponent(jLabel16)
+                .addGap(69, 69, 69)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel28))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(dcInicioEspacioUse, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(dcFinEspacioUse, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 70, Short.MAX_VALUE)
+                .addComponent(btnDescargarEspaciosUsadosPDF, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(153, 153, 153))
+        );
+
+        tpReportes.addTab("Espacios Usados", jPanel6);
+
+        jPanel7.setBackground(new java.awt.Color(29, 24, 39));
+
+        jLabel17.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel17.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel17.setText("Multas hechas");
+
+        btnDescargarMultaHechaPDF.setBackground(new java.awt.Color(153, 255, 51));
+        btnDescargarMultaHechaPDF.setText("Descargar PDF");
+        btnDescargarMultaHechaPDF.setColor1(new java.awt.Color(126, 217, 87));
+        btnDescargarMultaHechaPDF.setColor2(new java.awt.Color(126, 217, 87));
+        btnDescargarMultaHechaPDF.setColor3(new java.awt.Color(126, 217, 87));
+        btnDescargarMultaHechaPDF.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDescargarMultaHechaPDFActionPerformed(evt);
+            }
+        });
+
+        jLabel18.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel18.setText("Inicio del periodo");
+
+        jLabel29.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel29.setText("Fin del periodo");
+
+        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
+        jPanel7.setLayout(jPanel7Layout);
+        jPanel7Layout.setHorizontalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel7Layout.createSequentialGroup()
+                .addGap(0, 111, Short.MAX_VALUE)
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel7Layout.createSequentialGroup()
+                        .addComponent(jLabel18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel29))
+                    .addGroup(jPanel7Layout.createSequentialGroup()
+                        .addComponent(dcInicioMultaHecha, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(194, 194, 194)
+                        .addComponent(dcFinMultaHecha, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(101, 101, 101))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnDescargarMultaHechaPDF, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel17))
+                .addGap(298, 298, 298))
+        );
+        jPanel7Layout.setVerticalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel7Layout.createSequentialGroup()
+                .addGap(101, 101, 101)
+                .addComponent(jLabel17)
+                .addGap(70, 70, 70)
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel29))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(dcInicioMultaHecha, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(dcFinMultaHecha, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 70, Short.MAX_VALUE)
+                .addComponent(btnDescargarMultaHechaPDF, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(153, 153, 153))
+        );
+
+        tpReportes.addTab("Multas Hechas", jPanel7);
+
         cbReportes.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Estadisticas detalladas de espacios", "Estadisticas resumidas de espacios", "Ingresos de dinero por estacionamiento", "Ingresos de dinero por multas", "Historial de los espacios usados", "Historial de multas", "Espacios de parqueo" }));
         cbReportes.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
@@ -1641,7 +1787,13 @@ public class MenuAdministrador extends javax.swing.JFrame {
     }//GEN-LAST:event_btnReportesActionPerformed
 
     private void rondedBordes5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rondedBordes5ActionPerformed
-        // TODO add your handling code here:
+        LoginJFrame login = new LoginJFrame();
+        
+        actualizarInformacion(administrador, administrador.getIdentificacion()); //actualiza la informacion que fue generada por el usuario
+        
+        administrador=null; //elimina la informacion que apuntaba el usuario
+        this.setVisible(false);
+        login.setVisible(true);
     }//GEN-LAST:event_rondedBordes5ActionPerformed
 
     private void cargarDatosPerfil(){
@@ -2110,7 +2262,7 @@ public class MenuAdministrador extends javax.swing.JFrame {
     
         List<Persona> personas = new ArrayList<Persona>();
         
-        personas = Login.cargarUsuarios("listaUsuarios.dat");
+        personas = Login.cargarUsuarios("listaUsuarios.txt");
         
             
         
@@ -2509,7 +2661,14 @@ public class MenuAdministrador extends javax.swing.JFrame {
         }else if(cbReportes.getSelectedItem() == "Ingresos de dinero por estacionamiento")
         {
              tpReportes.setSelectedIndex(3);
+        }else if(cbReportes.getSelectedItem() == "Historial de los espacios usados")
+        {
+             tpReportes.setSelectedIndex(4);
+        }else if(cbReportes.getSelectedItem() == "Historial de multas")
+        {
+             tpReportes.setSelectedIndex(5);
         }
+        
     }//GEN-LAST:event_cbReportesItemStateChanged
 
     private void generarReporteGeneralEspacios(List<Espacio>  espacios){
@@ -2758,6 +2917,99 @@ public class MenuAdministrador extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnDescargarEspaciosIngPDFActionPerformed
 
+    private void btnDescargarEspaciosUsadosPDFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDescargarEspaciosUsadosPDFActionPerformed
+        Date fechaInicio = dcInicioEspacioUse.getDate();
+        Date fechaFinal = dcFinEspacioUse.getDate();
+        if (fechaInicio != null) {
+            if(fechaFinal!=null){
+
+                if(fechaFinal.after(fechaInicio) || fechaFinal.equals(fechaInicio)){
+                    // Convertimos la fecha a LocalDate
+                    LocalDate inicio = fechaInicio.toInstant()
+                    .atZone(ZoneId.systemDefault())
+                    .toLocalDate();
+
+                    LocalDate finalF = fechaFinal.toInstant()
+                    .atZone(ZoneId.systemDefault())
+                    .toLocalDate();
+                    
+                    
+                    JFileChooser fileChoo = new JFileChooser();
+                    File f = new File("EspaciosUsados");
+                    String rutaArchivo = "";
+                    fileChoo.setSelectedFile(f);
+                    Parqueo parqueo = new Parqueo();
+                    parqueo.lecturaArchivo();
+                    int option = fileChoo.showSaveDialog(this);
+
+                    if(option == JFileChooser.APPROVE_OPTION){
+
+                        f = fileChoo.getSelectedFile();
+                        rutaArchivo = f.toString();
+                    }
+                    parqueo.generarEspaciosUsadosPDF(rutaArchivo, inicio, finalF);
+                    JOptionPane.showMessageDialog(null, "Archivo descargado exitosamente!");
+                    
+                }else{
+                    JOptionPane.showMessageDialog(null, "La fecha final debe ser igual o mayor a la fecha de inicio.");
+                }
+
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "No se seleccionó ninguna fecha final.");
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "No se seleccionó ninguna fecha de inicio.");
+        }
+    }//GEN-LAST:event_btnDescargarEspaciosUsadosPDFActionPerformed
+
+    private void btnDescargarMultaHechaPDFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDescargarMultaHechaPDFActionPerformed
+       
+        Date fechaInicio = dcInicioMultaHecha.getDate();
+        Date fechaFinal = dcFinMultaHecha.getDate();
+        if (fechaInicio != null) {
+            if(fechaFinal!=null){
+
+                if(fechaFinal.after(fechaInicio) || fechaFinal.equals(fechaInicio)){
+                    // Convertimos la fecha a LocalDate
+                    LocalDate inicio = fechaInicio.toInstant()
+                    .atZone(ZoneId.systemDefault())
+                    .toLocalDate();
+
+                    LocalDate finalF = fechaFinal.toInstant()
+                    .atZone(ZoneId.systemDefault())
+                    .toLocalDate();
+                    
+                    
+                    JFileChooser fileChoo = new JFileChooser();
+                    File f = new File("MultasGeneradas");
+                    String rutaArchivo = "";
+                    fileChoo.setSelectedFile(f);
+                    Parqueo parqueo = new Parqueo();
+                    parqueo.lecturaArchivo();
+                    int option = fileChoo.showSaveDialog(this);
+
+                    if(option == JFileChooser.APPROVE_OPTION){
+
+                        f = fileChoo.getSelectedFile();
+                        rutaArchivo = f.toString();
+                    }
+                    parqueo.generarMultasHechasPDF(rutaArchivo, inicio, finalF);
+                    JOptionPane.showMessageDialog(null, "Archivo descargado exitosamente!");
+                    
+                }else{
+                    JOptionPane.showMessageDialog(null, "La fecha final debe ser igual o mayor a la fecha de inicio.");
+                }
+
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "No se seleccionó ninguna fecha final.");
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "No se seleccionó ninguna fecha de inicio.");
+        }
+    }//GEN-LAST:event_btnDescargarMultaHechaPDFActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -2804,6 +3056,8 @@ public class MenuAdministrador extends javax.swing.JFrame {
     private com.tec.parquimetro.parquimetro.GUI.RondedBordes btnConfinguracion;
     private com.tec.parquimetro.parquimetro.GUI.RondedBordes btnDescargarEspaciosIngPDF;
     private com.tec.parquimetro.parquimetro.GUI.RondedBordes btnDescargarEspaciosPDF;
+    private com.tec.parquimetro.parquimetro.GUI.RondedBordes btnDescargarEspaciosUsadosPDF;
+    private com.tec.parquimetro.parquimetro.GUI.RondedBordes btnDescargarMultaHechaPDF;
     private com.tec.parquimetro.parquimetro.GUI.RondedBordes btnDescargarMultasPDF;
     private com.tec.parquimetro.parquimetro.GUI.RondedBordes btnEliminar;
     private com.tec.parquimetro.parquimetro.GUI.RondedBordes btnEliminarUsuario;
@@ -2816,19 +3070,29 @@ public class MenuAdministrador extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cbTipoUsuario;
     private com.toedter.calendar.JDateChooser dcFechaIngreso;
     private com.toedter.calendar.JDateChooser dcFinEspacio;
+    private com.toedter.calendar.JDateChooser dcFinEspacioUse;
     private com.toedter.calendar.JDateChooser dcFinMulta;
+    private com.toedter.calendar.JDateChooser dcFinMultaHecha;
     private com.toedter.calendar.JDateChooser dcInicioEspacio;
+    private com.toedter.calendar.JDateChooser dcInicioEspacioUse;
     private com.toedter.calendar.JDateChooser dcInicioMulta;
+    private com.toedter.calendar.JDateChooser dcInicioMultaHecha;
     private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel27;
+    private javax.swing.JLabel jLabel28;
+    private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -2841,6 +3105,8 @@ public class MenuAdministrador extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;

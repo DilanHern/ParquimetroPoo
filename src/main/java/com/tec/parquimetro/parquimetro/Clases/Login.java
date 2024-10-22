@@ -123,7 +123,6 @@ public class Login {
             Object objeto = ois.readObject(); //lee el archivo guardado en ois y devuelve un tipo "Object"
             ArrayList<Persona> resultado = (ArrayList<Persona>) objeto; //se realiza un casting de objeto a ArrayList<Estudiante>
             System.out.println("El archivo se cargo correctamente");
-            System.out.println("ya");
             return resultado;
                     
         } 
@@ -151,19 +150,24 @@ public class Login {
         
          this.setListaUsuarios(cargarUsuarios("listaUsuarios.txt"));
         
-         //busca dentro de la lista el usuario
-        for(Persona obj : listaUsuarios){
-            //busca el usuario que coincide con la identificacion
-            if(obj.getIdentificacion().equals(usuario.getIdentificacion())){
-                //remueve el usuario de la lista
-                System.out.println("siiiii");
-                obj=usuario;
-                break;
+        for (int i = 0; i < listaUsuarios.size(); i++) {
+            Persona obj = listaUsuarios.get(i);
+
+            // Busca el usuario que coincide con la identificación
+            if (obj.getIdentificacion().equals(usuario.getIdentificacion())) {
+                // Actualiza el objeto en la lista
+                listaUsuarios.set(i, usuario);  // Reemplaza el objeto en la lista
+                System.out.println("Usuario encontrado y actualizado:");
+                System.out.println(usuario.getApellidos());
+                break;  // Rompe el bucle después de encontrar el usuario
             }
-        
         }
+
+        
+        
         try{
-            guardarUsuarios("listaUsuarios.dat", listaUsuarios);
+            guardarUsuarios("listaUsuarios.txt", listaUsuarios);
+            
         }
         catch (IOException e){
             System.out.println("malmamlal");
@@ -191,7 +195,7 @@ public class Login {
             listaUsuarios.remove(persona);
             
              try{
-                guardarUsuarios("listaUsuarios.dat", listaUsuarios);
+                guardarUsuarios("listaUsuarios.txt", listaUsuarios);
             }
             catch (IOException e){
                 System.out.println("El archivo no se logro abrir");
@@ -235,7 +239,7 @@ public class Login {
         try{
             System.out.println(usuario.getCorreo().getCorreo() + "dd");
             System.out.println("yaa");
-            guardarUsuarios("listaUsuarios.dat", listaUsuarios);
+            guardarUsuarios("listaUsuarios.txt", listaUsuarios);
         }
         catch (IOException e){
             System.out.println("malmamlal");

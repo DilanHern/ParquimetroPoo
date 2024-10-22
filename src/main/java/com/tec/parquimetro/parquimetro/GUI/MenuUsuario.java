@@ -3110,6 +3110,7 @@ public class MenuUsuario extends javax.swing.JFrame {
             ticket.setEspacio(espacio);
             
             //Agrega el vehiculo al espacio que fue reservado
+            espacio.agregarTicket(ticket);
             espacio.agregarVehiculo(vehiculo);
             espacio.setEstado(false);
             
@@ -3361,6 +3362,7 @@ public class MenuUsuario extends javax.swing.JFrame {
             
            //El vehiculo cambia a su nuevo ticket vigente
             vehiculo.generarTicketTiempoExtra(tiempoExtra, total); 
+            
             TicketParqueo ticket =  vehiculo.getTicketVigente();
            JOptionPane.showMessageDialog(null, "Espere un momento por favor... Estamos procesando su informacion!");
             //enviar correo

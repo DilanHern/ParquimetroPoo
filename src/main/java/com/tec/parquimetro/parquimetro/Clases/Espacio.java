@@ -11,7 +11,7 @@ public class Espacio implements Serializable{
     private int numero;
     private boolean estado; //Disponible o ocupado
     private List<Vehiculo> vehiculos; //Almacena el vehiculo que esta parqueado, de esta desocupado sera NULL
-
+    private List<TicketParqueo> tickets; //Almacena el vehiculo que esta parqueado, de esta desocupado sera NULL
     public Espacio(){}
     
     //constructor
@@ -20,7 +20,7 @@ public class Espacio implements Serializable{
         this.numero = numero;
         this.estado = estado;
         vehiculos = new ArrayList<Vehiculo>();
-    
+        this.tickets = new ArrayList<TicketParqueo>();
     }
 
     
@@ -45,9 +45,16 @@ public class Espacio implements Serializable{
         return vehiculos;
     }
     
+        /**
+     * @return the tickets
+     */
+    public List<TicketParqueo> getTickets() {
+        return tickets;
+    }
+    
     public Vehiculo buscarVehiculo(String placa){
     
-        for(Vehiculo obj : vehiculos){
+        for(Vehiculo obj : getVehiculos()){
          
             if(obj.getPlaca().equals(placa)){
             
@@ -64,7 +71,7 @@ public class Espacio implements Serializable{
     
         if(buscarVehiculo(vehiculo.getPlaca())== null){
         
-            vehiculos.add(vehiculo);
+            getVehiculos().add(vehiculo);
             vehiculo.setEspacio(this);
             
         }
@@ -72,11 +79,17 @@ public class Espacio implements Serializable{
         
     }
     
+    public void agregarTicket(TicketParqueo ticket){
+    
+        this.tickets.add(ticket);
+        
+    }
+    
    public void removerVehiculo(String placa){
     
        Vehiculo objEncontrado = null;
        
-        for(Vehiculo obj : vehiculos){
+        for(Vehiculo obj : getVehiculos()){
          
             if(obj.getPlaca().equals(placa)){
                 objEncontrado = obj;
@@ -85,9 +98,11 @@ public class Espacio implements Serializable{
             
         }
         if(objEncontrado!=null)
-            vehiculos.remove(objEncontrado);
+            getVehiculos().remove(objEncontrado);
         
     }
+
+
     
     
 }

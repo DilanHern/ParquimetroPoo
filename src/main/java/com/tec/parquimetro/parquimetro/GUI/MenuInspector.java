@@ -4,16 +4,19 @@
  */
 package com.tec.parquimetro.parquimetro.GUI;
 import com.tec.parquimetro.parquimetro.Clases.Administrador;
+import com.tec.parquimetro.parquimetro.Clases.Correo;
 import com.tec.parquimetro.parquimetro.Clases.Espacio;
 import com.tec.parquimetro.parquimetro.Clases.Inspector;
 import com.tec.parquimetro.parquimetro.Clases.Login;
 import com.tec.parquimetro.parquimetro.Clases.Multa;
 import com.tec.parquimetro.parquimetro.Clases.Parqueo;
 import com.tec.parquimetro.parquimetro.Clases.Persona;
+import com.tec.parquimetro.parquimetro.Clases.TicketParqueo;
 import com.tec.parquimetro.parquimetro.Clases.Usuario;
 import com.tec.parquimetro.parquimetro.Clases.Vehiculo;
 import static com.tec.parquimetro.parquimetro.GUI.MenuAdministrador.administrador;
 import java.awt.Color;
+import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.time.Instant;
@@ -23,6 +26,7 @@ import java.time.LocalTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -38,12 +42,17 @@ import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.swing.BorderFactory;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JSpinner;
+import javax.swing.RowSorter;
+import javax.swing.SortOrder;
 import javax.swing.SpinnerDateModel;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 
 /**
  *
@@ -65,11 +74,12 @@ public class MenuInspector extends javax.swing.JFrame {
     //FIN DE ATRIBUTOS DE REPORTES
     public  static Inspector inspector = new Inspector();
     public static Parqueo parqueo;
+    DefaultTableModel mdlEspaciosGeneral = new DefaultTableModel();//formato para tabal espacios en reporte general de espacios
     
     public MenuInspector(Inspector pinspector, Parqueo pParqueo) {
         initComponents();
         mProperties = new Properties();
-        
+        pbTabl.setSelectedIndex(4);
         parqueo = pParqueo;
         inspector = pinspector;
         labelBienvenido.setText(inspector.getNombre() + " " + inspector.getApellidos());
@@ -89,6 +99,7 @@ public class MenuInspector extends javax.swing.JFrame {
             }
         });
          pbTabl.setBorder(BorderFactory.createEmptyBorder());
+         pbTabl.setSelectedIndex(4);
     }
 
     //FUNCION PARA VERIFICAR SI LA PLACA ESTÁ EN EL PARQUEO, retorna true si la placa está en el parqueo, false si no lo está
@@ -146,6 +157,13 @@ public class MenuInspector extends javax.swing.JFrame {
         }
      }
      
+    private void actualizarInformacion(Inspector inspector, String identificacion){
+    
+        //Utilizado para actualizar los usuarios al modificar su informacion
+        Login login = new Login();
+         login.actualizarPersona(inspector,identificacion);
+        
+    }
      public void enviarEmail(){
         try {
             Transport mTransport = mSession.getTransport("smtp");
@@ -176,13 +194,25 @@ public class MenuInspector extends javax.swing.JFrame {
                         for (Vehiculo cadaVehiculo : usuario.getVehiculos()){ //revisa cada vehiculo
                             if (usuario.buscarVehiculo(String.valueOf(placa))!= null){ //si la placa es la misma
                                 //genera la multa
-                                Multa nuevaMulta = new Multa (costo, txtRazonMulta.getText(), LocalDateTime.now(),(Usuario)cadaPersona,cadaVehiculo.getPlaca());
+                                Multa nuevaMulta = new Multa (costo, txtRazonMulta.getText(), LocalDateTime.now(),(Usuario)cadaPersona,cadaVehiculo.getPlaca(),inspector);
                                 cadaVehiculo.setNuevaMulta(nuevaMulta);
                                 
                                 Parqueo pq = new Parqueo();
                                 pq.lecturaArchivo();
                                 pq.agregarMulta(nuevaMulta);
                                  JOptionPane.showMessageDialog(null, "Espere un momento por favor, estamos procesando su informacion.", "ERROR", JOptionPane.INFORMATION_MESSAGE);
+                                   JFileChooser fileChoo = new JFileChooser();
+                                  File f = new File("Multa");
+                                  String rutaArchivo = "";
+                                  fileChoo.setSelectedFile(f);
+                                  int option = fileChoo.showSaveDialog(this);
+
+                                  if(option == JFileChooser.APPROVE_OPTION){
+
+                                      f = fileChoo.getSelectedFile();
+                                      rutaArchivo = f.toString();
+                                  }
+                              nuevaMulta.generarPDF(rutaArchivo);
                                 //se envia el correo
                                 emailPara = usuario.getCorreo().getCorreo();
                                 crearEmail(txtRazonMulta.getText() + "\nCOSTO: " + parqueo.getCostoMulta(), "MULTA", emailPara);
@@ -233,6 +263,23 @@ public class MenuInspector extends javax.swing.JFrame {
         btnBuscar = new javax.swing.JButton();
         pnReportes = new com.tec.parquimetro.parquimetro.GUI.Componentes.PanelRedondo();
         lblPerfil3 = new javax.swing.JLabel();
+        tpReportes = new javax.swing.JTabbedPane();
+        jPanel2 = new javax.swing.JPanel();
+        cbEspaciosGeneral = new javax.swing.JComboBox<>();
+        jLabel9 = new javax.swing.JLabel();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        tblEspaciosGeneral = new javax.swing.JTable();
+        jLabel10 = new javax.swing.JLabel();
+        lblCantidadEspacios = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        btnDescargarEspaciosPDF = new com.tec.parquimetro.parquimetro.GUI.RondedBordes();
+        jPanel7 = new javax.swing.JPanel();
+        jLabel17 = new javax.swing.JLabel();
+        btnDescargarMultaHechaPDF = new com.tec.parquimetro.parquimetro.GUI.RondedBordes();
+        dcFinMultaHecha = new com.toedter.calendar.JDateChooser();
+        jLabel18 = new javax.swing.JLabel();
+        dcInicioMultaHecha = new com.toedter.calendar.JDateChooser();
+        jLabel29 = new javax.swing.JLabel();
         pnPrincipal = new com.tec.parquimetro.parquimetro.GUI.Componentes.PanelRedondo();
         lblPerfil5 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -261,6 +308,7 @@ public class MenuInspector extends javax.swing.JFrame {
         btnRestablecerContra = new com.tec.parquimetro.parquimetro.GUI.RondedBordes();
         jLabel3 = new javax.swing.JLabel();
         txtTerminal = new javax.swing.JTextField();
+        jPanel3 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -484,7 +532,7 @@ public class MenuInspector extends javax.swing.JFrame {
                     .addComponent(txtNumParqueo, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(52, 52, 52)
                 .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(215, Short.MAX_VALUE))
+                .addContainerGap(217, Short.MAX_VALUE))
         );
 
         pbTabl.addTab("", pnParquear);
@@ -499,21 +547,196 @@ public class MenuInspector extends javax.swing.JFrame {
         lblPerfil3.setForeground(new java.awt.Color(255, 255, 255));
         lblPerfil3.setText("Reportes");
 
+        tpReportes.setBackground(new java.awt.Color(57, 54, 66));
+
+        jPanel2.setBackground(new java.awt.Color(29, 24, 39));
+
+        cbEspaciosGeneral.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos los espacios", "Espacios ocupados", "Espacios vacios" }));
+        cbEspaciosGeneral.setSelectedIndex(-1);
+        cbEspaciosGeneral.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cbEspaciosGeneralItemStateChanged(evt);
+            }
+        });
+        cbEspaciosGeneral.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbEspaciosGeneralActionPerformed(evt);
+            }
+        });
+
+        jLabel9.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel9.setText("Filtrar");
+
+        tblEspaciosGeneral.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {},
+                {},
+                {},
+                {}
+            },
+            new String [] {
+
+            }
+        ));
+        jScrollPane5.setViewportView(tblEspaciosGeneral);
+
+        jLabel10.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel10.setText("Espacios considerados en el reporte:");
+
+        lblCantidadEspacios.setForeground(new java.awt.Color(255, 255, 255));
+        lblCantidadEspacios.setText("-");
+
+        jLabel11.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel11.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel11.setText("Espacios");
+
+        btnDescargarEspaciosPDF.setBackground(new java.awt.Color(153, 255, 51));
+        btnDescargarEspaciosPDF.setText("Descargar PDF");
+        btnDescargarEspaciosPDF.setColor1(new java.awt.Color(126, 217, 87));
+        btnDescargarEspaciosPDF.setColor2(new java.awt.Color(126, 217, 87));
+        btnDescargarEspaciosPDF.setColor3(new java.awt.Color(126, 217, 87));
+        btnDescargarEspaciosPDF.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDescargarEspaciosPDFActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(32, 32, 32)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel11)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 384, Short.MAX_VALUE)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                                .addComponent(jLabel9)
+                                .addGap(15, 15, 15))
+                            .addComponent(cbEspaciosGeneral, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(jPanel2Layout.createSequentialGroup()
+                            .addComponent(jLabel10)
+                            .addGap(18, 18, 18)
+                            .addComponent(lblCantidadEspacios)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnDescargarEspaciosPDF, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 664, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(28, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addComponent(jLabel9)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel11)
+                    .addComponent(cbEspaciosGeneral, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(21, 21, 21)
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 313, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel10)
+                    .addComponent(lblCantidadEspacios)
+                    .addComponent(btnDescargarEspaciosPDF, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(11, Short.MAX_VALUE))
+        );
+
+        tpReportes.addTab("Espacios", jPanel2);
+
+        jPanel7.setBackground(new java.awt.Color(29, 24, 39));
+
+        jLabel17.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel17.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel17.setText("Multas hechas");
+
+        btnDescargarMultaHechaPDF.setBackground(new java.awt.Color(153, 255, 51));
+        btnDescargarMultaHechaPDF.setText("Descargar PDF");
+        btnDescargarMultaHechaPDF.setColor1(new java.awt.Color(126, 217, 87));
+        btnDescargarMultaHechaPDF.setColor2(new java.awt.Color(126, 217, 87));
+        btnDescargarMultaHechaPDF.setColor3(new java.awt.Color(126, 217, 87));
+        btnDescargarMultaHechaPDF.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDescargarMultaHechaPDFActionPerformed(evt);
+            }
+        });
+
+        jLabel18.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel18.setText("Inicio del periodo");
+
+        jLabel29.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel29.setText("Fin del periodo");
+
+        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
+        jPanel7.setLayout(jPanel7Layout);
+        jPanel7Layout.setHorizontalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel7Layout.createSequentialGroup()
+                .addGap(0, 75, Short.MAX_VALUE)
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel7Layout.createSequentialGroup()
+                        .addComponent(jLabel18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel29))
+                    .addGroup(jPanel7Layout.createSequentialGroup()
+                        .addComponent(dcInicioMultaHecha, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(194, 194, 194)
+                        .addComponent(dcFinMultaHecha, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(101, 101, 101))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnDescargarMultaHechaPDF, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel17))
+                .addGap(298, 298, 298))
+        );
+        jPanel7Layout.setVerticalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel7Layout.createSequentialGroup()
+                .addGap(102, 102, 102)
+                .addComponent(jLabel17)
+                .addGap(69, 69, 69)
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel29))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(dcInicioMultaHecha, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(dcFinMultaHecha, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnDescargarMultaHechaPDF, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(153, 153, 153))
+        );
+
+        tpReportes.addTab("Multas Hechas", jPanel7);
+
         javax.swing.GroupLayout pnReportesLayout = new javax.swing.GroupLayout(pnReportes);
         pnReportes.setLayout(pnReportesLayout);
         pnReportesLayout.setHorizontalGroup(
             pnReportesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnReportesLayout.createSequentialGroup()
-                .addContainerGap(708, Short.MAX_VALUE)
-                .addComponent(lblPerfil3)
-                .addGap(40, 40, 40))
+            .addGroup(pnReportesLayout.createSequentialGroup()
+                .addContainerGap(65, Short.MAX_VALUE)
+                .addGroup(pnReportesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnReportesLayout.createSequentialGroup()
+                        .addComponent(lblPerfil3)
+                        .addGap(40, 40, 40))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnReportesLayout.createSequentialGroup()
+                        .addComponent(tpReportes, javax.swing.GroupLayout.PREFERRED_SIZE, 733, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(30, 30, 30))))
         );
         pnReportesLayout.setVerticalGroup(
             pnReportesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnReportesLayout.createSequentialGroup()
                 .addGap(31, 31, 31)
                 .addComponent(lblPerfil3)
-                .addContainerGap(558, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(tpReportes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(53, Short.MAX_VALUE))
         );
 
         pbTabl.addTab("", pnReportes);
@@ -576,7 +799,7 @@ public class MenuInspector extends javax.swing.JFrame {
                 .addGroup(pnPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnEnviarMulta)
                     .addComponent(btnCancelar))
-                .addContainerGap(68, Short.MAX_VALUE))
+                .addContainerGap(70, Short.MAX_VALUE))
         );
 
         pbTabl.addTab("", pnPrincipal);
@@ -770,7 +993,7 @@ public class MenuInspector extends javax.swing.JFrame {
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(txtTerminal, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
                 .addGroup(pnPerfilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnRestablecerContra, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnActualizarPerfil, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -778,6 +1001,21 @@ public class MenuInspector extends javax.swing.JFrame {
         );
 
         pbTabl.addTab("", pnPerfil);
+
+        jPanel3.setBackground(new java.awt.Color(57, 54, 66));
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 828, Short.MAX_VALUE)
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 615, Short.MAX_VALUE)
+        );
+
+        pbTabl.addTab("tab5", jPanel3);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -821,9 +1059,24 @@ public class MenuInspector extends javax.swing.JFrame {
         pbTabl.setSelectedIndex(4);
     }//GEN-LAST:event_jLabel1MouseClicked
 
+        private void cargarDatosPerfil(){
+         //coloca la informacion cactual del usuario dentro de los campos de texto
+        txtNombre1.setText(inspector.getNombre());
+        txtApellidos.setText(inspector.getApellidos());
+        txtTelefono.setText(String.valueOf(inspector.getTelefono()));
+        taDireccionFisica.setText(inspector.getDireccionFisica());
+        txtIdentificacion.setText(inspector.getIdentificacion());
+        txtPt1Mail.setText(inspector.getCorreo().getStr1());
+        txtPt2Mail.setText(inspector.getCorreo().getStr2());
+        txtTerminal.setText(inspector.getTerminalInspeccion());
+    
+    }
+    
+    
     private void btnPerfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPerfilActionPerformed
         // TODO add your handling code here:
         pbTabl.setSelectedIndex(3);
+        cargarDatosPerfil();
     }//GEN-LAST:event_btnPerfilActionPerformed
 
     private void btnRevisarParqueosMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRevisarParqueosMouseEntered
@@ -846,7 +1099,13 @@ public class MenuInspector extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRevisarParqueosActionPerformed
 
     private void rondedBordes5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rondedBordes5ActionPerformed
-        // TODO add your handling code here:
+         LoginJFrame login = new LoginJFrame();
+        
+        actualizarInformacion(inspector, inspector.getIdentificacion()); //actualiza la informacion que fue generada por el usuario
+        
+        inspector=null; //elimina la informacion que apuntaba el usuario
+        this.setVisible(false);
+        login.setVisible(true);
     }//GEN-LAST:event_rondedBordes5ActionPerformed
 
     private void btnReportesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReportesActionPerformed
@@ -999,10 +1258,14 @@ public class MenuInspector extends javax.swing.JFrame {
     private void btnActualizarPerfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarPerfilActionPerformed
         String nombre;
         String apellidos;
-        String identidicacion;
+        String identificacion;
         String direccionFisica;
+        String pt1Correo;
+        String pt2Correo;
+       String identificacionGeneral;
+       String terminal;
+        LocalDate fechaIngreso;
         int telefono;
-        
         
         if(validarNombre(txtNombre1.getText())){
         
@@ -1017,6 +1280,34 @@ public class MenuInspector extends javax.swing.JFrame {
                                
                                     if(validarTerminalInspeccion(txtTerminal.getText())){
                                        
+                                        //Almacena los datos de los campos de texto en las variables para ser alamacenadas
+                                       nombre = txtNombre1.getText();
+                                       apellidos= txtApellidos.getText();
+                                       direccionFisica = taDireccionFisica.getText();
+                                       identificacion = txtIdentificacion.getText();
+                                       pt1Correo = txtPt1Mail.getText();
+                                       pt2Correo =  txtPt2Mail.getText();
+                                       terminal =  txtTerminal.getText();
+                                       telefono = Integer.valueOf(txtTelefono.getText());
+                                       Correo correo = new Correo(pt1Correo, pt2Correo);
+                                       fechaIngreso = LocalDate.now();
+                                       
+                                       //Almacena la identificacion del usuario anteriormente de ser modificada
+                                       identificacionGeneral = inspector.getIdentificacion();
+                                       
+                                       Inspector  inspector = new Inspector(nombre, apellidos,telefono, direccionFisica, fechaIngreso, identificacion,"", terminal,correo);
+                                       
+                                       //modifica la informacion modificada en el archivo de datos
+                                       inspector.actualizarDatos(inspector);
+                                        
+                                        actualizarInformacion(inspector, identificacionGeneral);
+                                         labelBienvenido.setText(inspector.getNombre() + " " + inspector.getApellidos());
+                                        lblId.setText(inspector.getIdentificacion());
+                                       JOptionPane.showMessageDialog(null, "Datos actualizados existosamente!");
+                                        
+                                        
+                                        
+                                        
                                     String cuerpo = "Nombre: " + inspector.getNombre() + "\n" + "Apellidos: " + inspector.getApellidos() + "\n" + "Direccion fisica: " + inspector.getDireccionFisica() + "\n" + 
                                     "Identificacion: " + inspector.getIdentificacion() + "\n" + "Telefono: " + inspector.getTelefono();
                                     crearEmail(cuerpo, "DATOS ACTUALIZADOS", inspector.getCorreo().getCorreo());
@@ -1099,11 +1390,24 @@ public class MenuInspector extends javax.swing.JFrame {
                 crearMulta(placa, costo);
             }else{
             
-                Multa nuevaMulta = new Multa (costo, txtRazonMulta.getText(), LocalDateTime.now(),null,String.valueOf(placa));
+                Multa nuevaMulta = new Multa (costo, txtRazonMulta.getText(), LocalDateTime.now(),null,String.valueOf(placa),inspector);
                  Parqueo pq = new Parqueo();
                  pq.lecturaArchivo();
                  pq.agregarMulta(nuevaMulta);
-                
+                 
+                 JFileChooser fileChoo = new JFileChooser();
+                    File f = new File("Multa");
+                    String rutaArchivo = "";
+                    fileChoo.setSelectedFile(f);
+                    int option = fileChoo.showSaveDialog(this);
+
+                    if(option == JFileChooser.APPROVE_OPTION){
+
+                        f = fileChoo.getSelectedFile();
+                        rutaArchivo = f.toString();
+                    }
+                nuevaMulta.generarPDF(rutaArchivo);
+                 JOptionPane.showMessageDialog(null, "Multa generada exitosamente");
             }
         }
         catch (NumberFormatException e){
@@ -1111,6 +1415,206 @@ public class MenuInspector extends javax.swing.JFrame {
         
     }//GEN-LAST:event_btnEnviarMultaActionPerformed
 
+    private void btnDescargarMultaHechaPDFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDescargarMultaHechaPDFActionPerformed
+
+        Date fechaInicio = dcInicioMultaHecha.getDate();
+        Date fechaFinal = dcFinMultaHecha.getDate();
+        if (fechaInicio != null) {
+            if(fechaFinal!=null){
+
+                if(fechaFinal.after(fechaInicio) || fechaFinal.equals(fechaInicio)){
+                    // Convertimos la fecha a LocalDate
+                    LocalDate inicio = fechaInicio.toInstant()
+                    .atZone(ZoneId.systemDefault())
+                    .toLocalDate();
+
+                    LocalDate finalF = fechaFinal.toInstant()
+                    .atZone(ZoneId.systemDefault())
+                    .toLocalDate();
+
+                    JFileChooser fileChoo = new JFileChooser();
+                    File f = new File("MultasGeneradas");
+                    String rutaArchivo = "";
+                    fileChoo.setSelectedFile(f);
+                    Parqueo parqueo = new Parqueo();
+                    parqueo.lecturaArchivo();
+                    int option = fileChoo.showSaveDialog(this);
+
+                    if(option == JFileChooser.APPROVE_OPTION){
+
+                        f = fileChoo.getSelectedFile();
+                        rutaArchivo = f.toString();
+                    }
+                    parqueo.generarMultasHechasInspectorPDF(rutaArchivo, inicio, finalF, inspector.getIdentificacion());
+                    JOptionPane.showMessageDialog(null, "Archivo descargado exitosamente!");
+
+                }else{
+                    JOptionPane.showMessageDialog(null, "La fecha final debe ser igual o mayor a la fecha de inicio.");
+                }
+
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "No se seleccionó ninguna fecha final.");
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "No se seleccionó ninguna fecha de inicio.");
+        }
+    }//GEN-LAST:event_btnDescargarMultaHechaPDFActionPerformed
+
+    private void btnDescargarEspaciosPDFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDescargarEspaciosPDFActionPerformed
+
+        String opcion = cbEspaciosGeneral.getSelectedItem().toString();
+        String nombreArchivo="";
+        String ruta;
+        Parqueo parqueo = new Parqueo();
+
+        int tipoReporte = 0; //1->general 2->ocupados 3->vacios
+
+        if(opcion == "Todos los espacios"){
+
+            nombreArchivo="EspaciosGeneral";
+            tipoReporte=1;
+
+        }else if (opcion == "Espacios ocupados"){
+
+            nombreArchivo="EspaciosOcupados";
+            tipoReporte=2;
+
+        }else if(opcion == "Espacios vacios"){
+
+            nombreArchivo = "EspacioVacios";
+            tipoReporte=3;
+        }
+
+        JFileChooser fileChoo = new JFileChooser();
+        File f = new File(nombreArchivo);
+        String rutaArchivo = "";
+        fileChoo.setSelectedFile(f);
+        int option = fileChoo.showSaveDialog(this);
+
+        if(option == JFileChooser.APPROVE_OPTION){
+
+            f = fileChoo.getSelectedFile();
+            rutaArchivo = f.toString();
+        }
+
+        if(tipoReporte==1)
+        parqueo.generarEspaciosGeneralPDF(rutaArchivo);
+        else if(tipoReporte ==2)
+        parqueo.generarEspaciosOcupadosPDF(rutaArchivo);
+        else if (tipoReporte==3)
+        parqueo.generarEspaciosVaciosPDF(rutaArchivo);
+
+        if(tipoReporte!= 0)
+        JOptionPane.showMessageDialog(null, "Archivo descargado exitosamente!");
+    }//GEN-LAST:event_btnDescargarEspaciosPDFActionPerformed
+
+    private void cbEspaciosGeneralActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbEspaciosGeneralActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbEspaciosGeneralActionPerformed
+
+    private void cbEspaciosGeneralItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbEspaciosGeneralItemStateChanged
+
+        Parqueo parqueo = new Parqueo();
+        parqueo.lecturaArchivo();
+
+        if(cbEspaciosGeneral.getSelectedItem() == "Todos los espacios"){
+
+            generarReporteGeneralEspacios(parqueo.getEspacios());
+
+        }
+        else  if(cbEspaciosGeneral.getSelectedItem() == "Espacios vacios"){
+
+            generarReporteGeneralEspaciosVacios(parqueo.listarEspaciosVacios());
+
+        }else  if(cbEspaciosGeneral.getSelectedItem() == "Espacios ocupados"){
+
+            generarReporteGeneralEspaciosOcupados(parqueo.listarEspaciosOcupados());
+
+        }
+
+        TableRowSorter<TableModel> sorter = new TableRowSorter<TableModel>(mdlEspaciosGeneral);
+        tblEspaciosGeneral.setRowSorter(sorter);
+        sorter.setSortKeys(Arrays.asList(new RowSorter.SortKey(0, SortOrder.ASCENDING)));
+    }//GEN-LAST:event_cbEspaciosGeneralItemStateChanged
+
+     private void generarReporteGeneralEspacios(List<Espacio>  espacios){
+        
+        int cantidadEspacios=0;
+        String estado;
+        String identificadores [] = {"Numero", "Estado"};
+        mdlEspaciosGeneral.setColumnIdentifiers(identificadores);
+        
+        tblEspaciosGeneral.setModel(mdlEspaciosGeneral);
+
+        mdlEspaciosGeneral.getDataVector().removeAllElements();
+            
+        for(Espacio obj : espacios){
+                
+            if(obj.getEstado())
+                  estado="Libre";
+            else
+                  estado="Ocupado";
+                
+            mdlEspaciosGeneral.addRow(new Object[]{obj.getNumero(), estado});
+            cantidadEspacios++;
+                
+        }
+    
+        lblCantidadEspacios.setText(String.valueOf(cantidadEspacios));
+    }
+    
+    
+        private void generarReporteGeneralEspaciosVacios(List<Espacio>  espacios){
+        
+        int cantidadEspacios=0;
+        String estado = "Vacio";
+        String identificadores [] = {"Numero", "Estado"};
+        mdlEspaciosGeneral.setColumnIdentifiers(identificadores);
+        
+        tblEspaciosGeneral.setModel(mdlEspaciosGeneral);
+
+        mdlEspaciosGeneral.getDataVector().removeAllElements();
+            
+        for(Espacio obj : espacios){
+                
+            mdlEspaciosGeneral.addRow(new Object[]{obj.getNumero(), estado});
+            cantidadEspacios++;
+                
+        }
+    
+        lblCantidadEspacios.setText(String.valueOf(cantidadEspacios));
+    }
+    
+        private void generarReporteGeneralEspaciosOcupados(List<Espacio>  espacios){
+        
+        int cantidadEspacios=0;
+        String identificadores [] = {"Numero", "Placa","Costo", "TiempoInicial","TiempoFinal"};
+        
+         mdlEspaciosGeneral.getDataVector().removeAllElements();
+        mdlEspaciosGeneral.setColumnIdentifiers(identificadores);
+        
+        tblEspaciosGeneral.setModel(mdlEspaciosGeneral);
+
+        mdlEspaciosGeneral.getDataVector().removeAllElements();
+            
+        
+        for(Espacio obj : espacios){
+             if(obj.getVehiculos()!=null){
+                  Vehiculo vehiculo = obj.getVehiculos().getFirst();
+                    TicketParqueo ticket = vehiculo.getTicketVigente();
+                    mdlEspaciosGeneral.addRow(new Object[]{obj.getNumero(), vehiculo.getPlaca(), vehiculo.getTicketVigente().getTotal(), ticket.getHoraSistema(), ticket.getHoraSistema().plusMinutes(ticket.getTiempoParqueo())});
+                    cantidadEspacios++;
+                 
+             }
+           
+                
+        }
+    
+        lblCantidadEspacios.setText(String.valueOf(cantidadEspacios));
+    }
+    
+    
     /**
      * @param args the command line arguments
      */
@@ -1150,23 +1654,39 @@ public class MenuInspector extends javax.swing.JFrame {
     private com.tec.parquimetro.parquimetro.GUI.RondedBordes btnActualizarPerfil;
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnCancelar;
+    private com.tec.parquimetro.parquimetro.GUI.RondedBordes btnDescargarEspaciosPDF;
+    private com.tec.parquimetro.parquimetro.GUI.RondedBordes btnDescargarMultaHechaPDF;
     private javax.swing.JButton btnEnviarMulta;
     private com.tec.parquimetro.parquimetro.GUI.RondedBordes btnPerfil;
     private com.tec.parquimetro.parquimetro.GUI.RondedBordes btnReportes;
     private com.tec.parquimetro.parquimetro.GUI.RondedBordes btnRestablecerContra;
     private com.tec.parquimetro.parquimetro.GUI.RondedBordes btnRevisarParqueos;
+    private javax.swing.JComboBox<String> cbEspaciosGeneral;
+    private com.toedter.calendar.JDateChooser dcFinMultaHecha;
+    private com.toedter.calendar.JDateChooser dcInicioMultaHecha;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JLabel labelBienvenido;
     private javax.swing.JLabel lblApellidos;
     private javax.swing.JLabel lblApellidos1;
     private javax.swing.JLabel lblApellidos2;
     private javax.swing.JLabel lblApellidos3;
+    private javax.swing.JLabel lblCantidadEspacios;
     private javax.swing.JLabel lblId;
     private javax.swing.JLabel lblIdentificacion;
     private javax.swing.JLabel lblNombre1;
@@ -1184,6 +1704,8 @@ public class MenuInspector extends javax.swing.JFrame {
     private com.tec.parquimetro.parquimetro.GUI.Componentes.PanelRedondo pnReportes;
     private com.tec.parquimetro.parquimetro.GUI.RondedBordes rondedBordes5;
     private javax.swing.JTextArea taDireccionFisica;
+    private javax.swing.JTable tblEspaciosGeneral;
+    private javax.swing.JTabbedPane tpReportes;
     private javax.swing.JTextField txtApellidos;
     private javax.swing.JTextField txtIdentificacion;
     private javax.swing.JTextField txtNombre1;
