@@ -13,6 +13,8 @@ import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 import java.io.*; //manejo de archivos
 import java.nio.channels.OverlappingFileLockException;
+import java.text.DecimalFormat;
+import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -1264,6 +1266,335 @@ public class Parqueo implements Serializable {
                      
                    //Pie de la tabla, informa el total de los elementos
                    PdfPCell footerCell = new PdfPCell(new Phrase("Total de multas: " + cant, new Font(Font.FontFamily.HELVETICA, 12, Font.NORMAL, new BaseColor(255, 255, 255))));
+                   footerCell.setBackgroundColor(new BaseColor(184,102,20)); 
+                   footerCell.setBorderColor(new BaseColor(184,102,20));
+                   footerCell.setColspan(4);  // Combina las 5 columnas
+                   footerCell.setHorizontalAlignment(Element.ALIGN_RIGHT);  // Alinear el texto a la derecha
+                   footerCell.setPaddingTop(5);
+                   footerCell.setPaddingRight(10);
+                   footerCell.setPaddingBottom(7);
+                    tabla.addCell(footerCell);                       
+
+                    document.add(tabla);
+
+                     System.out.println("Listo");
+
+                     document.close();
+
+                 } catch (FileNotFoundException ex) {
+
+                 } catch (DocumentException ex) {
+
+                 }
+                
+            }
+   }
+
+     public PdfPTable generarEstadisticaDetallada(int espacio, LocalDate dia, PdfPTable tabla){
+    
+        double minOcupadas=0;
+        double horasVacio=0;
+        Duration horasParqueoAbierto = Duration.between(horaInicio, horaFinal);
+        double horasAbiertos = (double)horasParqueoAbierto.toHours();
+        
+        Espacio espacioEncontrado = buscarEspacio(espacio);
+       
+       for(TicketParqueo t : espacioEncontrado.getTickets()){
+       
+           if(t.getHoraSistema().toLocalDate().isEqual(dia)){
+                             minOcupadas+= t.getTiempoParqueo();
+            }
+           
+       }
+        //de minutos a horas
+         System.out.println(minOcupadas +"m");
+         double horasOcupadas = minOcupadas/60;
+          horasVacio= horasAbiertos-horasOcupadas;
+         System.out.println(horasOcupadas + "h");
+          double porcentajeOcupacion = (horasOcupadas / horasAbiertos) * 100;
+           double porcentajeVacio = 100 - porcentajeOcupacion; 
+           DecimalFormat df = new DecimalFormat("#.##");
+           String porcentajeOcupacionStr = df.format(porcentajeOcupacion);
+           String porcentajeVacioStr = df.format(porcentajeVacio);
+        
+       tabla.addCell(String.valueOf(espacio));
+       tabla.addCell(dia.toString());
+       tabla.addCell(String.valueOf(horasOcupadas));
+       tabla.addCell(String.valueOf(porcentajeOcupacionStr) + "%");
+       tabla.addCell(String.valueOf(horasVacio));
+       tabla.addCell(String.valueOf(porcentajeVacioStr) + "%");
+       
+       
+       return tabla;
+    }
+    
+        public void generarEspaciosDetalladosPDF(String rutaArchivo, LocalDate inicio, LocalDate finalF, int inicioEsp, int finEsp){
+       
+       List<Multa> lista = this.multas;
+            
+            if(lista!=null){
+                
+                try {
+                     Document document = new Document();
+                     PdfWriter.getInstance(document, new FileOutputStream(rutaArchivo+".pdf"));
+
+                     document.open();
+                     document.addAuthor("Parquimetro");
+
+                     //Titulo del documento
+                     Paragraph tituloPrincipal = new Paragraph("Reporte Parquimetro", FontFactory.getFont(FontFactory.HELVETICA_BOLD,20, Font.BOLD,new BaseColor(14, 41, 75)));
+                     tituloPrincipal.setAlignment(1);
+                      document.add(tituloPrincipal);
+                     Paragraph titulo = new Paragraph("Uso de los espacios detallado");
+                     titulo.setAlignment(5);
+                     document.add(titulo);
+
+                     //FECHAS Y PERIODOS DEL REPORTE 
+                     document.add(Chunk.NEWLINE);//SALTO DE LINEA
+                     Paragraph fecha = new Paragraph("Fecha de elaboracion: " + new Date().toString());
+                     fecha.setAlignment(Element.ALIGN_LEFT);  // Alinear a la derecha
+                     document.add(fecha);
+
+                     Paragraph periodo = new Paragraph("Periodo: " + inicio.toString() +" - " + finalF.toString());
+                     periodo.setAlignment(Element.ALIGN_LEFT);  // Alinear a la derecha
+                     document.add(periodo);
+                     // Agregar el párrafo al documento
+                      //FIN FECHAS Y PERIODOS DEL REPORTE 
+
+                     document.add(Chunk.NEWLINE);//SALTO DE LINEA
+
+                     //Genera la tabla por argumentos envia el numero de celdas por fila
+                     PdfPTable tabla = new PdfPTable(6);
+                     tabla.setWidthPercentage(100);
+
+                     //ENCABEZADO DE LA TABLA
+                     Phrase frase = new Phrase("Espacio", new Font(Font.FontFamily.HELVETICA, 12, Font.NORMAL, new BaseColor(255, 255, 255))); // Texto en blanco
+                     PdfPCell espacio = new PdfPCell(frase);
+                     espacio.setHorizontalAlignment(Element.ALIGN_CENTER);
+                     espacio.setPaddingTop(10);
+                     espacio.setPaddingBottom(10);
+                     espacio.setBackgroundColor(new BaseColor(14, 41, 75));  // Fondo azul oscuro
+                      tabla.addCell(espacio);
+                      
+                     Phrase frasedias= new Phrase("Dia", new Font(Font.FontFamily.HELVETICA, 12, Font.NORMAL, new BaseColor(255, 255, 255))); // Texto en blanco
+                     PdfPCell dia = new PdfPCell(frasedias);
+                     dia.setHorizontalAlignment(Element.ALIGN_CENTER);
+                     dia.setPaddingTop(10);
+                     dia.setPaddingBottom(10);
+                     dia.setBackgroundColor(new BaseColor(14, 41, 75));  // Fondo azul oscuro
+                     tabla.addCell(dia);
+                     
+                     Phrase fraseHOcupadas= new Phrase("Horas Ocupadas", new Font(Font.FontFamily.HELVETICA, 12, Font.NORMAL, new BaseColor(255, 255, 255))); // Texto en blanco
+                     PdfPCell hOcupadas = new PdfPCell(fraseHOcupadas);
+                     hOcupadas.setHorizontalAlignment(Element.ALIGN_CENTER);
+                     hOcupadas.setPaddingTop(10);
+                     hOcupadas.setPaddingBottom(10);
+                     hOcupadas.setBackgroundColor(new BaseColor(14, 41, 75));  // Fondo azul oscuro
+                     tabla.addCell(hOcupadas);
+                     
+                     Phrase frasePOcupadas= new Phrase("Porcentaje ocupado", new Font(Font.FontFamily.HELVETICA, 12, Font.NORMAL, new BaseColor(255, 255, 255))); // Texto en blanco
+                     PdfPCell pOcupadas = new PdfPCell(frasePOcupadas);
+                     pOcupadas.setHorizontalAlignment(Element.ALIGN_CENTER);
+                     pOcupadas.setPaddingTop(10);
+                     pOcupadas.setPaddingBottom(10);
+                     pOcupadas.setBackgroundColor(new BaseColor(14, 41, 75));  // Fondo azul oscuro
+                     tabla.addCell(pOcupadas);
+                      
+                     Phrase frasehVacias= new Phrase("Horas Vacias", new Font(Font.FontFamily.HELVETICA, 12, Font.NORMAL, new BaseColor(255, 255, 255))); // Texto en blanco
+                     PdfPCell hVacias = new PdfPCell(frasehVacias);
+                     hVacias.setHorizontalAlignment(Element.ALIGN_CENTER);
+                     hVacias.setPaddingTop(10);
+                     hVacias.setPaddingBottom(10);
+                     hVacias.setBackgroundColor(new BaseColor(14, 41, 75));  // Fondo azul oscuro
+                     tabla.addCell(hVacias);
+                     
+                     Phrase frasepVacias= new Phrase("Porcentaje Vacio", new Font(Font.FontFamily.HELVETICA, 12, Font.NORMAL, new BaseColor(255, 255, 255))); // Texto en blanco
+                     PdfPCell pVacias = new PdfPCell(frasepVacias);
+                     pVacias.setHorizontalAlignment(Element.ALIGN_CENTER);
+                     pVacias.setPaddingTop(10);
+                     pVacias.setPaddingBottom(10);
+                     pVacias.setBackgroundColor(new BaseColor(14, 41, 75));  // Fondo azul oscuro
+                     tabla.addCell(pVacias);
+
+                     //FIN DEL ENCABEZADO DE LA TABLA
+
+                     //Controla la cantidad de elementos considerados en el reporte
+                     int cant=0;
+                    
+                     LocalDate diaE = inicio;
+                     //carga los elementos a la tabla
+                     while(!diaE.isAfter(finalF)){
+
+                         for(int i=inicioEsp; i<=finEsp; i++){
+                         
+                              tabla = generarEstadisticaDetallada(i,diaE,tabla);
+                         }
+                            
+                            diaE = diaE.plusDays(1);
+                    }
+                     
+                   //Pie de la tabla, informa el total de los elementos
+                   PdfPCell footerCell = new PdfPCell(new Phrase("Total de espacios: " + espacios.size(), new Font(Font.FontFamily.HELVETICA, 12, Font.NORMAL, new BaseColor(255, 255, 255))));
+                   footerCell.setBackgroundColor(new BaseColor(184,102,20)); 
+                   footerCell.setBorderColor(new BaseColor(184,102,20));
+                   footerCell.setColspan(4);  // Combina las 5 columnas
+                   footerCell.setHorizontalAlignment(Element.ALIGN_RIGHT);  // Alinear el texto a la derecha
+                   footerCell.setPaddingTop(5);
+                   footerCell.setPaddingRight(10);
+                   footerCell.setPaddingBottom(7);
+                    tabla.addCell(footerCell);                       
+
+                    document.add(tabla);
+
+                     System.out.println("Listo");
+
+                     document.close();
+
+                 } catch (FileNotFoundException ex) {
+
+                 } catch (DocumentException ex) {
+
+                 }
+                
+            }
+   }
+        
+   public PdfPTable generarEstadisticaResumida(int espacio, LocalDate dia, PdfPTable tabla){
+    
+                double minOcupadas=0;
+                double horasVacio=0;
+                Duration horasParqueoAbierto = Duration.between(horaInicio, horaFinal);
+                double horasAbiertos = (double) horasParqueoAbierto.toHours();
+
+                Espacio espacioEncontrado = buscarEspacio(espacio);
+
+                if(espacioEncontrado!=null){
+                    
+                   for(TicketParqueo t : espacioEncontrado.getTickets()){
+                       System.out.println(t.getHoraSistema().toLocalDate());
+                        if(t.getHoraSistema().toLocalDate().isEqual(dia)){
+                                  minOcupadas+= t.getTiempoParqueo();
+                         }
+
+                    }
+                    //de minutos a horas
+                    System.out.println(minOcupadas +"m");
+                    double horasOcupadas = minOcupadas/60;
+                    horasVacio= horasAbiertos-horasOcupadas;
+                    System.out.println(horasOcupadas + "h");
+                    double porcentajeOcupacion = (horasOcupadas / horasAbiertos) * 100;
+                    double porcentajeVacio = 100 - porcentajeOcupacion; 
+                    DecimalFormat df = new DecimalFormat("#.##");
+                    String porcentajeOcupacionStr = df.format(porcentajeOcupacion);
+                    String porcentajeVacioStr = df.format(porcentajeVacio);
+                    
+                    tabla.addCell(String.valueOf(espacio));
+                    tabla.addCell(dia.toString());
+                    tabla.addCell(String.valueOf(porcentajeOcupacionStr) + "%");
+                    tabla.addCell(String.valueOf(porcentajeVacioStr) + "%");
+                    
+                }
+
+
+
+               return tabla;
+    }
+    
+        public void generarEspaciosResumidoPDF(String rutaArchivo, LocalDate inicio, LocalDate finalF, int inicioEsp, int finEsp){
+       
+       List<Multa> lista = this.multas;
+            
+            if(lista!=null){
+                
+                try {
+                     Document document = new Document();
+                     PdfWriter.getInstance(document, new FileOutputStream(rutaArchivo+".pdf"));
+
+                     document.open();
+                     document.addAuthor("Parquimetro");
+
+                     //Titulo del documento
+                     Paragraph tituloPrincipal = new Paragraph("Reporte Parquimetro", FontFactory.getFont(FontFactory.HELVETICA_BOLD,20, Font.BOLD,new BaseColor(14, 41, 75)));
+                     tituloPrincipal.setAlignment(1);
+                      document.add(tituloPrincipal);
+                     Paragraph titulo = new Paragraph("Uso de los espacios resumido");
+                     titulo.setAlignment(5);
+                     document.add(titulo);
+
+                     //FECHAS Y PERIODOS DEL REPORTE 
+                     document.add(Chunk.NEWLINE);//SALTO DE LINEA
+                     Paragraph fecha = new Paragraph("Fecha de elaboracion: " + new Date().toString());
+                     fecha.setAlignment(Element.ALIGN_LEFT);  // Alinear a la derecha
+                     document.add(fecha);
+
+                     Paragraph periodo = new Paragraph("Periodo: " + inicio.toString() +" - " + finalF.toString());
+                     periodo.setAlignment(Element.ALIGN_LEFT);  // Alinear a la derecha
+                     document.add(periodo);
+                     // Agregar el párrafo al documento
+                      //FIN FECHAS Y PERIODOS DEL REPORTE 
+
+                     document.add(Chunk.NEWLINE);//SALTO DE LINEA
+
+                     //Genera la tabla por argumentos envia el numero de celdas por fila
+                     PdfPTable tabla = new PdfPTable(4);
+                     tabla.setWidthPercentage(100);
+
+                     //ENCABEZADO DE LA TABLA
+                     Phrase frase = new Phrase("Espacio", new Font(Font.FontFamily.HELVETICA, 12, Font.NORMAL, new BaseColor(255, 255, 255))); // Texto en blanco
+                     PdfPCell espacio = new PdfPCell(frase);
+                     espacio.setHorizontalAlignment(Element.ALIGN_CENTER);
+                     espacio.setPaddingTop(10);
+                     espacio.setPaddingBottom(10);
+                     espacio.setBackgroundColor(new BaseColor(14, 41, 75));  // Fondo azul oscuro
+                      tabla.addCell(espacio);
+                      
+                     Phrase frasedias= new Phrase("Dia", new Font(Font.FontFamily.HELVETICA, 12, Font.NORMAL, new BaseColor(255, 255, 255))); // Texto en blanco
+                     PdfPCell dia = new PdfPCell(frasedias);
+                     dia.setHorizontalAlignment(Element.ALIGN_CENTER);
+                     dia.setPaddingTop(10);
+                     dia.setPaddingBottom(10);
+                     dia.setBackgroundColor(new BaseColor(14, 41, 75));  // Fondo azul oscuro
+                     tabla.addCell(dia);
+                     
+                     
+                     Phrase frasePOcupadas= new Phrase("Porcentaje ocupado", new Font(Font.FontFamily.HELVETICA, 12, Font.NORMAL, new BaseColor(255, 255, 255))); // Texto en blanco
+                     PdfPCell pOcupadas = new PdfPCell(frasePOcupadas);
+                     pOcupadas.setHorizontalAlignment(Element.ALIGN_CENTER);
+                     pOcupadas.setPaddingTop(10);
+                     pOcupadas.setPaddingBottom(10);
+                     pOcupadas.setBackgroundColor(new BaseColor(14, 41, 75));  // Fondo azul oscuro
+                     tabla.addCell(pOcupadas);
+                      
+                     
+                     Phrase frasepVacias= new Phrase("Porcentaje Vacio", new Font(Font.FontFamily.HELVETICA, 12, Font.NORMAL, new BaseColor(255, 255, 255))); // Texto en blanco
+                     PdfPCell pVacias = new PdfPCell(frasepVacias);
+                     pVacias.setHorizontalAlignment(Element.ALIGN_CENTER);
+                     pVacias.setPaddingTop(10);
+                     pVacias.setPaddingBottom(10);
+                     pVacias.setBackgroundColor(new BaseColor(14, 41, 75));  // Fondo azul oscuro
+                     tabla.addCell(pVacias);
+
+                     //FIN DEL ENCABEZADO DE LA TABLA
+
+                     //Controla la cantidad de elementos considerados en el reporte
+                     int cant=0;
+                    
+                     LocalDate diaE = inicio;
+                     //carga los elementos a la tabla
+                     while(!diaE.isAfter(finalF)){
+
+                           while(!diaE.isAfter(finalF)){
+
+                                for(int i=inicioEsp; i<=finEsp; i++){
+
+                                     tabla = generarEstadisticaResumida(i,diaE,tabla);
+                                }
+                                diaE = diaE.plusDays(1);
+                            }
+                    }
+                     
+                   //Pie de la tabla, informa el total de los elementos
+                   PdfPCell footerCell = new PdfPCell(new Phrase("Total de espacios: " + espacios.size(), new Font(Font.FontFamily.HELVETICA, 12, Font.NORMAL, new BaseColor(255, 255, 255))));
                    footerCell.setBackgroundColor(new BaseColor(184,102,20)); 
                    footerCell.setBorderColor(new BaseColor(184,102,20));
                    footerCell.setColspan(4);  // Combina las 5 columnas

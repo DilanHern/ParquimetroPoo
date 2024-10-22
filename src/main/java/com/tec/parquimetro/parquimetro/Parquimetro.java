@@ -107,11 +107,11 @@ public class Parquimetro {
          
          
          
-//MenuAdministrador menuIns = new MenuAdministrador(usuaario);
-//menuIns.setVisible(true);
-     Parqueo p = new Parqueo(); 
+MenuAdministrador menuIns = new MenuAdministrador(usuaario);
+menuIns.setVisible(true);
+     /*Parqueo p = new Parqueo(); 
       p.lecturaArchivo();
       MenuInspector menuIns  = new MenuInspector(ins,p);
-      menuIns.setVisible(true);
+      menuIns.setVisible(true);*/
     }
 }
