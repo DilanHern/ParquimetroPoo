@@ -79,7 +79,6 @@ public class PanelOlvidePin extends javax.swing.JPanel {
             mTransport.connect(emailDe, contraseñaDe);
             mTransport.sendMessage(mCorreo, mCorreo.getRecipients(Message.RecipientType.TO));
             mTransport.close();
-            JOptionPane.showMessageDialog(null, "Correo enviado");
             
         } catch (NoSuchProviderException ex) {
             Logger.getLogger(MenuInspector.class.getName()).log(Level.SEVERE, null, ex);
@@ -194,27 +193,33 @@ public class PanelOlvidePin extends javax.swing.JPanel {
             //revisar la identificacion
             if (MenuInspector.validacionIdentificacion(txtIdentificacion.getText())){ //si la identificacion fue bien escrita
                 ArrayList<Persona> listaUsuarios = Login.cargarUsuarios("listaUsuarios.txt");
+                boolean existe = false;
                 for (Persona cadaPersona : listaUsuarios){ //buscamos todas las identificaciones
-                    if(cadaPersona.getIdentificacion().equals(txtIdentificacion.getText())){
-                        System.out.println("aaaaaaa");
+                    if(cadaPersona.getIdentificacion().equals(txtIdentificacion.getText())){ 
                         //crear nuevo pin
                         Random random = new Random(); //Generar un número aleatorio entre 1000 y 9999
                         int numeroAleatorio = 1000 + random.nextInt(9000);
                         cadaPersona.setPin(String.valueOf(numeroAleatorio));
+
                         //enviar correo
                         String cuerpo = "TU NUEVO PIN: " + String.valueOf(numeroAleatorio);
                         crearEmail(cuerpo, "CAMBIO DE PIN", cadaPersona.getCorreo().getCorreo());
                         enviarEmail();
-                         JOptionPane.showMessageDialog(null, "Se ha enviado un correo de recuperacion!");
-                        try {
-                            Login.guardarUsuarios("listaUsuarios.txt", listaUsuarios);
-                        } catch (IOException ex) {
-                            Logger.getLogger(PanelOlvidePin.class.getName()).log(Level.SEVERE, null, ex);
-                        }
-                        return;
+                        JOptionPane.showMessageDialog(null, "Se ha enviado un correo de recuperacion!");
+                        existe = true;
+                        break;
                     }
                 }
-                JOptionPane.showMessageDialog(null, "No se encontró un usuario con esa identificación");
+                if (existe){
+                    try{
+                    Login.guardarUsuarios("listaUsuarios.txt", listaUsuarios);
+                    }
+                    catch (IOException ex) {
+                        Logger.getLogger(PanelOlvidePin.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+                else
+                    JOptionPane.showMessageDialog(null, "No se encontró un usuario con esa identificación");
             }
             else{
                 JOptionPane.showMessageDialog(null, "La identificacion debe tener entre 2 a 25 caracteres!");

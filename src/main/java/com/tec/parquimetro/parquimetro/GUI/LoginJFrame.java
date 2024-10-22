@@ -135,7 +135,6 @@ public class LoginJFrame extends javax.swing.JFrame {
         if (validarIdentPin()) { //si la informacion ingresada cumple las validaciones:
             //creamos un objeto LoginJFrame
             Login login1 = new Login();
-            //login1.crear();
             //cargamos la lista de cuentas
             login1.setListaUsuarios(cargarUsuarios("listaUsuarios.txt"));
             //comprobar que el usuario con la identificacion

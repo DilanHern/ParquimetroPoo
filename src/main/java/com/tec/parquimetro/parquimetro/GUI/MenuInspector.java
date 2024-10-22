@@ -1342,25 +1342,41 @@ public class MenuInspector extends javax.swing.JFrame {
        
     //funcion que permite cambiar el PIN del Inspector
     public void cambiarPin(){
-        if (txtPinAnterior.getText().equals(inspector.getPin())){
-            try{ //verificar si el pin ingresado es un entero
-                int pinNuevo = Integer.parseInt(txtPinAnterior.getText());
-                if (pinNuevo <= 9999 && pinNuevo >= 1000){
-                    inspector.setPin(txtPinAnterior.getText());
-                    JOptionPane.showMessageDialog(null, "Su PIN ha sido cambiado con éxito!");
+         if (txtPinAnterior.getText().equals(inspector.getPin())){
+             try{ //verificar si el pin ingresado es un entero
+                 int pinNuevo = Integer.parseInt(txtPinAnterior.getText());
+                 if (pinNuevo <= 9999 && pinNuevo >= 1000){
+                     //cargamos el pin
+                     ArrayList<Persona> listaUsuarios = Login.cargarUsuarios("listaUsuarios.txt");
+                     for (Persona cadaUsuario : listaUsuarios){
+                         if (cadaUsuario.getIdentificacion().equals(inspector.getIdentificacion())){ //buscamos la cuenta
+                             //asignamos el pin al usuario
+                             cadaUsuario.setPin(txtPinAnterior.getText());
+                             inspector.setPin(txtPinAnterior.getText());
+                             //guardamos el pin en los archivos
+                             try {
+                             Login.guardarUsuarios("listaUsuarios.txt", listaUsuarios);
+                             } 
+                             catch (IOException ex) {
+                               Logger.getLogger(PanelOlvidePin.class.getName()).log(Level.SEVERE, null, ex);
+                             }
+                             JOptionPane.showMessageDialog(null, "Su PIN ha sido cambiado con éxito!");
+                             return;
+                         }
+                     }
                  }
-                else{
-                    JOptionPane.showMessageDialog(null, "El PIN nuevo debe de ser de 4 digitos");
-                }
-            }
-            catch(NumberFormatException e){
-              JOptionPane.showMessageDialog(null, "El PIN nuevo debe de ser numeros enteros");
-            }
-        }
-        else{
-          JOptionPane.showMessageDialog(null, "El PIN anterior ingresado es erróneo");
-        }
-    }
+                 else{
+                     JOptionPane.showMessageDialog(null, "El PIN nuevo debe de ser de 4 digitos");
+                 }
+             }
+             catch(NumberFormatException e){
+                 JOptionPane.showMessageDialog(null, "El PIN nuevo debe de ser numeros enteros");
+             }
+         }
+         else{
+             JOptionPane.showMessageDialog(null, "El PIN anterior ingresado es erróneo");
+         }
+     }
     
     
     private void btnActualizarPerfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarPerfilActionPerformed

@@ -63,6 +63,8 @@ public class Login {
         if (persona.getPin().equals(pin)){
             return true;
         }
+        System.out.println(pin + " " + persona.getPin());
+
         return false;
         }
 

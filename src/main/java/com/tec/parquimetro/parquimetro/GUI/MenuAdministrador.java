@@ -2373,14 +2373,29 @@ public class MenuAdministrador extends javax.swing.JFrame {
         }
      }
     
-     //Funcion que permite al administrador cambiar su PIN actual
      public void cambiarPin(){
          if (txtPinAnterior.getText().equals(administrador.getPin())){
              try{ //verificar si el pin ingresado es un entero
                  int pinNuevo = Integer.parseInt(txtPinAnterior.getText());
                  if (pinNuevo <= 9999 && pinNuevo >= 1000){
-                     administrador.setPin(txtPinAnterior.getText());
-                     JOptionPane.showMessageDialog(null, "Su PIN ha sido cambiado con éxito!");
+                     //cargamos el pin
+                     ArrayList<Persona> listaUsuarios = Login.cargarUsuarios("listaUsuarios.txt");
+                     for (Persona cadaUsuario : listaUsuarios){
+                         if (cadaUsuario.getIdentificacion().equals(administrador.getIdentificacion())){
+                             //asignamos el pin al usuario
+                             cadaUsuario.setPin(txtPinAnterior.getText());
+                             administrador.setPin(txtPinAnterior.getText());
+                             //guardamos el pin en los archivos
+                             try {
+                             Login.guardarUsuarios("listaUsuarios.txt", listaUsuarios);
+                             } 
+                             catch (IOException ex) {
+                               Logger.getLogger(PanelOlvidePin.class.getName()).log(Level.SEVERE, null, ex);
+                             }
+                             JOptionPane.showMessageDialog(null, "Su PIN ha sido cambiado con éxito!");
+                             return;
+                         }
+                     }
                  }
                  else{
                      JOptionPane.showMessageDialog(null, "El PIN nuevo debe de ser de 4 digitos");

@@ -91,6 +91,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import com.itextpdf.text.Font;
 import com.tec.parquimetro.parquimetro.Clases.Multa;
+import com.tec.parquimetro.parquimetro.Clases.Persona;
 import java.util.ArrayList;
 
 
@@ -3163,9 +3164,13 @@ public class MenuUsuario extends javax.swing.JFrame {
             parqueo.cargarArchivo();
             actualizarInformacion(usuario, usuario.getIdentificacion());
             JOptionPane.showMessageDialog(null, "Espere un momento por favor... Estamos procesando su informacion!");
+            
             //enviar correo
             String cuerpo = "Se le informa que su vehiculo  " + vehiculo.getMarca() + " " + vehiculo.getMarca() + " de placa " + vehiculo.getPlaca() + 
-            " fue parqueado exitosamente con un tiempo de " + spnTiempoParqueo.getValue() + " minutos. HORA DE FINALIZACION: " + LocalTime.now().plusMinutes(ticket.getTiempoParqueo()) + "  ESPACIO: " + ticket.getEspacio().getNumero() + " COSTO TOTAL:  ₡" + ticket.getTotal();
+            " fue parqueado exitosamente con un tiempo de " + spnTiempoParqueo.getValue() + " minutos. HORA DE FINALIZACION: " + 
+            LocalTime.now().plusMinutes(ticket.getTiempoParqueo()) + "  ESPACIO: " + ticket.getEspacio().getNumero() + " COSTO TOTAL:  ₡" + ticket.getTotal() +
+            "El cobro se ha realizado a la tarjeta con el número: " + usuario.getTarjeta().getNumeroTarjeta();
+            
             crearEmail(cuerpo, "SU PARQUEO DE VEHICULO FUE REGISTRADO", usuario.getCorreo().getCorreo());
             enviarEmail();
             JOptionPane.showMessageDialog(null, "Espacio registrado exitosamente!");
@@ -3317,10 +3322,20 @@ public class MenuUsuario extends javax.swing.JFrame {
                 
                 parqueo.cargarArchivo();
                 
-                if(tiempoRestante>0)
+                if(tiempoRestante>0){
+                    //enviar correo
+                    String cuerpo = "Tu vehiculo de placa" + placa + " fue desaparcado con éxito. Haz acumulado " + tiempoRestante + " minutos.";
+                    crearEmail(cuerpo, "Desparqueo de vehiculo", usuario.getCorreo().getCorreo());
+                    enviarEmail();
                      JOptionPane.showMessageDialog(null, "Vehiculo desaparcado exitosamente, ha acumulado " +tiempoRestante+" minutos !");
-                else
+                }
+                else{
+                    //enviar correo
+                    String cuerpo = "Tu vehiculo de placa" + placa + " fue desaparcado con éxito. No haz acumulado puntos.";
+                    crearEmail(cuerpo, "Desparqueo de vehiculo", usuario.getCorreo().getCorreo());
+                    enviarEmail();
                     JOptionPane.showMessageDialog(null, "Vehiculo desaparcado!");
+                }
                 
                 inicializarTBMisParqueos();
                 actualizarInformacion(usuario, usuario.getIdentificacion());
@@ -4023,8 +4038,24 @@ public class MenuUsuario extends javax.swing.JFrame {
              try{ //verificar si el pin ingresado es un entero
                  int pinNuevo = Integer.parseInt(txtPinAnterior.getText());
                  if (pinNuevo <= 9999 && pinNuevo >= 1000){
-                     usuario.setPin(txtPinAnterior.getText());
-                     JOptionPane.showMessageDialog(null, "Su PIN ha sido cambiado con éxito!");
+                     //cargamos el pin
+                     ArrayList<Persona> listaUsuarios = Login.cargarUsuarios("listaUsuarios.txt");
+                     for (Persona cadaUsuario : listaUsuarios){
+                         if (cadaUsuario.getIdentificacion().equals(usuario.getIdentificacion())){
+                             //asignamos el pin al usuario
+                             cadaUsuario.setPin(txtPinAnterior.getText());
+                             usuario.setPin(txtPinAnterior.getText());
+                             //guardamos el pin en los archivos
+                             try {
+                             Login.guardarUsuarios("listaUsuarios.txt", listaUsuarios);
+                             } 
+                             catch (IOException ex) {
+                               Logger.getLogger(PanelOlvidePin.class.getName()).log(Level.SEVERE, null, ex);
+                             }
+                             JOptionPane.showMessageDialog(null, "Su PIN ha sido cambiado con éxito!");
+                             return;
+                         }
+                     }
                  }
                  else{
                      JOptionPane.showMessageDialog(null, "El PIN nuevo debe de ser de 4 digitos");
