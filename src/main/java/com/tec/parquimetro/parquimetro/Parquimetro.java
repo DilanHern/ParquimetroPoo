@@ -21,11 +21,7 @@ public class Parquimetro {
 
     public static void main(String[] args) throws ClassNotFoundException {
         
-<<<<<<< Updated upstream
     /* Parqueo parqueo = new Parqueo(LocalTime.parse("08:30"), LocalTime.parse("17:30"), 1000, 30, 200);
-=======
-  /*Parqueo parqueo = new Parqueo(LocalTime.parse("08:30"), LocalTime.parse("22:30"), 1000, 30, 200);
->>>>>>> Stashed changes
             parqueo.agregarEspacios(100, 110);
             List<Espacio> espacios = parqueo.getEspacios();
             espacios.getFirst().setEstado(false);
@@ -77,7 +73,6 @@ public class Parquimetro {
         
 
          
-<<<<<<< Updated upstream
     ArrayList<Persona> personas = new ArrayList<Persona>();
     //Administrador  usuario = new Administrador();
     Inspector ins = new Inspector();
@@ -97,21 +92,6 @@ public class Parquimetro {
         catch (IOException e){
             System.out.println("malmamlal");
         }
-=======
- ArrayList<Persona> personas = new ArrayList<Persona>();
- Administrador  usuaario = new Administrador();
-    Inspector ins = new Inspector();
-    Usuario user= new Usuario();
-       Login login = new Login();
-  /*try{
-            Login.guardarUsuarios("listaUsuarios.txt", personas);
-        }
-        catch (IOException e){
-            System.out.println("El archivo no se logro abrir");
-        }*/
-        
-       personas = Login.cargarUsuarios("listaUsuarios.txt");
->>>>>>> Stashed changes
          
         for(Persona ob : personas){
          
@@ -122,7 +102,6 @@ public class Parquimetro {
              
          }
         
-<<<<<<< Updated upstream
        MenuUsuario menuUser = new MenuUsuario(user);
          menuUser.setVisible(true);
          
@@ -134,18 +113,5 @@ public class Parquimetro {
      //  p.lecturaArchivo();
       //  MenuInspector menuIns  = new MenuInspector(ins,p);
     //   menuIns.setVisible(true);
-=======
-  //  MenuUsuario menuUser = new MenuUsuario(user);
- //menuUser.setVisible(true);
-         
-         
-         
-MenuAdministrador menuIns = new MenuAdministrador(usuaario);
-menuIns.setVisible(true);
-     /*Parqueo p = new Parqueo(); 
-      p.lecturaArchivo();
-      MenuInspector menuIns  = new MenuInspector(ins,p);
-      menuIns.setVisible(true);*/
->>>>>>> Stashed changes
     }
 }
