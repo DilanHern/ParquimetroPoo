@@ -1277,7 +1277,6 @@ public class Parqueo implements Serializable {
 
                     document.add(tabla);
 
-                     System.out.println("Listo");
 
                      document.close();
 
@@ -1307,15 +1306,13 @@ public class Parqueo implements Serializable {
            
        }
         //de minutos a horas
-         System.out.println(minOcupadas +"m");
          double horasOcupadas = minOcupadas/60;
-          horasVacio= horasAbiertos-horasOcupadas;
-         System.out.println(horasOcupadas + "h");
-          double porcentajeOcupacion = (horasOcupadas / horasAbiertos) * 100;
-           double porcentajeVacio = 100 - porcentajeOcupacion; 
-           DecimalFormat df = new DecimalFormat("#.##");
-           String porcentajeOcupacionStr = df.format(porcentajeOcupacion);
-           String porcentajeVacioStr = df.format(porcentajeVacio);
+         horasVacio= horasAbiertos-horasOcupadas;
+         double porcentajeOcupacion = (horasOcupadas / horasAbiertos) * 100;
+         double porcentajeVacio = 100 - porcentajeOcupacion; 
+         DecimalFormat df = new DecimalFormat("#.##");
+         String porcentajeOcupacionStr = df.format(porcentajeOcupacion);
+         String porcentajeVacioStr = df.format(porcentajeVacio);
         
        tabla.addCell(String.valueOf(espacio));
        tabla.addCell(dia.toString());
@@ -1478,10 +1475,8 @@ public class Parqueo implements Serializable {
 
                     }
                     //de minutos a horas
-                    System.out.println(minOcupadas +"m");
                     double horasOcupadas = minOcupadas/60;
                     horasVacio= horasAbiertos-horasOcupadas;
-                    System.out.println(horasOcupadas + "h");
                     double porcentajeOcupacion = (horasOcupadas / horasAbiertos) * 100;
                     double porcentajeVacio = 100 - porcentajeOcupacion; 
                     DecimalFormat df = new DecimalFormat("#.##");

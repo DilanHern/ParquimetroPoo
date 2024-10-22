@@ -7,6 +7,7 @@ package com.tec.parquimetro.parquimetro;
 import com.tec.parquimetro.parquimetro.Clases.Parqueo;
 import com.tec.parquimetro.parquimetro.Clases.*;
 import static com.tec.parquimetro.parquimetro.Clases.Login.guardarUsuarios;
+import com.tec.parquimetro.parquimetro.GUI.LoginJFrame;
 import com.tec.parquimetro.parquimetro.GUI.MenuAdministrador;
 import com.tec.parquimetro.parquimetro.GUI.MenuInspector;
 import com.tec.parquimetro.parquimetro.GUI.MenuUsuario;
@@ -20,7 +21,7 @@ import java.util.List;
 public class Parquimetro {
 
     public static void main(String[] args) throws ClassNotFoundException {
-        
+ /*       
   Parqueo parqueo = new Parqueo(LocalTime.parse("08:30"), LocalTime.parse("17:30"), 1000, 30, 200);
             parqueo.agregarEspacios(100, 110);
             List<Espacio> espacios = parqueo.getEspacios();
@@ -70,23 +71,23 @@ public class Parquimetro {
          
          personas = new ArrayList<Persona>();
          
-         Persona.lecturaArchivo(personas);
+         Persona.lecturaArchivo(personas);*/
         
 
          
- //ArrayList<Persona> personas = new ArrayList<Persona>();
+ /*ArrayList<Persona> personas = new ArrayList<Persona>();
  Administrador  usuaario = new Administrador();
     Inspector ins = new Inspector();
     Usuario user= new Usuario();
-       Login login = new Login();
-   try{
+       Login login = new Login();*/
+  /** try{
             Login.guardarUsuarios("listaUsuarios.txt", personas);
         }
         catch (IOException e){
             System.out.println("El archivo no se logro abrir");
-        }
+        }*/
         
-       personas = Login.cargarUsuarios("listaUsuarios.txt");
+      /* personas = Login.cargarUsuarios("listaUsuarios.txt");
          
         for(Persona ob : personas){
          
@@ -100,18 +101,25 @@ public class Parquimetro {
               if(ob instanceof Inspector usuarioCast){
                  ins = usuarioCast;
              }
-         }
+         }*/
         
-    //MenuUsuario menuUser = new MenuUsuario(user);
- //  menuUser.setVisible(true);
+   // MenuUsuario menuUser = new MenuUsuario(user);
+  //menuUser.setVisible(true);
          
          
          
-MenuAdministrador menuIns = new MenuAdministrador(usuaario);
-menuIns.setVisible(true);
+//MenuAdministrador menuIns = new MenuAdministrador(usuaario);
+//menuIns.setVisible(true);
      /*Parqueo p = new Parqueo(); 
       p.lecturaArchivo();
       MenuInspector menuIns  = new MenuInspector(ins,p);
       menuIns.setVisible(true);*/
+     Correo correo = new Correo("correo", "gmail.com");
+     Persona admin = new Administrador("Usuario", "Administrador", 12345678, "-", LocalDate.now(), "123456789", "8952", correo);
+     
+     LoginJFrame login = new LoginJFrame();
+     login.setVisible(true);
+     
+     
     }
 }
