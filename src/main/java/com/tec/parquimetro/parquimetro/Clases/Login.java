@@ -90,10 +90,6 @@ public class Login {
         
     }
     
-    //funcion iniciarSesion(): permite al usuario/admins/inspectores ingresar a la app
-    public void iniciarSesion(){
-        //llama a la app del usuario
-    }
     
     
     //funcion guardarUsuarios: guarda la lista de personas

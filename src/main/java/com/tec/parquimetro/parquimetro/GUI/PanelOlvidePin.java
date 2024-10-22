@@ -200,6 +200,7 @@ public class PanelOlvidePin extends javax.swing.JPanel {
                         Random random = new Random(); //Generar un número aleatorio entre 1000 y 9999
                         int numeroAleatorio = 1000 + random.nextInt(9000);
                         cadaPersona.setPin(String.valueOf(numeroAleatorio));
+                        System.out.println(cadaPersona.getPin());
 
                         //enviar correo
                         String cuerpo = "TU NUEVO PIN: " + String.valueOf(numeroAleatorio);
@@ -212,6 +213,7 @@ public class PanelOlvidePin extends javax.swing.JPanel {
                 }
                 if (existe){
                     try{
+                    System.out.println("asdsa");
                     Login.guardarUsuarios("listaUsuarios.txt", listaUsuarios);
                     }
                     catch (IOException ex) {

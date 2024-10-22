@@ -138,7 +138,7 @@ public class Persona implements Serializable{
 
     public boolean setPin(String pin) {
         
-        if(pin.length() == 5){
+        if(pin.length() == 4){
         
             this.pin = pin;
             return true;
