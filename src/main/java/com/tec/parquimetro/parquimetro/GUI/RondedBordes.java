@@ -11,14 +11,21 @@ import java.awt.geom.RoundRectangle2D;
 import javax.swing.ButtonModel;
 import javax.swing.JButton;
 
+/**
+ * La clase RondedBordes representa un componente gráfico personalizado con bordes redondeados.
+ * Extiende la funcionalidad de un componente Swing para proporcionar una apariencia visual mejorada.
+ */
 public class RondedBordes extends JButton{
 
-
+    //atributos
     private Color color1 = new Color(0x666f7f);
     private Color color2 = new Color(0x262d3d);
     private Color color3 = new Color(0x262d3d);
 
-    
+    /**
+     * Constructor de la clase RondedBordes.
+     * Inicializa los componentes del panel con bordes redondeados.
+     */
     public RondedBordes() {
         setOpaque(false);
         setContentAreaFilled(false);
@@ -27,6 +34,12 @@ public class RondedBordes extends JButton{
         setBorderPainted(false);
     }
 
+    /**
+     * Pinta el componente con bordes redondeados.
+     * Configura el estilo de pintura y dibuja el componente con un gradiente de colores.
+     *
+     * @param g El objeto Graphics utilizado para dibujar el componente.
+     */
     protected void paintComponent(Graphics g) {
         Color c1,c2,c3;
         Graphics2D g2 = (Graphics2D) g;

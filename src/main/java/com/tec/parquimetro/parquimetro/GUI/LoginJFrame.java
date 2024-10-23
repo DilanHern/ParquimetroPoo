@@ -77,8 +77,11 @@ public class LoginJFrame extends javax.swing.JFrame {
         MensajeErrorP = bool;
     }
     
-    //validarIdentPin(): Valida si el pin y la identificacion ingresada son correcta
-    //retorna true si la identificacion y pin son validos, de lo contrario retorna false
+     /**
+     * Valida si el PIN y la identificación ingresada son correctos.
+     *
+     * @return true si la identificación y el PIN son válidos, de lo contrario false.
+     */
     public boolean validarIdentPin(){
         //el pin debe de ser de 4 caracteres
         if (new String(campoPin.getPassword()).length() != 4){
@@ -129,8 +132,10 @@ public class LoginJFrame extends javax.swing.JFrame {
             return true;
         }
     }
-     
-    //iniciarSesion(): Esta funcion permite iniciar sesion a cada usuario con su debida app
+    
+    /**
+     * Permite iniciar sesión a cada usuario con su debida aplicación.
+     */
     public void iniciarSesion(){
         if (validarIdentPin()) { //si la informacion ingresada cumple las validaciones:
             //creamos un objeto LoginJFrame
@@ -185,10 +190,6 @@ public class LoginJFrame extends javax.swing.JFrame {
         }
     }
     
-    //registrarse(): Este boton abre la opcion para que el usuario pueda crearse una cuenta
-    public void registrarse(){
-        
-    }
     
     public LoginJFrame() {
         initComponents();

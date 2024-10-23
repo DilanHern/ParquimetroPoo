@@ -22,11 +22,13 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.swing.JOptionPane;
 
+
 /**
- *
- * @author Dilan
+ * La clase PanelOlvidePin representa el panel de la interfaz gráfica para recuperar el PIN olvidado.
+ * Maneja la interfaz gráfica y las funcionalidades necesarias para enviar el PIN al correo del usuario.
  */
 public class PanelOlvidePin extends javax.swing.JPanel {
+    //atributos
     private LoginJFrame loginJFrame;
     //ATRIBUTOS PARA ENVIAR REPORTES
     private static String emailDe = "paquimetrocartago@gmail.com";
@@ -37,15 +39,26 @@ public class PanelOlvidePin extends javax.swing.JPanel {
     private Session mSession;
     private MimeMessage mCorreo;
     //FIN DE ATRIBUTOS DE REPORTES
+
     /**
-     * Creates new form PanelOlvidePin
+     * Constructor de la clase PanelOlvidePin.
+     * Inicializa los componentes de la interfaz gráfica y configura el JFrame de login.
+     *
+     * @param loginJFrame El JFrame de login asociado a este panel.
      */
     public PanelOlvidePin(LoginJFrame loginJFrame) {
         this.loginJFrame = loginJFrame;
         initComponents();
     }
 
-    //FUNCION PARA CREAR EL MAIL
+    /**
+     * Crea un correo electrónico configurando la sesión y el mensaje.
+     * Establece los parámetros necesarios para enviar el correo electrónico.
+     *
+     * @param destinatario El correo electrónico del destinatario.
+     * @param asunto El asunto del correo electrónico.
+     * @param cuerpo El cuerpo del correo electrónico.
+     */
      public void crearEmail(String cuerpo, String asunto, String correo){
          //Protocolo para el envio de correos
         mProperties.put("mail.smtp.host", "smtp.gmail.com");
@@ -73,6 +86,10 @@ public class PanelOlvidePin extends javax.swing.JPanel {
         }
      }
      
+     /**
+    * Envía un correo electrónico utilizando la configuración de la sesión.
+    * Establece la conexión con el servidor SMTP y envía el mensaje.
+    */
      public void enviarEmail(){
         try {
             Transport mTransport = mSession.getTransport("smtp");

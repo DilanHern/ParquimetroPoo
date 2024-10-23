@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package com.tec.parquimetro.parquimetro.GUI;
 
 import com.itextpdf.text.BaseColor;
@@ -101,12 +97,12 @@ import java.util.ArrayList;
  */
 
 
-
+/**
+ * La clase MenuUsuario representa el menú de usuario del parquímetro.
+ * Maneja la interfaz gráfica y las funcionalidades disponibles para el usuario.
+ */
 public class MenuUsuario extends javax.swing.JFrame {
-
-    /**
-     * Creates new form MenuUsuario
-     */
+    //atributos
      DefaultTableModel mdlEspaciosGeneral = new DefaultTableModel();//formato para tabal espacios en reporte general de espacios
      int precioMinuto = 0;
      public static Usuario usuario = new Usuario();
@@ -121,7 +117,13 @@ public class MenuUsuario extends javax.swing.JFrame {
     private Session mSession;
     private MimeMessage mCorreo;
     //FIN DE ATRIBUTOS DE REPORTES
-             
+    
+    /**
+     * Constructor de la clase MenuUsuario.
+     * Inicializa los componentes de la interfaz gráfica y configura el usuario.
+     *
+     * @param pusuario El usuario que inicia sesión.
+     */
     public MenuUsuario(Usuario pusuario) {
         
         initComponents();
@@ -164,7 +166,14 @@ public class MenuUsuario extends javax.swing.JFrame {
         pbTabl.setSelectedIndex(3); //muestra el tab 3 (inicio)
     }
     
-    //FUNCION PARA CREAR EL MAIL
+    /**
+     * Crea un correo electrónico configurando la sesión y el mensaje.
+     * Establece los parámetros necesarios para enviar el correo electrónico.
+     *
+     * @param destinatario El correo electrónico del destinatario.
+     * @param asunto El asunto del correo electrónico.
+     * @param cuerpo El cuerpo del correo electrónico.
+     */
      public void crearEmail(String cuerpo, String asunto, String correo){
          //Protocolo para el envio de correos
         mProperties.put("mail.smtp.host", "smtp.gmail.com");
@@ -192,7 +201,10 @@ public class MenuUsuario extends javax.swing.JFrame {
         }
      }
      
-     //FUNCION PARA ENVIAR LOS EMAILS
+     /**
+     * Envía un correo electrónico utilizando la configuración de la sesión.
+     * Establece la conexión con el servidor SMTP y envía el mensaje.
+     */
      public void enviarEmail(){
         try {
             Transport mTransport = mSession.getTransport("smtp");
@@ -2307,6 +2319,12 @@ public class MenuUsuario extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Actualiza la información del usuario en el sistema.
+     *
+     * @param usuario El usuario cuya información se va a actualizar.
+     * @param identificacion La identificación del usuario.
+     */
     private void actualizarInformacion(Usuario usuario, String identificacion){
     
         //Utilizado para actualizar los usuarios al modificar su informacion
@@ -2397,6 +2415,10 @@ public class MenuUsuario extends javax.swing.JFrame {
        tpReportes.setSelectedIndex(1);
     }//GEN-LAST:event_btnReportesActionPerformed
 
+    /**
+     * Inicializa el panel de pestañas para la gestión de vehículos.
+     * Configura los componentes y la interfaz gráfica del panel de vehículos.
+     */
     private void inicializarTabPanelVehiculos(){
     
         //inicializa el tab que muestra las acciones que manipula los vehiculos
@@ -2411,6 +2433,10 @@ public class MenuUsuario extends javax.swing.JFrame {
     
     }
     
+    /**
+     * Inicializa la tabla de vehículos con la información de los vehículos del usuario.
+     * Configura el modelo de la tabla y carga los datos de los vehículos.
+     */
     private void inicializarTablaVehiculos(){
         
         String placa, modeloAuto,  marca,  estado; 
@@ -2908,6 +2934,12 @@ public class MenuUsuario extends javax.swing.JFrame {
     }//GEN-LAST:event_btnActualizarTarjetaActionPerformed
 
     
+    /**
+     * Genera un reporte general de los espacios de parqueo vacíos.
+     * Carga la información de los espacios vacíos en la tabla de reporte general.
+     *
+     * @param espacios La lista de espacios de parqueo a reportar.
+     */
      private void generarReporteGeneralEspaciosVacios(List<Espacio>  espacios){
         
          //Inicializa la tabla de espacios vacios que puede utilizar el usuario
@@ -2959,7 +2991,12 @@ public class MenuUsuario extends javax.swing.JFrame {
       
     }//GEN-LAST:event_cbReportesActionPerformed
 
-    
+    /**
+     * Actualiza los datos del ticket de parqueo del usuario.
+     * Carga la información actual del ticket en los campos correspondientes.
+     *
+     * @param ticket El ticket de parqueo a actualizar.
+     */
     private void actualizarDatosTicket(){
     
        //actualiza la tabla de los datos al generar un ticket del espacio
@@ -3255,7 +3292,13 @@ public class MenuUsuario extends javax.swing.JFrame {
         
     }//GEN-LAST:event_spnTiempoAcumuladoStateChanged
 
-    
+    /**
+     * Agrega tiempo adicional al ticket de parqueo del usuario.
+     * Actualiza el ticket con el nuevo tiempo y el costo total.
+     *
+     * @param tiempoExtra El tiempo adicional a agregar en minutos.
+     * @param costoExtra El costo adicional correspondiente al tiempo extra.
+     */
     private void agregarTiempo(String placa){
     
             //Confirma la extension del tiempo
@@ -3297,6 +3340,12 @@ public class MenuUsuario extends javax.swing.JFrame {
             }
     }
     
+    /**
+     * Desaparca el vehículo del usuario.
+     * Marca el ticket de parqueo como finalizado y actualiza el estado del espacio de parqueo.
+     *
+     * @param placa La placa del vehículo a desaparcar.
+     */
     private void desaparcar(String placa){
     
             //Confirma que se puede desaparcar el vehiculo en el espacio
@@ -3575,7 +3624,12 @@ public class MenuUsuario extends javax.swing.JFrame {
         
     }//GEN-LAST:event_btnConfirmarActualzacionVehiculobtnConfirmarTiempoExtra1ActionPerformed
 
-    
+    /**
+     * Elimina un vehículo del usuario.
+     * Remueve el vehículo de la lista de vehículos del usuario y actualiza la interfaz gráfica.
+     *
+     * @param placa La placa del vehículo a eliminar.
+     */
     private void eliminarVehiculo(String placa){
     
             //genera una confirmacion de eliminar el vehiculo
@@ -3603,6 +3657,10 @@ public class MenuUsuario extends javax.swing.JFrame {
         
     }
     
+    /**
+     * Inicializa el panel de actualización de información del usuario.
+     * Configura los componentes y la interfaz gráfica del panel de actualización.
+     */
     private void inicializaPanelActualiza(String placa){
     
            btnAgregarVehiculo.setVisible(false);
@@ -3648,6 +3706,13 @@ public class MenuUsuario extends javax.swing.JFrame {
         
     }//GEN-LAST:event_tblVehiculoMouseClicked
 
+    /**
+     * Genera un archivo PDF con el reporte de multas del usuario.
+     * Incluye la información de todas las multas registradas para el usuario.
+     *
+     * @param multas La lista de multas a incluir en el reporte.
+     * @param filePath La ruta del archivo donde se guardará el PDF.
+     */
     private void generarPdfMultas(LocalDate inicio, LocalDate finalF){
     
             List<Multa> lista = usuario.listarMultas(inicio, finalF);
@@ -3821,6 +3886,12 @@ public class MenuUsuario extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnDescargarMultasActionPerformed
 
+    /**
+     * Carga la tabla de multas con la información de las multas del usuario.
+     * Configura el modelo de la tabla y carga los datos de las multas.
+     *
+     * @param multas La lista de multas a cargar en la tabla.
+     */
     private void cargaTablaMultas(LocalDate inicio, LocalDate finalF){
     
             List<Multa> lista = usuario.listarMultas(inicio, finalF);
@@ -4048,6 +4119,10 @@ public class MenuUsuario extends javax.swing.JFrame {
         pbTabl.setSelectedIndex(6);
     }//GEN-LAST:event_btnCancelarActionPerformed
 
+    /**
+     * Cambia el PIN del usuario si el PIN anterior es correcto y el nuevo PIN es válido.
+     * Verifica que el PIN ingresado sea un número entero de 4 dígitos.
+     */
     public void cambiarPin(){
          if (txtPinAnterior.getText().equals(usuario.getPin())){
              try{ //verificar si el pin ingresado es un entero
@@ -4089,6 +4164,12 @@ public class MenuUsuario extends javax.swing.JFrame {
         cambiarPin();
     }//GEN-LAST:event_btnRestablecerPinActionPerformed
 
+    /**
+     * Carga la tabla de espacios utilizados con la información de los espacios de parqueo utilizados por el usuario.
+     * Configura el modelo de la tabla y carga los datos de los espacios utilizados.
+     *
+     * @param espacios La lista de espacios de parqueo utilizados a cargar en la tabla.
+     */
     private void cargaTablaEspaciosUtilzados(LocalDate inicio, LocalDate finalF){
     
             List<TicketParqueo> lista = usuario.listarParqueosUtilizados(inicio, finalF);
@@ -4117,7 +4198,14 @@ public class MenuUsuario extends javax.swing.JFrame {
         
     }
     
-        private void generarPdfEspaciosUtilzados(LocalDate inicio, LocalDate finalF){
+    /**
+     * Genera un archivo PDF con el reporte de espacios de parqueo utilizados por el usuario.
+     * Incluye la información de todos los espacios utilizados en el periodo especificado.
+     *
+     * @param inicio La fecha de inicio del periodo a reportar.
+     * @param finalF La fecha de finalización del periodo a reportar.
+     */
+    private void generarPdfEspaciosUtilzados(LocalDate inicio, LocalDate finalF){
     
             List<TicketParqueo> lista = usuario.listarParqueosUtilizados(inicio, finalF);
             
@@ -4262,6 +4350,10 @@ public class MenuUsuario extends javax.swing.JFrame {
     
     //------------------------Carga de parqueos en la tabla mis parqueos-------------------------------
     
+    /**
+     * Inicializa la tabla de "Mis Parqueos" con la información de los parqueos del usuario.
+     * Configura el modelo de la tabla y carga los datos de los parqueos.
+     */
     public void inicializarTBMisParqueos(){
     
         tblMisParqueos.setDefaultRenderer(Object.class, new RenderTable());

@@ -59,10 +59,7 @@ import javax.swing.table.TableRowSorter;
  * @author carol_flgngfy
  */
 public class MenuInspector extends javax.swing.JFrame {
-
-    /**
-     * Creates new form MenuInspector
-     */
+    //Atributos
     //ATRIBUTOS PARA ENVIAR REPORTES
     private static String emailDe = "paquimetrocartago@gmail.com";
     private static String contraseñaDe = "vofx ztal oawe yary";
@@ -76,6 +73,13 @@ public class MenuInspector extends javax.swing.JFrame {
     public static Parqueo parqueo;
     DefaultTableModel mdlEspaciosGeneral = new DefaultTableModel();//formato para tabal espacios en reporte general de espacios
     
+     /**
+     * Constructor de la clase MenuInspector.
+     * Inicializa los componentes de la interfaz gráfica y configura el inspector y el parqueo.
+     *
+     * @param pinspector El inspector que inicia sesión.
+     * @param pParqueo El objeto Parqueo que contiene la información del parqueo.
+     */
     public MenuInspector(Inspector pinspector, Parqueo pParqueo) {
         initComponents();
         mProperties = new Properties();
@@ -102,8 +106,16 @@ public class MenuInspector extends javax.swing.JFrame {
          pbTabl.setSelectedIndex(4);
     }
 
-    //FUNCION PARA VERIFICAR SI LA PLACA ESTÁ EN EL PARQUEO, retorna true si la placa está en el parqueo, false si no lo está
-     public static boolean verificarPlacaParqueo(int placa, int numParqueo, Parqueo parqueo){
+    /**
+     * Verifica si la placa está en el parqueo.
+     * Retorna true si la placa está en el parqueo, false si no lo está.
+     *
+     * @param placa La placa del vehículo a verificar.
+     * @param numParqueo El número del espacio de parqueo.
+     * @param parqueo El objeto Parqueo que contiene la información del parqueo.
+     * @return true si la placa está en el parqueo, false en caso contrario.
+     */
+    public static boolean verificarPlacaParqueo(int placa, int numParqueo, Parqueo parqueo){
          //2. verificar en esta lista si el parqueo ingresado existe, si no retorna FALSE, si si, continua
          Espacio espacioVerificar = parqueo.buscarEspacio(numParqueo);
          if (espacioVerificar == null){ //no existe ese espacio
@@ -129,7 +141,14 @@ public class MenuInspector extends javax.swing.JFrame {
          }
      }    
      
-     //FUNCION PARA CREAR EL MAIL
+     /**
+     * Crea un correo electrónico configurando la sesión y el mensaje.
+     * Establece los parámetros necesarios para enviar el correo electrónico.
+     *
+     * @param destinatario El correo electrónico del destinatario.
+     * @param asunto El asunto del correo electrónico.
+     * @param cuerpo El cuerpo del correo electrónico.
+     */
      public void crearEmail(String cuerpo, String asunto, String correo){
          //Protocolo para el envio de correos
         mProperties.put("mail.smtp.host", "smtp.gmail.com");
@@ -157,6 +176,10 @@ public class MenuInspector extends javax.swing.JFrame {
         }
      }
      
+     /**
+     * Envía un correo electrónico utilizando la configuración de la sesión.
+     * Establece la conexión con el servidor SMTP y envía el mensaje.
+     */
     private void actualizarInformacion(Inspector inspector, String identificacion){
     
         //Utilizado para actualizar los usuarios al modificar su informacion
@@ -178,7 +201,15 @@ public class MenuInspector extends javax.swing.JFrame {
         }
      }
      
-     //FUNCION PARA CREAR UNA MULTA
+     /**
+     * Crea una multa para un vehículo en un espacio de parqueo específico.
+     * Registra la multa en el sistema y la asocia al vehículo y al espacio de parqueo.
+     *
+     * @param placa La placa del vehículo a multar.
+     * @param numParqueo El número del espacio de parqueo donde se encuentra el vehículo.
+     * @param motivo El motivo de la multa.
+     * @param monto El monto de la multa.
+     */
      public void crearMulta(int placa, int costo){
         
         try{
@@ -1340,7 +1371,10 @@ public class MenuInspector extends javax.swing.JFrame {
     
     }
        
-    //funcion que permite cambiar el PIN del Inspector
+    /**
+     * Cambia el PIN del inspector si el PIN anterior es correcto y el nuevo PIN es válido.
+     * Verifica que el PIN ingresado sea un número entero de 4 dígitos.
+     */
     public void cambiarPin(){
          if (txtPinAnterior.getText().equals(inspector.getPin())){
              try{ //verificar si el pin ingresado es un entero
@@ -1680,6 +1714,10 @@ public class MenuInspector extends javax.swing.JFrame {
         pbTabl.setSelectedIndex(3);
     }//GEN-LAST:event_rondedBordes2ActionPerformed
 
+    /**
+     * Genera un reporte general de los espacios de parqueo.
+     * Carga la información de los espacios en la tabla de reporte general.
+     */
      private void generarReporteGeneralEspacios(List<Espacio>  espacios){
         
         int cantidadEspacios=0;
@@ -1706,7 +1744,12 @@ public class MenuInspector extends javax.swing.JFrame {
         lblCantidadEspacios.setText(String.valueOf(cantidadEspacios));
     }
     
-    
+        /**
+         * Genera un reporte general de los espacios de parqueo vacíos.
+         * Carga la información de los espacios vacíos en la tabla de reporte general.
+         *
+         * @param espacios La lista de espacios de parqueo a reportar.
+         */
         private void generarReporteGeneralEspaciosVacios(List<Espacio>  espacios){
         
         int cantidadEspacios=0;
@@ -1728,6 +1771,12 @@ public class MenuInspector extends javax.swing.JFrame {
         lblCantidadEspacios.setText(String.valueOf(cantidadEspacios));
     }
     
+        /**
+         * Genera un reporte general de los espacios de parqueo ocupados.
+         * Carga la información de los espacios ocupados en la tabla de reporte general.
+         *
+         * @param espacios La lista de espacios de parqueo a reportar.
+         */ 
         private void generarReporteGeneralEspaciosOcupados(List<Espacio>  espacios){
         
         int cantidadEspacios=0;

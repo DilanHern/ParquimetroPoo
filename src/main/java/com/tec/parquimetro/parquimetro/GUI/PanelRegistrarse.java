@@ -17,14 +17,20 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.time.LocalDate;
 
+
 /**
- *
- * @author Dilan
+ * La clase PanelRegistrarse representa el panel de la interfaz gráfica para el registro de nuevos usuarios.
+ * Maneja la interfaz gráfica y las funcionalidades necesarias para registrar un nuevo usuario en el sistema.
  */
 public class PanelRegistrarse extends javax.swing.JPanel {
+    //atributos
     private LoginJFrame loginJFrame;
+    
     /**
-     * Creates new form PanelRegistrarse
+     * Constructor de la clase PanelRegistrarse.
+     * Inicializa los componentes de la interfaz gráfica y configura el JFrame de login.
+     *
+     * @param loginJFrame El JFrame de login asociado a este panel.
      */
     public PanelRegistrarse(LoginJFrame loginJFrame) {
         this.loginJFrame = loginJFrame;
@@ -206,7 +212,10 @@ public class PanelRegistrarse extends javax.swing.JPanel {
     //FIN DEVALIDACIONES DATOS DE PERFIL***********************
     //*********************************************************
     
-    //funcion crearUsuario(): esta funcion se encarga de verificar la informacion ingresada y crear una cuenta al usuario
+    /**
+     * Crea un nuevo usuario en el sistema.
+     * Valida los datos ingresados y guarda la información del nuevo usuario.
+     */
     public void crearUsuario(){        
         if(validarNombre(txtNombre1.getText())){
                 if(validarApellidos(txtApellidos.getText())){

@@ -51,11 +51,11 @@ import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 
 /**
- *
- * @author carol_flgngfy
+ * La clase MenuAdministrador representa el menú de administración del parquímetro.
  */
 public class MenuAdministrador extends javax.swing.JFrame {
 
+    //atributos
     /**
      * Creates new form MenuAdministrador
      */
@@ -73,7 +73,12 @@ public class MenuAdministrador extends javax.swing.JFrame {
     private MimeMessage mCorreo;
     //FIN DE ATRIBUTOS DE REPORTES
     
-    
+    /**
+     * Constructor de la clase MenuAdministrador.
+     * Inicializa los componentes de la interfaz gráfica y configura el administrador.
+     *
+     * @param padministrador El administrador que inicia sesión.
+     */
     public MenuAdministrador(Administrador padministrador) {
         
 
@@ -2149,6 +2154,12 @@ public class MenuAdministrador extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+     /**
+     * Constructor de la clase MenuAdministrador.
+     * Inicializa los componentes de la interfaz gráfica y configura el administrador.
+     *
+     * @param padministrador El administrador que inicia sesión.
+     */
       private void actualizarInformacion(Administrador admin, String identificacion){
     
         //Utilizado para actualizar los usuarios al modificar su informacion
@@ -2172,6 +2183,10 @@ public class MenuAdministrador extends javax.swing.JFrame {
         login.setVisible(true);
     }//GEN-LAST:event_rondedBordes5ActionPerformed
 
+    /**
+     * Carga los datos del perfil del administrador en los campos de texto correspondientes.
+     * Coloca la información actual del usuario dentro de los campos de texto.
+     */
     private void cargarDatosPerfil(){
          //coloca la informacion cactual del usuario dentro de los campos de texto
         txtNombre1.setText(administrador.getNombre());
@@ -2251,6 +2266,7 @@ public class MenuAdministrador extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_btnActualizarParametrosActionPerformed
+    
 //VALIDACIONES DATOS DE PERFIL
     public boolean validarApellidos(String apellidos) {
         
@@ -2330,7 +2346,10 @@ public class MenuAdministrador extends javax.swing.JFrame {
         }
     }   
     
-    //FUNCION PARA CREAR EL MAIL
+     /**
+      * Cambia el PIN del administrador si el PIN anterior es correcto y el nuevo PIN es válido.
+      * Verifica que el PIN ingresado sea un número entero de 4 dígitos.
+      */
      public void crearEmail(String cuerpo, String asunto, String correo){
          //Protocolo para el envio de correos
         mProperties.put("mail.smtp.host", "smtp.gmail.com");
@@ -2358,7 +2377,10 @@ public class MenuAdministrador extends javax.swing.JFrame {
         }
      }
      
-     //FUNCION PARA ENVIAR LOS EMAILS
+     /**
+     * Carga los datos del perfil del administrador en los campos de texto correspondientes.
+     * Coloca la información actual del usuario dentro de los campos de texto.
+     */
      public void enviarEmail(){
         try {
             Transport mTransport = mSession.getTransport("smtp");
@@ -2373,6 +2395,10 @@ public class MenuAdministrador extends javax.swing.JFrame {
         }
      }
     
+        /**
+      * Cambia el PIN del administrador si el PIN anterior es correcto y el nuevo PIN es válido.
+      * Verifica que el PIN ingresado sea un número entero de 4 dígitos.
+      */
      public void cambiarPin(){
          if (txtPinAnterior.getText().equals(administrador.getPin())){
              try{ //verificar si el pin ingresado es un entero
@@ -2471,6 +2497,7 @@ public class MenuAdministrador extends javax.swing.JFrame {
     
     }//GEN-LAST:event_btnEliminarActionPerformed
 
+
     private boolean validarRangos(){
     
         int rInicial = Integer.parseInt(String.valueOf(spnRangoInicial.getValue()));
@@ -2554,6 +2581,12 @@ public class MenuAdministrador extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_spnRangoInicialStateChanged
 
+         /**
+         * Carga la tabla de espacios con la información de los espacios de parqueo.
+         * Elimina todos los elementos actuales de la tabla y agrega los nuevos elementos.
+         *
+         * @param espacios La lista de espacios de parqueo a cargar en la tabla.
+         */
     private void cargarTablaEspacios(List<Espacio> espacios){
     
             tableFormato.getDataVector().removeAllElements();
@@ -2586,6 +2619,12 @@ public class MenuAdministrador extends javax.swing.JFrame {
         
     }
     
+      /**
+     * Carga los parámetros del parqueo en los componentes de la interfaz gráfica.
+     * Formatea y establece los valores de hora de inicio, hora final, precio por hora, costo de multa y tiempo mínimo.
+     *
+     * @param parqueo El objeto Parqueo que contiene los parámetros a cargar.
+     */
     private void cargarParametros(Parqueo parqueo){
 
          // Formatear el LocalTime a "HH:mm"
@@ -2670,6 +2709,12 @@ public class MenuAdministrador extends javax.swing.JFrame {
        pbTabl.setSelectedIndex(1);
     }//GEN-LAST:event_jLabel1MouseClicked
 
+     /**
+     * Carga la tabla de usuarios con la información de los usuarios registrados.
+     * Elimina todos los elementos actuales de la tabla y agrega los nuevos elementos.
+     *
+     * @throws ClassNotFoundException Si la clase no se encuentra.
+     */
     private void cargarTablaUsuarios() throws ClassNotFoundException{
     
         List<Persona> personas = new ArrayList<Persona>();
@@ -2760,6 +2805,7 @@ public class MenuAdministrador extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtApellidosActionPerformed
 
+    
      private boolean validarCorreo(String pt1, String pt2){
    
        if(pt1.length() < 3){
@@ -2934,6 +2980,11 @@ public class MenuAdministrador extends javax.swing.JFrame {
     
     }
     
+      /**
+     * Genera un PIN numérico de 4 dígitos.
+     *
+     * @return El PIN generado como una cadena de 4 dígitos.
+     */
     private String generarPin(){
     
         Random random = new Random();
@@ -3113,6 +3164,12 @@ public class MenuAdministrador extends javax.swing.JFrame {
         
     }//GEN-LAST:event_cbReportesItemStateChanged
 
+     /**
+     * Genera un reporte general de todos los espacios de parqueo.
+     * Carga la tabla con el número y estado de cada espacio.
+     *
+     * @param espacios La lista de espacios de parqueo a incluir en el reporte.
+     */
     private void generarReporteGeneralEspacios(List<Espacio>  espacios){
         
         int cantidadEspacios=0;
@@ -3139,7 +3196,12 @@ public class MenuAdministrador extends javax.swing.JFrame {
         lblCantidadEspacios.setText(String.valueOf(cantidadEspacios));
     }
     
-    
+    /**
+     * Genera un reporte general de todos los espacios de parqueo.
+     * Carga la tabla con el número y estado de cada espacio.
+     *
+     * @param espacios La lista de espacios de parqueo a incluir en el reporte.
+     */
         private void generarReporteGeneralEspaciosVacios(List<Espacio>  espacios){
         
         int cantidadEspacios=0;
