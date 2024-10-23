@@ -13,6 +13,10 @@ import java.nio.channels.OverlappingFileLockException;
 import java.time.LocalDate;
 import java.util.List;
 
+/**
+ * La clase Persona representa a una persona en el sistema.
+ * Implementa {@link Serializable}.
+ */
 public class Persona implements Serializable{
     
     private static final long serialVersionUID = 1L;
@@ -26,13 +30,27 @@ public class Persona implements Serializable{
     private String direccionFisica;
     private Correo correo;
 
-
+    /**
+     * La clase Persona representa a una persona en el sistema.
+     * Implementa {@link Serializable}.
+     */
     public Persona(){
     
         telefono = -1;
     }
     
-    //Constructor
+    /**
+     * Constructor para crear una nueva Persona con los detalles especificados.
+     *
+     * @param nombre El nombre de la persona.
+     * @param apellidos Los apellidos de la persona.
+     * @param telefono El número de teléfono de la persona.
+     * @param direccionFisica La dirección física de la persona.
+     * @param fechaIngreso La fecha de ingreso de la persona.
+     * @param identificacion La identificación de la persona.
+     * @param pin El PIN de la persona.
+     * @param correo El correo electrónico de la persona.
+     */
     public Persona(String nombre, String apellidos, int telefono, String direccionFisica, LocalDate fechaIngreso, String identificacion, String pin, Correo correo){
     
     
@@ -49,23 +67,42 @@ public class Persona implements Serializable{
     
     
     
-    // getters and setters
+    // getters y setters
     
+     /**
+     * Obtiene el correo electrónico de la persona.
+     *
+     * @return El correo electrónico de la persona.
+     */
     public Correo getCorreo() {
         return correo;
     }
 
+     /**
+     * Establece el correo electrónico de la persona.
+     *
+     * @param correo El nuevo correo electrónico de la persona.
+     */
     public void setCorrero(Correo correo) {
         
             this.correo = correo;
     }
     
-    
-    
+    /**
+     * Obtiene los apellidos de la persona.
+     *
+     * @return Los apellidos de la persona.
+     */
     public String getApellidos() {
         return apellidos;
     }
 
+    /**
+     * Establece los apellidos de la persona.
+     *
+     * @param apellidos Los nuevos apellidos de la persona.
+     * @return true si los apellidos son válidos, false en caso contrario.
+     */
     public boolean setApellidos(String apellidos) {
         
         if(apellidos.length()>= 1 && apellidos.length()<=40){
@@ -77,12 +114,21 @@ public class Persona implements Serializable{
         
     }
 
-
+    /**
+     * Obtiene el nombre de la persona.
+     *
+     * @return El nombre de la persona.
+     */
     public String getNombre() {
         return nombre;
     }
 
-
+    /**
+     * Establece el nombre de la persona.
+     *
+     * @param nombre El nuevo nombre de la persona.
+     * @return true si el nombre es válido, false en caso contrario.
+     */
     public boolean setNombre(String nombre) {
         
         if(nombre.length() >= 2 && nombre.length()<=20){
@@ -93,12 +139,21 @@ public class Persona implements Serializable{
         
     }
 
-
+    /**
+     * Obtiene el número de teléfono de la persona.
+     *
+     * @return El número de teléfono de la persona.
+     */
     public int getTelefono() {
         return telefono;
     }
 
-
+    /**
+     * Establece el número de teléfono de la persona.
+     *
+     * @param telefono El nuevo número de teléfono de la persona.
+     * @return true si el número de teléfono es válido, false en caso contrario.
+     */
     public boolean setTelefono(int telefono) {
         
         //es caso de tener 8 digito su resultado
@@ -112,12 +167,21 @@ public class Persona implements Serializable{
         
     }
 
-
+    /**
+     * Obtiene la fecha de ingreso de la persona.
+     *
+     * @return La fecha de ingreso de la persona.
+     */
     public LocalDate getFechaIngreso() {
         return fechaIngreso;
     }
 
-  
+    /**
+     * Establece la fecha de ingreso de la persona.
+     *
+     * @param fechaIngreso La nueva fecha de ingreso de la persona.
+     * @return true si la fecha de ingreso es válida, false en caso contrario.
+     */
     public boolean setFechaIngreso(LocalDate fechaIngreso) {
         
         
@@ -131,11 +195,22 @@ public class Persona implements Serializable{
             return false;
         
     }
-    
+
+    /**
+     * Obtiene el PIN de la persona.
+     *
+     * @return El PIN de la persona.
+     */
     public String getPin() {
         return pin;
     }
-
+    
+    /**
+     * Establece el PIN de la persona.
+     *
+     * @param pin El nuevo PIN de la persona.
+     * @return true si el PIN es válido, false en caso contrario.
+     */
     public boolean setPin(String pin) {
         
         if(pin.length() == 4){
@@ -149,10 +224,21 @@ public class Persona implements Serializable{
         
     }
 
+    /**
+     * Obtiene la identificación de la persona.
+     *
+     * @return La identificación de la persona.
+     */
     public String getIdentificacion() {
         return identificacion;
     }
 
+    /**
+     * Establece la identificación de la persona.
+     *
+     * @param identificacion La nueva identificación de la persona.
+     * @return true si la identificación es válida, false en caso contrario.
+     */
     public boolean setIdentificacion(String identificacion) {
         
         if(identificacion.length()>= 2 && identificacion.length() <= 25){
@@ -168,10 +254,22 @@ public class Persona implements Serializable{
         }
     }
 
+
+    /**
+     * Obtiene la dirección física de la persona.
+     *
+     * @return La dirección física de la persona.
+     */
     public String getDireccionFisica() {
         return direccionFisica;
     }
 
+    /**
+     * Establece la dirección física de la persona.
+     *
+     * @param direccionFisica La nueva dirección física de la persona.
+     * @return true si la dirección física es válida, false en caso contrario.
+     */
     public boolean  setDireccionFisica(String direccionFisica) {
         
         if(direccionFisica.length() >= 5 && direccionFisica.length() <= 50){
@@ -186,7 +284,12 @@ public class Persona implements Serializable{
         
     }
     
-    
+    /**
+     * Actualiza el PIN de la persona.
+     *
+     * @param pin El nuevo PIN de la persona.
+     * @return true si el PIN es válido, false en caso contrario.
+     */
     public boolean actualizaPin(String pin){
     
         if(pin.length() == 5){
@@ -199,7 +302,11 @@ public class Persona implements Serializable{
         }
     }
     
-
+    /**
+     * Actualiza los datos de la persona con los datos de otra persona.
+     *
+     * @param persona La persona con los nuevos datos.
+     */
    public void actualizarDatos(Persona persona){
        
        //validacion actualizar datos de una persona

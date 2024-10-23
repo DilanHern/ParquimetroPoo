@@ -388,7 +388,7 @@ public class LoginJFrame extends javax.swing.JFrame {
 
     }//GEN-LAST:event_campoIdentificacionActionPerformed
 
-    private void botonIniciarActionPerformed(java.awt.event.ActionEvent evt) {                                             
+    private void botonIniciarActionPerformed(java.awt.event.ActionEvent evt) {       
         iniciarSesion();
     }
     

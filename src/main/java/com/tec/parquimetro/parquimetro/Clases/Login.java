@@ -19,36 +19,61 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
+
 /**
- *
- * @author carol_flgngfy
+ * La clase Login maneja la autenticación de usuarios y la gestión de la lista de usuarios.
  */
 public class Login {
+    //atributos
     private ArrayList<Persona> listaUsuarios;
     
-    //constructor
+    /**
+     * Constructor por defecto para la clase Login.
+     * Inicializa la lista de usuarios y carga los usuarios desde el archivo "listaUsuarios.txt" si existe.
+     */
     public Login() {
      listaUsuarios = new ArrayList<>(); 
-     listaUsuarios=cargarUsuarios("listaUsuarios.txt");
+     if (cargarUsuarios("listaUsuarios.txt") != null){
+        listaUsuarios= cargarUsuarios("listaUsuarios.txt");
+     }
     }
     
-    //setters 
+    //setters y getters
+
+     /**
+     * Establece la lista de usuarios.
+     *
+     * @param listaUsuarios La nueva lista de usuarios.
+     */
     public void setListaUsuarios(ArrayList<Persona> listaUsuarios){
         this.listaUsuarios = listaUsuarios;
     }
-    
-    //getters
+     
+    /**
+     * Obtiene la lista de usuarios.
+     *
+     * @return La lista de usuarios.
+     */
     public ArrayList<Persona> getListaUsuarios(){
         return listaUsuarios;
     }
     
-    //funcion existeParametros.txt: esta funcion comprueba si existe el archivo Parametros.txt
+    /**
+     * Comprueba si existe el archivo "Parametros.txt".
+     *
+     * @return true si el archivo existe, false en caso contrario.
+     */
     public boolean existeParametros(){
         File file = new File("Parametros.txt");
         return file.exists();
     }
     
-    //funcion verificarIdentificacion: esta funcion se encarga de verificar si la identificacion ingresada existe:
+    /**
+     * Verifica si la identificación ingresada existe en la lista de usuarios.
+     *
+     * @param identificacion La identificación a verificar.
+     * @return La persona con la identificación especificada, o null si no se encuentra.
+     */
     public Persona verificarIdentificacion(String identificacion){
         for (Persona persona: listaUsuarios){
             if (persona.getIdentificacion() == null){ //no hacer nada
@@ -60,7 +85,12 @@ public class Login {
         return null;
     }
     
-        //funcion verificarCorreo: esta funcion se encarga de verificar si el correo ingresado existe:
+    /**
+     * Verifica si el correo ingresado existe en la lista de usuarios.
+     *
+     * @param correo El correo a verificar.
+     * @return La persona con el correo especificado, o null si no se encuentra.
+     */
     public Persona verificarCorreo(Correo correo){
         for (Persona persona: listaUsuarios){
             if (persona.getCorreo()== null){ //no hacer nada
@@ -72,7 +102,12 @@ public class Login {
         return null;
     }
     
-       //funcion verificarPlaca: esta funcion se encarga de verificar si placa ya existe:
+    /**
+     * Verifica si la placa ingresada ya existe en la lista de usuarios.
+     *
+     * @param placa La placa a verificar.
+     * @return true si la placa ya existe, false en caso contrario.
+     */
     public boolean verificarPlaca(String placa){
         for (Persona persona: listaUsuarios){
             if (persona instanceof Usuario usuarioCast){
@@ -90,7 +125,13 @@ public class Login {
         return false;
     }
     
-    //funcion verificarContraseña: esta funcion se encarga verificar si el pin ingresado coincide con el del usuario:
+    /**
+     * Verifica si el PIN ingresado coincide con el del usuario.
+     *
+     * @param pin El PIN a verificar.
+     * @param persona La persona cuyo PIN se va a verificar.
+     * @return true si el PIN coincide, false en caso contrario.
+     */
     public boolean verificarPin(String pin, Persona persona){
         if (persona.getPin().equals(pin)){
             return true;
@@ -101,16 +142,12 @@ public class Login {
         }
 
     
-    //funcion registrarse(): permite registrar a los usuarios
-    public void registrarse(String nombre, String apellido, Correo correo, String direccionFisica, int telefono, Tarjeta tarjeta, String identificacion, String pin){
-        //Usuario usuario = new Usuario(nombre, apellido, correo, direccionFisica, telefono, tarjeta, identificacion, pin);
-        //listaUsuarios.add(usuario);
-        //inicia sesion automaticamente despues de registrarse
-        //
-    }
-    //BORRARRR
+    /**
+     * Crea un administrador de prueba y lo guarda en la lista de usuarios. BORRAR
+     */
     public void crear(){
-        Administrador adminOficial = new Administrador("Admin prueba", "apellido", 123456, "vive en su casa", LocalDate.now(), "1234", "1234",null);
+        Correo correo = new Correo("dilanhernandez48", "gmail.com");
+        Administrador adminOficial = new Administrador("Admin prueba", "apellido del admin", 123456, "vive en su casa", LocalDate.now(), "1234", "1234", correo);
 
         listaUsuarios.add(adminOficial);
         try{
@@ -122,10 +159,13 @@ public class Login {
         
     }
     
-    
-    
-    //funcion guardarUsuarios: guarda la lista de personas
-    //recibe el nombre del archivo donde se guardará la lista y la lista a guardar, no retorna nada
+    /**
+     * Guarda la lista de usuarios en un archivo.
+     *
+     * @param nombreArchivo El nombre del archivo en el cual guardar los usuarios.
+     * @param listaAGuardar La lista de usuarios a guardar.
+     * @throws IOException Si ocurre un error al escribir el archivo.
+     */
     public static void guardarUsuarios(String nombreArchivo, ArrayList<Persona> listaAGuardar) throws IOException {
         ObjectOutputStream oos = null; //crea el objeto ObjectOutPutStream util para cargar archivos
         try {
@@ -145,7 +185,12 @@ public class Login {
         }
     }
     
-    //funcion cargarUsuarios: carga la lista de estudiantes. Retorna la lista de personas
+    /**
+     * Carga la lista de usuarios desde un archivo.
+     *
+     * @param nombreArchivo El nombre del archivo desde el cual cargar los usuarios.
+     * @return La lista de usuarios cargada desde el archivo.
+     */
     public static ArrayList<Persona> cargarUsuarios(String nombreArchivo){
         ObjectInputStream ois = null; //crea el objeto ObjectInputStream util para leer archivos
         try {
@@ -175,7 +220,12 @@ public class Login {
         return null;
     }
     
-    //recibe una persona y su identificacion(puede ser la antigua) y la actualice en los usuarios
+    /**
+     * Actualiza la información de una persona en la lista de usuarios.
+     *
+     * @param usuario La persona con la información actualizada.
+     * @param identificacion La identificación de la persona a actualizar.
+     */
     public void actualizarPersona(Persona usuario, String identificacion){
         
          this.setListaUsuarios(cargarUsuarios("listaUsuarios.txt"));
@@ -205,7 +255,12 @@ public class Login {
         
     }
     
-        //recibe una persona y su identificacion(puede ser la antigua) y la actualice en los usuarios
+    /**
+     * Elimina una persona de la lista de usuarios basado en su identificación.
+     *
+     * @param identificacion La identificación de la persona a eliminar.
+     * @return true si la persona fue eliminada, false en caso contrario.
+     */
     public boolean eliminarPersona(String identificacion){
         
        this.setListaUsuarios(cargarUsuarios("listaUsuarios.txt"));
@@ -237,6 +292,12 @@ public class Login {
         return false;
     }
     
+    /**
+     * Busca si una placa ya existe en la lista de usuarios.
+     *
+     * @param placa La placa a buscar.
+     * @return true si la placa ya existe, false en caso contrario.
+     */
    public boolean buscarPlaca(String placa){
         
        this.setListaUsuarios(cargarUsuarios("listaUsuarios.txt"));
@@ -260,6 +321,11 @@ public class Login {
         return false;
     }
     
+    /**
+     * Agrega una persona a la lista de usuarios.
+     *
+     * @param usuario La persona a agregar.
+     */
     public void agregarPersona(Persona usuario){
         
         this.setListaUsuarios(cargarUsuarios("listaUsuarios.txt")); 

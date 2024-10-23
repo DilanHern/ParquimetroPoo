@@ -26,10 +26,13 @@ import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-
+/**
+ * La clase Parqueo maneja la gestión de espacios de parqueo, multas y generación de reportes.
+ * Implementa {@link Serializable}.
+ */
 public class Parqueo implements Serializable {
     
-    
+    //atributos
     private LocalTime horaInicio;
     private LocalTime horaFinal;
     private int precioHora;
@@ -38,13 +41,25 @@ public class Parqueo implements Serializable {
     private ArrayList<Espacio> espacios;
     private ArrayList<Multa> multas;
     
+    /**
+     * Constructor por defecto para la clase Parqueo.
+     * Inicializa las listas de espacios y multas.
+     */
     public Parqueo(){
     
         this.espacios = new ArrayList<Espacio>();
          this.multas = new ArrayList<Multa>();
     }
     
-    //constructor
+    /**
+     * Constructor para crear un nuevo Parqueo con los detalles especificados.
+     *
+     * @param horaInicio La hora de inicio del parqueo.
+     * @param horaFinal La hora de finalización del parqueo.
+     * @param precioHora El precio por hora del parqueo.
+     * @param tiempoMinimo El tiempo mínimo de parqueo.
+     * @param costoMulta El costo de la multa.
+     */
     public Parqueo(LocalTime horaInicio, LocalTime horaFinal, int precioHora, int tiempoMinimo, int costoMulta){
     
         this.costoMulta = costoMulta;
@@ -58,30 +73,60 @@ public class Parqueo implements Serializable {
     }
 
 
-    //getters and setters
+    //getters y setters
+
+    /**
+     * Obtiene la hora de inicio del parqueo.
+     *
+     * @return La hora de inicio del parqueo.
+     */
     public LocalTime getHoraInicio() {
         return horaInicio;
     }
 
-
+    /**
+     * Establece la hora de inicio del parqueo.
+     *
+     * @param horaInicio La nueva hora de inicio del parqueo.
+     */
     public void setHoraInicio(LocalTime horaInicio) {
         this.horaInicio = horaInicio;
     }
 
-
+    /**
+     * Obtiene la hora de finalización del parqueo.
+     *
+     * @return La hora de finalización del parqueo.
+     */
     public LocalTime getHoraFinal() {
         return horaFinal;
     }
 
-
+    /**
+     * Establece la hora de finalización del parqueo.
+     *
+     * @param horaFinal La nueva hora de finalización del parqueo.
+     */
     public void setHoraFinal(LocalTime horaFinal) {
         this.horaFinal = horaFinal;
     }
 
+    /**
+     * Obtiene el precio por hora del parqueo.
+     *
+     * @return El precio por hora del parqueo.
+     */
     public int getPrecioHora() {
         return precioHora;
     }
     
+    /**
+     * Establece el horario de regulación del parqueo.
+     *
+     * @param horaInicio La hora de inicio de la regulación.
+     * @param horaFinal La hora de finalización de la regulación.
+     * @return true si las horas son válidas y se establecieron correctamente, false en caso contrario.
+     */
    public boolean setHorarioRegulacion(LocalTime horaIncio, LocalTime horaFinal){
         
         if(horaIncio!= horaFinal){ //validacion si las horas son distintas
@@ -98,7 +143,12 @@ public class Parqueo implements Serializable {
             return false;//las horas son iguales
     }
 
-
+    /**
+     * Valida si el precio por hora es par.
+     *
+     * @param precioHora El precio por hora a validar.
+     * @return true si el precio por hora es par, false en caso contrario.
+     */
     public boolean validarPrecioHora(int precioHora) {
         
         if(precioHora%2 ==  0){
@@ -112,17 +162,31 @@ public class Parqueo implements Serializable {
         
     }
     
+    /**
+     * Establece el precio por hora del parqueo.
+     *
+     * @param precioHora El nuevo precio por hora.
+     */
     public void setPrecioHora(int precioHora) {
         
         this.precioHora = precioHora;
     }
 
-
+    /**
+     * Obtiene el tiempo mínimo de parqueo.
+     *
+     * @return El tiempo mínimo de parqueo.
+     */
     public int getTiempoMinimo() {
         return tiempoMinimo;
     }
 
-  
+    /**
+     * Valida si el tiempo mínimo de parqueo es múltiplo de 30.
+     *
+     * @param tiempoMinimo El tiempo mínimo a validar.
+     * @return true si el tiempo mínimo es múltiplo de 30, false en caso contrario.
+     */
     public boolean validarTiempoMinimo(int tiempoMinimo) {
         
         if(tiempoMinimo%30 == 0){
@@ -135,18 +199,32 @@ public class Parqueo implements Serializable {
         
     }
     
+    /**
+     * Establece el tiempo mínimo de parqueo.
+     *
+     * @param tiempoMinimo El nuevo tiempo mínimo de parqueo.
+     */
    public void setTiempoMinimo(int tiempoMinimo) {
         
         this.tiempoMinimo = tiempoMinimo;
         
     }
 
- 
+    /**
+     * Obtiene el costo de la multa.
+     *
+     * @return El costo de la multa.
+     */
     public int getCostoMulta() {
         return costoMulta;
     }
 
-
+    /**
+     * Valida si el costo de la multa es mayor o igual a 0.
+     *
+     * @param costoMulta El costo de la multa a validar.
+     * @return true si el costo de la multa es mayor o igual a 0, false en caso contrario.
+     */
     public boolean validarCostoMulta(int costoMulta) {
         
         if(costoMulta>=0){
@@ -158,21 +236,41 @@ public class Parqueo implements Serializable {
         }
     }
     
+    /**
+     * Establece el costo de la multa.
+     *
+     * @param costoMulta El nuevo costo de la multa.
+     */
     public void setCostoMulta(int costoMulta) {
         
         this.costoMulta = costoMulta;
     }
     
+    /**
+     * Obtiene la lista de espacios de parqueo.
+     *
+     * @return La lista de espacios de parqueo.
+     */
    public List<Espacio> getEspacios(){
     
         return this.espacios;
     }
     
+    /**
+     * Establece la lista de espacios de parqueo.
+     *
+     * @param espacios La nueva lista de espacios de parqueo.
+     */
     public void setEspacios(ArrayList<Espacio> espacios){
     
         this.espacios = espacios;
     }
     
+    /**
+     * Establece la lista de multas.
+     *
+     * @param multas La nueva lista de multas.
+     */
     public void setMultas(ArrayList<Multa> multas){
     
         this.multas = multas;
@@ -180,8 +278,9 @@ public class Parqueo implements Serializable {
     
     //metodos
     
-    //actualiza los espacios de manera automatica (en caso de haber cumplido el tiempo de parqueo)
-        
+    /**
+     * Verifica y actualiza los espacios de parqueo automáticamente si se ha cumplido el tiempo de parqueo.
+     */
     public void verificarReservados() {
     
         for(Espacio e : espacios){
@@ -233,6 +332,11 @@ public class Parqueo implements Serializable {
     
     }
     
+    /**
+     * Actualiza los parámetros del parqueo.
+     *
+     * @param parqueo El objeto Parqueo con los nuevos parámetros.
+     */
     public void actualizarParametros(Parqueo parqueo){
     
         System.out.println("yaaaa");
@@ -247,7 +351,9 @@ public class Parqueo implements Serializable {
     }
     
 
-   
+    /**
+     * Guarda los parámetros del parqueo en un archivo.
+     */
    public void cargarArchivo(){
    
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("Parametros.txt"))) {
@@ -265,7 +371,9 @@ public class Parqueo implements Serializable {
        }
 }
    
-   //Lee el archivo de Parametros.txt, 
+    /**
+     * Lee los parámetros del parqueo desde un archivo.
+     */
    public void lecturaArchivo(){
    
     try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("Parametros.txt"))) { 
@@ -302,10 +410,9 @@ public class Parqueo implements Serializable {
    
    }
     
-    
-   
-   
-   
+    /**
+     * Imprime los parámetros del parqueo.
+     */
    public void toStrin(){
    
         System.out.println(this.costoMulta);
@@ -318,13 +425,23 @@ public class Parqueo implements Serializable {
             System.out.println(espacio.getNumero() + " " + espacio.getEstado());
         }
    }
-   
+
+    /**
+     * Lista todos los espacios de parqueo.
+     *
+     * @return La lista de espacios de parqueo.
+     */
     public ArrayList<Espacio> listarEspacios(){
         verificarReservados();
         return espacios;
     
     }
     
+    /**
+     * Lista los espacios de parqueo vacíos.
+     *
+     * @return La lista de espacios de parqueo vacíos.
+     */
     public ArrayList<Espacio> listarEspaciosVacios(){
         verificarReservados();
         ArrayList<Espacio> espaciosVacios = new ArrayList<Espacio>();
@@ -340,6 +457,11 @@ public class Parqueo implements Serializable {
     
     }
     
+    /**
+     * Lista los espacios de parqueo ocupados.
+     *
+     * @return La lista de espacios de parqueo ocupados.
+     */
    public ArrayList<Espacio> listarEspaciosOcupados(){
         verificarReservados();
         ArrayList<Espacio> espaciosOcupados = new ArrayList<Espacio>();
@@ -355,6 +477,11 @@ public class Parqueo implements Serializable {
     
     }
    
+    /**
+     * Libera un espacio de parqueo.
+     *
+     * @param numero El número del espacio a liberar.
+     */
    public void liberarEspacio(int numero){
    
    
@@ -363,7 +490,12 @@ public class Parqueo implements Serializable {
        cargarArchivo();
    
    }
-   
+
+    /**
+     * Ocupa un espacio de parqueo.
+     *
+     * @param numero El número del espacio a ocupar.
+     */
      public void ocuparEspacio(int numero){
    
    
@@ -373,6 +505,13 @@ public class Parqueo implements Serializable {
    
    }
     
+    /**
+     * Agrega espacios de parqueo en un rango especificado.
+     *
+     * @param rangoInicio El número de inicio del rango.
+     * @param rangoFinal El número de finalización del rango.
+     * @return true si los espacios se agregaron correctamente, false en caso contrario.
+     */
     public boolean agregarEspacios(int rangoInicio, int rangoFinal){
     
         
@@ -400,6 +539,12 @@ public class Parqueo implements Serializable {
     
     }
     
+    /**
+     * Elimina espacios de parqueo en un rango especificado.
+     *
+     * @param rangoInicio El número de inicio del rango.
+     * @param rangoFinal El número de finalización del rango.
+     */
     public void eliminarEspacios(int rangoInicio, int rangoFinal){
     
         
@@ -418,6 +563,12 @@ public class Parqueo implements Serializable {
     
     }
     
+    /**
+     * Busca un espacio de parqueo por su número.
+     *
+     * @param numero El número del espacio a buscar.
+     * @return El espacio encontrado, o null si no se encuentra.
+     */
     public Espacio buscarEspacio(int numero){
         verificarReservados();
         
@@ -438,6 +589,11 @@ public class Parqueo implements Serializable {
     
     }
 
+    /**
+     * Agrega una multa a la lista de multas.
+     *
+     * @param multa La multa a agregar.
+     */
    public void agregarMulta(Multa multa){
        
        this.multas.add(multa);
@@ -445,6 +601,11 @@ public class Parqueo implements Serializable {
        System.out.println(multa.getCosto());
    }
 
+   /**
+     * Genera un archivo PDF con los espacios de parqueo vacíos.
+     *
+     * @param rutaArchivo La ruta donde se guardará el archivo PDF.
+     */
    public void generarEspaciosVaciosPDF(String rutaArchivo){
        verificarReservados();
         try {
@@ -525,6 +686,11 @@ public class Parqueo implements Serializable {
        
    }
    
+   /**
+     * Genera un archivo PDF con los espacios de parqueo generales.
+     *
+     * @param rutaArchivo La ruta donde se guardará el archivo PDF.
+     */
    public void generarEspaciosGeneralPDF(String rutaArchivo){
        verificarReservados();
         try {
@@ -621,7 +787,12 @@ public class Parqueo implements Serializable {
        
    }
  
-      public void generarEspaciosOcupadosPDF(String rutaArchivo){
+    /**
+     * Genera un archivo PDF con los detalles de los espacios ocupados.
+     *
+     * @param rutaArchivo La ruta donde se guardará el archivo PDF.
+     */
+    public void generarEspaciosOcupadosPDF(String rutaArchivo){
        verificarReservados();
         try {
             Document document = new Document();
@@ -743,8 +914,14 @@ public class Parqueo implements Serializable {
         }
        
    }
-      
-      public long obtenerIngresoMultaDiario(LocalDate dia){
+
+    /**
+     * Obtiene el ingreso por multas en un día específico.
+     *
+     * @param dia El día para el cual se desea obtener el ingreso por multas.
+     * @return El ingreso total por multas en el día especificado.
+     */  
+    public long obtenerIngresoMultaDiario(LocalDate dia){
           verificarReservados();
           long ingresos =0;
           if(this.multas!=null)
@@ -758,6 +935,13 @@ public class Parqueo implements Serializable {
           return ingresos;
       }
       
+    /**
+     * Genera un archivo PDF con los ingresos por multas en un período específico.
+     *
+     * @param rutaArchivo La ruta donde se guardará el archivo PDF.
+     * @param inicio La fecha de inicio del período.
+     * @param finalF La fecha de finalización del período.
+     */
       public void generaIngresosMultasPDF(String rutaArchivo, LocalDate inicio, LocalDate finalF){
        verificarReservados();
         try {
@@ -850,6 +1034,12 @@ public class Parqueo implements Serializable {
        
    }
       
+    /**
+     * Calcula el monto total de ingresos por estacionamiento en un día específico.
+     *
+     * @param dia El día para el cual se desea calcular el monto de ingresos por estacionamiento.
+     * @return El monto total de ingresos por estacionamiento en el día especificado.
+     */
       private long calcularMontoEstacionamiento(LocalDate dia){
       verificarReservados();
        long ingresos=0;
@@ -877,6 +1067,13 @@ public class Parqueo implements Serializable {
           return ingresos;
       }
       
+     /**
+     * Genera un archivo PDF con los ingresos por estacionamiento en un período específico.
+     *
+     * @param rutaArchivo La ruta donde se guardará el archivo PDF.
+     * @param inicio La fecha de inicio del período.
+     * @param finalF La fecha de finalización del período.
+     */
    public void generaIngresosEstacionamientoPDF(String rutaArchivo, LocalDate inicio, LocalDate finalF){
        verificarReservados();
         try {
@@ -966,6 +1163,13 @@ public class Parqueo implements Serializable {
        
    }
    
+    /**
+     * Obtiene el tiempo de uso y el ingreso de un espacio en un día específico.
+     *
+     * @param espacio El número del espacio.
+     * @param dia El día para el cual se desea obtener el tiempo de uso y el ingreso.
+     * @return Un arreglo de enteros donde el primer elemento es el ingreso y el segundo el tiempo de uso.
+     */
    private int[] obtenerTiempoUso(int espacio, LocalDate dia){
        verificarReservados();
        int[] calculos = new int[2];
@@ -990,7 +1194,14 @@ public class Parqueo implements Serializable {
        return calculos;
    }
    
-   
+
+     /**
+     * Genera un archivo PDF con los espacios utilizados en un rango de fechas.
+     *
+     * @param rutaArchivo La ruta donde se guardará el archivo PDF.
+     * @param inicio La fecha de inicio del periodo.
+     * @param finalF La fecha de fin del periodo.
+     */
       public void generarEspaciosUsadosPDF(String rutaArchivo, LocalDate inicio, LocalDate finalF){
        verificarReservados();
         try {
@@ -1107,8 +1318,13 @@ public class Parqueo implements Serializable {
        
    }
       
-      
-      
+     /**
+     * Genera un archivo PDF con las multas hechas en un rango de fechas.
+     *
+     * @param rutaArchivo La ruta donde se guardará el archivo PDF.
+     * @param inicio La fecha de inicio del periodo.
+     * @param finalF La fecha de fin del periodo.
+     */
     public void generarMultasHechasPDF(String rutaArchivo, LocalDate inicio, LocalDate finalF){
        verificarReservados();
        List<Multa> lista = this.multas;
@@ -1226,9 +1442,15 @@ public class Parqueo implements Serializable {
                 
             }
    }
-      
-    
-          
+       
+    /**
+     * Genera un archivo PDF con las multas hechas por un inspector en un rango de fechas.
+     *
+     * @param rutaArchivo La ruta donde se guardará el archivo PDF.
+     * @param inicio La fecha de inicio del periodo.
+     * @param finalF La fecha de fin del periodo.
+     * @param identificacion La identificación del inspector.
+     */
     public void generarMultasHechasInspectorPDF(String rutaArchivo, LocalDate inicio, LocalDate finalF, String identificacion){
        
        List<Multa> lista = this.multas;
@@ -1346,6 +1568,14 @@ public class Parqueo implements Serializable {
             }
    }
 
+    /**
+     * Genera una tabla PDF con estadísticas detalladas de un espacio en un día específico.
+     *
+     * @param espacio El número del espacio.
+     * @param dia El día específico.
+     * @param tabla La tabla PDF a la que se agregarán las estadísticas.
+     * @return La tabla PDF con las estadísticas agregadas.
+     */
      public PdfPTable generarEstadisticaDetallada(int espacio, LocalDate dia, PdfPTable tabla){
         verificarReservados();
         double minOcupadas=0;
@@ -1512,7 +1742,15 @@ public class Parqueo implements Serializable {
                 
             }
    }
-        
+    
+   /**
+     * Genera una tabla PDF con estadísticas resumidas de ocupación y vacantes de un espacio de parqueo en un día específico.
+     *
+     * @param espacio El número del espacio de parqueo.
+     * @param dia El día para el cual se generarán las estadísticas.
+     * @param tabla La tabla PDF a la cual se agregarán las estadísticas.
+     * @return La tabla PDF con las estadísticas agregadas.
+     */
    public PdfPTable generarEstadisticaResumida(int espacio, LocalDate dia, PdfPTable tabla){
                 verificarReservados();
                 double minOcupadas=0;
@@ -1552,6 +1790,15 @@ public class Parqueo implements Serializable {
                return tabla;
     }
     
+        /**
+         * Genera un archivo PDF con un resumen del uso de los espacios de parqueo en un rango de fechas.
+         *
+         * @param rutaArchivo La ruta donde se guardará el archivo PDF.
+         * @param inicio La fecha de inicio del periodo a considerar.
+         * @param finalF La fecha de fin del periodo a considerar.
+         * @param inicioEsp El número del primer espacio de parqueo a considerar.
+         * @param finEsp El número del último espacio de parqueo a considerar.
+         */
         public void generarEspaciosResumidoPDF(String rutaArchivo, LocalDate inicio, LocalDate finalF, int inicioEsp, int finEsp){
        
        List<Multa> lista = this.multas;

@@ -3185,7 +3185,7 @@ public class MenuUsuario extends javax.swing.JFrame {
             txtEspacioConsultado.enable(true);
             btnConsultarEspacio.setVisible(true);
             tpParquearEspacio.setSelectedIndex(2);
-            
+            actualizarInformacion(usuario, usuario.getIdentificacion()); //actualiza la información que fue generada por el usuario agrega la linea al final de la función de parquear
            
                 
             }else{
@@ -3479,30 +3479,30 @@ public class MenuUsuario extends javax.swing.JFrame {
         Login login = new Login();
         //valida
         if(validarPlaca(placa)){
-                if(login.verificarPlaca(placa)){
-                    if(validarModeloMarca(marca)){
-                        if(validarModeloMarca(modelo)){
+            if(!login.verificarPlaca(placa)){
+                if(validarModeloMarca(marca)){
+                    if(validarModeloMarca(modelo)){
 
-                                Vehiculo vehiculo = new Vehiculo(placa, modelo, marca, usuario);
-                                //agrega el vehiculo al usuario
-                                usuario.agregarVehiculo(vehiculo);
-                                JOptionPane.showMessageDialog(null, "Vehiculo agregado exitosamente");
+                            Vehiculo vehiculo = new Vehiculo(placa, modelo, marca, usuario);
+                            //agrega el vehiculo al usuario
+                            usuario.agregarVehiculo(vehiculo);
+                            JOptionPane.showMessageDialog(null, "Vehiculo agregado exitosamente");
 
-                                tpPanelModificaciones.setVisible(false);
-                                //refresca la tabla de vehiculos
-                                inicializarTablaVehiculos();
-                                btnAgregarVehiculo.setVisible(true);
-                                actualizarInformacion(usuario, usuario.getIdentificacion());
-                        }
-                        else
-                            JOptionPane.showMessageDialog(null, "Al ingresar un modelo debe tener menos de 15 caracteres");
-                     
+                            tpPanelModificaciones.setVisible(false);
+                            //refresca la tabla de vehiculos
+                            inicializarTablaVehiculos();
+                            btnAgregarVehiculo.setVisible(true);
+                            actualizarInformacion(usuario, usuario.getIdentificacion());
+                    }
+                    else
+                        JOptionPane.showMessageDialog(null, "Al ingresar un modelo debe tener menos de 15 caracteres");
+
                 }
                 else
                     JOptionPane.showMessageDialog(null, "Al ingresar una marca debe tener menos de 15 caracteres");
             }
-                else
-                    JOptionPane.showMessageDialog(null, "Ya existe esta placa registrada");
+            else
+                JOptionPane.showMessageDialog(null, "Ya existe esta placa registrada");
         }    
         else
              JOptionPane.showMessageDialog(null, "Debe ingresar la placa con 6 digitos");
