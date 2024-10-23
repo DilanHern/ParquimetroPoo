@@ -123,7 +123,7 @@ public class Parqueo implements Serializable {
     /**
      * Establece el horario de regulación del parqueo.
      *
-     * @param horaInicio La hora de inicio de la regulación.
+     * @param horaIncio La hora de inicio de la regulación.
      * @param horaFinal La hora de finalización de la regulación.
      * @return true si las horas son válidas y se establecieron correctamente, false en caso contrario.
      */

@@ -170,7 +170,7 @@ public class MenuUsuario extends javax.swing.JFrame {
      * Crea un correo electrónico configurando la sesión y el mensaje.
      * Establece los parámetros necesarios para enviar el correo electrónico.
      *
-     * @param destinatario El correo electrónico del destinatario.
+     * @param correo El correo electrónico del destinatario.
      * @param asunto El asunto del correo electrónico.
      * @param cuerpo El cuerpo del correo electrónico.
      */

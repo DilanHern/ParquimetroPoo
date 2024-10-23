@@ -145,7 +145,7 @@ public class MenuInspector extends javax.swing.JFrame {
      * Crea un correo electrónico configurando la sesión y el mensaje.
      * Establece los parámetros necesarios para enviar el correo electrónico.
      *
-     * @param destinatario El correo electrónico del destinatario.
+     * @param correo El correo electrónico del destinatario.
      * @param asunto El asunto del correo electrónico.
      * @param cuerpo El cuerpo del correo electrónico.
      */
@@ -206,9 +206,7 @@ public class MenuInspector extends javax.swing.JFrame {
      * Registra la multa en el sistema y la asocia al vehículo y al espacio de parqueo.
      *
      * @param placa La placa del vehículo a multar.
-     * @param numParqueo El número del espacio de parqueo donde se encuentra el vehículo.
-     * @param motivo El motivo de la multa.
-     * @param monto El monto de la multa.
+     * @param costo El costo de la multa
      */
      public void crearMulta(int placa, int costo){
         
