@@ -2734,7 +2734,7 @@ public class MenuUsuario extends javax.swing.JFrame {
                                if(validarTelefono(Integer.parseInt(txtTelefono.getText()))){
                                
                                    if(validarCorreo(txtPt1Mail.getText(), txtPt2Mail.getText())){
-                                       if(login.verificarIdentificacion(txtIdentificacion.getText())!=null){
+                                       if(login.verificarIdentificacion(txtIdentificacion.getText())==null){
                                        
                                             //Almacena los datos de los campos de texto en las variables para ser alamacenadas
                                             nombre = txtNombre1.getText();
@@ -2747,7 +2747,7 @@ public class MenuUsuario extends javax.swing.JFrame {
                                             Correo correo = new Correo(parte1Correo, parte2Correo);
                                             fechaIngreso = LocalDate.now();
                                            
-                                            if(login.verificarCorreo(correo) != null){
+                                            if(login.verificarCorreo(correo) == null){
                                                 
                                                  //Almacena la identificacion del usuario anteriormente de ser modificada
                                                 identificacionGeneral = usuario.getIdentificacion();

@@ -2852,7 +2852,7 @@ public class MenuAdministrador extends javax.swing.JFrame {
                                      if(validarCorreo(txtPt1Mail.getText(), txtPt2Mail.getText())){
                                      
                                          
-                                         if(login.verificarIdentificacion(txtIdentificacion.getText())!=null){
+                                         if(login.verificarIdentificacion(txtIdentificacion.getText())==null){
                                          
                                                         //Almacena los datos de los campos de texto en las variables para ser alamacenadas
                                               nombre = txtNombre1.getText();
@@ -2865,7 +2865,7 @@ public class MenuAdministrador extends javax.swing.JFrame {
                                               Correo correo = new Correo(pt1Correo, pt2Correo);
                                               fechaIngreso = LocalDate.now();
 
-                                              if(login.verificarCorreo(correo) != null){
+                                              if(login.verificarCorreo(correo) == null){
 
                                                     //Almacena la identificacion del usuario anteriormente de ser modificada
                                                     identificacionGeneral = administrador.getIdentificacion();
@@ -2945,21 +2945,29 @@ public class MenuAdministrador extends javax.swing.JFrame {
             if (selection == 0) {
 
                 Login login = new Login();
-                if(login.eliminarPersona(txtIdEliminar.getText())){
-                    JOptionPane.showMessageDialog(null, "Eliminado exitosamente!");
-                        try{
-                          cargarTablaUsuarios();
-                       } catch (ClassNotFoundException ex) {
-                            System.out.println("");
-                       }
+                
+                if(!txtIdEliminar.getText().equals(administrador.getIdentificacion())){
+                    
+                      if(login.eliminarPersona(txtIdEliminar.getText())){
+                    
+                            JOptionPane.showMessageDialog(null, "Eliminado exitosamente!");
+                                try{
+                                  cargarTablaUsuarios();
+                               } catch (ClassNotFoundException ex) {
+                                    System.out.println("");
+                               }
+                        }else{
+                            JOptionPane.showMessageDialog(null, "La identifiacacion no existe!");
+                        }
+
                 }else{
-                    JOptionPane.showMessageDialog(null, "No se eliminara!");
-                }
+                            JOptionPane.showMessageDialog(null, "No puede eliminar su propio usuario!");
+                 }
                 txtIdEliminar.setText("");
                 
               }
             else{
-                JOptionPane.showMessageDialog(null, "No se actualizara!");
+                JOptionPane.showMessageDialog(null, "No se eliminara!");
             }
     }//GEN-LAST:event_btnEliminarUsuarioActionPerformed
 
@@ -3020,7 +3028,7 @@ public class MenuAdministrador extends javax.swing.JFrame {
                            
                                if(validarTelefono(Integer.parseInt(txtTelefonoU.getText()))){
                                    
-                                   if(login.verificarIdentificacion(txtIdentificacion.getText())!=null){
+                                   if(login.verificarIdentificacion(txtIdentificacion.getText())==null){
 
                                             String pin = generarPin();
 
@@ -3037,7 +3045,7 @@ public class MenuAdministrador extends javax.swing.JFrame {
                                                 .atZone(ZoneId.systemDefault())
                                                 .toLocalDate();
 
-                                               if(login.verificarCorreo(correo) != null){
+                                               if(login.verificarCorreo(correo) == null){
 
                                                         if(cbTipoUsuario.getSelectedItem() == "Administrador"){
 

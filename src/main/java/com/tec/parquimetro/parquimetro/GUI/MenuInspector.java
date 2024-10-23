@@ -1436,7 +1436,7 @@ public class MenuInspector extends javax.swing.JFrame {
                                
                                     if(validarTerminalInspeccion(txtTerminal.getText())){
                                        
-                                         if(login.verificarIdentificacion(txtIdentificacion.getText())!=null){
+                                         if(login.verificarIdentificacion(txtIdentificacion.getText())==null){
                                        
                                             //Almacena los datos de los campos de texto en las variables para ser alamacenadas
                                             nombre = txtNombre1.getText();
@@ -1449,7 +1449,7 @@ public class MenuInspector extends javax.swing.JFrame {
                                             Correo correo = new Correo(pt1Correo, pt2Correo);
                                             fechaIngreso = LocalDate.now();
                                             terminal =txtTerminal.getText();
-                                            if(login.verificarCorreo(correo) != null){
+                                            if(login.verificarCorreo(correo) == null){
                                                 //Almacena la identificacion del usuario anteriormente de ser modificada
                                                 identificacionGeneral = inspector.getIdentificacion();
 
